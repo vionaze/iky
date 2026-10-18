@@ -10,7 +10,7 @@ export const Media: CollectionConfig = {
   admin: { useAsTitle: 'title', defaultColumns: ['title', 'sourceType', 'mediaType'] },
   access: { read: () => true },
   upload: {
-    staticDir: path.resolve(dirname, '../../media'),
+    staticDir: process.env.MEDIA_DIR || path.resolve(dirname, '../../media'),
     mimeTypes: ['image/*', 'video/*'],
     imageSizes: [
       { name: 'thumbnail', width: 400, height: 400, position: 'centre' },
