@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Ikymian Studios — AI Filmmaker &amp; Content Creator</title>
-<meta name="description" content="Portfolio Ikymian Studios — series, music video, short film, dan tutorial dengan pendekatan kreatif berbasis AI.">
+<meta name="description" content="Portfolio of Ikymian Studios — series, music video, short film, and tutorial with an AI-driven creative approach.">
 <link rel="canonical" href="https://ikymianstudios.si/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -290,7 +290,7 @@
 </style>
 </head>
 <body>
-<a class="skip" href="#work">Lewati ke karya</a>
+<a class="skip" href="#work">Skip to work</a>
 
 <header class="nav">
   <div class="wrap nav-inner">
@@ -298,13 +298,13 @@
       <strong>Ikymian Studios</strong>
       <span>Caisart Felix</span>
     </a>
-    <nav class="nav-links" aria-label="Navigasi utama">
+    <nav class="nav-links" aria-label="Main navigation">
       <a href="#work" data-id="Karya" data-en="Work">Karya</a>
       <a href="#about" data-id="Tentang" data-en="About">Tentang</a>
       <a href="#contact" data-id="Kontak" data-en="Contact">Kontak</a>
-      <div class="lang" role="group" aria-label="Bahasa / Language">
-        <button type="button" data-lang="id" aria-pressed="true">ID</button>
-        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <div class="lang" role="group" aria-label="Language / Bahasa">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="id" aria-pressed="false">ID</button>
       </div>
     </nav>
   </div>
@@ -333,7 +333,7 @@
         </div>
       </div>
       <div class="hero-portrait reveal" style="--i:2">
-        <img src="images/hero-1.png" alt="Potret karakter visual Ikymian Studios" width="1200" height="896">
+        <img src="images/hero-1.png" alt="Portrait of an Ikymian Studios visual character" data-alt-id="Potret karakter visual Ikymian Studios" data-alt-en="Portrait of an Ikymian Studios visual character" width="1200" height="896">
       </div>
     </div>
   </section>
@@ -513,6 +513,8 @@
       nodes.forEach(function (el) {
         var value = el.getAttribute("data-" + next);
         if (value !== null) el.textContent = value;
+        var alt = el.getAttribute("data-alt-" + next);
+        if (alt !== null) el.setAttribute("alt", alt);
       });
       buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === next)); });
       try { localStorage.setItem("lang", next); } catch (e) {}
@@ -520,8 +522,8 @@
 
     buttons.forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
 
-    var saved = "id";
-    try { saved = localStorage.getItem("lang") || "id"; } catch (e) {}
+    var saved = "en";
+    try { saved = localStorage.getItem("lang") || "en"; } catch (e) {}
     setLang(saved);
 
     var revealed = document.querySelectorAll(".reveal");

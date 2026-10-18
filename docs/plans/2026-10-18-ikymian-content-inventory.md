@@ -51,7 +51,7 @@ menunggu (kelayakan API dibuktikan di Phase 4).
 | Email bisnis | `ariesiky8@gmail.com` | ✅ | Dikonfirmasi pengguna sebagai kontak resmi |
 | Logo | — | ❌ | Opsional; tanpa logo, nama studio dipakai sebagai wordmark |
 | Empat kategori karya | Series, Music Video, Short Film, Tutorial | ✅ | Berasal dari dokumen awal; jangan diubah jadi empat layanan berbayar |
-| Bahasa landing | Bilingual **Indonesia + Inggris** dengan toggle | 🟡 | Dikonfirmasi pengguna; strategi routing dibahas di bagian 9.9 |
+| Bahasa landing | Bilingual **Inggris (default) + Indonesia**, toggle tanpa ubah URL | ✅ | Dikonfirmasi pengguna; detail di bagian 9.9 |
 
 ### 2.1 Kanal resmi
 
@@ -464,17 +464,17 @@ termasuk judul serta deskripsi karya — punya versi ID dan EN.
 | Setelan | Nilai |
 | --- | --- |
 | `localization.locales` | `id`, `en` |
-| `localization.defaultLocale` | `id` |
-| `localization.fallback` | `true` — field EN kosong memakai nilai ID |
+| `localization.defaultLocale` | `en` |
+| `localization.fallback` | `true` — field yang kosong memakai nilai locale default (`en`) |
 | Field `localized` | semua `text`, `textarea`, `richText`, dan label di dalam array |
 
 **Perilaku frontend**
 
 1. Bahasa disimpan di cookie `lang` (`id` atau `en`), bukan di URL.
 2. Server membaca cookie saat render, sehingga tidak ada kedipan bahasa yang salah.
-3. Kunjungan pertama tanpa cookie → `id`.
+3. Kunjungan pertama tanpa cookie → `en`.
 4. Toggle di header menulis cookie lalu me-render ulang halaman.
-5. Nilai cookie tidak valid → jatuh ke `id`.
+5. Nilai cookie tidak valid → jatuh ke `en`.
 6. Atribut `html lang` mengikuti bahasa aktif.
 7. Label toggle `ID` dan `EN` statis karena berupa kode bahasa, bukan field CMS.
 
@@ -483,7 +483,7 @@ termasuk judul serta deskripsi karya — punya versi ID dan EN.
 | Konsekuensi | Dampak |
 | --- | --- |
 | URL tidak berubah | Tautan yang dibagikan terbuka dalam bahasa default penerima, bukan bahasa pengirim |
-| Satu URL untuk dua bahasa | Tidak ada `hreflang`; crawler hanya melihat versi `id` |
+| Satu URL untuk dua bahasa | Tidak ada `hreflang`; crawler hanya melihat versi `en` |
 | Cache halaman | Cache harus memperhitungkan cookie `lang` (`Vary: Cookie`) atau di-bypass untuk halaman ini |
 | Konten ganda | Setiap field teks diisi dua kali; `fallback` mencegah halaman kosong saat EN belum ada |
 

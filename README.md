@@ -17,7 +17,8 @@ Halaman `index.html` kini menampilkan portfolio statis: hero, lima episode serie
 tiga tautan karya, Impact, About dengan logo mitra, dan Contact. Toggle bahasa
 memakai `localStorage`; versi CMS nanti memakai cookie. Belum ada `/adminku`,
 database, atau sinkronisasi statistik.
-Seluruh halaman memakai latar terang.
+Seluruh halaman memakai latar terang. Bahasa default **Inggris (EN)**; toggle ke
+Indonesia (ID) tersimpan di `localStorage`.
 
 ## VPS
 
