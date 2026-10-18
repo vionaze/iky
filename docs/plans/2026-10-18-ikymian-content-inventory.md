@@ -89,7 +89,7 @@ Catatan:
 | 3 | Showreel | `#showreel` | 🟡 opsional | Tampil hanya jika ada aset; tanpa pemutar kosong |
 | 4 | Selected Works | `#work` | ✅ | 6–8 karya terkurasi lintas empat kategori; tanpa filter dulu |
 | 5 | Impact | `#impact` | ✅ | Enam kelompok metrik + waktu pembaruan |
-| 6 | About & Process | `#about` | ✅ | Bio, kemampuan, tools terverifikasi, satu contoh proses |
+| 6 | About & Process | `#about` | ✅ | Bio, kemampuan, **Creative Partner** dengan baris logo, satu contoh proses |
 | 7 | Contact | `#contact` | ✅ | Email + link sosial; tanpa form backend |
 
 Section prestasi/program kreator **tidak dibuat**; nominasi masuk ke Impact.
@@ -101,7 +101,7 @@ Tidak ada halaman publik tambahan, blog, atau page builder.
 
 | Elemen | Draft | Status |
 | --- | --- | --- |
-| Identity | Ikymian Studios · AI Filmmaker & Content Creator | 🟡 titel masih draft |
+| Identity | Ikymian Studios — Caisart Felix · AI Filmmaker & Content Creator | 🟡 titel masih draft |
 | Hero | Cerita, musik, dan ide yang menjadi visual. | 🟡 |
 | Supporting line | Series, music video, short film, dan tutorial dengan pendekatan kreatif berbasis AI. | 🟡 |
 | CTA utama | Lihat Karya | 🟡 |
@@ -109,6 +109,7 @@ Tidak ada halaman publik tambahan, blog, atau page builder.
 | About | Saya membuat series, music video, short film, dan tutorial, mengeksplorasi cara ide berkembang menjadi cerita dan visual melalui AI. | 🟡 sesuaikan dengan proses dan peran yang benar |
 | Bio alternatif (EN) | AI Filmmaker & Visual Storyteller. I create cinematic worlds, characters, and stories with AI. Making the impossible feel real. | 🟡 dari Linktree; perlu dipilih bahasanya |
 | Label kategori | Series · Music Video · Short Film · Tutorial | ✅ |
+| Label partner | ID: **Mitra Kreatif** · EN: **Creative Partner** | 🟡 bisa disamakan bila diinginkan |
 | CTA kartu series | Tonton series | ✅ |
 
 Aturan: jangan menulis klaim performa, nama klien, kutipan testimoni, atau
@@ -146,6 +147,15 @@ Referensi visual: Aura (pilih 3–5 contoh saat Phase 3). Panduan FE: Taste Skil
 
 Komposisi hero memakai potret cutout transparan di sisi kanan dan teks di kiri —
 lihat bagian 6.1.
+
+### Baris Creative Partner
+
+- Label kecil di atas logo: EN **Creative Partner**, ID **Mitra Kreatif**.
+- Logo disusun satu baris dengan tinggi optis sama (20–24 px), gap 32–40 px,
+  dan wrap rapi di mobile.
+- Gunakan berkas resmi; jangan mengubah warna bila brand guideline melarang.
+- Tanpa marquee. Hover maksimal satu pola sederhana (mis. opacity 0.6 → 1).
+- Setiap logo punya `alt` = nama partner dan opsional tautan ke situs partner.
 
 ---
 
@@ -202,6 +212,30 @@ Catatan implementasi:
   identitas seseorang.
 - Ketiga berkas sudah masuk repo pada `images/` sebagai aset sumber. Saat aplikasi
   dibuat, aset ini akan disalin ke lokasi upload persisten atau `public/`.
+
+### 6.2 Creative partner
+
+Enam mitra yang dikonfirmasi pengguna. Logo disimpan lokal di `images/partners/`,
+bukan di-hotlink.
+
+| Partner | Berkas | Kualitas | Status |
+| --- | --- | --- | --- |
+| CapCut | `capcut.svg` | SVG dari situs resmi, memakai `currentColor` sehingga bisa monokrom | ✅ siap |
+| OiiOii | `oiioii.png` | PNG 196 × 66, warna pink | 🟡 resolusi rendah, minta versi SVG |
+| Pixmax | `pixmax.svg` | SVG 555 × 120, **isi putih** — tidak terlihat di latar krim | 🟡 butuh varian gelap |
+| TopMediai | `topmediai.png` | PNG 512 × 512, ungu, berbentuk ikon | 🟡 ikon, bukan wordmark |
+| OpenArt | `openart.png` | PNG 415 × 415, hitam, berbentuk ikon | 🟡 ikon, bukan wordmark |
+| AKOOL | — | Logo di situs resmi mengembalikan 404 | ❌ butuh berkas resmi |
+
+Catatan:
+
+- Campuran wordmark dan ikon membuat baris terlihat tidak rata; idealnya semua
+  memakai wordmark dengan tinggi optis sama.
+- Minta **brand kit resmi** (SVG, versi terang dan gelap) dari masing-masing program
+  mitra. Berkas saat ini dipakai sebagai placeholder, bukan final.
+- Jangan mengubah warna logo jika brand guideline melarang; gunakan varian resmi.
+- Hanya tampilkan mitra yang benar-benar bekerja sama. Jangan menambah logo pihak
+  lain untuk memenuhi baris.
 
 ---
 
@@ -364,7 +398,8 @@ dari Media yang terhubung. Ini mencegah dua sumber kebenaran untuk aset yang sam
 | `about` | `title` | text | ✅ | |
 | | `body` | richText (tanpa HTML mentah) | ✅ | |
 | | `skills` | array of text | — | Kemampuan nyata saja |
-| | `tools` | array of text | — | Terverifikasi |
+| | `partnersLabel` | text (localized) | — | Default EN "Creative Partner", ID "Mitra Kreatif" |
+| | `partners` | array: `name` (text), `logo` (upload → Media image), `url` (URL), `visible` (checkbox) | — | Logo resmi; hanya mitra yang benar-benar bekerja sama |
 | | `process` | group: `title` (text), `body` (richText) | — | Satu contoh proses |
 | `contact` | `title` | text | ✅ | |
 | | `body` | textarea | — | Email & sosial diambil dari Footer global |
@@ -474,6 +509,7 @@ login /adminku → tambah/edit → simpan draft → preview → publish
 | 4 | Link karya Music Video, Short Film, Tutorial | Selected Works |
 | 5 | Poster/thumbnail setiap video | Aturan publish video |
 | 6 | Foto hero (still) — ✅ `images/hero-1.png` dipilih, 2 cadangan | Hero |
+| 7 | Logo partner resmi — 5 dari 6 terkumpul, AKOOL belum; lihat 6.2 | Baris Creative Partner |
 
 Sudah diputuskan: bilingual ID/EN dengan toggle (bagian 9.9), nama kreator
 Caisart Felix ditampilkan bersama brand, dan `@damiann101` adalah akun pengguna.
@@ -511,6 +547,7 @@ Phase 1 selesai ketika:
 4. Setiap karya tervalidasi: judul, kategori, peran, link, sumber media, thumbnail.
 5. Akun/platform statistik dan cakupan total views tercatat, termasuk status akses API.
 6. Peta field CMS di bagian 9 ditinjau dan disetujui.
+7. Berkas logo resmi keenam mitra Creative Partner tersedia.
 
 **Belum termasuk:** membuat halaman, mengolah video, menghubungkan API, deployment,
 atau menambah dependencies.

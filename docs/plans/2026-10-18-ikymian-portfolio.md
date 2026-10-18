@@ -159,10 +159,10 @@ Tipografi besar dan lapang, navigasi pendek, garis pembatas tipis, sudut media l
 | 3. Showreel | Ringkasan karya lintas format | Saran 30–60 detik, diputar setelah klik |
 | 4. Selected Works | 6–8 karya terpilih yang mewakili empat kategori | Label Series, Music Video, Short Film, Tutorial; tidak perlu filter dulu |
 | 5. Impact | Views, followers, engagement, videos created, campaigns, nominations | Angka nyata, periode dan sumber jelas |
-| 6. About & Process | Bio singkat, kemampuan, tools terverifikasi, satu contoh proses | Ringkas, tidak menjadi daftar semua tools |
+| 6. About & Process | Bio singkat, kemampuan, baris logo Creative Partner, satu contoh proses | Ringkas; logo hanya untuk mitra yang benar-benar bekerja sama |
 | 7. Contact | Email bisnis dan link Instagram, TikTok, YouTube atau akun lain yang diberikan | CTA langsung, tanpa form backend |
 
-Brand collaboration dan testimonial dari referensi tidak menjadi section wajib. Hanya tampilkan jika ada bukti dan materi nyata. Jangan mengisi logo, nama klien, kutipan, atau pengalaman dari contoh referensi seolah sudah terverifikasi.
+Brand collaboration dan testimonial dari referensi tidak menjadi section wajib. Hanya tampilkan jika ada bukti dan materi nyata. Jangan mengisi logo, nama klien, kutipan, atau pengalaman dari contoh referensi seolah sudah terverifikasi. Pengguna mengonfirmasi enam mitra kreatif — **CapCut, OiiOii, Pixmax, TopMediai, OpenArt, AKOOL** — yang tampil sebagai baris logo berlabel **Creative Partner** di About. Hanya logo resmi keenam mitra itu yang boleh dipakai; jangan menambah logo lain. Detail aset ada pada inventaris Phase 1.
 
 ### Isi dan perilaku kartu karya
 
@@ -246,7 +246,7 @@ Jika akses salah satu platform tidak tersedia, laporkan batasannya dan tentukan 
 
 Prioritas pertama: ejaan brand (✅ **Ikymian Studios**), logo jika ada, satu hero still, tautan karya dari empat kategori, poster karya, peran pada setiap karya, kontak bisnis (✅ `ariesiky8@gmail.com`), serta URL sosial asli (✅ terdaftar di Linktree). Series TikTok sudah memiliki tautan playlist tetapi belum memiliki aset lokal.
 
-Prioritas berikutnya: klip preview 6–8 detik, showreel bila tersedia, bio final, daftar tools yang benar dipakai, data statistik beserta periode/sumber, bukti campaign selesai, dan bukti nominations. Pilih 6–8 karya setelah meninjau semua kategori; bukan mengarang karya untuk memenuhi kuota.
+Prioritas berikutnya: klip preview 6–8 detik, showreel bila tersedia, bio final, logo resmi mitra Creative Partner, data statistik beserta periode/sumber, bukti campaign selesai, dan bukti nominations. Pilih 6–8 karya setelah meninjau semua kategori; bukan mengarang karya untuk memenuhi kuota.
 
 Setiap karya mengacu ke Media pada CMS. Upload disimpan secara persisten di luar checkout; URL eksternal disimpan sebagai URL dengan jenis sumber yang jelas. Siapkan thumbnail yang stabil untuk setiap video. Hindari hotlink poster sementara yang URL-nya bisa kedaluwarsa, dan jangan mengunduh video platform menjadi aset lokal tanpa sumber asli/izin pengguna.
 
@@ -268,6 +268,7 @@ Setiap karya mengacu ke Media pada CMS. Upload disimpan secara persisten di luar
 14. Media mendukung upload dan URL: video upload, URL file video langsung, serta embed provider yang disepakati dapat diputar setelah Play. Video tanpa thumbnail tidak dapat dipublikasikan sebagai video playable; sumber yang gagal menampilkan fallback yang jujur.
 15. Database, upload, dan rahasia tetap aman saat deploy/pull kode. Backup database/media dapat dipulihkan sebelum CMS diluncurkan.
 16. Toggle bahasa ID/EN bekerja tanpa mengubah URL: cookie `lang` dihormati saat render, `html lang` sesuai, tidak ada kedipan bahasa salah, teks yang belum diterjemahkan jatuh ke versi ID, dan pilihan bahasa bertahan saat halaman dimuat ulang.
+17. Baris Creative Partner hanya menampilkan enam mitra yang dikonfirmasi memakai berkas logo resmi, dengan `alt` yang benar, tinggi optis rata, dan tanpa marquee. Tidak ada logo atau klaim kemitraan tambahan.
 
 ## Pembagian proyek: total 5 phase
 
