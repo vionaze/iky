@@ -15,8 +15,8 @@ Buka `http://127.0.0.1:4173/`.
 
 Halaman `index.html` kini menampilkan portfolio statis: hero, lima episode series,
 tiga tautan karya, Impact, About dengan logo mitra, dan Contact. Toggle bahasa
-memakai `localStorage`; versi CMS nanti memakai cookie. Belum ada `/adminku`,
-database, atau sinkronisasi statistik.
+memakai `localStorage`; versi CMS nanti memakai cookie. CMS (Phase 2) berjalan
+terpisah di port 3000 dan belum menggantikan halaman statis ini.
 Seluruh halaman memakai latar terang. Bahasa default **Inggris (EN)**; toggle ke
 Indonesia (ID) tersimpan di `localStorage`.
 
@@ -67,3 +67,23 @@ nginx -t && systemctl reload nginx
 
 Tidak ada auto-deploy atau workflow GitHub Actions pada tahap ini. Perubahan
 ditinjau lewat pull request, lalu checkout VPS dapat diperbarui secara manual.
+
+## CMS (Phase 2)
+
+Aplikasi Next.js + Payload CMS + SQLite berada di root repo. Halaman statis
+`index.html` tetap dipakai sampai landing dipindahkan ke Next.js pada Phase 3.
+
+```sh
+pnpm install
+pnpm dev
+```
+
+- Admin: `http://localhost:3000/adminku`
+- Akun pertama sudah dibuat: `admin@ikymianstudios.si` (ganti password lewat menu Account)
+- Database: `data/ikymian.db` — di luar Git
+- Upload: `media/` — di luar Git
+- Rahasia: `.env` — di luar Git, contoh pada `.env.example`
+- Bahasa admin: default `en`, tersedia `id`
+
+Catatan Payload 3.91: upload lewat REST mengirim field tambahan sebagai satu field
+`_payload` berisi JSON, bukan field terpisah.
