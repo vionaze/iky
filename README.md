@@ -2,6 +2,8 @@
 
 Halaman awal untuk pemeriksaan domain `https://ikymianstudios.si/`.
 Rencana portfolio tersedia di `docs/plans/2026-10-18-ikymian-portfolio.md`.
+Inventaris konten dan peta field CMS (Phase 1) ada di
+`docs/plans/2026-10-18-ikymian-content-inventory.md`.
 
 ## Preview lokal
 
