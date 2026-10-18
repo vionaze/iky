@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ikymian Studios — AI Filmmaker &amp; Content Creator</title>
+<meta name="description" content="Portfolio Ikymian Studios — series, music video, short film, dan tutorial dengan pendekatan kreatif berbasis AI.">
+<link rel="canonical" href="https://ikymianstudios.si/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f8f1e7;
+    --paper: #fffdf8;
+    --ink: #171225;
+    --wine: #5c1329;
+    --rose: #c2496d;
+    --blush: #f3d6df;
+    --gold: #c9a227;
+    --muted: #6f6270;
+    --line: rgba(23, 18, 37, .14);
+    --page: 1200px;
+    --ease: cubic-bezier(.16, 1, .3, 1);
+    --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+    --sans: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; background: var(--cream); }
+  body {
+    margin: 0; background: var(--cream); color: var(--ink);
+    font-family: var(--sans); font-weight: 400; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  ::selection { background: var(--rose); color: var(--paper); }
+
+  .wrap { width: min(var(--page), calc(100% - 48px)); margin-inline: auto; }
+
+  .skip { position: absolute; left: -9999px; top: 0; z-index: 60; background: var(--ink); color: var(--cream); padding: 12px 18px; }
+  .skip:focus { left: 0; }
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 4px; border-radius: 4px; }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 30;
+    background: color-mix(in srgb, var(--cream) 88%, transparent);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 74px; }
+  .brand { display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
+  .brand strong { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -.01em; line-height: 1; }
+  .brand span { font-size: 9.5px; color: var(--muted); letter-spacing: .26em; text-transform: uppercase; }
+
+  .nav-links { display: flex; align-items: center; gap: 26px; }
+  .nav-links a {
+    text-decoration: none; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink); padding-block: 4px; border-bottom: 1px solid transparent;
+    transition: border-color .25s var(--ease), color .25s var(--ease);
+  }
+  .nav-links a:hover { border-color: var(--rose); color: var(--wine); }
+
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--wine) !important; border-radius: 999px;
+    padding: 9px 16px !important; color: var(--wine) !important;
+    transition: background .25s var(--ease), color .25s var(--ease) !important;
+  }
+  .nav-cta:hover { background: var(--wine); color: var(--cream) !important; }
+  .nav-cta span[aria-hidden] { color: var(--gold); font-size: 12px; }
+
+  .lang {
+    display: inline-flex; align-items: center; gap: 2px;
+    border: 1px solid var(--line); border-radius: 999px; padding: 3px;
+    background: rgba(255, 255, 255, .6);
+  }
+  .lang button {
+    appearance: none; border: 0; background: transparent; cursor: pointer;
+    font: inherit; font-size: 10.5px; letter-spacing: .12em; font-weight: 500;
+    color: var(--muted); padding: 5px 9px; border-radius: 999px;
+    transition: background .25s var(--ease), color .25s var(--ease);
+  }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: var(--cream); }
+  .lang button:hover { color: var(--ink); }
+  .lang button[aria-pressed="true"]:hover { color: var(--cream); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(ellipse 48% 52% at 12% 22%, rgba(243, 214, 223, .85), transparent 62%),
+      radial-gradient(ellipse 42% 46% at 88% 30%, rgba(240, 203, 220, .72), transparent 60%),
+      radial-gradient(ellipse 60% 45% at 55% 100%, rgba(201, 162, 39, .12), transparent 70%),
+      var(--cream);
+  }
+  .watermark {
+    position: absolute; top: 1%; left: 50%; transform: translateX(-50%);
+    font-family: var(--serif); font-size: clamp(180px, 24vw, 400px); line-height: .8;
+    color: rgba(92, 19, 41, .055); letter-spacing: -.03em; white-space: nowrap;
+    pointer-events: none; user-select: none;
+  }
+  .hero-grid {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1.02fr .98fr; align-items: center;
+    gap: 32px; min-height: calc(88dvh - 74px); padding-block: 48px 56px;
+  }
+  .hero-copy { max-width: 640px; min-width: 0; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 12px; margin: 0 0 26px;
+    font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--wine);
+  }
+  .eyebrow::before { content: ""; width: 34px; height: 1px; background: var(--rose); }
+
+  .hero h1 {
+    margin: 0 0 26px; font-family: var(--serif); font-weight: 400;
+    font-size: clamp(56px, 7.4vw, 104px); line-height: .88; letter-spacing: -.025em;
+    max-width: 11ch;
+  }
+  .hero h1 em { font-style: italic; color: var(--wine); }
+  .hero p.lead { margin: 0 0 34px; font-size: clamp(15px, 1.45vw, 18px); line-height: 1.65; color: var(--muted); max-width: 38ch; }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+    font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+    padding: 14px 22px; border-radius: 999px;
+    transition: transform .3s var(--ease), background .3s var(--ease), color .3s var(--ease);
+  }
+  .btn:active { transform: translateY(-1px) scale(.99); }
+  .btn--solid { background: var(--wine); color: var(--cream); }
+  .btn--solid:hover { background: var(--ink); }
+  .btn--ghost { border: 1px solid rgba(23, 18, 37, .22); color: var(--ink); }
+  .btn--ghost:hover { border-color: var(--wine); color: var(--wine); }
+  .btn .arrow { transition: transform .3s var(--ease); font-size: 14px; }
+  .btn:hover .arrow { transform: translate(2px, -2px); }
+
+  .hero-portrait { position: relative; display: flex; justify-content: center; align-items: flex-end; min-height: 440px; }
+  .hero-card {
+    width: min(100%, 430px); height: min(56vh, 540px);
+    background: linear-gradient(175deg, #f6dde6 0%, #ecc9d6 100%);
+    border-radius: 28px; overflow: hidden;
+    box-shadow: 0 34px 70px -38px rgba(92, 19, 41, .55);
+    border: 1px solid rgba(255, 255, 255, .5);
+  }
+  .hero-card img { width: 100%; height: 100%; object-fit: cover; object-position: 66% 16%; max-height: none; }
+
+  .sticker {
+    position: absolute; z-index: 3; font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase;
+    padding: 8px 14px; border-radius: 999px; background: var(--paper);
+    border: 1px solid rgba(92, 19, 41, .16); color: var(--wine);
+    box-shadow: 0 10px 24px -16px rgba(92, 19, 41, .6);
+  }
+  .sticker--one { top: 6px; left: 2%; transform: rotate(-6deg); }
+  .sticker--two { bottom: 22px; right: -4px; transform: rotate(4deg); background: var(--wine); color: var(--cream); border-color: transparent; }
+
+  /* ---------- sections ---------- */
+  section { scroll-margin-top: 88px; }
+  .section { padding-block: 96px; position: relative; }
+  .section--dark { background: var(--ink); color: var(--cream); }
+  .section--wine { background: var(--wine); color: var(--cream); }
+
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 40px; }
+  .section-head h2 {
+    margin: 0; font-family: var(--serif); font-weight: 400;
+    font-size: clamp(40px, 5vw, 66px); letter-spacing: -.02em; line-height: .95;
+  }
+  .section-head .index { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+  .section--dark .index, .section--wine .index { color: rgba(248, 241, 231, .55); }
+  .section-intro { max-width: 52ch; margin: -22px 0 44px; color: var(--muted); font-size: 16px; }
+  .section--dark .section-intro, .section--wine .section-intro { color: rgba(248, 241, 231, .66); }
+
+  /* ---------- series ---------- */
+  .series-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px; margin-bottom: 26px; }
+  .series-meta h3 { margin: 0; font-family: var(--serif); font-size: 30px; font-weight: 400; letter-spacing: -.01em; }
+  .series-meta span { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--rose); }
+
+  .series-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+  .card { text-decoration: none; display: block; }
+  .poster {
+    position: relative; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 14px;
+    background: rgba(255, 255, 255, .06); border: 1px solid rgba(248, 241, 231, .14);
+  }
+  .poster img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+  .card:hover .poster img { transform: scale(1.04); }
+  .poster::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(23, 18, 37, .78), transparent 40%);
+  }
+  .poster-meta {
+    position: absolute; left: 12px; right: 12px; bottom: 10px; z-index: 2;
+    display: flex; justify-content: space-between; color: var(--paper);
+    font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  }
+  .card-body { padding-top: 12px; }
+  .card-body h4 { margin: 0 0 4px; font-family: var(--serif); font-size: 19px; font-weight: 400; line-height: 1.15; }
+  .card-body p { margin: 0; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: rgba(248, 241, 231, .55); }
+
+  /* ---------- single works ---------- */
+  .works-label { margin: 64px 0 16px; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--rose); }
+  .work-list { border-top: 1px solid rgba(248, 241, 231, .18); }
+  .work-row {
+    display: grid; grid-template-columns: 150px 1fr auto; align-items: center; gap: 24px;
+    padding: 22px 4px; border-bottom: 1px solid rgba(248, 241, 231, .18);
+    text-decoration: none; transition: padding-left .3s var(--ease), background .3s var(--ease);
+  }
+  .work-row:hover { padding-left: 16px; background: rgba(248, 241, 231, .04); }
+  .work-row .cat { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(248, 241, 231, .55); }
+  .work-row .title { font-family: var(--serif); font-size: clamp(24px, 2.6vw, 34px); letter-spacing: -.01em; }
+  .work-row .arrow { font-size: 22px; color: var(--rose); transition: transform .3s var(--ease); }
+  .work-row:hover .arrow { transform: translate(4px, -4px); }
+
+  /* ---------- impact ---------- */
+  .impact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 48px; }
+  .metric { padding: 24px 0; border-top: 1px solid rgba(248, 241, 231, .22); }
+  .metric dt { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(248, 241, 231, .6); }
+  .metric dd { margin: 12px 0 0; font-family: var(--serif); font-size: clamp(30px, 3.2vw, 44px); letter-spacing: -.01em; }
+  .metric dd.empty { font-family: var(--sans); font-size: 13px; letter-spacing: .02em; color: rgba(248, 241, 231, .55); padding-top: 10px; }
+  .impact-note { margin-top: 34px; font-size: 13px; color: rgba(248, 241, 231, .62); max-width: 60ch; }
+
+  /* ---------- about ---------- */
+  .about-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 64px; align-items: start; }
+  .about-copy p { margin: 0 0 20px; font-size: 16px; line-height: 1.7; max-width: 50ch; }
+  .about-copy p:first-child {
+    font-family: var(--serif); font-size: clamp(26px, 2.6vw, 34px);
+    line-height: 1.22; letter-spacing: -.01em; max-width: 22ch; margin-bottom: 26px;
+  }
+  .about-copy p:last-child { margin-bottom: 0; color: var(--muted); }
+  .process { border-left: 1px solid var(--line); padding-left: 30px; }
+  .process .label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--wine); }
+  .process ul { list-style: none; margin: 16px 0 0; padding: 0; }
+  .process li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .process li span:last-child { font-family: var(--serif); color: var(--rose); }
+
+  .partners { margin-top: 68px; padding-top: 30px; border-top: 1px solid var(--line); }
+  .partners .label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--wine); }
+  .partner-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 26px; }
+  .partner-row img {
+    box-sizing: content-box; height: 18px; width: auto; object-fit: contain;
+    padding: 12px 18px; background: var(--paper); border: 1px solid var(--line);
+    border-radius: 999px; filter: grayscale(1) opacity(.8);
+    transition: border-color .3s var(--ease), opacity .3s var(--ease);
+  }
+  .partner-row img:hover { border-color: var(--rose); opacity: 1; }
+  .partner-row .capcut { color: var(--ink); }
+  .partner-row .invert { background: var(--ink); border-color: var(--ink); filter: grayscale(1) opacity(.9); }
+  .partner-row .invert:hover { filter: grayscale(1) opacity(1); border-color: var(--ink); }
+
+  /* ---------- contact ---------- */
+  .contact--blush {
+    background:
+      radial-gradient(ellipse 55% 60% at 78% 20%, rgba(194, 73, 109, .16), transparent 62%),
+      var(--blush);
+    color: var(--ink);
+  }
+  .contact-grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
+  .contact h2 {
+    margin: 0 0 22px; font-family: var(--serif); font-weight: 400;
+    font-size: clamp(48px, 7vw, 92px); letter-spacing: -.025em; line-height: .9; max-width: 12ch;
+  }
+  .mail {
+    display: inline-block; font-family: var(--serif); font-size: clamp(22px, 2.6vw, 34px);
+    text-decoration: none; border-bottom: 1px solid var(--wine); padding-bottom: 4px;
+    transition: color .3s var(--ease);
+  }
+  .mail:hover { color: var(--wine); }
+  .socials { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 36px; }
+  .socials a { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: rgba(23, 18, 37, .62); text-decoration: none; transition: color .25s var(--ease); }
+  .socials a:hover { color: var(--wine); }
+  .contact .index { color: rgba(23, 18, 37, .5); }
+
+  /* ---------- footer ---------- */
+  .footer { background: var(--ink); color: rgba(248, 241, 231, .7); padding-block: 26px 34px; }
+  .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 11px; letter-spacing: .08em; }
+
+  /* ---------- reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .card:hover .poster img, .work-row:hover .arrow, .btn:hover .arrow { transform: none; }
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 1000px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 34px; min-height: 0; padding-block: 44px 44px; }
+    .hero h1 { max-width: 13ch; }
+    .hero-portrait { justify-content: flex-start; min-height: 0; }
+    .hero-card { width: min(100%, 380px); }
+    .hero-card { height: min(52vh, 420px); }
+    .hero-card img { object-position: 64% 14%; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .process { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
+    .series-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .impact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .contact-grid { grid-template-columns: 1fr; align-items: start; }
+  }
+
+  @media (max-width: 720px) {
+    .wrap { width: calc(100% - 32px); }
+    .nav-inner { min-height: 64px; }
+    .nav-links { gap: 12px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .nav-cta { padding: 8px 12px !important; }
+    .hero h1 { font-size: clamp(40px, 10.5vw, 58px); max-width: 11ch; }
+    .hero-card { border-radius: 20px; }
+    .hero-card { height: 340px; }
+    .hero-card img { object-position: 62% 12%; }
+    .sticker { font-size: 8.5px; padding: 6px 11px; }
+    .section { padding-block: 68px; }
+    .section-head { flex-direction: column; gap: 8px; margin-bottom: 30px; }
+    .section-intro { margin-top: -16px; }
+    .series-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .work-row { grid-template-columns: 1fr auto; gap: 4px 16px; padding: 18px 2px; }
+    .work-row .cat { grid-column: 1 / -1; }
+    .impact-grid { grid-template-columns: 1fr; }
+    .partners { margin-top: 50px; }
+    .partner-row { gap: 10px; }
+    .partner-row img { height: 15px; padding: 10px 14px; }
+    .footer-inner { flex-direction: column; }
+  }
+
+  @media (max-width: 460px) {
+    .nav-cta { display: none; }
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f2eee6; --paper:#141416; --ink:#f2eee6; --wine:#ff5233; --rose:#ff7a45;
+    --blush:#16161a; --gold:#ffb347; --muted:#9a958d; --line:rgba(242,238,230,.14);
+    --sans:"Archivo","Outfit",system-ui,sans-serif;
+  }
+  html,body{background:#0a0a0c;color:var(--cream)}
+  body{font-family:var(--sans)}
+  .nav{background:rgba(10,10,12,.78);border-bottom:1px solid var(--line)}
+  .brand strong{font-family:var(--sans);font-weight:800;text-transform:uppercase;letter-spacing:.01em;font-size:17px}
+  .brand span{color:#8a857d}
+  .nav-links a{color:#cfc9bf;font-weight:500}
+  .nav-links a:hover{color:#fff;border-color:var(--wine)}
+  .lang{background:transparent;border-color:var(--line)}
+  .lang button{color:#8a857d}
+  .lang button[aria-pressed="true"]{background:#f2eee6;color:#0a0a0c}
+  .nav-cta{border-color:rgba(242,238,230,.35)!important;color:var(--cream)!important}
+  .nav-cta:hover{background:#f2eee6;color:#0a0a0c!important}
+  .hero{background:
+     radial-gradient(ellipse 40% 55% at 78% 42%, rgba(255,61,46,.22), transparent 62%),
+     radial-gradient(ellipse 30% 40% at 92% 18%, rgba(122,43,255,.18), transparent 60%),
+     #0a0a0c;}
+  .watermark{color:rgba(242,238,230,.045);font-family:var(--sans);font-weight:900;letter-spacing:-.04em}
+  .hero h1{font-family:var(--sans);font-weight:800;text-transform:none;letter-spacing:-.045em;
+    font-size:clamp(46px,6.3vw,92px);line-height:.9;max-width:13.5ch}
+  .hero p.lead{color:#a8a29a;max-width:36ch}
+  .eyebrow{color:#ff7a45}
+  .btn{font-weight:600;letter-spacing:.1em}
+  .btn--solid{background:#f2eee6;color:#0a0a0c}
+  .btn--solid:hover{background:var(--wine);color:#0a0a0c}
+  .btn--ghost{border-color:rgba(242,238,230,.32);color:var(--cream)}
+  .btn--ghost:hover{border-color:var(--wine);color:#ff7a45}
+  .hero-card{background:linear-gradient(135deg,#ff3d2e 0%,#ff8a00 52%,#7a2bff 100%);
+    border:0;border-radius:6px;box-shadow:0 40px 90px -40px rgba(255,61,46,.55)}
+  .hero-card img{filter:grayscale(1) contrast(1.08);mix-blend-mode:multiply;opacity:.96}
+  .sticker{background:#0a0a0c;color:var(--cream);border-color:rgba(242,238,230,.28);font-weight:600}
+  .sticker--two{background:var(--wine);color:#0a0a0c;border-color:transparent}
+  .section{background:#0a0a0c;border-top:1px solid var(--line)}
+  .section--dark{background:#0a0a0c}
+  .section--wine{background:#101013;border-top:1px solid var(--line)}
+  .section-head h2{font-family:var(--sans);font-weight:800;letter-spacing:-.035em;text-transform:none}
+  .section-head .index{color:#8a857d}
+  .section-intro{color:#a8a29a}
+  .series-meta h3{font-family:var(--sans);font-weight:700}
+  .series-meta span{color:#ff7a45}
+  .poster{border-radius:4px;border-color:rgba(242,238,230,.16)}
+  .poster-meta{color:#f2eee6}
+  .poster::after{background:linear-gradient(to top,rgba(0,0,0,.72),transparent 42%)}
+  .card-body h4{font-family:var(--sans);font-weight:600;font-size:16px}
+  .card-body p{color:#8a857d}
+  .works-label{color:#ff7a45}
+  .work-list{border-top-color:var(--line)}
+  .work-row{border-bottom-color:var(--line)}
+  .work-row .cat{color:#8a857d}
+  .work-row .title{font-family:var(--sans);font-weight:700;letter-spacing:-.02em}
+  .work-row .arrow{color:#ff7a45}
+  .metric dt{color:#8a857d}
+  .metric dd{font-family:var(--sans);font-weight:700;letter-spacing:-.03em}
+  .metric dd.empty{color:#8a857d}
+  .impact-note{color:#a8a29a}
+  .about-copy p:first-child{font-family:var(--sans);font-weight:500;font-size:clamp(22px,2.2vw,30px);line-height:1.3;max-width:26ch}
+  .about-copy p:last-child{color:#a8a29a}
+  .process .label{color:#ff7a45}
+  .process li{border-bottom-color:var(--line)}
+  .process li span:last-child{font-family:var(--sans);color:#ff7a45}
+  .partners{border-top-color:var(--line)}
+  .partners .label{color:#ff7a45}
+  .partner-row img{background:#f2eee6;border-color:transparent}
+  .partner-row .invert{background:#141416;border-color:rgba(242,238,230,.2)}
+  .contact--blush{
+    background:
+      radial-gradient(ellipse 46% 78% at 86% 22%, rgba(255,61,46,.38), transparent 62%),
+      radial-gradient(ellipse 38% 55% at 8% 92%, rgba(122,43,255,.20), transparent 62%),
+      #101013;
+    color:var(--cream);
+  }
+  .contact h2{font-family:var(--sans);font-weight:800;letter-spacing:-.045em}
+  .mail{font-family:var(--sans);font-weight:600;border-color:var(--wine)}
+  .mail:hover{color:#ff8a00}
+  .socials a{color:#8a857d}
+  .socials a:hover{color:#ff8a00}
+  .contact .index{color:#8a857d}
+  .footer{background:#050506;color:#8a857d}
+  @media (max-width:720px){
+    .hero h1{font-size:clamp(38px,9.6vw,54px);max-width:12ch}
+    .about-copy p:first-child{font-size:22px}
+    .contact h2{font-size:clamp(40px,11vw,64px)}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#work">Lewati ke karya</a>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Ikymian Studios">
+      <strong>Ikymian Studios</strong>
+      <span>Caisart Felix</span>
+    </a>
+    <nav class="nav-links" aria-label="Navigasi utama">
+      <a href="#work" data-id="Karya" data-en="Work">Karya</a>
+      <a href="#about" data-id="Tentang" data-en="About">Tentang</a>
+      <a href="#contact" data-id="Kontak" data-en="Contact">Kontak</a>
+      <a class="nav-cta" href="#contact"><span data-id="Ngobrol" data-en="Let's talk">Ngobrol</span> <span aria-hidden="true">&#10022;</span></a>
+      <div class="lang" role="group" aria-label="Bahasa / Language">
+        <button type="button" data-lang="id" aria-pressed="true">ID</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <span class="watermark" aria-hidden="true">IKYMIAN</span>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow reveal" data-id="AI Filmmaker &amp; Content Creator" data-en="AI Filmmaker &amp; Content Creator">AI Filmmaker &amp; Content Creator</p>
+        <h1 class="reveal" style="--i:1"
+            data-id="Cerita, musik, dan ide yang menjadi visual."
+            data-en="Stories, music, and ideas turned into visuals.">Cerita, musik, dan ide yang menjadi visual.</h1>
+        <p class="lead reveal" style="--i:2"
+           data-id="Series, music video, short film, dan tutorial dengan pendekatan kreatif berbasis AI."
+           data-en="Series, music videos, short films, and tutorials with an AI-driven creative approach.">Series, music video, short film, dan tutorial dengan pendekatan kreatif berbasis AI.</p>
+        <div class="cta-row reveal" style="--i:3">
+          <a class="btn btn--solid" href="#work">
+            <span data-id="Lihat Karya" data-en="View Work">Lihat Karya</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="btn btn--ghost" href="#contact">
+            <span data-id="Diskusi Kolaborasi" data-en="Start a Project">Diskusi Kolaborasi</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-portrait reveal" style="--i:2">
+        <span class="sticker sticker--one">Est. 2026</span>
+        <span class="sticker sticker--two" data-id="AI Filmmaker" data-en="AI Filmmaker">AI Filmmaker</span>
+        <div class="hero-card">
+          <img src="../images/hero-1.png" alt="Potret karakter visual Ikymian Studios" width="1200" height="896">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="section section--dark">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 data-id="Karya Pilihan" data-en="Selected Works">Karya Pilihan</h2>
+        <span class="index">01 / Work</span>
+      </div>
+      <p class="section-intro reveal"
+         data-id="Lima episode series, satu music video, satu short film, dan satu tutorial."
+         data-en="Five series episodes, one music video, one short film, and one tutorial.">Lima episode series, satu music video, satu short film, dan satu tutorial.</p>
+
+      <div class="series-meta reveal">
+        <h3>Berondong Sebelah Rumah</h3>
+        <span>Series · 5 episode</span>
+      </div>
+
+      <div class="series-grid">
+        <a class="card reveal" style="--i:1" href="https://www.tiktok.com/@damiann101/video/7692173774682131733" target="_blank" rel="noopener">
+          <div class="poster">
+            <img src="../images/works/berondong/ep01.jpg" alt="Poster Berondong Sebelah Rumah episode 01" loading="lazy">
+            <div class="poster-meta"><span class="ep">EP 01</span><span>1:59</span></div>
+          </div>
+          <div class="card-body">
+            <h4 data-id="Episode 01" data-en="Episode 01">Episode 01</h4>
+            <p>TikTok · Series</p>
+          </div>
+        </a>
+        <a class="card reveal" style="--i:2" href="https://www.tiktok.com/@damiann101/video/7692619848244890900" target="_blank" rel="noopener">
+          <div class="poster">
+            <img src="../images/works/berondong/ep02.jpg" alt="Poster Berondong Sebelah Rumah episode 02" loading="lazy">
+            <div class="poster-meta"><span class="ep">EP 02</span><span>2:01</span></div>
+          </div>
+          <div class="card-body">
+            <h4 data-id="Terlalu Dekat" data-en="Too Close">Terlalu Dekat</h4>
+            <p>TikTok · Series</p>
+          </div>
+        </a>
+        <a class="card reveal" style="--i:3" href="https://www.tiktok.com/@damiann101/video/7692863785836678421" target="_blank" rel="noopener">
+          <div class="poster">
+            <img src="../images/works/berondong/ep03.jpg" alt="Poster Berondong Sebelah Rumah episode 03" loading="lazy">
+            <div class="poster-meta"><span class="ep">EP 03</span><span>2:03</span></div>
+          </div>
+          <div class="card-body">
+            <h4 data-id="Mantan Suami" data-en="The Ex-Husband">Mantan Suami</h4>
+            <p>TikTok · Series</p>
+          </div>
+        </a>
+        <a class="card reveal" style="--i:4" href="https://www.tiktok.com/@damiann101/video/7693810204948974869" target="_blank" rel="noopener">
+          <div class="poster">
+            <img src="../images/works/berondong/ep04.jpg" alt="Poster Berondong Sebelah Rumah episode 04" loading="lazy">
+            <div class="poster-meta"><span class="ep">EP 04</span><span>2:03</span></div>
+          </div>
+          <div class="card-body">
+            <h4 data-id="Jangan Bikin Gue Nyaman" data-en="Don't Make Me Comfortable">Jangan Bikin Gue Nyaman</h4>
+            <p>TikTok · Series</p>
+          </div>
+        </a>
+        <a class="card reveal" style="--i:5" href="https://www.tiktok.com/@damiann101/video/7695612157299379476" target="_blank" rel="noopener">
+          <div class="poster">
+            <img src="../images/works/berondong/ep05.jpg" alt="Poster Berondong Sebelah Rumah episode 05" loading="lazy">
+            <div class="poster-meta"><span class="ep">EP 05</span><span>1:56</span></div>
+          </div>
+          <div class="card-body">
+            <h4 data-id="Bukan Tempat Gue" data-en="Not My Place">Bukan Tempat Gue</h4>
+            <p>TikTok · Series</p>
+          </div>
+        </a>
+      </div>
+
+      <p class="works-label reveal" data-id="Format lain" data-en="Other formats">Format lain</p>
+      <div class="work-list">
+        <a class="work-row reveal" href="https://www.instagram.com/reel/Dd89pg1SnHS/" target="_blank" rel="noopener">
+          <span class="cat">Instagram</span>
+          <span class="title" data-id="Tutorial" data-en="Tutorial">Tutorial</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="work-row reveal" href="https://www.instagram.com/reel/DcfJ7wEyVAA/" target="_blank" rel="noopener">
+          <span class="cat">Instagram</span>
+          <span class="title" data-id="Short Film" data-en="Short Film">Short Film</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="work-row reveal" href="https://www.instagram.com/reel/DejefTNSRs7/" target="_blank" rel="noopener">
+          <span class="cat">Instagram</span>
+          <span class="title" data-id="Music Video" data-en="Music Video">Music Video</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="impact" class="section section--wine">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 data-id="Jangkauan" data-en="Reach">Jangkauan</h2>
+        <span class="index">02 / Impact</span>
+      </div>
+      <dl class="impact-grid">
+        <div class="metric reveal"><dt data-id="Total views" data-en="Total views">Total views</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:1"><dt data-id="Followers" data-en="Followers">Followers</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:2"><dt data-id="Engagement" data-en="Engagement">Engagement</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:3"><dt data-id="Videos created" data-en="Videos created">Videos created</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:4"><dt data-id="Completed campaigns" data-en="Completed campaigns">Completed campaigns</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:5"><dt data-id="Nominations" data-en="Nominations">Nominations</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+      </dl>
+      <p class="impact-note reveal"
+         data-id="Angka belum terhubung. Views akan diisi otomatis dari API resmi; metrik lain diisi dari data terverifikasi."
+         data-en="Numbers are not connected yet. Views will sync automatically from official APIs; other metrics come from verified records.">Angka belum terhubung. Views akan diisi otomatis dari API resmi; metrik lain diisi dari data terverifikasi.</p>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 data-id="Tentang" data-en="About">Tentang</h2>
+        <span class="index">03 / About</span>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy reveal">
+          <p data-id="Saya membuat series, music video, short film, dan tutorial, mengeksplorasi cara ide berkembang menjadi cerita dan visual melalui AI."
+             data-en="I make series, music videos, short films, and tutorials, exploring how ideas become stories and visuals through AI.">Saya membuat series, music video, short film, dan tutorial, mengeksplorasi cara ide berkembang menjadi cerita dan visual melalui AI.</p>
+          <p data-id="Berondong Sebelah Rumah adalah AI micro-drama lima episode, dibuat dengan CapCut dan Seedance 2.5."
+             data-en="Berondong Sebelah Rumah is a five-episode AI micro-drama, made with CapCut and Seedance 2.5.">Berondong Sebelah Rumah adalah AI micro-drama lima episode, dibuat dengan CapCut dan Seedance 2.5.</p>
+        </div>
+        <aside class="process reveal" style="--i:2">
+          <span class="label" data-id="Proses" data-en="Process">Proses</span>
+          <ul>
+            <li><span data-id="Arah cerita" data-en="Story direction">Arah cerita</span><span>01</span></li>
+            <li><span data-id="Visual &amp; karakter" data-en="Visuals &amp; characters">Visual &amp; karakter</span><span>02</span></li>
+            <li><span data-id="Editing &amp; suara" data-en="Editing &amp; sound">Editing &amp; suara</span><span>03</span></li>
+            <li><span data-id="Publikasi" data-en="Publishing">Publikasi</span><span>04</span></li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="partners reveal">
+        <span class="label" data-id="Mitra Kreatif" data-en="Creative Partner">Mitra Kreatif</span>
+        <div class="partner-row">
+          <img class="capcut" src="../images/partners/capcut.svg" alt="CapCut" loading="lazy">
+          <img src="../images/partners/oiioii.png" alt="OiiOii" loading="lazy">
+          <img class="invert" src="../images/partners/pixmax.svg" alt="Pixmax" loading="lazy">
+          <img src="../images/partners/topmediai.png" alt="TopMediai" loading="lazy">
+          <img src="../images/partners/openart.png" alt="OpenArt" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact contact--blush">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 class="reveal" data-id="Mari buat sesuatu." data-en="Let's make something.">Mari buat sesuatu.</h2>
+        <a class="mail reveal" href="mailto:ariesiky8@gmail.com">ariesiky8@gmail.com</a>
+        <div class="socials reveal">
+          <a href="https://instagram.com/ikymianvt" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@caisarttfelix" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://www.youtube.com/@ikymian_dramas" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://x.com/ikymianstudios" target="_blank" rel="noopener">X</a>
+          <a href="https://www.threads.com/@ikymian_series" target="_blank" rel="noopener">Threads</a>
+        </div>
+      </div>
+      <span class="index reveal" style="--i:2">04 / Contact</span>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span>© 2026 Ikymian Studios</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var nodes = document.querySelectorAll("[data-id]");
+    var buttons = document.querySelectorAll(".lang button");
+
+    function setLang(lang) {
+      var next = lang === "en" ? "en" : "id";
+      document.documentElement.lang = next;
+      nodes.forEach(function (el) {
+        var value = el.getAttribute("data-" + next);
+        if (value !== null) el.textContent = value;
+      });
+      buttons.forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.lang === next));
+      });
+      try { localStorage.setItem("lang", next); } catch (e) {}
+      document.title = next === "en"
+        ? "Ikymian Studios — AI Filmmaker & Content Creator"
+        : "Ikymian Studios — AI Filmmaker & Content Creator";
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () { setLang(b.dataset.lang); });
+    });
+
+    var saved = "id";
+    try { saved = localStorage.getItem("lang") || "id"; } catch (e) {}
+    setLang(saved);
+
+    var revealed = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      revealed.forEach(function (el) { el.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
+    revealed.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+</body>
+</html>

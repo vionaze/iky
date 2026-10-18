@@ -18,6 +18,9 @@ tiga tautan karya, Impact, About dengan logo mitra, dan Contact. Toggle bahasa
 memakai `localStorage`; versi CMS nanti memakai cookie. Belum ada `/adminku`,
 database, atau sinkronisasi statistik.
 
+Varian tema gelap high-contrast tersedia di `http://127.0.0.1:4173/v2/` untuk
+perbandingan. Halaman live di `/` belum diubah ke varian ini.
+
 ## VPS
 
 - Server: koneksi EZTOPUP di Termius.
