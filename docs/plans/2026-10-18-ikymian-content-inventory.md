@@ -170,7 +170,7 @@ seperti "Berondong Sebelah Rumah" tetap memakai judul aslinya bila tidak ada pad
 | 1 | Berondong Sebelah Rumah — EP 01 | Series | Elian (Caisart Felix); Aurelia (Aluna) | CapCut + Seedance 2.5 | [video](https://www.tiktok.com/@damiann101/video/7692173774682131733) | `ep01.jpg` | 1:59 | ✅ |
 | 2 | Berondong Sebelah Rumah — EP 02 "Terlalu Dekat" | Series | sama | sama | [video](https://www.tiktok.com/@damiann101/video/7692619848244890900) | `ep02.jpg` | 2:01 | ✅ |
 | 3 | Berondong Sebelah Rumah — EP 03 "Mantan Suami" | Series | sama | sama | [video](https://www.tiktok.com/@damiann101/video/7692863785836678421) | `ep03.jpg` | 2:03 | ✅ |
-| 4 | Berondong Sebelah Rumah — EP 04 "Jangan Bikin Gue Nyaman" | Series | sama | sama | [video](https://www.tiktok.com/@damiann101/video/7693810204948974869) | `ep04.jpg` | 2:03 | 🟡 poster duplikat |
+| 4 | Berondong Sebelah Rumah — EP 04 "Jangan Bikin Gue Nyaman" | Series | sama | sama | [video](https://www.tiktok.com/@damiann101/video/7693810204948974869) | `ep04.jpg` | 2:03 | ✅ |
 | 5 | Berondong Sebelah Rumah — EP 05 "Bukan Tempat Gue" | Series | sama | sama | [video](https://www.tiktok.com/@damiann101/video/7695612157299379476) | `ep05.jpg` | 1:56 | ✅ |
 | 6 | Belum tersedia | Tutorial | ❌ | ❌ | [Instagram](https://www.instagram.com/reel/Dd89pg1SnHS/) | ❌ | ❌ | 🟡 link saja |
 | 7 | Belum tersedia | Short Film | ❌ | ❌ | [Instagram](https://www.instagram.com/reel/DcfJ7wEyVAA/) | ❌ | ❌ | 🟡 link saja |
@@ -183,8 +183,9 @@ Catatan:
 - Playlist series terverifikasi berisi **5 video**. Judul, nomor episode, dan durasi
   diambil dari metadata TikTok pada 18 Oktober 2026; durasi dalam menit:detik.
 - Poster episode disimpan di `images/works/berondong/ep01.jpg`–`ep05.jpg`, ukuran
-  540 × 960 (9:16). **Poster EP 03 dan EP 04 identik** — EP 04 perlu diganti sebelum
-  publish.
+  540 × 960 (9:16). Semua memakai key art series yang sama; EP 02 semula berupa still
+  pintu dari TikTok lalu diseragamkan. Still berbeda per episode perlu disediakan
+  sebelum publish agar kartu tidak tampak berulang.
 - Tiga reel Instagram baru berupa **link**. Judul, durasi, dan poster belum terbaca
   karena Instagram tidak membuka metadata untuk pembaca non-login. Jangan menebak
   judulnya; minta judul dari pengguna.

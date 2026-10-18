@@ -13,6 +13,11 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 Buka `http://127.0.0.1:4173/`.
 
+Mockup tema portfolio (statis, bukan aplikasi CMS) ada di
+`http://127.0.0.1:4173/preview/`. Halaman ini memakai aset di `images/`, toggle bahasa
+via `localStorage`, dan hanya untuk meninjau arah visual. Halaman produksi
+`index.html` tidak diubah.
+
 ## VPS
 
 - Server: koneksi EZTOPUP di Termius.
