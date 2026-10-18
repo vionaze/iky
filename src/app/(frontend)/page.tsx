@@ -2,7 +2,10 @@ import { cookies } from 'next/headers'
 import type { Metadata } from 'next'
 import { LangToggle } from '@/components/LangToggle'
 import { getDict, type Locale } from '@/lib/i18n'
+import { getCmsContent } from '@/lib/cms'
 import LiquidScene from '@/components/LiquidScene'
+
+type AnyRecord = Record<string, any>
 
 export const metadata: Metadata = {
   title: 'Ikymian Studios — AI Filmmaker & Content Creator',
@@ -23,6 +26,35 @@ export default async function HomePage() {
   const cookieStore = await cookies()
   const locale: Locale = cookieStore.get('lang')?.value === 'id' ? 'id' : 'en'
   const t = getDict(locale)
+  const cms = await getCmsContent(locale)
+
+  const navItems =
+    Array.isArray(cms.header?.navItems) && cms.header.navItems.length > 0
+      ? cms.header.navItems
+      : [
+          { label: t.nav.work, href: '#work' },
+          { label: t.nav.about, href: '#about' },
+          { label: t.nav.contact, href: '#contact' },
+        ]
+
+  const heroTitle = cms.home?.hero?.title || t.hero.title
+  const heroLead = cms.home?.hero?.subtitle || t.hero.lead
+  const ctaPrimaryLabel = cms.home?.hero?.ctaPrimary?.label || t.hero.primary
+  const ctaSecondaryLabel = cms.home?.hero?.ctaSecondary?.label || t.hero.secondary
+  const worksLabel = cms.home?.works?.title || t.works.label
+  const worksIntro = cms.home?.works?.intro || t.works.intro
+  const impactLabel = cms.home?.impact?.title || t.impact.label
+  const impactNote = cms.home?.impact?.intro || t.impact.note
+  const aboutHeadline = cms.home?.about?.title || t.about.title
+  const contactTitle = cms.home?.contact?.title || t.contact.title
+  const email = cms.footer?.email || t.contact.email
+  const footerCopyright = cms.footer?.copyright || t.footer
+  const socials =
+    Array.isArray(cms.footer?.socials) && cms.footer.socials.length > 0
+      ? cms.footer.socials
+          .filter((item: AnyRecord) => item.visible !== false)
+          .map((item: AnyRecord) => ({ name: item.label || item.platform, href: item.url }))
+      : t.socials
 
   return (
     <>
@@ -41,15 +73,15 @@ export default async function HomePage() {
           </a>
 
           <nav className="flex items-center gap-6 sm:gap-7" aria-label="Main">
-            <a className="hidden text-[13px] text-muted transition-colors hover:text-ink sm:block" href="#work">
-              {t.nav.work}
-            </a>
-            <a className="hidden text-[13px] text-muted transition-colors hover:text-ink sm:block" href="#about">
-              {t.nav.about}
-            </a>
-            <a className="hidden text-[13px] text-muted transition-colors hover:text-ink sm:block" href="#contact">
-              {t.nav.contact}
-            </a>
+            {navItems.map((item: AnyRecord) => (
+              <a
+                key={item.href}
+                className="hidden text-[13px] text-muted transition-colors hover:text-ink sm:block"
+                href={item.href}
+              >
+                {item.label}
+              </a>
+            ))}
             <LangToggle locale={locale} />
           </nav>
         </div>
@@ -68,24 +100,24 @@ export default async function HomePage() {
                 {t.hero.eyebrow}
               </p>
               <h1 className="animate-rise mt-7 max-w-[13ch] font-display text-[clamp(2.6rem,6.2vw,5.25rem)] font-medium leading-[0.94] tracking-[-0.045em] [animation-delay:90ms]">
-                {t.hero.title}
+                {heroTitle}
               </h1>
               <p className="animate-rise mt-7 max-w-[42ch] text-[clamp(1rem,1.4vw,1.125rem)] leading-relaxed text-muted [animation-delay:180ms]">
-                {t.hero.lead}
+                {heroLead}
               </p>
               <div className="animate-rise mt-9 flex flex-wrap items-center gap-3 [animation-delay:270ms]">
                 <a
                   href="#work"
                   className="inline-flex items-center gap-2 rounded-full bg-indigo px-6 py-3.5 text-sm font-medium text-cream transition-colors hover:bg-ink active:translate-y-px"
                 >
-                  {t.hero.primary}
+                  {ctaPrimaryLabel}
                   <span aria-hidden="true" className="text-xs">↗</span>
                 </a>
                 <a
                   href="#contact"
                   className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3.5 text-sm font-medium transition-colors hover:border-indigo hover:text-indigo active:translate-y-px"
                 >
-                  {t.hero.secondary}
+                  {ctaSecondaryLabel}
                 </a>
               </div>
             </div>
@@ -107,13 +139,13 @@ export default async function HomePage() {
           <div className="mx-auto w-[min(1160px,calc(100%-32px))]">
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-medium tracking-[-0.035em]">
-                {t.works.label}
+                {worksLabel}
               </h2>
               <span className="text-[10px] uppercase tracking-[0.22em] text-muted">
                 {t.works.index} / Work
               </span>
             </div>
-            <p className="mt-3 max-w-[54ch] text-muted">{t.works.intro}</p>
+            <p className="mt-3 max-w-[54ch] text-muted">{worksIntro}</p>
 
             <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-14">
               <div className="lg:col-span-5">
@@ -207,7 +239,7 @@ export default async function HomePage() {
           <div className="mx-auto w-[min(1160px,calc(100%-32px))]">
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-medium tracking-[-0.035em]">
-                {t.impact.label}
+                {impactLabel}
               </h2>
               <span className="text-[10px] uppercase tracking-[0.22em] text-muted">
                 {t.impact.index} / Impact
@@ -222,7 +254,7 @@ export default async function HomePage() {
                 </div>
               ))}
             </dl>
-            <p className="mt-8 max-w-[62ch] text-[13px] leading-relaxed text-muted">{t.impact.note}</p>
+            <p className="mt-8 max-w-[62ch] text-[13px] leading-relaxed text-muted">{impactNote}</p>
           </div>
         </section>
 
@@ -240,7 +272,7 @@ export default async function HomePage() {
             <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
               <div className="lg:col-span-7">
                 <p className="font-display text-[clamp(1.6rem,2.8vw,2.2rem)] font-medium leading-[1.2] tracking-[-0.03em]">
-                  {t.about.title}
+                  {aboutHeadline}
                 </p>
                 <p className="mt-6 max-w-[52ch] text-[17px] leading-relaxed">{t.about.lead}</p>
                 <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">{t.about.body}</p>
@@ -287,16 +319,16 @@ export default async function HomePage() {
           <div className="mx-auto flex w-[min(1160px,calc(100%-32px))] flex-wrap items-end justify-between gap-10">
             <div>
               <h2 className="max-w-[13ch] font-display text-[clamp(2.4rem,5.4vw,4.25rem)] font-medium leading-[0.96] tracking-[-0.045em]">
-                {t.contact.title}
+                {contactTitle}
               </h2>
               <a
-                href={`mailto:${t.contact.email}`}
+                href={`mailto:${email}`}
                 className="mt-7 inline-block border-b border-indigo pb-1 text-[clamp(1.125rem,2.2vw,1.625rem)] transition-colors hover:text-indigo"
               >
-                {t.contact.email}
+                {email}
               </a>
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-                {t.socials.map((social) => (
+                {socials.map((social: AnyRecord) => (
                   <a
                     key={social.name}
                     href={social.href}
@@ -316,7 +348,7 @@ export default async function HomePage() {
 
       <footer className="border-t border-line py-7">
         <div className="mx-auto flex w-[min(1160px,calc(100%-32px))] flex-wrap items-center justify-between gap-3 text-xs text-muted">
-          <span>{t.footer}</span>
+          <span>{footerCopyright}</span>
           <span>Caisart Felix</span>
         </div>
       </footer>
