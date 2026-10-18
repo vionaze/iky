@@ -6,7 +6,7 @@ Rencana portfolio tersedia di `docs/plans/2026-10-18-ikymian-portfolio.md`.
 ## Preview lokal
 
 ```sh
-python3 -m http.server 4173 --bind 127.0.0.1 --directory www
+python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
 Buka `http://127.0.0.1:4173/`.
@@ -16,13 +16,13 @@ Buka `http://127.0.0.1:4173/`.
 - Server: koneksi EZTOPUP di Termius.
 - Repository: `https://github.com/vionaze/iky.git`.
 - Checkout: `/var/www/ikymianstudios.si`.
-- Document root: `/var/www/ikymianstudios.si/www`.
+- Document root: `/var/www/ikymianstudios.si`.
 - Domain utama: `ikymianstudios.si`.
 - Cloudflare: record A domain utama ke `161.97.130.68`, DNS only.
 - Nginx: `/etc/nginx/sites-available/ikymianstudios.si`.
 
-Folder `/var/www` adalah lokasi situs pada server; `www` di dalam checkout
-adalah folder berkas publik proyek. Alamat browser tetap domain utama.
+Halaman berada langsung di `/var/www/ikymianstudios.si/index.html`.
+Tidak ada folder `www` tambahan. Nginx menolak akses ke dotfiles, `docs`, dan `deploy`.
 
 ## Pemasangan awal
 
