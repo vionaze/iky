@@ -358,6 +358,55 @@ Path berikut adalah rencana berkas untuk implementasi berikutnya, bukan berkas y
 3. Verifikasi backup/pemulihan database dan media; perubahan kode tidak boleh menimpa konten atau rahasia. Catat cara menjalankan aplikasi, migrasi, dan rollback di README.
 4. Setelah pengguna meminta peluncuran, jalankan proses aplikasi pada port lokal yang tersedia dan arahkan Nginx ke proses tersebut. Pertahankan domain/SSL dan konfigurasi situs lain; verifikasi landing serta `/adminku` lewat HTTPS.
 
+#### TODO runtime service (diputuskan di Phase 5)
+
+**Status 18 Oktober 2026:** belum dipakai. Halaman publik masih statis dan disajikan
+langsung oleh Nginx, sehingga belum ada proses Node yang perlu dijaga. Menambahkan
+PM2 sekarang hanya menambah satu titik gagal tanpa manfaat.
+
+**Pilihan yang ditunda:** PM2 atau systemd. Ditetapkan saat aplikasi Next.js/Payload
+benar-benar berjalan, bukan sebelum scaffold dibuat.
+
+| Opsi | Kelebihan | Konsekuensi |
+| --- | --- | --- |
+| PM2 | `pm2 logs`, restart otomatis, cluster mode, dokumentasi luas | dependency tambahan; daemon harus dijalankan sebagai user aplikasi, bukan root |
+| systemd | sudah tersedia di VPS, start otomatis saat boot, tanpa dependency | log lewat `journalctl`, tanpa cluster bawaan |
+
+**Syarat wajib untuk kedua opsi:**
+
+1. Proses berjalan sebagai user aplikasi, **bukan root**.
+2. `/var/lib/ikymianstudios/` (SQLite dan media) dimiliki user tersebut dan berada di
+   luar checkout Git.
+3. Nginx menjadi reverse proxy ke `127.0.0.1:3000`; port aplikasi tidak dibuka ke
+   publik dan SSL tetap ditangani Nginx.
+4. Rahasia (`PAYLOAD_SECRET`, token API) hanya ada di environment server, tidak di repo.
+5. Backup database dan media tersedia sebelum peluncuran; `git pull` tidak boleh
+   menimpa data atau berkas upload.
+
+**Skeleton PM2 — hanya jika PM2 dipilih; jangan dibuat sekarang:**
+
+```js
+// ecosystem.config.js
+module.exports = {
+  apps: [{
+    name: "ikymian",
+    script: "node_modules/next/dist/bin/next",
+    args: "start -p 3000",
+    cwd: "/var/www/ikymianstudios.si",
+    env: { NODE_ENV: "production" },
+    max_memory_restart: "512M",
+    out_file: "/var/log/ikymian/out.log",
+    error_file: "/var/log/ikymian/error.log"
+  }]
+};
+```
+
+```sh
+pm2 start ecosystem.config.js
+pm2 save
+pm2 startup systemd -u <user-aplikasi> --hp /home/<user-aplikasi>
+```
+
 **Acceptance:** aplikasi siap ditinjau, konten persisten, admin terlindungi, dan deployment yang diminta pengguna terbukti bekerja. Halaman sementara tidak dinyatakan sebagai portfolio CMS yang sudah selesai.
 
 ## Verifikasi dan batas tes
