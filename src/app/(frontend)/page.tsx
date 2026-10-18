@@ -337,8 +337,20 @@ export default async function HomePage() {
               ))}
             </dl>
             <p className="mt-8 max-w-[62ch] text-[13px] leading-relaxed text-muted">{impactNote}</p>
+            {Array.isArray(stats?.platforms) && stats.platforms.length > 0 ? (
+              <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.14em] text-muted">
+                {stats.platforms.map((platform: AnyRecord) => (
+                  <li key={platform.name}>
+                    {platform.name}
+                    {typeof platform.followers === 'number'
+                      ? ` · ${platform.followers.toLocaleString(locale === 'id' ? 'id-ID' : 'en-US')}`
+                      : ''}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
             {updatedLabel ? (
-              <p className="mt-2 text-[11px] uppercase tracking-[0.16em] text-muted">
+              <p className="mt-3 text-[11px] uppercase tracking-[0.16em] text-muted">
                 {locale === 'id' ? 'Diperbarui' : 'Updated'} {updatedLabel}
               </p>
             ) : null}

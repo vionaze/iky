@@ -115,3 +115,20 @@ pnpm dev
 
 Catatan Payload 3.91: upload lewat REST mengirim field tambahan sebagai satu field
 `_payload` berisi JSON, bukan field terpisah.
+
+## Statistik (Phase 4)
+
+Sinkronisasi memakai sumber gratis **tidak resmi** (bisa berubah tanpa pemberitahuan):
+
+- YouTube: Innertube `videos` tab (jumlah view video long-form) + socialcounts
+  untuk subscriber
+- TikTok: markup halaman profil publik (followers, likes, jumlah video)
+- Instagram: endpoint web profil; sering diblokir sehingga dilewati
+
+```sh
+ADMIN_EMAIL=admin@ikymianstudios.si ADMIN_PASSWORD='...' pnpm sync:stats
+```
+
+Cakupan tidak lengkap: `totalViews` hanya menjumlahkan platform yang menyediakan
+view. Platform yang follower-nya terbaca tetap ditampilkan terpisah di Impact.
+Jadwal otomatis (cron/systemd timer) belum dipasang.

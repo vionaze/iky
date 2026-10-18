@@ -9,7 +9,8 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
-    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types"
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "sync:stats": "node scripts/sync-stats.mjs"
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "3.91.0",
