@@ -182,23 +182,26 @@ Catatan:
 Tiga kandidat potret cutout, semua berlatar transparan sehingga dapat menyatu dengan
 latar krim tanpa kotak putih.
 
-| File | Ukuran | Transparansi | Komposisi | Catatan |
+| File | Ukuran | Transparansi | Komposisi | Status |
 | --- | --- | --- | --- | --- |
-| `images/hero-1.png` | 1200 × 896 | 78% | Setengah badan, blazer hitam, ruang kosong di kiri | Kandidat utama; ruang kiri untuk teks |
-| `images/hero-2.png` | 1152 × 928 | 78% | Setengah badan, jaket hitam, ruang kosong di kiri | Alternatif dengan gestur lebih santai |
-| `images/hero-3.webp` | 3504 × 2336 | 56% | Potret dada, ruang kosong di kiri | Resolusi tertinggi, crop paling dekat |
+| `images/hero-1.png` | 1200 × 896 | 78% | Setengah badan, blazer hitam, ruang kosong di kiri | ✅ **dipilih sebagai hero utama** |
+| `images/hero-2.png` | 1152 × 928 | 78% | Setengah badan, jaket hitam, ruang kosong di kiri | Alternatif |
+| `images/hero-3.webp` | 3504 × 2336 | 56% | Potret dada, ruang kosong di kiri | Alternatif; resolusi tertinggi |
+
+Pilihan utama: **`hero-1.png`** — komposisinya paling seimbang dan menyisakan ruang
+teks paling lega di kiri. Dua berkas lain disimpan sebagai cadangan, bukan dihapus.
 
 Implikasi layout: subjek berada di kanan, teks hero di kiri. Ini menguntungkan karena
 judul dan CTA bisa memakai ruang kosong tanpa menutupi subjek.
 
 Catatan implementasi:
 
-- Nama file akan diganti mengikuti slug aset, bukan `hero-1`.
+- Nama file akan diganti mengikuti slug aset saat masuk CMS, bukan `hero-1`.
 - Ukuran dioptimalkan (WebP/AVIF + varian responsif) saat Phase 3, bukan sekarang.
 - Teks alternatif wajib diisi di CMS; subjek adalah karakter visual, bukan klaim
   identitas seseorang.
-- Ketiga berkas saat ini **belum masuk Git** (masih untracked) — keputusan disimpan
-  di repo atau tidak menunggu pengguna.
+- Ketiga berkas sudah masuk repo pada `images/` sebagai aset sumber. Saat aplikasi
+  dibuat, aset ini akan disalin ke lokasi upload persisten atau `public/`.
 
 ---
 
@@ -470,7 +473,7 @@ login /adminku → tambah/edit → simpan draft → preview → publish
 | 3 | URL sosial asli — ✅ terisi, lihat bagian 2.1 | Contact, Footer |
 | 4 | Link karya Music Video, Short Film, Tutorial | Selected Works |
 | 5 | Poster/thumbnail setiap video | Aturan publish video |
-| 6 | Foto hero (still) — ✅ 3 kandidat di `images/`, lihat 6.1 | Hero |
+| 6 | Foto hero (still) — ✅ `images/hero-1.png` dipilih, 2 cadangan | Hero |
 
 Sudah diputuskan: bilingual ID/EN dengan toggle (bagian 9.9), nama kreator
 Caisart Felix ditampilkan bersama brand, dan `@damiann101` adalah akun pengguna.
