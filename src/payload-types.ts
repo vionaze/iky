@@ -641,7 +641,10 @@ export interface Footer {
  */
 export interface Stat {
   id: number;
-  updatedAt?: string | null;
+  /**
+   * Waktu snapshot metrik diambil dari sumber.
+   */
+  metricsUpdatedAt?: string | null;
   /**
    * Diisi proses sinkronisasi, bukan editor manual.
    */
@@ -651,7 +654,10 @@ export interface Stat {
         name: string;
         url?: string | null;
         followers?: number | null;
-        updatedAt?: string | null;
+        /**
+         * Waktu snapshot metrik diambil dari sumber.
+         */
+        metricsUpdatedAt?: string | null;
         source?: string | null;
         id?: string | null;
       }[]
@@ -669,6 +675,7 @@ export interface Stat {
   videosCreated?: number | null;
   completedCampaigns?: number | null;
   nominations?: number | null;
+  updatedAt?: string | null;
   createdAt?: string | null;
 }
 /**
@@ -807,7 +814,7 @@ export interface FooterSelect<T extends boolean = true> {
  * via the `definition` "stats_select".
  */
 export interface StatsSelect<T extends boolean = true> {
-  updatedAt?: T;
+  metricsUpdatedAt?: T;
   totalViews?: T;
   platforms?:
     | T
@@ -815,7 +822,7 @@ export interface StatsSelect<T extends boolean = true> {
         name?: T;
         url?: T;
         followers?: T;
-        updatedAt?: T;
+        metricsUpdatedAt?: T;
         source?: T;
         id?: T;
       };
@@ -832,6 +839,7 @@ export interface StatsSelect<T extends boolean = true> {
   videosCreated?: T;
   completedCampaigns?: T;
   nominations?: T;
+  updatedAt?: T;
   createdAt?: T;
   globalType?: T;
 }

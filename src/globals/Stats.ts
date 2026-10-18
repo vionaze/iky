@@ -4,7 +4,11 @@ export const Stats: GlobalConfig = {
   slug: 'stats',
   access: { read: () => true },
   fields: [
-    { name: 'updatedAt', type: 'date' },
+    {
+      name: 'metricsUpdatedAt',
+      type: 'date',
+      admin: { description: 'Waktu snapshot metrik diambil dari sumber.' },
+    },
     {
       name: 'totalViews',
       type: 'number',
@@ -17,7 +21,7 @@ export const Stats: GlobalConfig = {
         { name: 'name', type: 'text', required: true },
         { name: 'url', type: 'text' },
         { name: 'followers', type: 'number' },
-        { name: 'updatedAt', type: 'date' },
+        { name: 'metricsUpdatedAt', type: 'date' },
         { name: 'source', type: 'text' },
       ],
     },

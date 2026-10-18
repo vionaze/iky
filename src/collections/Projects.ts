@@ -66,9 +66,13 @@ export const Projects: CollectionConfig = {
     beforeChange: [
       async ({ data, req, operation }) => {
         if (data?._status !== 'published') return data
-        if (!data.media?.length) {
-          throw new APIError('Karya yang dipublikasikan wajib punya minimal satu media.', 400)
+        if (!data.media?.length && !data.link) {
+          throw new APIError(
+            'Karya yang dipublikasikan wajib punya minimal satu media atau tautan karya.',
+            400,
+          )
         }
+        if (!data.media?.length) return data
         const ids = data.media.map((m: unknown) =>
           typeof m === 'object' && m !== null ? (m as { id: string }).id : m,
         )

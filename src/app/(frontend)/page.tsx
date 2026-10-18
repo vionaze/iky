@@ -4,6 +4,7 @@ import { LangToggle } from '@/components/LangToggle'
 import { getDict, type Locale } from '@/lib/i18n'
 import { getCmsContent } from '@/lib/cms'
 import LiquidScene from '@/components/LiquidScene'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 
 type AnyRecord = Record<string, any>
 
@@ -48,6 +49,25 @@ export default async function HomePage() {
   const aboutHeadline = cms.home?.about?.title || t.about.title
   const contactTitle = cms.home?.contact?.title || t.contact.title
 
+  const formatDocs = Array.isArray(cms.formats) ? cms.formats : []
+  const formats =
+    formatDocs.length > 0
+      ? formatDocs.map((item: AnyRecord) => ({
+          name: item.title,
+          href: item.link,
+          poster: item.media?.[0]?.url ?? null,
+        }))
+      : t.works.formats
+
+  const stats = cms.stats
+  const updatedAt = stats?.metricsUpdatedAt ? new Date(stats.metricsUpdatedAt) : null
+  const updatedLabel = updatedAt
+    ? new Intl.DateTimeFormat(locale === 'id' ? 'id-ID' : 'en-US', {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+      }).format(updatedAt)
+    : null
+
   const seriesDoc = cms.series
   const seriesTitle = seriesDoc?.title || t.works.series.title
   const seriesDesc = seriesDoc?.context || t.works.series.desc
@@ -67,7 +87,6 @@ export default async function HomePage() {
       ? `Series \u00b7 ${episodeList.length} episode`
       : `Series \u00b7 ${episodeList.length} episodes`
 
-  const stats = cms.stats
   const followersTotal =
     Array.isArray(stats?.platforms) && stats.platforms.length > 0
       ? stats.platforms.reduce(
@@ -249,7 +268,7 @@ export default async function HomePage() {
 
             <p className="mt-16 text-[10px] uppercase tracking-[0.2em] text-muted">{t.works.other}</p>
             <div className="mt-4 grid gap-4 md:grid-cols-12">
-              {t.works.formats.map((format, index) => {
+              {formats.map((format: AnyRecord, index: number) => {
                 const span = ['md:col-span-5', 'md:col-span-4', 'md:col-span-3'][index]
                 const tint = ['bg-milk/50', 'bg-pink/55', 'bg-indigo/[0.09]'][index]
                 return (
@@ -302,6 +321,11 @@ export default async function HomePage() {
               ))}
             </dl>
             <p className="mt-8 max-w-[62ch] text-[13px] leading-relaxed text-muted">{impactNote}</p>
+            {updatedLabel ? (
+              <p className="mt-2 text-[11px] uppercase tracking-[0.16em] text-muted">
+                {locale === 'id' ? 'Diperbarui' : 'Updated'} {updatedLabel}
+              </p>
+            ) : null}
           </div>
         </section>
 
@@ -322,7 +346,13 @@ export default async function HomePage() {
                   {aboutHeadline}
                 </p>
                 <p className="mt-6 max-w-[52ch] text-[17px] leading-relaxed">{t.about.lead}</p>
-                <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">{t.about.body}</p>
+                {cms.home?.about?.body ? (
+                  <div className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted [&_p]:mt-3">
+                    <RichText data={cms.home.about.body} />
+                  </div>
+                ) : (
+                  <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">{t.about.body}</p>
+                )}
               </div>
 
               <aside className="lg:col-span-5">
