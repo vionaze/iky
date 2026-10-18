@@ -68,6 +68,19 @@ nginx -t && systemctl reload nginx
 Tidak ada auto-deploy atau workflow GitHub Actions pada tahap ini. Perubahan
 ditinjau lewat pull request, lalu checkout VPS dapat diperbarui secara manual.
 
+## Landing (Phase 3)
+
+Landing baru berjalan di `http://localhost:3000/` (Next.js). Halaman statis
+`index.html` masih menjadi halaman live di domain sampai deployment diarahkan ke
+aplikasi Next.
+
+- Tailwind CSS v4 dengan token di `src/app/(frontend)/globals.css`
+- Display: Bricolage Grotesque; body: Instrument Sans (`next/font`)
+- Hero memakai Three.js (`src/components/LiquidScene.tsx`): blob cair biru-pink,
+  menghormati `prefers-reduced-motion`, berhenti saat tab/elemen tidak terlihat
+- Bahasa via cookie `lang` (`en` default, `id`), tombol di header
+- Responsif 390 / 768 / 1440 px
+
 ## CMS (Phase 2)
 
 Aplikasi Next.js + Payload CMS + SQLite berada di root repo. Halaman statis

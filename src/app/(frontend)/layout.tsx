@@ -1,19 +1,29 @@
-import React from 'react'
-import './styles.css'
+import type { Metadata } from 'next'
+import { Bricolage_Grotesque, Instrument_Sans } from 'next/font/google'
+import './globals.css'
 
-export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+const display = Bricolage_Grotesque({
+  subsets: ['latin'],
+  variable: '--font-bricolage',
+  display: 'swap',
+})
+
+const sans = Instrument_Sans({
+  subsets: ['latin'],
+  variable: '--font-instrument',
+  display: 'swap',
+})
+
+export const metadata: Metadata = {
+  title: 'Ikymian Studios — AI Filmmaker & Content Creator',
+  description:
+    'Portfolio of Ikymian Studios — series, music video, short film, and tutorial with an AI-driven creative approach.',
 }
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
-  const { children } = props
-
+export default function FrontendLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
-        <main>{children}</main>
-      </body>
+    <html lang="en" className={`${display.variable} ${sans.variable}`}>
+      <body>{children}</body>
     </html>
   )
 }
