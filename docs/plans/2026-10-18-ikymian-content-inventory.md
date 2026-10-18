@@ -30,7 +30,7 @@ instruksi, implementasi menunggu permintaan pengguna.
 | 1 | Identitas: ejaan brand, titel, bio, email | 🟡 | Ejaan brand + kanal sosial ✅; titel/bio draft; email, bahasa, nama kreator belum |
 | 2 | Struktur section | ✅ | Hero → Selected Works → Impact → About & Process → Contact |
 | 3 | Arah visual: palet, tipografi, jarak | ✅ | Token di bagian 5; tekstur cair masih perlu ditinjau di browser |
-| 4 | Inventaris karya & media | ❌ | 1 kandidat diketahui; sisanya butuh link + poster |
+| 4 | Inventaris karya & media | 🟡 | 8 karya: 5 series lengkap dengan poster; 3 reel butuh judul + poster |
 | 5 | Inventaris statistik & akses API | ❌ | Metrik terkunci; akun/platform dan akses belum |
 | 6 | Peta field CMS header–body–footer | ✅ | Bagian 9 |
 
@@ -165,27 +165,37 @@ Skema kolom. Setiap karya harus lengkap sesuai kolom sebelum dipublikasikan.
 Judul dan konteks karya wajib tersedia dalam **ID dan EN** (bagian 9.9); nama series
 seperti "Berondong Sebelah Rumah" tetap memakai judul aslinya bila tidak ada padanan.
 
-| # | Judul | Kategori | Peran | Tools | Link karya | Sumber media | Thumbnail | Status |
+| # | Judul | Kategori | Peran | Tools | Link | Poster | Durasi | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Berondong Sebelah Rumah | Series | ❌ | ❌ | Playlist TikTok (lihat catatan) | ❌ | ❌ | 🟡 kandidat |
-| 2 | — | Music Video | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| 3 | — | Short Film | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| 4 | — | Tutorial | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| 5–8 | — | lintas kategori | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| 1 | Berondong Sebelah Rumah — EP 01 | Series | Elian (Caisart Felix); Aurelia (Aluna) | CapCut + Seedance 2.5 | [video](https://www.tiktok.com/@damiann101/video/7692173774682131733) | `ep01.jpg` | 1:59 | ✅ |
+| 2 | Berondong Sebelah Rumah — EP 02 "Terlalu Dekat" | Series | sama | sama | [video](https://www.tiktok.com/@damiann101/video/7692619848244890900) | `ep02.jpg` | 2:01 | ✅ |
+| 3 | Berondong Sebelah Rumah — EP 03 "Mantan Suami" | Series | sama | sama | [video](https://www.tiktok.com/@damiann101/video/7692863785836678421) | `ep03.jpg` | 2:03 | ✅ |
+| 4 | Berondong Sebelah Rumah — EP 04 "Jangan Bikin Gue Nyaman" | Series | sama | sama | [video](https://www.tiktok.com/@damiann101/video/7693810204948974869) | `ep04.jpg` | 2:03 | 🟡 poster duplikat |
+| 5 | Berondong Sebelah Rumah — EP 05 "Bukan Tempat Gue" | Series | sama | sama | [video](https://www.tiktok.com/@damiann101/video/7695612157299379476) | `ep05.jpg` | 1:56 | ✅ |
+| 6 | Belum tersedia | Tutorial | ❌ | ❌ | [Instagram](https://www.instagram.com/reel/Dd89pg1SnHS/) | ❌ | ❌ | 🟡 link saja |
+| 7 | Belum tersedia | Short Film | ❌ | ❌ | [Instagram](https://www.instagram.com/reel/DcfJ7wEyVAA/) | ❌ | ❌ | 🟡 link saja |
+| 8 | Belum tersedia | Music Video | ❌ | ❌ | [Instagram](https://www.instagram.com/reel/DejefTNSRs7/) | ❌ | ❌ | 🟡 link saja |
+
+Total **8 karya**, memenuhi target kurasi 6–8 dan mencakup keempat kategori.
 
 Catatan:
 
-- Target **6–8 karya** adalah target kurasi, bukan kuota. Lebih baik 4 karya nyata
-  daripada 8 dengan isian karangan.
-- Kandidat #1: tautan pendek `vt.tiktok.com/ZS9U5fU9PpM2m-zKLX9/` **terverifikasi
-  (HTTP 301)** mengarah ke playlist `@damiann101/playlist/BerondongSebelahRumah-7692418796472109844`
-  pada 18 Oktober 2026. Pengguna mengonfirmasi `@damiann101` adalah akunnya juga,
-  sehingga playlist sah dipakai sebagai kartu Series.
-- Halaman playlist tidak dapat dibaca robot (hanya mengembalikan shell kosong), sehingga
-  judul episode, jumlah episode, sinopsis, dan performa **tetap belum terverifikasi**.
-  Jangan menebak angka atau peran produksi.
-- Untuk karya yang hanya punya link tanpa video yang dapat diputar: kartu tetap
-  ditampilkan sebagai tautan dengan poster — tanpa mengklaim ada player.
+- Playlist series terverifikasi berisi **5 video**. Judul, nomor episode, dan durasi
+  diambil dari metadata TikTok pada 18 Oktober 2026; durasi dalam menit:detik.
+- Poster episode disimpan di `images/works/berondong/ep01.jpg`–`ep05.jpg`, ukuran
+  540 × 960 (9:16). **Poster EP 03 dan EP 04 identik** — EP 04 perlu diganti sebelum
+  publish.
+- Tiga reel Instagram baru berupa **link**. Judul, durasi, dan poster belum terbaca
+  karena Instagram tidak membuka metadata untuk pembaca non-login. Jangan menebak
+  judulnya; minta judul dari pengguna.
+- Semua series adalah AI Micro-Drama oleh Ikymian Studios. Peran "Elian" dipegang
+  Caisart Felix; "Aurelia" diperankan Aluna. Jangan menambah peran lain yang belum
+  disebut.
+- Tautan memakai URL kanonik; parameter pelacakan (`?dlrf=`, `?rpxt=`, `?psln=`) dibuang.
+- Terjemahan EN judul episode belum ada. Ajukan terjemahan untuk disetujui; jangan
+  mengarang judul resmi berbahasa Inggris.
+- Karya yang hanya punya link tanpa video yang dapat diputar ditampilkan sebagai
+  kartu tautan dengan poster — tanpa mengklaim ada player.
 
 ### 6.1 Aset hero (diterima)
 
@@ -506,10 +516,11 @@ login /adminku → tambah/edit → simpan draft → preview → publish
 | 1 | Ejaan brand final — ✅ "Ikymian Studios" | Semua copy, metadata |
 | 2 | Email bisnis — ✅ `ariesiky8@gmail.com` | Contact, Footer |
 | 3 | URL sosial asli — ✅ terisi, lihat bagian 2.1 | Contact, Footer |
-| 4 | Link karya Music Video, Short Film, Tutorial | Selected Works |
-| 5 | Poster/thumbnail setiap video | Aturan publish video |
+| 4 | Link karya MV, Short Film, Tutorial — ✅ terisi (3 reel Instagram) | Selected Works |
+| 5 | Poster/thumbnail — ✅ 5 episode series, ❌ 3 reel | Aturan publish video |
 | 6 | Foto hero (still) — ✅ `images/hero-1.png` dipilih, 2 cadangan | Hero |
 | 7 | Logo partner resmi — 5 dari 6 terkumpul, AKOOL belum; lihat 6.2 | Baris Creative Partner |
+| 8 | Judul dan durasi 3 reel Instagram | Kartu karya |
 
 Sudah diputuskan: bilingual ID/EN dengan toggle (bagian 9.9), nama kreator
 Caisart Felix ditampilkan bersama brand, dan `@damiann101` adalah akun pengguna.
