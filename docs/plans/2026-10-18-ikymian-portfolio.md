@@ -154,6 +154,8 @@ Ini baseline CSS, bukan klaim bahwa tekstur cair sudah selesai secara visual. Pe
 
 **Revisi ketiga, 19 Oktober 2026 — kembali ke brief awal.** Pengguna menilai arah serif/wine/gold tidak sesuai brief. Tema dikembalikan ke token awal: krim, biru susu, pink pucat, dan indigo; tipografi sans (Instrument Sans), hero dengan bidang warna cair, area karya tenang, garis pembatas tipis. Tidak ada serif display, stiker, watermark, atau blok wine. Selected Works memakai satu poster series + daftar lima episode agar tidak menampilkan poster yang sama berulang.
 
+**Revisi keempat, 19 Oktober 2026 — biru dan pink dominan.** Pengguna meminta warna dominan situs adalah biru dan pink. Hero memakai gradien biru susu ke pink pucat, Selected Works berlatar biru lembut, Impact berlatar pink lembut, dan Contact bergradien pink ke biru. Krem dipakai sebagai aksen permukaan (nav, kartu, footer) dan indigo tetap warna teks. Tidak ada blok gelap.
+
 Tipografi besar dan lapang, navigasi pendek, garis pembatas tipis, sudut media lembut, dan maksimal satu pola hover sederhana. Tidak ada marquee, scroll hijacking, cursor khusus, atau efek gerak terus-menerus. Hormati `prefers-reduced-motion` bila transisi ditambahkan.
 
 ## Struktur satu halaman
