@@ -144,6 +144,9 @@ EN**; `fallback` ke ID dipakai selama terjemahan EN belum tersedia.
 Target hero: judul maksimal dua baris, subteks maksimal 20 kata.
 Referensi visual: Aura (pilih 3–5 contoh saat Phase 3). Panduan FE: Taste Skill v2.
 
+Komposisi hero memakai potret cutout transparan di sisi kanan dan teks di kiri —
+lihat bagian 6.1.
+
 ---
 
 ## 6. Inventaris karya
@@ -173,6 +176,29 @@ Catatan:
   Jangan menebak angka atau peran produksi.
 - Untuk karya yang hanya punya link tanpa video yang dapat diputar: kartu tetap
   ditampilkan sebagai tautan dengan poster — tanpa mengklaim ada player.
+
+### 6.1 Aset hero (diterima)
+
+Tiga kandidat potret cutout, semua berlatar transparan sehingga dapat menyatu dengan
+latar krim tanpa kotak putih.
+
+| File | Ukuran | Transparansi | Komposisi | Catatan |
+| --- | --- | --- | --- | --- |
+| `images/hero-1.png` | 1200 × 896 | 78% | Setengah badan, blazer hitam, ruang kosong di kiri | Kandidat utama; ruang kiri untuk teks |
+| `images/hero-2.png` | 1152 × 928 | 78% | Setengah badan, jaket hitam, ruang kosong di kiri | Alternatif dengan gestur lebih santai |
+| `images/hero-3.webp` | 3504 × 2336 | 56% | Potret dada, ruang kosong di kiri | Resolusi tertinggi, crop paling dekat |
+
+Implikasi layout: subjek berada di kanan, teks hero di kiri. Ini menguntungkan karena
+judul dan CTA bisa memakai ruang kosong tanpa menutupi subjek.
+
+Catatan implementasi:
+
+- Nama file akan diganti mengikuti slug aset, bukan `hero-1`.
+- Ukuran dioptimalkan (WebP/AVIF + varian responsif) saat Phase 3, bukan sekarang.
+- Teks alternatif wajib diisi di CMS; subjek adalah karakter visual, bukan klaim
+  identitas seseorang.
+- Ketiga berkas saat ini **belum masuk Git** (masih untracked) — keputusan disimpan
+  di repo atau tidak menunggu pengguna.
 
 ---
 
@@ -444,7 +470,7 @@ login /adminku → tambah/edit → simpan draft → preview → publish
 | 3 | URL sosial asli — ✅ terisi, lihat bagian 2.1 | Contact, Footer |
 | 4 | Link karya Music Video, Short Film, Tutorial | Selected Works |
 | 5 | Poster/thumbnail setiap video | Aturan publish video |
-| 6 | Foto hero (still) | Hero |
+| 6 | Foto hero (still) — ✅ 3 kandidat di `images/`, lihat 6.1 | Hero |
 
 Sudah diputuskan: bilingual ID/EN dengan toggle (bagian 9.9), nama kreator
 Caisart Felix ditampilkan bersama brand, dan `@damiann101` adalah akun pengguna.
