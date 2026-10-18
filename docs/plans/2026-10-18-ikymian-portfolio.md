@@ -148,6 +148,8 @@ body {
 
 Ini baseline CSS, bukan klaim bahwa tekstur cair sudah selesai secara visual. Pertajam penempatan warna melalui browser preview; jangan menambah generator gambar atau canvas jika CSS sudah cukup.
 
+**Pembaruan 18 Oktober 2026 — tema lebih bold.** Setelah meninjau halaman statis, pengguna meminta arah yang lebih bold dengan referensi [Gween Studios](https://gweenstudios.xyz/). Implementasi memakai **Instrument Serif** untuk display, aksen **wine/blush/gold** di atas krim, blok gelap untuk Selected Works dan Impact, blok blush untuk Contact, stiker kecil, dan watermark tipografi. Token di atas tetap dicatat sebagai riwayat; warna dan tipografi final mengikuti implementasi terbaru.
+
 Tipografi besar dan lapang, navigasi pendek, garis pembatas tipis, sudut media lembut, dan maksimal satu pola hover sederhana. Tidak ada marquee, scroll hijacking, cursor khusus, atau efek gerak terus-menerus. Hormati `prefers-reduced-motion` bila transisi ditambahkan.
 
 ## Struktur satu halaman
