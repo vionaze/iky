@@ -2,22 +2,22 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Membuat landing page portfolio di `https://ikymianstudios.si` untuk menampilkan Series, Music Video, Short Film, dan Tutorial dalam tampilan kalem yang membantu calon kolaborator memahami karya dan menghubungi kreatornya.
+**Goal:** Membuat webapp portfolio di `https://ikymianstudios.si` dengan landing page publik dan admin `/adminku` untuk mengelola karya serta mengedit konten dari header sampai footer tanpa mengubah kode.
 
-**Architecture:** Satu halaman statis dengan HTML semantik, CSS responsif, dan JavaScript kecil untuk statistik. Karya dan narasi utama ditulis langsung di HTML; statistik publik dibaca dari satu snapshot JSON. Total views media sosial wajib diperbarui otomatis melalui API resmi dan proses di server; platform, izin, serta hosting diperiksa sebelum menentukan implementasi proses tersebut.
+**Architecture:** Satu aplikasi Next.js dengan Payload CMS terintegrasi, satu repo, dan SQLite pada VPS EZTOPUP. Landing page membaca konten terpublikasi dari CMS; `/adminku` menyediakan login, pengelolaan portfolio/media, serta editor konten per bagian. Upload dan database disimpan secara persisten di luar checkout Git. Total views diperbarui otomatis melalui API resmi ke snapshot pada database; akses tiap platform diperiksa sebelum implementasi konektornya.
 
-**Tech Stack:** HTML, CSS, JavaScript ES modules, native HTML video. Python HTTP server hanya untuk preview lokal. Tidak membutuhkan framework, package manager, database, atau sistem login untuk halaman dasar.
+**Tech Stack:** Next.js, React, TypeScript, Tailwind CSS, Payload CMS, SQLite melalui adapter resmi Payload, serta Nginx dan SSL yang sudah tersedia di VPS. Native HTML video untuk upload/file video langsung dan embed player untuk platform yang mendukung. Versi paket yang kompatibel ditetapkan saat implementasi. Stack ini sudah disetujui pengguna; aplikasi CMS belum dibuat.
 
 ---
 
 ## Intent, scope, dan batas pekerjaan
 
-Permintaan awal adalah analisis dan rencana portfolio. Pengguna kemudian meminta bootstrap domain, halaman `index.html`, SSL, serta pull request. Halaman status sementara sudah dibuat; Phase 1–5 untuk portfolio lengkap tetap merupakan rencana pekerjaan berikutnya.
+Permintaan awal adalah analisis dan rencana portfolio, dilanjutkan bootstrap domain, `index.html`, SSL, serta pull request yang sudah dibuat. Pengguna kemudian menyetujui stack CMS dan meminta portfolio dinamis, editor header/body/footer, serta media upload/URL. **Instruksi terbaru: simpan seluruh keputusan ke docs; jangan koding dulu.** Pada pembaruan ini hanya dokumen ini yang boleh berubah; kode, dependencies, konfigurasi deployment, dan server tetap.
 
-- **Scope:** satu landing page portfolio, empat kategori karya, preview video, statistik, link sosial, kontak bisnis, dan persiapan metadata domain.
-- **Non-goals:** multipage portfolio, admin/CMS, blog, login, booking/payment, episode player sendiri, scraping statistik, animasi WebGL, dan dashboard analytics.
+- **Scope:** satu landing page portfolio, admin `/adminku` dengan login, CRUD portfolio, editor teks/gambar per bagian, media upload/URL, thumbnail wajib untuk video, player responsif tanpa autoplay, statistik, link sosial, kontak, dan metadata domain.
+- **Non-goals:** multipage portfolio, blog, akun/registrasi pengunjung, booking/payment, page builder bebas/drag-and-drop, editor kode HTML, episode player sendiri, scraping statistik, animasi WebGL, dan dashboard analytics terpisah.
 - **Untouched:** akun sosial, video asli, kredensial, serta konfigurasi situs lain di VPS. DNS dan hosting domain ini hanya diubah dalam bootstrap yang kemudian diminta pengguna, bukan saat analisis awal.
-- **Definition of done untuk tahap ini:** arah desain, susunan konten, definisi metrik, kebutuhan aset, langkah implementasi, dan keputusan terbuka terdokumentasi tanpa klaim palsu.
+- **Definition of done untuk tahap ini:** semua keputusan terbaru, batas media, admin, stack, acceptance criteria, dan lima phase terdokumentasi konsisten; tidak ada perubahan kode atau server.
 
 Git terhubung ke `https://github.com/vionaze/iky.git`. Branch dasar `main` berisi rencana awal; pekerjaan bootstrap domain berada pada `setup/domain-bootstrap` untuk ditinjau melalui PR. Workspace saat ini berisi halaman status, konfigurasi Nginx, README deployment, dan dokumen ini; belum ada package atau framework tes. Instruksi handoff di atas adalah format skill; pada lingkungan ini skill yang tersedia bernama `executing-plans`, bukan namespace `superpowers`.
 
@@ -25,7 +25,7 @@ Git terhubung ke `https://github.com/vionaze/iky.git`. Branch dasar `main` beris
 
 - Domain terbaru: **https://ikymianstudios.si/**, menggantikan target awal `ikymian.studio`.
 - Server: VPS EZTOPUP, diidentifikasi dari sesi Termius; deployment memakai SSH ke server yang sama.
-- Folder situs dan document root: `/var/www/ikymianstudios.si`; halaman langsung pada `index.html`, tanpa folder `www` tambahan sesuai koreksi pengguna.
+- Folder situs dan document root saat bootstrap: `/var/www/ikymianstudios.si`; halaman langsung pada `index.html`, tanpa folder `www` tambahan sesuai koreksi pengguna. Saat aplikasi Next.js dibuat, Nginx perlu diarahkan ke proses aplikasi; perubahan itu belum dilakukan.
 - Cloudflare: record A domain utama menuju `161.97.130.68`, DNS only. Tidak menambah subdomain `www`.
 - Situs memakai konfigurasi Nginx terpisah dan SSL Let's Encrypt. HTTP dialihkan ke HTTPS; timer renewal Certbot tersedia.
 - Tampilan saat ini hanya pemberitahuan bahwa portfolio sedang disiapkan. Tidak ada statistik, karya, atau klaim performa fiktif.
@@ -57,11 +57,34 @@ Referensi berguna sebagai daftar bahan portfolio, tetapi usulan 10–12 halaman 
 
 Rekomendasi durasi **8 detik per preview karya** adalah keputusan desain awal untuk ditinjau, bukan angka dari referensi. Showreel kompilasi adalah aset terpisah dan tidak perlu dibuat agar halaman bisa mulai dikerjakan. Pengguna telah mengonfirmasi bahwa “live” berarti **views media sosial diperbarui otomatis**. Angka manual tidak memenuhi kebutuhan total views ini.
 
-**Urutan kerja minimum:** kunci aset/konten → susun halaman dan warna → pasang preview serta kontak → hubungkan snapshot statistik sesuai keputusan sumber → cek browser. Integrasi otomatis hanya dikerjakan setelah akses platform dan hosting jelas. Tahap analisis ini hanya memperbarui dokumen yang sama, tanpa menambah kode, dependencies, tes, atau berkas desain kedua.
+**Urutan kerja minimum:** kunci konten dan field editor → siapkan CMS/admin → bangun landing dan player media → hubungkan statistik otomatis → verifikasi dan deploy. Integrasi otomatis hanya dikerjakan setelah akses platform jelas. Saat ini hanya memperbarui dokumen yang sama, tanpa menambah kode, dependencies, tes, atau berkas desain kedua.
+
+## Keputusan CMS dan konten dinamis yang disetujui
+
+Pengguna menyetujui **Next.js + TypeScript + Tailwind CSS + Payload CMS + SQLite**. Pilihan ini menggantikan rencana HTML/CSS/JavaScript statis untuk portfolio lengkap. Halaman `index.html` yang sudah live tetap menjadi halaman sementara sampai implementasi berikutnya diminta.
+
+Payload dipilih karena admin, autentikasi, form konten, upload, dan draft/publish dapat berada dalam aplikasi Next.js yang sama. SQLite dipilih untuk kebutuhan awal satu pengelola di satu VPS, tanpa service database terpisah. Admin custom dari nol menambah pekerjaan autentikasi dan form; PostgreSQL belum dibutuhkan untuk scope yang disepakati. Ini keputusan untuk kebutuhan sekarang, bukan janji migrasi database otomatis di kemudian hari.
+
+| Menu `/adminku` | Konten yang dapat dikelola |
+| --- | --- |
+| Header | Logo/nama studio, label dan tujuan navigasi, teks dan link tombol |
+| Landing Page | Hero, deskripsi, CTA, judul serta teks setiap section body, About, Process, dan Contact |
+| Portfolio | Tambah/edit/hapus karya, kategori, deskripsi, peran, tools, link lengkap, media, urutan, featured, dan status draft/published |
+| Media | Upload gambar/video atau masukkan URL gambar/video; pilih thumbnail/poster dan isi teks alternatif |
+| Statistik | Metrik editorial seperti jumlah karya, completed campaigns, nominations; views otomatis mengikuti sumber API |
+| Footer & Socials | Teks footer/copyright, email, label dan URL akun sosial |
+
+Editor berupa form per bagian dengan field yang jelas. Semua teks yang tampil pada header, body, dan footer harus terhubung ke field CMS; label navigasi dan tombol juga termasuk. Layout dan komponen tetap dikendalikan desain aplikasi. Gunakan Collections untuk Users, Media, dan Projects; Globals untuk Header, Home, Footer, serta Stats. Tidak membuat CMS/admin kedua.
+
+Alur konten: login → tambah/edit → simpan draft → preview → publish → konten publik diperbarui tanpa deploy kode. Landing publik hanya membaca konten yang sudah dipublikasikan; perubahan field CMS harus memperbarui cache halaman bila caching digunakan. Admin serta operasi tulis wajib memeriksa autentikasi/otorisasi di server, bukan hanya menyembunyikan URL atau tombol.
+
+Database SQLite dan berkas upload ditempatkan di direktori persisten di luar checkout Git, misalnya `/var/lib/ikymianstudios/data/` dan `/var/lib/ikymianstudios/media/`. Lokasi final ditentukan saat implementasi. Deploy/pull kode tidak boleh menimpa database, upload, atau rahasia server. Backup mencakup database yang konsisten dan berkas media; pemulihannya diperiksa sebelum peluncuran CMS.
+
+Rujukan teknis yang sudah dibaca: [Payload Admin](https://payloadcms.com/docs/admin/overview), [SQLite adapter](https://payloadcms.com/docs/database/sqlite), [Globals](https://payloadcms.com/docs/configuration/globals), [Drafts](https://payloadcms.com/docs/versions/drafts), serta [deployment dan penyimpanan persisten](https://payloadcms.com/docs/production/deployment).
 
 ## Arah desain
 
-**Sumber referensi utama pilihan pengguna: [Aura](https://aura.build).** Mayoritas referensi visual untuk Phase 2 diambil dari Aura, terutama komposisi hero, tipografi, jarak antar elemen, penataan karya, dan transisi ringan. Saat mulai desain, pilih 3–5 contoh yang paling cocok dengan portfolio kalem lalu catat URL serta aspek yang diadaptasi pada dokumen ini. Belum ada template tertentu yang dipilih atau ditinjau secara visual pada tahap pencatatan preferensi ini.
+**Sumber referensi utama pilihan pengguna: [Aura](https://aura.build).** Mayoritas referensi visual untuk landing pada Phase 3 diambil dari Aura, terutama komposisi hero, tipografi, jarak antar elemen, penataan karya, dan transisi ringan. Saat mulai desain, pilih 3–5 contoh yang paling cocok dengan portfolio kalem lalu catat URL serta aspek yang diadaptasi pada dokumen ini. Belum ada template tertentu yang dipilih atau ditinjau secara visual pada tahap pencatatan preferensi ini.
 
 Referensi Aura dipadukan menjadi desain Ikymian sendiri dengan brief krim/biru susu/pink/indigo. **Taste Skill v2** menjadi panduan pengerjaan FE, dengan [guide resmi pilihan pengguna](https://www.tasteskill.dev/guide) sebagai rujukan penggunaan. Pemilihan Aura sebagai sumber referensi tidak mengubah stack, hosting, scope, atau kebutuhan views otomatis.
 
@@ -144,7 +167,18 @@ Setiap karya memiliki judul, label kategori, satu kalimat konteks, peran kreator
 
 Untuk series yang sudah dikirim, gunakan satu kartu **Berondong Sebelah Rumah**, label **Series**, dan CTA **Tonton series** ke playlist canonical di atas. Jangan menebak sinopsis, episode count, atau peran produksi. MV, tutorial, dan short film memerlukan tautan serta poster masing-masing.
 
-Preview per karya disarankan **6–8 detik**, dengan **8 detik** sebagai target awal untuk klip yang dipilih. Ini saran desain, belum durasi yang disetujui pengguna. Gunakan berkas preview yang sudah dipotong, native `video controls playsinline preload="none"` dan poster. Tulis durasi sesuai berkas sebenarnya, bukan angka hardcode yang salah. Tidak autoplay seluruh grid, tidak unduh video TikTok sebagai aset tanpa sumber asli dari pengguna. Jika belum ada klip, tampilkan poster dan link asli.
+Preview per karya disarankan **6–8 detik**, dengan **8 detik** sebagai target awal untuk klip yang dipilih. Durasi ini belum disetujui pengguna dan bukan batas durasi video lengkap. **Thumbnail/poster sebelum Play sudah diwajibkan pengguna untuk semua video.** Native player upload/file langsung menggunakan controls, playsinline, preload none, serta poster; embed mengikuti aturan sumber di bawah. Tulis durasi sesuai media sebenarnya. Jika hanya ada poster dan link karya, kartu tetap dapat ditampilkan sebagai tautan, tanpa mengklaim menyediakan video yang dapat diputar di halaman.
+
+### Media, thumbnail, dan pemutaran video
+
+1. **Sumber media:** admin dapat mengunggah gambar/video atau memasukkan URL. Media video dari upload dan URL yang didukung harus dapat diputar di landing saat pengunjung memilih Play.
+2. **Jenis URL:** URL file gambar/video langsung ditangani sebagai file media; URL halaman platform video ditangani melalui embed resmi jika platform mengizinkan. Tidak menjanjikan semua URL halaman web dapat menjadi video. Daftar provider, format file, dan batas ukuran ditetapkan saat implementasi berdasarkan sumber nyata yang diberikan.
+3. **Thumbnail wajib:** setiap item video harus memiliki gambar thumbnail/poster yang dipilih dari admin. Berlaku untuk video upload, URL video langsung, video embed, preview karya, dan showreel jika ada. Video boleh disimpan sebagai draft saat thumbnail belum tersedia, tetapi tidak boleh dipublikasikan sebagai video playable tanpa thumbnail.
+4. **Sebelum Play:** pengunjung melihat thumbnail dengan tombol Play yang jelas; bukan layar player kosong atau cuplikan yang bergerak sendiri. Video/iframe aktif setelah tindakan Play. Poster tetap menjadi tampilan awal meskipun provider tidak menyediakan thumbnail otomatis.
+5. **Tanpa autoplay:** video tidak dimulai ketika website dibuka, saat scroll, atau ketika hover; tidak ada autoplay diam-diam dalam keadaan muted. Pengunjung memulai pemutaran sendiri. Terapkan aturan ini pada semua sumber media.
+6. **Player menyesuaikan sumber:** gunakan native player untuk upload/file langsung dan embed player untuk provider yang didukung. Jangan memaksa URL halaman platform menjadi sumber native video. Jika sumber privat, rusak, atau embed ditolak, tampilkan pesan singkat dan tautan karya lengkap bila tersedia, tanpa status seolah pemutaran berhasil.
+7. **Responsif:** portrait dan landscape mengikuti rasio sumber, tidak diregangkan atau memotong isi video. Kontrol dapat digunakan pada mobile/desktop; tersedia play/pause, seek, volume, dan fullscreen sejauh didukung sumber/player. Tombol Play dapat diakses dengan keyboard dan punya label yang jelas.
+8. **Field minimum:** jenis sumber (upload/URL), jenis media (gambar/video), file atau URL sesuai sumber yang dipilih, judul, teks alternatif untuk gambar, dan thumbnail wajib untuk video. Karya menghubungkan item Media yang relevan, bukan menyalin file atau membuat implementasi player kedua.
 
 Showreel berbeda dengan preview tiap karya: 30–60 detik untuk ringkasan lintas format. Tidak wajib membuat showreel baru agar tahap layout dapat berjalan. Jika belum ada, jangan menampilkan pemutar kosong di versi publik.
 
@@ -173,7 +207,7 @@ Untuk engagement, denominator dan data harus cocok dengan sumber. Jika data hany
 
 ### Snapshot publik dan metrik editorial
 
-Simpan snapshot publik dalam `data/stats.json` dan tampilkan tanggal pembaruan. Proses otomatis mengisi views; jumlah karya unik, completed campaigns, serta nominations dapat diisi dari catatan terverifikasi. Otomatisasi followers dan engagement ditentukan sesuai data serta akses platform yang tersedia. Selama sumber views belum terhubung, tampilkan belum tersedia; pengisian manual hanya boleh untuk preview lokal yang ditandai jelas, bukan dianggap penyelesaian fitur. Bentuk data minimum:
+Simpan snapshot metrik pada database melalui CMS dan tampilkan tanggal pembaruan. Proses otomatis mengisi views; jumlah karya unik, completed campaigns, serta nominations dapat diisi dari admin berdasarkan catatan terverifikasi. Otomatisasi followers dan engagement ditentukan sesuai akses platform. Nilai views otomatis tidak ditimpa editor manual. Selama sumber views belum terhubung, tampilkan belum tersedia; pengisian manual hanya boleh untuk preview lokal yang ditandai jelas, bukan dianggap penyelesaian fitur. Bentuk data konseptual minimum, bukan berkas JSON yang harus dibuat:
 
 ```json
 {
@@ -191,7 +225,7 @@ Simpan snapshot publik dalam `data/stats.json` dan tampilkan tanggal pembaruan. 
 
 ### Pembaruan views otomatis — kebutuhan terkonfirmasi
 
-Lakukan pemeriksaan akses akun lebih dulu. Tentukan platform, akun pemilik, field tersedia, izin aplikasi, dan hosting yang mendukung pekerjaan server. Setelah lolos pemeriksaan itu, tambahkan rencana endpoint serta jadwal sinkronisasi dengan path yang sesuai hosting yang benar-benar dipilih. Jangan membangun endpoint spekulatif sekarang.
+Lakukan pemeriksaan akses akun lebih dulu. Tentukan platform, akun pemilik, field tersedia, izin aplikasi, serta mekanisme scheduler pada VPS yang sudah dipilih. Setelah lolos pemeriksaan itu, tambahkan rencana proses sinkronisasi dan jadwalnya dengan path yang sesuai aplikasi. Jangan membangun endpoint spekulatif sekarang.
 
 Alur minimum: API resmi → pembaruan di server → satu snapshot publik → halaman. Token tetap di server. Usulan interval awal 30–60 menit, disesuaikan kuota serta kebutuhan; jangan menjanjikan realtime per detik. Tampilkan tanggal pembaruan per sumber. Saat refresh gagal, pertahankan snapshot terakhir beserta waktunya; jika belum pernah ada data, tampilkan belum tersedia. Tidak menggunakan angka yang naik sendiri untuk menyimulasikan views.
 
@@ -209,7 +243,7 @@ Prioritas pertama: ejaan brand, logo jika ada, satu hero still, tautan karya dar
 
 Prioritas berikutnya: klip preview 6–8 detik, showreel bila tersedia, bio final, daftar tools yang benar dipakai, data statistik beserta periode/sumber, bukti campaign selesai, dan bukti nominations. Pilih 6–8 karya setelah meninjau semua kategori; bukan mengarang karya untuk memenuhi kuota.
 
-Setiap karya menggunakan nama folder stabil, misalnya `assets/works/berondong-sebelah-rumah/`. Target pertama di folder itu adalah `poster.webp` dan `preview.mp4` hanya ketika berkas asli tersedia. Hindari hotlink poster sementara yang URL-nya bisa kedaluwarsa.
+Setiap karya mengacu ke Media pada CMS. Upload disimpan secara persisten di luar checkout; URL eksternal disimpan sebagai URL dengan jenis sumber yang jelas. Siapkan thumbnail yang stabil untuk setiap video. Hindari hotlink poster sementara yang URL-nya bisa kedaluwarsa, dan jangan mengunduh video platform menjadi aset lokal tanpa sumber asli/izin pengguna.
 
 ## Acceptance criteria implementasi
 
@@ -217,34 +251,38 @@ Setiap karya menggunakan nama folder stabil, misalnya `assets/works/berondong-se
 2. Hero terasa kalem dengan biru susu/pink/indigo di atas latar krim; teks tetap jelas.
 3. Selected Works mewakili Series, Music Video, Short Film, dan Tutorial menggunakan karya nyata yang tersedia. Jika kategori belum memiliki aset, itu dicatat sebagai kebutuhan konten, bukan diisi karya palsu.
 4. Playlist series yang diberikan dapat dibuka dari kartu karya. Tidak ada episode count yang ditebak.
-5. Preview yang tersedia berdurasi sesuai label, diputar setelah tindakan pengguna, dan link karya lengkap tetap mudah ditemukan.
+5. Semua video menampilkan thumbnail sebelum Play, tidak autoplay pada load/scroll/hover, dan memiliki player yang sesuai sumber serta responsif untuk portrait/landscape. Preview berdurasi sesuai label; link karya lengkap tetap mudah ditemukan.
 6. Enam kelompok metrik terwadahi. Nilai tidak tersedia tidak berubah menjadi angka palsu atau nol; total tidak dinyatakan lengkap jika sumbernya belum lengkap.
 7. Tidak ada section prestasi/program kreator; nominations muncul pada Impact.
 8. Link sosial dan email bisnis berasal dari data pengguna, bukan handle/email tebakan.
 9. Layout berfungsi di lebar 375, 768, dan 1440 px, tanpa horizontal overflow; navigasi, link, dan pemutar dapat dipakai dengan keyboard. Teks normal memenuhi kontras minimum 4.5:1.
 10. Website publik memiliki metadata domain yang benar, aset yang dapat dimuat, dan tidak membocorkan token. Deployment dan perubahan DNS tetap merupakan langkah terpisah yang memerlukan konfirmasi pengguna.
 11. Total views diperbarui otomatis dari platform yang disepakati, dengan cakupan dan waktu pembaruan terlihat. Verifikasi sinkronisasi menggunakan respons API nyata; jika refresh gagal, snapshot terakhir tetap tersedia beserta waktunya. Angka manual dan animasi counter tidak membuktikan acceptance ini.
+12. `/adminku` mewajibkan login. Pengguna yang belum terautentikasi tidak dapat menambah, mengubah, atau menghapus konten melalui admin maupun API.
+13. Admin dapat mengelola portfolio serta mengedit teks header, body, footer, tombol, kontak, dan sosial. Publish memperbarui landing tanpa mengubah kode atau deploy ulang; draft tidak muncul pada halaman publik.
+14. Media mendukung upload dan URL: video upload, URL file video langsung, serta embed provider yang disepakati dapat diputar setelah Play. Video tanpa thumbnail tidak dapat dipublikasikan sebagai video playable; sumber yang gagal menampilkan fallback yang jujur.
+15. Database, upload, dan rahasia tetap aman saat deploy/pull kode. Backup database/media dapat dipulihkan sebelum CMS diluncurkan.
 
 ## Pembagian proyek: total 5 phase
 
-Pembagian ini mengikuti Task 1–5 di bawah; tidak menambah fitur atau jalur implementasi kedua. Tujuan akhirnya satu landing page portfolio yang siap dipublikasikan di `ikymianstudios.si`, dengan total views media sosial diperbarui otomatis. Blog, CMS, dashboard admin, serta halaman tambahan berada di luar scope. Video asli, akun sosial, dan kredensial tetap tidak diubah selama perencanaan. Bootstrap DNS/SSL yang diminta terpisah dicatat di atas.
+Tetap **total 5 phase**, diperbarui mengikuti kebutuhan CMS yang disetujui. Tujuan akhirnya landing page dinamis dan `/adminku` pada satu aplikasi di `ikymianstudios.si`, dengan views otomatis serta media ber-thumbnail tanpa autoplay. Blog, registrasi pengunjung, page builder bebas, dan halaman publik tambahan berada di luar scope. Bootstrap DNS/SSL sudah tersedia; aplikasi CMS belum boleh dikerjakan sampai pengguna meminta lanjut.
 
 | Phase | Pekerjaan | Hasil dan syarat selesai |
 | --- | --- | --- |
-| 1 — Fondasi konten dan arah visual | Kunci identitas, susunan section, copy awal, palet warna, kandidat karya, kontak, akun sosial, dan daftar kebutuhan metrik | Brief implementasi pada rencana ini dan inventaris konten di `README.md` saat dieksekusi; data tersedia dan kebutuhan yang masih kurang dibedakan dengan jelas |
-| 2 — Landing page responsif | Bangun navigasi, hero, struktur karya, Impact, About, dan Contact dengan warna krim/biru susu/pink/indigo | Preview lokal yang dapat ditinjau pada mobile dan desktop; struktur terbaca meski video dan data API belum tersedia |
-| 3 — Karya dan preview video | Masukkan karya nyata, poster, kategori, peran, link video lengkap, serta preview dengan usulan durasi 8 detik | Karya dapat dilihat dan link dapat dibuka; tidak ada player kosong atau aset fiktif; showreel hanya jika tersedia |
-| 4 — Statistik dan views otomatis | Periksa API serta hosting, bangun sinkronisasi views, tampilkan followers, engagement, jumlah video, completed campaigns, dan nominations sesuai sumbernya | Views benar-benar diperbarui otomatis pada platform yang disepakati; cakupan dan waktu pembaruan terlihat; snapshot terakhir tetap tersedia saat refresh gagal |
-| 5 — Pemeriksaan akhir dan peluncuran | Finalisasi kontak, metadata, tampilan mobile, akses keyboard, performa pemuatan, serta kesiapan hosting/domain | Preview final lolos pemeriksaan terkait; peluncuran dan perubahan DNS dilakukan setelah konfirmasi pengguna |
+| 1 — Fondasi konten dan arah visual | Kunci identitas, section, copy, palet, kandidat karya, thumbnail, akun sosial, dan field editor | Brief serta inventaris konten/field jelas; kebutuhan yang belum tersedia ditandai |
+| 2 — Fondasi aplikasi dan admin | Siapkan Next.js, Payload, SQLite, login `/adminku`, Collections, Globals, media upload/URL, dan draft/publish | Admin dapat mengelola konten; akses tulis terlindungi; video tanpa thumbnail tidak lolos publish |
+| 3 — Landing page dan player media | Bangun UI dengan Taste Skill v2 dan referensi Aura; hubungkan konten CMS, portfolio, thumbnail, serta player sesuai sumber | Landing responsif; edit/publish tampil tanpa deploy; video baru aktif setelah Play dan mengikuti rasio sumber |
+| 4 — Statistik dan views otomatis | Periksa API serta scheduler VPS, bangun sinkronisasi views, tampilkan followers, engagement, jumlah video, completed campaigns, dan nominations sesuai sumbernya | Views benar-benar diperbarui otomatis pada platform yang disepakati; cakupan dan waktu pembaruan terlihat; snapshot terakhir tetap tersedia saat refresh gagal |
+| 5 — Pemeriksaan akhir dan peluncuran | Verifikasi edit/publish, akses admin, media, metadata, backup/pemulihan, serta deployment aplikasi di balik Nginx/SSL | Preview final dan alur utama lolos; data bertahan saat deploy; peluncuran aplikasi setelah diminta pengguna |
 
 ### Rincian Phase 1
 
 1. **Identitas:** pastikan ejaan Ikymian Studio/Studios, titel kreator, bio singkat, serta email bisnis.
 2. **Struktur:** tetapkan Hero → Selected Works → Impact → About & Process → Contact. Showreel bersifat opsional; section poin 8 tidak dibuat.
 3. **Arah visual:** tetapkan latar krim, campuran biru susu/pink/indigo pada hero, teks indigo gelap, serta tipografi dan jarak yang lapang. Tahap ini belum membuat UI final.
-4. **Inventaris karya:** tinjau kandidat dari Series, Music Video, Short Film, dan Tutorial; catat judul, peran, link asli, poster, serta ketersediaan klip. Jumlah 6–8 adalah target kurasi, bukan alasan membuat konten fiktif.
+4. **Inventaris karya/media:** tinjau kandidat dari Series, Music Video, Short Film, dan Tutorial; catat judul, peran, link asli, sumber upload/URL, serta thumbnail wajib untuk setiap video. Jumlah 6–8 adalah target kurasi, bukan alasan membuat konten fiktif. Durasi preview 8 detik masih usulan.
 5. **Inventaris statistik:** daftar akun/platform yang ingin dihitung, cakupan total views, sumber angka lain, serta kebutuhan akses API. Views otomatis sudah menjadi requirement; kelayakan koneksi dibuktikan di Phase 4.
-6. **Kesiapan implementasi:** pisahkan materi yang siap dipakai dan yang belum tersedia, lalu dokumentasikan cara preview lokal. Phase 1 selesai ketika fondasi untuk mulai layout jelas; tidak perlu menunggu semua kredensial API.
+6. **Field CMS dan kesiapan implementasi:** petakan seluruh teks header/body/footer ke form admin; bedakan data editorial dan data API otomatis. Pisahkan materi siap pakai dan yang belum tersedia. Phase 1 selesai ketika konten serta struktur editor jelas; tidak perlu menunggu semua kredensial API.
 
 **Batas Phase 1:** belum membuat halaman, mengolah video, menghubungkan API, atau melakukan deployment. Pemeriksaan cukup meninjau kelengkapan brief dan sumber konten; tidak perlu menambah tes atau dependencies. Setelah Phase 1, pekerjaan visual dapat dimulai menggunakan materi yang tersedia.
 
@@ -254,106 +292,71 @@ Langkah ini baru dijalankan setelah pengguna meminta implementasi. **Pilihan ski
 
 Brief pengguna tetap menjadi acuan: kalem, sederhana, campuran krim/biru susu/pink/indigo, dan gerak ringan. Default skill tentang palet, intensitas animasi, stack, atau proses tidak boleh menambah scope maupun mengganti keputusan proyek tanpa kebutuhan nyata. Tidak perlu mengaktifkan banyak skill desain sekaligus. Kerjakan satu alur, tanpa subagent secara default.
 
-### Task 1: Kunci konten minimum
+Path berikut adalah rencana berkas untuk implementasi berikutnya, bukan berkas yang dibuat sekarang. Detail scaffold dan command build mengikuti versi Next.js/Payload yang dipilih saat implementasi; jangan menjalankan scaffolding untuk pekerjaan dokumentasi ini.
 
-**Files:** Create `README.md`.
+### Task 1: Kunci konten dan field editor
 
-1. Catat brand, empat kategori, kontak, URL sosial, serta tautan playlist series yang sudah diketahui.
-2. Susun daftar 6–8 kandidat karya dengan judul, kategori, peran, link asli, serta status poster dan preview. Periksa ulang URL dan kepemilikan kandidat playlist dari docs sebelum memublikasikannya sebagai karya kreator. Tandai kebutuhan aset yang belum diberikan.
-3. Catat bahwa views wajib diperbarui otomatis. Tetapkan akun/platform, cakupan total, dan akses sumber metrik. Jangan memblokir pekerjaan layout pada kredensial yang belum tersedia.
-4. Tuliskan cara preview lokal: `python3 -m http.server 4173 --bind 127.0.0.1`. Expected: server melayani folder di `http://127.0.0.1:4173`.
+**Files:** Modify `docs/plans/2026-10-18-ikymian-portfolio.md`; update `README.md` saat implementasi benar-benar dimulai.
 
-**Acceptance:** tidak ada fakta hasil tebakan; seluruh kebutuhan konten terlihat pada satu tempat.
+1. Catat brand, empat kategori, kontak, URL sosial, serta kandidat karya dan kepemilikannya.
+2. Petakan teks/gambar header, setiap section body, dan footer ke field CMS pada tabel admin di atas.
+3. Catat sumber tiap video, thumbnail, ketersediaan klip, serta URL/provider yang perlu didukung. Usulan 8 detik belum menjadi batas wajib.
+4. Tetapkan akun/platform serta cakupan views otomatis; tandai akses dan aset yang belum tersedia.
 
-### Task 2: Buat struktur halaman
+**Acceptance:** konten, kebutuhan media, dan editor per bagian jelas tanpa fakta tebakan atau pekerjaan kode.
 
-**Files:** Create `index.html` and `styles.css`.
+### Task 2: Siapkan aplikasi, CMS, dan admin
 
-1. Buat HTML dengan `lang="id"`, viewport metadata, satu H1, skip link, header/nav, main, dan footer.
-2. Isi section `#work`, `#impact`, `#about`, dan `#contact`, dengan hero dan showreel di bagian awal. Link CTA menggunakan anchor yang benar.
-3. Terapkan token CSS di atas, heading responsif memakai `clamp()`, lebar konten, jarak section, dan grid karya 2 kolom/1 kolom.
-4. Buka halaman pada 375 dan 1440 px. Expected: navigasi muat, hero terbaca, warna tidak menutupi teks, tidak ada overflow.
+**Files yang direncanakan:** `package.json`, lockfile package manager terpilih, `.env.example`, `src/payload.config.ts`, `src/collections/Users.ts`, `src/collections/Media.ts`, `src/collections/Projects.ts`, `src/globals/Header.ts`, `src/globals/Home.ts`, `src/globals/Footer.ts`, `src/globals/Stats.ts`, dan route Payload `src/app/(payload)/adminku/[[...segments]]/page.tsx` beserta route API/layout hasil scaffold resmi.
 
-**Acceptance:** struktur dan arah visual dapat ditinjau tanpa JavaScript dan tanpa memerlukan video.
+1. Pilih versi Next.js/Payload yang kompatibel; scaffold satu aplikasi TypeScript, Tailwind, dan adapter SQLite resmi. Pertahankan halaman sementara yang live selama proses pengembangan.
+2. Konfigurasikan route admin `/adminku`, login pengelola, dan izin server untuk Collections/Globals; publik hanya dapat membaca konten terpublikasi yang memang diperbolehkan.
+3. Buat form konten, portfolio, serta media sesuai field minimum yang disepakati. Upload dan URL dipilih berdasarkan jenis sumber. Terapkan kewajiban thumbnail ketika memublikasikan video.
+4. Hubungkan draft/preview/publish dan pembaruan cache landing. Simpan SQLite serta upload pada lokasi persisten di luar checkout.
+5. Verifikasi admin dapat menyimpan draft dan publish; request tulis tanpa autentikasi ditolak. Tidak membuka registrasi pengunjung.
 
-### Task 3: Masukkan karya dan preview
+**Acceptance:** CMS dan editor berfungsi lokal, draft tidak bocor ke publik, dan video tanpa thumbnail tidak dapat dipublikasikan sebagai video playable.
 
-**Files:** Modify `index.html` and `styles.css`; create only asset files actually supplied under `assets/works/<slug>/`.
+### Task 3: Bangun landing dan pemutaran media
 
-1. Masukkan karya yang sudah dipilih, dengan label kategori dan peran terverifikasi. Gunakan `loading="lazy"` serta dimensi/aspect ratio untuk poster di bawah fold.
-2. Untuk Berondong Sebelah Rumah, hubungkan CTA ke URL playlist canonical. Gunakan layout kartu yang sama dengan karya lain.
-3. Pasang native `<video controls playsinline preload="none">` hanya pada kartu dengan klip asli tersedia; poster dan link karya menjadi fallback saat tidak ada klip.
-4. Periksa satu preview, video penuh, dan playlist pada desktop serta mobile. Expected: tidak autoplay, durasi cocok, orientasi portrait/landscape tidak terdistorsi, link dapat dibuka.
+**Files yang direncanakan:** `src/app/(frontend)/layout.tsx`, `src/app/(frontend)/page.tsx`, `src/app/(frontend)/globals.css`, `src/components/Header.tsx`, `src/components/Footer.tsx`, `src/components/Portfolio.tsx`, dan `src/components/VideoPlayer.tsx`. Buat komponen tambahan hanya jika konten/perilakunya benar-benar memerlukan pemisahan.
 
-**Acceptance:** karya empat kategori terbaca sebagai satu portfolio dan aset yang belum ada tidak menghasilkan player rusak.
+1. Tinjau referensi Aura yang cocok dan gunakan Taste Skill v2 dengan palet serta suasana pengguna. Render konten publik dari CMS melalui komponen Next.js.
+2. Hubungkan label navigasi, hero, teks section, CTA, kontak, serta footer ke field admin. Pertahankan HTML semantik, satu H1, dan anchor yang jelas.
+3. Tampilkan karya nyata dari Projects. Untuk video, tampilkan thumbnail dan tombol Play terlebih dulu; native player atau embed dipilih sesuai sumber. Jangan memulai video pada load/scroll/hover.
+4. Periksa upload video, URL file langsung, dan URL provider yang disepakati dengan sumber nyata. Pastikan rasio portrait/landscape tidak terdistorsi dan fallback muncul bila sumber tidak dapat diputar.
+5. Periksa mobile/desktop dan keyboard, kemudian ubah satu teks serta satu karya melalui admin untuk membuktikan publish memperbarui landing tanpa deploy kode.
 
-### Task 4: Tampilkan statistik yang benar
+**Acceptance:** landing dinamis sesuai brief; semua video memiliki thumbnail, tidak autoplay, dan player sesuai sumber dapat digunakan pengunjung.
 
-**Files:** Create `data/stats.json` and `main.js`; modify `index.html`.
+### Task 4: Hubungkan statistik otomatis
 
-1. Lakukan pemeriksaan kelayakan API untuk akun/platform yang disepakati dan pilih hosting yang mendukung sinkronisasi otomatis. Tulis task integrasi dengan path serta perintah konkret untuk hosting tersebut sebelum membuat kode server. Pembaruan otomatis views sudah diputuskan; yang belum diputuskan adalah sumber dan implementasinya.
-2. Buat JSON sesuai kontrak di atas dan isi hanya data terverifikasi. Tambahkan elemen metrik di HTML dengan atribut `data-stat` serta elemen waktu pembaruan.
-3. Untuk membaca snapshot publik, implementasi minimum `main.js` berikut. Total followers dan engagement dirender sebagai baris per platform saat datanya telah ditetapkan, menggunakan `textContent`, tanpa menyisipkan HTML dari respons.
+**Files yang direncanakan:** Modify `src/globals/Stats.ts` dan `src/app/(frontend)/page.tsx`; create `src/lib/sync-stats.ts`. Path konektor dan konfigurasi scheduler ditetapkan setelah platform serta mekanisme proses server benar-benar dipilih.
 
-```js
-const formatter = new Intl.NumberFormat("id-ID");
-const keys = [
-  "totalViews", "videosCreated", "completedCampaigns", "nominations"
-];
+1. Periksa akses API untuk akun/platform yang disepakati; dokumentasikan field, cakupan total views, serta interval yang layak.
+2. Hubungkan API resmi ke proses sinkronisasi server dan simpan snapshot pada database. Token tetap di environment server.
+3. Tampilkan nilai, cakupan, dan waktu pembaruan pada landing. Bedakan views otomatis dari metrik editorial yang bisa diedit melalui admin.
+4. Verifikasi respons API nyata memperbarui snapshot. Saat refresh gagal, snapshot terakhir dan waktunya tetap tersedia; data yang belum ada tidak berubah menjadi nol atau angka fiktif.
 
-async function loadStats() {
-  try {
-    const response = await fetch("./data/stats.json");
-    if (!response.ok) throw new Error("Stats unavailable");
-    const stats = await response.json();
+**Acceptance:** views benar-benar diperbarui otomatis untuk cakupan yang disepakati; data manual bukan pengganti penyelesaian fitur.
 
-    for (const key of keys) {
-      const element = document.querySelector(`[data-stat="${key}"]`);
-      if (!element) continue;
-      const value = stats[key];
-      element.textContent = Number.isSafeInteger(value) && value >= 0
-        ? formatter.format(value)
-        : "Belum tersedia";
-    }
+### Task 5: Verifikasi dan deploy aplikasi
 
-    const updated = document.querySelector("[data-stats-updated]");
-    const date = stats.updatedAt ? new Date(stats.updatedAt) : null;
-    if (updated) {
-      updated.textContent = date && !Number.isNaN(date.getTime())
-        ? `Diperbarui ${date.toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })} WIB`
-        : "Waktu pembaruan belum tersedia";
-    }
-  } catch {
-    document.querySelectorAll("[data-stat]").forEach((element) => {
-      element.textContent = "Belum tersedia";
-    });
-  }
-}
+**Files:** Modify `README.md` dan `deploy/ikymianstudios.si.nginx.conf` sesuai kebutuhan aplikasi; konfigurasi proses Node dan migrasi database mengikuti mekanisme deployment yang dipilih saat implementasi.
 
-loadStats();
-```
+1. Jalankan pemeriksaan/build yang tersedia pada scaffold terpilih. Verifikasi alur edit → draft → preview → publish → landing, pemutaran media, serta penolakan akses tulis tanpa login.
+2. Periksa tampilan 375/768/1440 px, keyboard, thumbnail sebelum Play, tanpa autoplay, metadata domain, dan link sosial/karya. Tidak ada player kosong, aset 404, atau error aplikasi yang belum ditangani.
+3. Verifikasi backup/pemulihan database dan media; perubahan kode tidak boleh menimpa konten atau rahasia. Catat cara menjalankan aplikasi, migrasi, dan rollback di README.
+4. Setelah pengguna meminta peluncuran, jalankan proses aplikasi pada port lokal yang tersedia dan arahkan Nginx ke proses tersebut. Pertahankan domain/SSL dan konfigurasi situs lain; verifikasi landing serta `/adminku` lewat HTTPS.
 
-4. Periksa angka terverifikasi dan ulangi dengan request JSON diblokir melalui DevTools. Expected: angka serta tanggal benar pada jalur utama; kondisi gagal tetap menampilkan konten utama dan tidak menghasilkan angka palsu. Teks awal HTML harus sudah berbunyi “Belum tersedia” agar tetap benar tanpa JavaScript.
-
-**Acceptance:** semua kelompok metrik terwadahi dengan sumber/periode jelas; total views benar-benar diperbarui melalui sinkronisasi API pada server. Cuplikan di atas hanya pembaca snapshot. Task ini belum selesai sebelum proses otomatis dan perilaku saat refresh gagal diverifikasi.
-
-### Task 5: Kontak, metadata, dan pemeriksaan akhir
-
-**Files:** Modify `index.html`, `styles.css`, `main.js`, and `README.md` only as needed; create `assets/og-cover.webp` only after a real approved image exists.
-
-1. Pasang email dan URL sosial yang diberikan, bio final, tools yang benar dipakai, serta satu contoh proses nyata. Jangan tampilkan link `#` sebagai kontak.
-2. Tambahkan title, description, canonical `https://ikymianstudios.si/`, dan Open Graph. Referensikan OG image hanya jika berkasnya benar tersedia.
-3. Lakukan browser QA pada 375/768/1440 px, keyboard, kontras, network assets, serta console. Periksa poster, satu preview, satu link per kategori, playlist series, dan kontak. Expected: tidak ada overflow, aset 404, fokus hilang, atau error JavaScript.
-4. Perbarui README dengan cara mengganti karya, metrik, aset, dan daftar kebutuhan yang tersisa. Siapkan catatan deployment; jangan mengubah DNS atau memublikasikan sebelum pengguna meminta dan mengonfirmasi langkah tersebut.
-
-**Acceptance:** preview lokal siap ditinjau dan kebutuhan peluncuran jelas.
+**Acceptance:** aplikasi siap ditinjau, konten persisten, admin terlindungi, dan deployment yang diminta pengguna terbukti bekerja. Halaman sementara tidak dinyatakan sebagai portfolio CMS yang sudah selesai.
 
 ## Verifikasi dan batas tes
 
-Tidak ada existing tests karena kode aplikasi belum dibuat. Untuk halaman statis ini, gunakan pemeriksaan browser yang langsung membuktikan acceptance, bukan menambah framework test, screenshot matrix, atau suite e2e. Dua pemeriksaan perilaku terpenting: jalur karya/preview/kontak normal dan kegagalan data statistik. Bila nanti ada integrasi server yang mengubah perilaku, tentukan paling banyak satu tes jalur utama dan satu jalur kegagalan kritis sesuai aturan pengguna; jangan membuat test infrastructure hanya demi rencana ini.
+Saat ini belum ada existing tests atau toolchain CMS. Pembaruan docs cukup diverifikasi lewat diff dan konsistensi kebutuhan; tidak menambahkan tes atau dependencies. Saat implementasi diminta, gunakan pemeriksaan/build yang tersedia dari stack terpilih dan browser untuk acceptance. Jalur utama adalah admin mengedit/publish konten lalu pengunjung melihat perubahan dan memutar video setelah thumbnail; jalur kegagalan kritis adalah akses tulis tanpa login ditolak. Perilaku media yang disepakati serta snapshot saat API gagal diperiksa langsung, tanpa membuat matriks snapshot atau suite e2e. Tes baru hanya jika existing checks tidak dapat membuktikan perilaku yang berubah: paling banyak satu jalur utama dan satu kegagalan kritis, tanpa framework baru hanya demi kelengkapan.
 
 Tidak ada perintah npm/build/lint karena belum ada toolchain aplikasi. Halaman status sudah dibuat dan diperiksa melalui HTTP/HTTPS serta browser; portfolio lengkap belum diimplementasikan. Git sudah tersedia; ketika melakukan commit, sertakan hanya berkas terkait setelah unit pekerjaan selesai, dengan pesan sederhana seperti `feat: add portfolio layout`; jangan menggunakan `git add .` untuk mencakup aset atau kredensial yang belum ditinjau.
 
 ## Handoff
 
-Rencana dapat dijalankan berurutan dalam sesi ini setelah diminta, atau di sesi terpisah menggunakan @executing-plans. Tidak perlu subagent untuk scope ini. Views otomatis sudah terkonfirmasi. Kelayakan API, akun/platform, hosting, serta kelengkapan aset masih harus ditetapkan untuk fitur yang bergantung padanya; hal tersebut tidak menghalangi peninjauan layout awal.
+**Jangan mulai implementasi sampai pengguna meminta lanjut.** Seluruh keputusan kini tersimpan pada dokumen ini: stack CMS, `/adminku`, editor per bagian, media upload/URL, thumbnail wajib sebelum Play, tanpa autoplay, Taste Skill v2, referensi Aura, dan views otomatis. Total tetap lima phase. Saat diminta, kerjakan berurutan tanpa subagent secara default; kelengkapan aset serta akses API/provider yang belum diputuskan ditetapkan pada phase terkait. Halaman status, SSL, dan PR bootstrap yang sudah ada tetap terpisah dari pekerjaan CMS berikutnya.
