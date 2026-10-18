@@ -80,8 +80,9 @@ aplikasi Next.
   menghormati `prefers-reduced-motion`, berhenti saat tab/elemen tidak terlihat
 - Bahasa via cookie `lang` (`en` default, `id`), tombol di header
 - Responsif 390 / 768 / 1440 px
-- Konten utama dibaca dari globals Payload (Header, Home, Footer) dengan fallback
-  kamus di `src/lib/i18n.ts`; locale dari cookie `lang`
+- Konten dibaca dari CMS dengan fallback kamus di `src/lib/i18n.ts`:
+  globals Header/Home/Footer/Stats dan collection Projects (series + episodes)
+- Locale dari cookie `lang`; kartu format lain masih dari kamus sampai posternya tersedia
 
 ## CMS (Phase 2)
 

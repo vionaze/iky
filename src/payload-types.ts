@@ -217,6 +217,15 @@ export interface Project {
   slug: string;
   category: 'series' | 'music-video' | 'short-film' | 'tutorial';
   context?: string | null;
+  episodes?:
+    | {
+        label?: string | null;
+        title?: string | null;
+        duration?: string | null;
+        href?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   role?: string | null;
   tools?:
     | {
@@ -407,6 +416,15 @@ export interface ProjectsSelect<T extends boolean = true> {
   slug?: T;
   category?: T;
   context?: T;
+  episodes?:
+    | T
+    | {
+        label?: T;
+        title?: T;
+        duration?: T;
+        href?: T;
+        id?: T;
+      };
   role?: T;
   tools?:
     | T

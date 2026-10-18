@@ -47,6 +47,53 @@ export default async function HomePage() {
   const impactNote = cms.home?.impact?.intro || t.impact.note
   const aboutHeadline = cms.home?.about?.title || t.about.title
   const contactTitle = cms.home?.contact?.title || t.contact.title
+
+  const seriesDoc = cms.series
+  const seriesTitle = seriesDoc?.title || t.works.series.title
+  const seriesDesc = seriesDoc?.context || t.works.series.desc
+  const seriesHref = seriesDoc?.link || t.works.series.href
+  const seriesPoster = seriesDoc?.media?.[0]?.url || '/images/works/berondong/ep01.jpg'
+  const episodeList =
+    Array.isArray(seriesDoc?.episodes) && seriesDoc.episodes.length > 0
+      ? seriesDoc.episodes.map((episode: AnyRecord) => ({
+          ep: episode.label,
+          title: episode.title,
+          duration: episode.duration,
+          href: episode.href,
+        }))
+      : t.works.episodes
+  const seriesMeta =
+    locale === 'id'
+      ? `Series \u00b7 ${episodeList.length} episode`
+      : `Series \u00b7 ${episodeList.length} episodes`
+
+  const stats = cms.stats
+  const followersTotal =
+    Array.isArray(stats?.platforms) && stats.platforms.length > 0
+      ? stats.platforms.reduce(
+          (sum: number, platform: AnyRecord) =>
+            sum + (typeof platform.followers === 'number' ? platform.followers : 0),
+          0,
+        )
+      : null
+  const engagementValue =
+    Array.isArray(stats?.engagement) && typeof stats.engagement[0]?.value === 'number'
+      ? stats.engagement[0].value
+      : null
+
+  const statValues: Array<number | null> = [
+    typeof stats?.totalViews === 'number' ? stats.totalViews : null,
+    followersTotal,
+    engagementValue,
+    typeof stats?.videosCreated === 'number' ? stats.videosCreated : null,
+    typeof stats?.completedCampaigns === 'number' ? stats.completedCampaigns : null,
+    typeof stats?.nominations === 'number' ? stats.nominations : null,
+  ]
+
+  const formatStat = (value: number | null) =>
+    typeof value === 'number'
+      ? value.toLocaleString(locale === 'id' ? 'id-ID' : 'en-US')
+      : t.impact.empty
   const email = cms.footer?.email || t.contact.email
   const footerCopyright = cms.footer?.copyright || t.footer
   const socials =
@@ -151,19 +198,19 @@ export default async function HomePage() {
               <div className="lg:col-span-5">
                 <div className="lg:sticky lg:top-24">
                   <a
-                    href={t.works.series.href}
+                    href={seriesHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group relative block overflow-hidden rounded-[20px] border border-ink/10 bg-cream"
                   >
                     <img
-                      src="/images/works/berondong/ep01.jpg"
-                      alt={t.works.series.title}
+                      src={seriesPoster}
+                      alt={seriesTitle}
                       className="aspect-[9/16] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                       loading="lazy"
                     />
                     <span className="absolute left-4 top-4 rounded-full border border-cream/30 bg-ink/35 px-3 py-1.5 text-[10px] uppercase tracking-[0.16em] text-cream backdrop-blur">
-                      {t.works.series.meta}
+                      {seriesMeta}
                     </span>
                   </a>
                 </div>
@@ -171,12 +218,12 @@ export default async function HomePage() {
 
               <div className="lg:col-span-7">
                 <h3 className="font-display text-[clamp(1.7rem,2.8vw,2.25rem)] font-medium tracking-[-0.03em]">
-                  {t.works.series.title}
+                  {seriesTitle}
                 </h3>
-                <p className="mt-3 max-w-[48ch] text-muted">{t.works.series.desc}</p>
+                <p className="mt-3 max-w-[48ch] text-muted">{seriesDesc}</p>
 
                 <ol className="mt-8 divide-y divide-line border-y border-line">
-                  {t.works.episodes.map((episode) => (
+                  {episodeList.map((episode: AnyRecord) => (
                     <li key={episode.ep}>
                       <a
                         href={episode.href}
@@ -247,10 +294,10 @@ export default async function HomePage() {
             </div>
 
             <dl className="mt-10 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
-              {t.impact.metrics.map((metric) => (
+              {t.impact.metrics.map((metric, index) => (
                 <div key={metric} className="border-t border-ink/15 py-5">
                   <dt className="text-[10px] uppercase tracking-[0.18em] text-ink/60">{metric}</dt>
-                  <dd className="mt-2 text-sm text-muted">{t.impact.empty}</dd>
+                  <dd className="mt-2 text-sm text-muted">{formatStat(statValues[index] ?? null)}</dd>
                 </div>
               ))}
             </dl>

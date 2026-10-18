@@ -26,6 +26,16 @@ export const Projects: CollectionConfig = {
       ],
     },
     { name: 'context', type: 'textarea', localized: true },
+    {
+      name: 'episodes',
+      type: 'array',
+      fields: [
+        { name: 'label', type: 'text' },
+        { name: 'title', type: 'text', localized: true },
+        { name: 'duration', type: 'text' },
+        { name: 'href', type: 'text' },
+      ],
+    },
     { name: 'role', type: 'text', localized: true },
     {
       name: 'tools',
