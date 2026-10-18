@@ -218,11 +218,9 @@
   .partners { margin-top: 68px; padding-top: 30px; border-top: 1px solid var(--line); }
   .partners .label { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
   .partner-row { display: flex; flex-wrap: wrap; align-items: center; gap: 28px 42px; margin-top: 24px; }
-  .partner-row img { height: 20px; width: auto; object-fit: contain; filter: grayscale(1) opacity(.62); transition: filter .3s var(--ease), opacity .3s var(--ease); }
-  .partner-row img:hover { filter: grayscale(1) opacity(1); }
+  .partner-row img { height: 20px; width: auto; object-fit: contain; filter: brightness(0) opacity(.58); transition: filter .3s var(--ease), opacity .3s var(--ease); }
+  .partner-row img:hover { filter: brightness(0) opacity(.92); }
   .partner-row .capcut { color: var(--ink); }
-  .partner-row .invert { filter: invert(1) grayscale(1) opacity(.62); }
-  .partner-row .invert:hover { filter: invert(1) grayscale(1) opacity(1); }
 
   /* ---------- contact ---------- */
   .contact {
@@ -469,9 +467,10 @@
         <div class="partner-row">
           <img class="capcut" src="images/partners/capcut.svg" alt="CapCut" loading="lazy">
           <img src="images/partners/oiioii.png" alt="OiiOii" loading="lazy">
-          <img class="invert" src="images/partners/pixmax.svg" alt="Pixmax" loading="lazy">
+          <img src="images/partners/pixmax.svg" alt="Pixmax" loading="lazy">
           <img src="images/partners/topmediai.png" alt="TopMediai" loading="lazy">
           <img src="images/partners/openart.png" alt="OpenArt" loading="lazy">
+          <img src="images/partners/akool.png" alt="AKOOL" loading="lazy">
         </div>
       </div>
     </div>

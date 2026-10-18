@@ -188,7 +188,8 @@ Catatan:
   sebelum publish agar kartu tidak tampak berulang.
 - Tiga reel Instagram baru berupa **link**. Judul, durasi, dan poster belum terbaca
   karena Instagram tidak membuka metadata untuk pembaca non-login. Jangan menebak
-  judulnya; minta judul dari pengguna.
+  judulnya. **Keputusan 19 Oktober 2026:** judul/poster ditanyakan setelah Phase 5;
+  sementara kartu memakai nama kategori.
 - Semua series adalah AI Micro-Drama oleh Ikymian Studios. Peran "Elian" dipegang
   Caisart Felix; "Aurelia" diperankan Aluna. Jangan menambah peran lain yang belum
   disebut.
@@ -236,14 +237,16 @@ bukan di-hotlink.
 | Pixmax | `pixmax.svg` | SVG 555 × 120, **isi putih** — tidak terlihat di latar krim | 🟡 butuh varian gelap |
 | TopMediai | `topmediai.png` | PNG 512 × 512, ungu, berbentuk ikon | 🟡 ikon, bukan wordmark |
 | OpenArt | `openart.png` | PNG 415 × 415, hitam, berbentuk ikon | 🟡 ikon, bukan wordmark |
-| AKOOL | — | Logo di situs resmi mengembalikan 404 | ❌ butuh berkas resmi |
+| AKOOL | `akool.png` | PNG 659 × 131, wordmark putih + ikon berwarna | ✅ siap (ditampilkan monokrom) |
 
 Catatan:
 
 - Campuran wordmark dan ikon membuat baris terlihat tidak rata; idealnya semua
   memakai wordmark dengan tinggi optis sama.
+- Semua logo ditampilkan **monokrom** (`filter: brightness(0)`) agar seragam di latar
+  krim; wordmark putih AKOOL dan Pixmax ikut terbaca.
 - Minta **brand kit resmi** (SVG, versi terang dan gelap) dari masing-masing program
-  mitra. Berkas saat ini dipakai sebagai placeholder, bukan final.
+  mitra bila tersedia. Berkas saat ini dipakai apa adanya, bukan hasil redesign.
 - Jangan mengubah warna logo jika brand guideline melarang; gunakan varian resmi.
 - Hanya tampilkan mitra yang benar-benar bekerja sama. Jangan menambah logo pihak
   lain untuk memenuhi baris.
@@ -279,7 +282,7 @@ berdasarkan sumber nyata yang diberikan — bukan sekarang.
 
 | Metrik | Definisi | Sumber data | Status |
 | --- | --- | --- | --- |
-| Total views | Akumulasi views konten pada akun/platform yang disebut; bukan page views | API resmi, otomatis | 🟡 platform diketahui; cakupan & akses ❌ |
+| Total views | Akumulasi views konten pada akun/platform yang disebut; bukan page views | API resmi, otomatis | ✅ cakupan: semua kanal; akses API ❌ |
 | Followers/subscribers | Per platform + total akun terverifikasi; bukan unique audience | API resmi | ❌ |
 | Engagement | Engagement rate per platform, periode 30 hari, rumus disebut | API resmi | ❌ |
 | Videos created | Jumlah karya video unik yang dibuat | Editorial (admin) | ❌ angka belum ada |
@@ -288,7 +291,11 @@ berdasarkan sumber nyata yang diberikan — bukan sekarang.
 
 Kanal yang sudah diketahui: Instagram `@ikymianvt`, TikTok `@caisarttfelix`,
 YouTube `@ikymian_dramas`, X `@ikymianstudios`, Threads `@ikymian_series`.
-Akun mana yang masuk cakupan total views belum diputuskan, dan akses API belum ada.
+
+**Keputusan 19 Oktober 2026:** cakupan total views adalah **semua kanal** di atas
+(plus Facebook bila URL profil bersih tersedia). Total hanya menjumlahkan platform
+yang API-nya benar-benar menyediakan views; platform tanpa akses ditampilkan
+terpisah, bukan dianggap nol. Akses API belum ada dan diperiksa di Phase 4.
 
 Kelayakan API yang sudah diperiksa (dari rencana):
 
@@ -521,7 +528,7 @@ login /adminku → tambah/edit → simpan draft → preview → publish
 | 5 | Poster/thumbnail — ✅ 5 episode series, ❌ 3 reel | Aturan publish video |
 | 6 | Foto hero (still) — ✅ `images/hero-1.png` dipilih, 2 cadangan | Hero |
 | 7 | Logo partner resmi — 5 dari 6 terkumpul, AKOOL belum; lihat 6.2 | Baris Creative Partner |
-| 8 | Judul dan durasi 3 reel Instagram | Kartu karya |
+| 8 | Judul dan durasi 3 reel Instagram — **ditunda, ditanyakan setelah Phase 5** | Kartu karya |
 
 Sudah diputuskan: bilingual ID/EN dengan toggle (bagian 9.9), nama kreator
 Caisart Felix ditampilkan bersama brand, dan `@damiann101` adalah akun pengguna.
@@ -559,7 +566,12 @@ Phase 1 selesai ketika:
 4. Setiap karya tervalidasi: judul, kategori, peran, link, sumber media, thumbnail.
 5. Akun/platform statistik dan cakupan total views tercatat, termasuk status akses API.
 6. Peta field CMS di bagian 9 ditinjau dan disetujui.
-7. Berkas logo resmi keenam mitra Creative Partner tersedia.
+7. Berkas logo resmi keenam mitra Creative Partner tersedia. ✅
+
+**Penutupan Phase 1 (19 Oktober 2026):** Phase 1 ditutup dengan gap yang tercatat —
+poster episode berbeda dan judul/poster tiga reel ditanyakan setelah Phase 5 sesuai
+instruksi pengguna. Cakupan statistik sudah diputuskan (semua kanal). Pekerjaan
+dilanjutkan ke Phase 2.
 
 **Belum termasuk:** membuat halaman, mengolah video, menghubungkan API, deployment,
 atau menambah dependencies.

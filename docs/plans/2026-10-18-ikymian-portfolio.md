@@ -350,7 +350,7 @@ Path berikut adalah rencana berkas untuk implementasi berikutnya, bukan berkas y
 
 1. Periksa akses API untuk akun/platform yang disepakati; dokumentasikan field, cakupan total views, serta interval yang layak.
 2. Hubungkan API resmi ke proses sinkronisasi server dan simpan snapshot pada database. Token tetap di environment server.
-3. Tampilkan nilai, cakupan, dan waktu pembaruan pada landing. Bedakan views otomatis dari metrik editorial yang bisa diedit melalui admin.
+3. Tampilkan nilai, cakupan, dan waktu pembaruan pada landing. Bedakan views otomatis dari metrik editorial yang bisa diedit melalui admin. Cakupan yang disetujui pengguna pada 19 Oktober 2026: **semua kanal** (Instagram, TikTok, YouTube, X, Threads; Facebook menyusul).
 4. Verifikasi respons API nyata memperbarui snapshot. Saat refresh gagal, snapshot terakhir dan waktunya tetap tersedia; data yang belum ada tidak berubah menjadi nol atau angka fiktif.
 
 **Acceptance:** views benar-benar diperbarui otomatis untuk cakupan yang disepakati; data manual bukan pengganti penyelesaian fitur.
