@@ -233,20 +233,66 @@ async function seed() {
     _status: 'published',
   }
 
-  const series = await upsertProject('berondong-sebelah-rumah', {
-    ...seriesBase,
-    context:
-      'A five-episode AI micro-drama. Elian and Aurelia, two worlds meeting in one house. Made with CapCut and Seedance 2.5.',
-    episodes: episodes.en.map(([label, title, duration, href]) => ({ label, title, duration, href })),
-  })
+  const contextEn =
+    'A five-episode AI micro-drama. Elian and Aurelia, two worlds meeting in one house. Made with CapCut and Seedance 2.5.'
+  const contextId =
+    'AI micro-drama lima episode. Elian dan Aurelia, dua dunia yang bertemu di satu rumah. Dibuat dengan CapCut dan Seedance 2.5.'
 
-  await api(`/api/projects/${series.doc.id}?locale=id`, {
+  const toRows = (list, ids = []) =>
+    list.map(([label, title, duration, href], index) => ({
+      ...(ids[index] ? { id: ids[index] } : {}),
+      label,
+      title,
+      duration,
+      href,
+    }))
+
+  const existingSeries = await api(
+    '/api/projects?where[slug][equals]=berondong-sebelah-rumah&limit=1&depth=0',
+  ).catch(() => ({ docs: [] }))
+
+  let seriesId = existingSeries.docs[0]?.id
+
+  if (seriesId) {
+    // Update base fields only; the episodes array is patched per locale below
+    // so localized titles are not wiped by replacing the rows.
+    await api(`/api/projects/${seriesId}`, {
+      method: 'PATCH',
+      body: JSON.stringify(seriesBase),
+    })
+  } else {
+    const created = await api('/api/projects', {
+      method: 'POST',
+      body: JSON.stringify({
+        ...seriesBase,
+        context: contextEn,
+        episodes: toRows(episodes.en),
+      }),
+    })
+    seriesId = created.doc.id
+  }
+
+  const afterCreate = await api(`/api/projects/${seriesId}?locale=en&depth=0`)
+  const rowIds = (afterCreate.episodes ?? []).map((row) => row.id)
+
+  await api(`/api/projects/${seriesId}?locale=en`, {
     method: 'PATCH',
     body: JSON.stringify({
       ...seriesBase,
-      context:
-        'AI micro-drama lima episode. Elian dan Aurelia, dua dunia yang bertemu di satu rumah. Dibuat dengan CapCut dan Seedance 2.5.',
-      episodes: episodes.id.map(([label, title, duration, href]) => ({ label, title, duration, href })),
+      context: contextEn,
+      episodes: toRows(episodes.en, rowIds),
+    }),
+  })
+
+  const afterEn = await api(`/api/projects/${seriesId}?locale=en&depth=0`)
+  const stableIds = (afterEn.episodes ?? []).map((row) => row.id)
+
+  await api(`/api/projects/${seriesId}?locale=id`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      ...seriesBase,
+      context: contextId,
+      episodes: toRows(episodes.id, stableIds),
     }),
   })
 

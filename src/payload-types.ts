@@ -654,9 +654,6 @@ export interface Stat {
         name: string;
         url?: string | null;
         followers?: number | null;
-        /**
-         * Waktu snapshot metrik diambil dari sumber.
-         */
         metricsUpdatedAt?: string | null;
         source?: string | null;
         id?: string | null;

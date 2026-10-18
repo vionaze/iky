@@ -81,8 +81,20 @@ aplikasi Next.
 - Bahasa via cookie `lang` (`en` default, `id`), tombol di header
 - Responsif 390 / 768 / 1440 px
 - Konten dibaca dari CMS dengan fallback kamus di `src/lib/i18n.ts`:
-  globals Header/Home/Footer/Stats dan collection Projects (series + episodes)
-- Locale dari cookie `lang`; kartu format lain masih dari kamus sampai posternya tersedia
+  globals Header/Home/Footer/Stats dan collection Projects (series, episodes,
+  serta kartu Tutorial / Short Film / Music Video)
+- `about.body` (rich text Lexical) dirender di section About
+- Tanggal snapshot metrik memakai field `metricsUpdatedAt` dan hanya tampil jika terisi
+- Locale dari cookie `lang`
+
+Seed data lokal (aman dijalankan berulang):
+
+```sh
+ADMIN_EMAIL=admin@ikymianstudios.si ADMIN_PASSWORD='...' node scripts/seed.mjs
+```
+
+Jika database perlu dibuat ulang: hentikan dev server, hapus `data/ikymian.db`,
+jalankan `pnpm dev`, lalu seed lagi.
 
 ## CMS (Phase 2)
 
