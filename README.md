@@ -1,134 +1,134 @@
 # Ikymian Studios
 
-Halaman awal untuk pemeriksaan domain `https://ikymianstudios.si/`.
-Rencana portfolio tersedia di `docs/plans/2026-10-18-ikymian-portfolio.md`.
-Inventaris konten dan peta field CMS (Phase 1) ada di
-`docs/plans/2026-10-18-ikymian-content-inventory.md`.
+Portfolio di `https://ikymianstudios.si/` — Next.js + Payload CMS + SQLite,
+Tailwind CSS v4, dan hero Three.js.
 
-## Preview lokal
+- Rencana: `docs/plans/2026-10-18-ikymian-portfolio.md`
+- Inventaris konten & peta field CMS: `docs/plans/2026-10-18-ikymian-content-inventory.md`
 
-```sh
-python3 -m http.server 4173 --bind 127.0.0.1
-```
+## Stack
 
-Buka `http://127.0.0.1:4173/`.
+| Bagian | Teknologi |
+| --- | --- |
+| App | Next.js 15 (App Router) |
+| CMS | Payload 3 + SQLite (`@payloadcms/db-sqlite`) |
+| Style | Tailwind CSS v4 (token di `src/app/(frontend)/globals.css`) |
+| Font | Bricolage Grotesque (display) + Instrument Sans (body) |
+| Hero | Three.js blob cair (`src/components/LiquidScene.tsx`) |
+| Bahasa | Cookie `lang` — `en` default, `id` |
 
-Halaman `index.html` kini menampilkan portfolio statis: hero, lima episode series,
-tiga tautan karya, Impact, About dengan logo mitra, dan Contact. Toggle bahasa
-memakai `localStorage`; versi CMS nanti memakai cookie. CMS (Phase 2) berjalan
-terpisah di port 3000 dan belum menggantikan halaman statis ini.
-Seluruh halaman memakai latar terang. Bahasa default **Inggris (EN)**; toggle ke
-Indonesia (ID) tersimpan di `localStorage`.
-
-## VPS
-
-- Server: koneksi EZTOPUP di Termius.
-- Repository: `https://github.com/vionaze/iky.git`.
-- Checkout: `/var/www/ikymianstudios.si`.
-- Document root: `/var/www/ikymianstudios.si`.
-- Domain utama: `ikymianstudios.si`.
-- Cloudflare: record A domain utama ke `161.97.130.68`, DNS only.
-- Nginx: `/etc/nginx/sites-available/ikymianstudios.si`.
-
-Halaman berada langsung di `/var/www/ikymianstudios.si/index.html`.
-Tidak ada folder `www` tambahan. Nginx menolak akses ke dotfiles, `docs`, dan `deploy`.
-
-## Status deployment
-
-- Halaman status sudah terpasang dari branch `setup/domain-bootstrap`.
-- HTTPS memakai sertifikat Let's Encrypt, berlaku sampai 16 Januari 2027.
-- HTTP dialihkan ke HTTPS.
-- Renewal otomatis memakai Certbot dan timer yang sudah tersedia di VPS.
-- Konfigurasi Nginx di repo adalah konfigurasi HTTPS final; sertifikat di server
-  harus sudah tersedia sebelum konfigurasi ini dimuat.
-
-Sertifikat pertama diterbitkan setelah konfigurasi HTTP dan DNS aktif:
-
-```sh
-certbot --nginx --non-interactive --redirect -d ikymianstudios.si
-certbot renew --cert-name ikymianstudios.si --dry-run --non-interactive --no-random-sleep-on-renew
-```
-
-## Pembaruan manual
-
-Sesuaikan branch setelah PR digabung. Jangan ubah konfigurasi situs lain.
-
-```sh
-cd /var/www/ikymianstudios.si
-git pull --ff-only
-```
-
-Jika konfigurasi Nginx pada repo berubah, setelah ditinjau:
-
-```sh
-install -m 644 deploy/ikymianstudios.si.nginx.conf /etc/nginx/sites-available/ikymianstudios.si
-nginx -t && systemctl reload nginx
-```
-
-Tidak ada auto-deploy atau workflow GitHub Actions pada tahap ini. Perubahan
-ditinjau lewat pull request, lalu checkout VPS dapat diperbarui secara manual.
-
-## Landing (Phase 3)
-
-Landing baru berjalan di `http://localhost:3000/` (Next.js). Halaman statis
-`index.html` masih menjadi halaman live di domain sampai deployment diarahkan ke
-aplikasi Next.
-
-- Tailwind CSS v4 dengan token di `src/app/(frontend)/globals.css`
-- Display: Bricolage Grotesque; body: Instrument Sans (`next/font`)
-- Hero memakai Three.js (`src/components/LiquidScene.tsx`): blob cair biru-pink,
-  menghormati `prefers-reduced-motion`, berhenti saat tab/elemen tidak terlihat
-- Bahasa via cookie `lang` (`en` default, `id`), tombol di header
-- Responsif 390 / 768 / 1440 px
-- Konten dibaca dari CMS dengan fallback kamus di `src/lib/i18n.ts`:
-  globals Header/Home/Footer/Stats dan collection Projects (series, episodes,
-  serta kartu Tutorial / Short Film / Music Video)
-- `about.body` (rich text Lexical) dirender di section About
-- Tanggal snapshot metrik memakai field `metricsUpdatedAt` dan hanya tampil jika terisi
-- Locale dari cookie `lang`
-
-Seed data lokal (aman dijalankan berulang):
-
-```sh
-ADMIN_EMAIL=admin@ikymianstudios.si ADMIN_PASSWORD='...' node scripts/seed.mjs
-```
-
-Jika database perlu dibuat ulang: hentikan dev server, hapus `data/ikymian.db`,
-jalankan `pnpm dev`, lalu seed lagi.
-
-## CMS (Phase 2)
-
-Aplikasi Next.js + Payload CMS + SQLite berada di root repo. Halaman statis
-`index.html` tetap dipakai sampai landing dipindahkan ke Next.js pada Phase 3.
+## Lokal
 
 ```sh
 pnpm install
 pnpm dev
 ```
 
+- Landing: `http://localhost:3000/`
 - Admin: `http://localhost:3000/adminku`
-- Akun pertama sudah dibuat: `admin@ikymianstudios.si` (ganti password lewat menu Account)
 - Database: `data/ikymian.db` — di luar Git
 - Upload: `media/` — di luar Git
-- Rahasia: `.env` — di luar Git, contoh pada `.env.example`
-- Bahasa admin: default `en`, tersedia `id`
+- Rahasia: `.env` (contoh di `.env.example`)
 
-Catatan Payload 3.91: upload lewat REST mengirim field tambahan sebagai satu field
-`_payload` berisi JSON, bukan field terpisah.
+Seed idempoten:
+
+```sh
+ADMIN_EMAIL=admin@ikymianstudios.si ADMIN_PASSWORD='...' node scripts/seed.mjs
+```
+
+Jika database lokal perlu dibuat ulang: hentikan dev, hapus `data/ikymian.db`,
+jalankan `pnpm dev`, lalu seed lagi.
+
+## Produksi (VPS EZTOPUP)
+
+| Item | Nilai |
+| --- | --- |
+| Server | `root@161.97.130.68` (host `vmi3330948`) |
+| Domain | `ikymianstudios.si` — Cloudflare A record, DNS only |
+| Checkout | `/var/www/ikymianstudios.si` (branch `setup/domain-bootstrap`) |
+| Service | `ikymianstudios.service` (systemd, user `ikymian`) |
+| App | `next start` di `127.0.0.1:3001` |
+| Env | `/etc/ikymianstudios/env` (root:ikymian, 640) |
+| Database | `/var/lib/ikymianstudios/data/ikymian.db` |
+| Media | `/var/lib/ikymianstudios/media` |
+| Nginx | reverse proxy ke `127.0.0.1:3001`, SSL Let's Encrypt |
+| Password admin | `/root/ikymian-admin.txt` (root only) |
+
+Port 3000 dipakai proyek lain (`eztu`) lewat PM2. Jangan mengubah PM2 atau
+konfigurasi situs lain.
+
+### Deploy pembaruan
+
+```sh
+sudo -u ikymian env HOME=/var/lib/ikymianstudios \
+  git -C /var/www/ikymianstudios.si pull --ff-only
+
+sudo -u ikymian bash -lc 'export HOME=/var/lib/ikymianstudios; \
+  set -a; . /etc/ikymianstudios/env; set +a; \
+  cd /var/www/ikymianstudios.si && \
+  pnpm install --frozen-lockfile && pnpm payload migrate && pnpm build'
+
+systemctl restart ikymianstudios
+systemctl status ikymianstudios --no-pager
+curl -sS -o /dev/null -w '%{http_code}\n' http://127.0.0.1:3001/
+```
+
+Jalankan `pnpm payload migrate` setiap ada migrasi baru di `src/migrations`.
+Saat ini Payload berjalan dengan `push: false` di production, jadi skema hanya
+berubah lewat migrasi.
+
+### Backup
+
+```sh
+STAMP=$(date +%F-%H%M)
+sqlite3 /var/lib/ikymianstudios/data/ikymian.db \
+  ".backup '/var/backups/ikymianstudios/ikymian-$STAMP.db'"
+tar czf /var/backups/ikymianstudios/media-$STAMP.tar.gz \
+  -C /var/lib/ikymianstudios media
+```
+
+Backup pertama sudah ada di `/var/backups/ikymianstudios/`.
+
+### Rollback ke halaman statis
+
+```sh
+systemctl stop ikymianstudios
+cp /root/backups-ikymian-*/nginx.conf.bak /etc/nginx/sites-available/ikymianstudios.si
+nginx -t && systemctl reload nginx
+```
+
+Backup konfigurasi Nginx dan `index.html` lama ada di `/root/backups-ikymian-*`.
+
+### Nginx
+
+Konfigurasi di repo (`deploy/ikymianstudios.si.nginx.conf`) sudah berupa reverse
+proxy. Pasang setelah ditinjau:
+
+```sh
+install -m 644 deploy/ikymianstudios.si.nginx.conf /etc/nginx/sites-available/ikymianstudios.si
+nginx -t && systemctl reload nginx
+```
 
 ## Statistik (Phase 4)
 
-Sinkronisasi memakai sumber gratis **tidak resmi** (bisa berubah tanpa pemberitahuan):
+Sumber gratis **tidak resmi** (bisa berubah sewaktu-waktu):
 
-- YouTube: Innertube `videos` tab (jumlah view video long-form) + socialcounts
-  untuk subscriber
-- TikTok: markup halaman profil publik (followers, likes, jumlah video)
-- Instagram: endpoint web profil; sering diblokir sehingga dilewati
+- YouTube: Innertube `videos` tab (view video long-form) + socialcounts (subscriber)
+- TikTok: markup profil publik (followers, likes, jumlah video)
+- Instagram: biasanya diblokir, dilewati
 
 ```sh
-ADMIN_EMAIL=admin@ikymianstudios.si ADMIN_PASSWORD='...' pnpm sync:stats
+sudo -u ikymian env HOME=/var/lib/ikymianstudios BASE_URL=http://127.0.0.1:3001 \
+  ADMIN_EMAIL=admin@ikymianstudios.si ADMIN_PASSWORD='...' \
+  node /var/www/ikymianstudios.si/scripts/sync-stats.mjs
 ```
 
-Cakupan tidak lengkap: `totalViews` hanya menjumlahkan platform yang menyediakan
-view. Platform yang follower-nya terbaca tetap ditampilkan terpisah di Impact.
-Jadwal otomatis (cron/systemd timer) belum dipasang.
+`totalViews` hanya menjumlahkan platform yang menyediakan view; follower tetap
+ditampilkan per platform. Penjadwalan otomatis belum dipasang.
+
+## Catatan
+
+- Metadata memakai `noindex, nofollow` sampai konten final. Hapus di
+  `generateMetadata` (`src/app/(frontend)/page.tsx`) saat siap diindeks.
+- Upload REST Payload 3.91 mengirim field tambahan sebagai satu field `_payload`
+  berisi JSON, bukan field terpisah.
