@@ -8,10 +8,26 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 
 type AnyRecord = Record<string, any>
 
-export const metadata: Metadata = {
-  title: 'Ikymian Studios — AI Filmmaker & Content Creator',
-  description:
-    'Portfolio of Ikymian Studios — series, music video, short film, and tutorial with an AI-driven creative approach.',
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies()
+  const locale: Locale = cookieStore.get('lang')?.value === 'id' ? 'id' : 'en'
+  const t = getDict(locale)
+
+  return {
+    title: 'Ikymian Studios — AI Filmmaker & Content Creator',
+    description:
+      locale === 'id'
+        ? 'Portfolio Ikymian Studios — series, music video, short film, dan tutorial dengan pendekatan kreatif berbasis AI.'
+        : 'Portfolio of Ikymian Studios — series, music video, short film, and tutorial with an AI-driven creative approach.',
+    alternates: { canonical: 'https://ikymianstudios.si/' },
+    robots: { index: false, follow: false },
+    openGraph: {
+      title: 'Ikymian Studios — AI Filmmaker & Content Creator',
+      description: t.hero.lead,
+      type: 'website',
+      url: 'https://ikymianstudios.si/',
+    },
+  }
 }
 
 const partners = [
