@@ -2,7 +2,7 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Membuat landing page portfolio di `https://ikymian.studio` untuk menampilkan Series, Music Video, Short Film, dan Tutorial dalam tampilan kalem yang membantu calon kolaborator memahami karya dan menghubungi kreatornya.
+**Goal:** Membuat landing page portfolio di `https://ikymianstudios.si` untuk menampilkan Series, Music Video, Short Film, dan Tutorial dalam tampilan kalem yang membantu calon kolaborator memahami karya dan menghubungi kreatornya.
 
 **Architecture:** Satu halaman statis dengan HTML semantik, CSS responsif, dan JavaScript kecil untuk statistik. Karya dan narasi utama ditulis langsung di HTML; statistik publik dibaca dari satu snapshot JSON. Total views media sosial wajib diperbarui otomatis melalui API resmi dan proses di server; platform, izin, serta hosting diperiksa sebelum menentukan implementasi proses tersebut.
 
@@ -12,14 +12,24 @@
 
 ## Intent, scope, dan batas pekerjaan
 
-Pengguna meminta analisis referensi dan rencana, belum meminta implementasi atau deployment. Dokumen ini adalah hasil pekerjaan saat ini; semua berkas website di bawah adalah rencana berkas, belum dibuat.
+Permintaan awal adalah analisis dan rencana portfolio. Pengguna kemudian meminta bootstrap domain, halaman `index.html`, SSL, serta pull request. Halaman status sementara sudah dibuat; Phase 1–5 untuk portfolio lengkap tetap merupakan rencana pekerjaan berikutnya.
 
 - **Scope:** satu landing page portfolio, empat kategori karya, preview video, statistik, link sosial, kontak bisnis, dan persiapan metadata domain.
 - **Non-goals:** multipage portfolio, admin/CMS, blog, login, booking/payment, episode player sendiri, scraping statistik, animasi WebGL, dan dashboard analytics.
-- **Untouched:** akun sosial, video asli, pengaturan akun, DNS, hosting, dan kredensial. Tidak ada perubahan atau publikasi pada layanan tersebut dalam tahap perencanaan.
+- **Untouched:** akun sosial, video asli, kredensial, serta konfigurasi situs lain di VPS. DNS dan hosting domain ini hanya diubah dalam bootstrap yang kemudian diminta pengguna, bukan saat analisis awal.
 - **Definition of done untuk tahap ini:** arah desain, susunan konten, definisi metrik, kebutuhan aset, langkah implementasi, dan keputusan terbuka terdokumentasi tanpa klaim palsu.
 
-Workspace diperiksa ulang pada 18 Oktober 2026: hanya dokumen rencana ini yang ditemukan; belum ada kode aplikasi, package, atau tes. Atas permintaan pengguna, Git sudah diinisialisasi pada folder proyek dengan branch lokal `main` dan remote `origin` ke `https://github.com/vionaze/iky.git`. Akses baca dan fetch berhasil; remote belum memiliki refs dan belum ada commit lokal atau push. Instruksi handoff di atas adalah format skill; pada lingkungan ini skill yang tersedia bernama `executing-plans`, bukan namespace `superpowers`.
+Git terhubung ke `https://github.com/vionaze/iky.git`. Branch dasar `main` berisi rencana awal; pekerjaan bootstrap domain berada pada `setup/domain-bootstrap` untuk ditinjau melalui PR. Workspace saat ini berisi halaman status, konfigurasi Nginx, README deployment, dan dokumen ini; belum ada package atau framework tes. Instruksi handoff di atas adalah format skill; pada lingkungan ini skill yang tersedia bernama `executing-plans`, bukan namespace `superpowers`.
+
+### Bootstrap domain yang diminta pengguna
+
+- Domain terbaru: **https://ikymianstudios.si/**, menggantikan target awal `ikymian.studio`.
+- Server: VPS EZTOPUP, diidentifikasi dari sesi Termius; deployment memakai SSH ke server yang sama.
+- Folder situs dan document root: `/var/www/ikymianstudios.si`; halaman langsung pada `index.html`, tanpa folder `www` tambahan sesuai koreksi pengguna.
+- Cloudflare: record A domain utama menuju `161.97.130.68`, DNS only. Tidak menambah subdomain `www`.
+- Situs memakai konfigurasi Nginx terpisah dan SSL Let's Encrypt. HTTP dialihkan ke HTTPS; timer renewal Certbot tersedia.
+- Tampilan saat ini hanya pemberitahuan bahwa portfolio sedang disiapkan. Tidak ada statistik, karya, atau klaim performa fiktif.
+- Detail operasional ada pada `README.md`. Bootstrap ini mendahului Phase 1–5 dan tidak menyatakan portfolio lengkap sudah selesai.
 
 ## Sumber dan fakta yang diketahui
 
@@ -28,7 +38,7 @@ Workspace diperiksa ulang pada 18 Oktober 2026: hanya dokumen rencana ini yang d
 3. Poin 9 dipertahankan: views, engagement, followers, jumlah video dibuat, completed campaigns, serta nominations. Link sosial harus tersedia.
 4. Dokumen awal mencatat empat kategori: Series, MV, Tutorial, dan Short Film. Pertahankan sebagai konteks proyek; kategori Tutorial berasal dari dokumen awal, bukan pesan pada shared chat yang dibaca ulang. Jangan mengubah keempat kategori menjadi empat layanan berbayar tanpa konfirmasi.
 5. Dokumen awal menyimpan [tautan pendek series](https://vt.tiktok.com/ZS9U5fU9PpM2m-zKLX9/) dan hasil redirect sebelumnya ke [playlist Berondong Sebelah Rumah](https://www.tiktok.com/@damiann101/playlist/BerondongSebelahRumah-7692418796472109844). URL playlist dipertahankan sebagai kandidat dari docs, belum diperiksa ulang pada analisis ini. Daftar episode, isi video, sinopsis, poster, kepemilikan akun, serta angka performa belum dapat diverifikasi. Belum ada analisis visual terhadap filmnya.
-6. `ikymian.studio` gagal di-resolve dari lingkungan pemeriksaan. Ini bukan bukti domain belum dimiliki atau tidak aktif secara global. Status DNS dan hosting belum dapat dipastikan.
+6. Target awal `ikymian.studio` gagal di-resolve pada pemeriksaan awal. Pengguna kemudian memilih `ikymianstudios.si` untuk deployment; gunakan domain terbaru ini untuk metadata dan operasional berikutnya.
 
 ## Hasil analisis referensi dan tambahan brief
 
@@ -217,7 +227,7 @@ Setiap karya menggunakan nama folder stabil, misalnya `assets/works/berondong-se
 
 ## Pembagian proyek: total 5 phase
 
-Pembagian ini mengikuti Task 1–5 di bawah; tidak menambah fitur atau jalur implementasi kedua. Tujuan akhirnya satu landing page portfolio yang siap dipublikasikan di `ikymian.studio`, dengan total views media sosial diperbarui otomatis. Blog, CMS, dashboard admin, serta halaman tambahan berada di luar scope. Video asli, akun sosial, kredensial, dan DNS tetap tidak diubah selama perencanaan.
+Pembagian ini mengikuti Task 1–5 di bawah; tidak menambah fitur atau jalur implementasi kedua. Tujuan akhirnya satu landing page portfolio yang siap dipublikasikan di `ikymianstudios.si`, dengan total views media sosial diperbarui otomatis. Blog, CMS, dashboard admin, serta halaman tambahan berada di luar scope. Video asli, akun sosial, dan kredensial tetap tidak diubah selama perencanaan. Bootstrap DNS/SSL yang diminta terpisah dicatat di atas.
 
 | Phase | Pekerjaan | Hasil dan syarat selesai |
 | --- | --- | --- |
@@ -332,7 +342,7 @@ loadStats();
 **Files:** Modify `index.html`, `styles.css`, `main.js`, and `README.md` only as needed; create `assets/og-cover.webp` only after a real approved image exists.
 
 1. Pasang email dan URL sosial yang diberikan, bio final, tools yang benar dipakai, serta satu contoh proses nyata. Jangan tampilkan link `#` sebagai kontak.
-2. Tambahkan title, description, canonical `https://ikymian.studio/`, dan Open Graph. Referensikan OG image hanya jika berkasnya benar tersedia.
+2. Tambahkan title, description, canonical `https://ikymianstudios.si/`, dan Open Graph. Referensikan OG image hanya jika berkasnya benar tersedia.
 3. Lakukan browser QA pada 375/768/1440 px, keyboard, kontras, network assets, serta console. Periksa poster, satu preview, satu link per kategori, playlist series, dan kontak. Expected: tidak ada overflow, aset 404, fokus hilang, atau error JavaScript.
 4. Perbarui README dengan cara mengganti karya, metrik, aset, dan daftar kebutuhan yang tersisa. Siapkan catatan deployment; jangan mengubah DNS atau memublikasikan sebelum pengguna meminta dan mengonfirmasi langkah tersebut.
 
@@ -342,7 +352,7 @@ loadStats();
 
 Tidak ada existing tests karena kode aplikasi belum dibuat. Untuk halaman statis ini, gunakan pemeriksaan browser yang langsung membuktikan acceptance, bukan menambah framework test, screenshot matrix, atau suite e2e. Dua pemeriksaan perilaku terpenting: jalur karya/preview/kontak normal dan kegagalan data statistik. Bila nanti ada integrasi server yang mengubah perilaku, tentukan paling banyak satu tes jalur utama dan satu jalur kegagalan kritis sesuai aturan pengguna; jangan membuat test infrastructure hanya demi rencana ini.
 
-Tidak ada perintah npm/build/lint yang dapat diklaim lulus saat ini. Website belum diimplementasikan. Git sudah tersedia; ketika melakukan commit, sertakan hanya berkas terkait setelah unit pekerjaan selesai, dengan pesan sederhana seperti `feat: add portfolio layout`; jangan menggunakan `git add .` untuk mencakup aset atau kredensial yang belum ditinjau.
+Tidak ada perintah npm/build/lint karena belum ada toolchain aplikasi. Halaman status sudah dibuat dan diperiksa melalui HTTP/HTTPS serta browser; portfolio lengkap belum diimplementasikan. Git sudah tersedia; ketika melakukan commit, sertakan hanya berkas terkait setelah unit pekerjaan selesai, dengan pesan sederhana seperti `feat: add portfolio layout`; jangan menggunakan `git add .` untuk mencakup aset atau kredensial yang belum ditinjau.
 
 ## Handoff
 

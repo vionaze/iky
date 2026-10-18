@@ -24,20 +24,37 @@ Buka `http://127.0.0.1:4173/`.
 Halaman berada langsung di `/var/www/ikymianstudios.si/index.html`.
 Tidak ada folder `www` tambahan. Nginx menolak akses ke dotfiles, `docs`, dan `deploy`.
 
-## Pemasangan awal
+## Status deployment
 
-Gunakan Nginx dan Certbot yang sudah tersedia di VPS. Jangan ubah konfigurasi
-situs lain. Untuk repo kosong, buat branch dasar `main` sebelum membuka PR.
+- Halaman status sudah terpasang dari branch `setup/domain-bootstrap`.
+- HTTPS memakai sertifikat Let's Encrypt, berlaku sampai 16 Januari 2027.
+- HTTP dialihkan ke HTTPS.
+- Renewal otomatis memakai Certbot dan timer yang sudah tersedia di VPS.
+- Konfigurasi Nginx di repo adalah konfigurasi HTTPS final; sertifikat di server
+  harus sudah tersedia sebelum konfigurasi ini dimuat.
+
+Sertifikat pertama diterbitkan setelah konfigurasi HTTP dan DNS aktif:
 
 ```sh
-git clone --branch setup/domain-bootstrap https://github.com/vionaze/iky.git /var/www/ikymianstudios.si
-install -m 644 /var/www/ikymianstudios.si/deploy/ikymianstudios.si.nginx.conf /etc/nginx/sites-available/ikymianstudios.si
-ln -s /etc/nginx/sites-available/ikymianstudios.si /etc/nginx/sites-enabled/ikymianstudios.si
-nginx -t && systemctl reload nginx
+certbot --nginx --non-interactive --redirect -d ikymianstudios.si
+certbot renew --cert-name ikymianstudios.si --dry-run --non-interactive --no-random-sleep-on-renew
 ```
 
-Aktifkan sertifikat setelah DNS mengarah ke VPS dan halaman HTTP dapat diakses.
-Status penerbitan sertifikat dan perintah pembaruan dicatat setelah verifikasi.
+## Pembaruan manual
+
+Sesuaikan branch setelah PR digabung. Jangan ubah konfigurasi situs lain.
+
+```sh
+cd /var/www/ikymianstudios.si
+git pull --ff-only
+```
+
+Jika konfigurasi Nginx pada repo berubah, setelah ditinjau:
+
+```sh
+install -m 644 deploy/ikymianstudios.si.nginx.conf /etc/nginx/sites-available/ikymianstudios.si
+nginx -t && systemctl reload nginx
+```
 
 Tidak ada auto-deploy atau workflow GitHub Actions pada tahap ini. Perubahan
 ditinjau lewat pull request, lalu checkout VPS dapat diperbarui secara manual.
