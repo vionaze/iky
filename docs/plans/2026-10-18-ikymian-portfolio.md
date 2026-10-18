@@ -150,7 +150,9 @@ Ini baseline CSS, bukan klaim bahwa tekstur cair sudah selesai secara visual. Pe
 
 **Pembaruan 18 Oktober 2026 — tema lebih bold.** Setelah meninjau halaman statis, pengguna meminta arah yang lebih bold dengan referensi [Gween Studios](https://gweenstudios.xyz/). Implementasi memakai **Instrument Serif** untuk display, aksen **wine/blush/gold** di atas krim, blok gelap untuk Selected Works dan Impact, blok blush untuk Contact, stiker kecil, dan watermark tipografi. Token di atas tetap dicatat sebagai riwayat; warna dan tipografi final mengikuti implementasi terbaru.
 
-**Revisi kedua, 18 Oktober 2026.** Pengguna menegaskan situs harus tetap **terang**, bukan dark. Varian gelap `/v2/` yang sempat dibuat sebagai percobaan sudah dihapus. Arah final: latar terang dengan tipografi serif besar, blok warna blush/sand, aksen wine/gold, dan komposisi bold tanpa latar gelap.
+**Revisi kedua, 18 Oktober 2026.** Pengguna menegaskan situs harus tetap **terang**, bukan dark. Varian gelap `/v2/` yang sempat dibuat sebagai percobaan sudah dihapus.
+
+**Revisi ketiga, 19 Oktober 2026 — kembali ke brief awal.** Pengguna menilai arah serif/wine/gold tidak sesuai brief. Tema dikembalikan ke token awal: krim, biru susu, pink pucat, dan indigo; tipografi sans (Instrument Sans), hero dengan bidang warna cair, area karya tenang, garis pembatas tipis. Tidak ada serif display, stiker, watermark, atau blok wine. Selected Works memakai satu poster series + daftar lima episode agar tidak menampilkan poster yang sama berulang.
 
 Tipografi besar dan lapang, navigasi pendek, garis pembatas tipis, sudut media lembut, dan maksimal satu pola hover sederhana. Tidak ada marquee, scroll hijacking, cursor khusus, atau efek gerak terus-menerus. Hormati `prefers-reduced-motion` bila transisi ditambahkan.
 
