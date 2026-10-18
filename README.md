@@ -13,10 +13,10 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 Buka `http://127.0.0.1:4173/`.
 
-Mockup tema portfolio (statis, bukan aplikasi CMS) ada di
-`http://127.0.0.1:4173/preview/`. Halaman ini memakai aset di `images/`, toggle bahasa
-via `localStorage`, dan hanya untuk meninjau arah visual. Halaman produksi
-`index.html` tidak diubah.
+Halaman `index.html` kini menampilkan portfolio statis: hero, lima episode series,
+tiga tautan karya, Impact, About dengan logo mitra, dan Contact. Toggle bahasa
+memakai `localStorage`; versi CMS nanti memakai cookie. Belum ada `/adminku`,
+database, atau sinkronisasi statistik.
 
 ## VPS
 

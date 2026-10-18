@@ -28,7 +28,7 @@ Git terhubung ke `https://github.com/vionaze/iky.git`. Branch dasar `main` beris
 - Folder situs dan document root saat bootstrap: `/var/www/ikymianstudios.si`; halaman langsung pada `index.html`, tanpa folder `www` tambahan sesuai koreksi pengguna. Saat aplikasi Next.js dibuat, Nginx perlu diarahkan ke proses aplikasi; perubahan itu belum dilakukan.
 - Cloudflare: record A domain utama menuju `161.97.130.68`, DNS only. Tidak menambah subdomain `www`.
 - Situs memakai konfigurasi Nginx terpisah dan SSL Let's Encrypt. HTTP dialihkan ke HTTPS; timer renewal Certbot tersedia.
-- Tampilan saat ini hanya pemberitahuan bahwa portfolio sedang disiapkan. Tidak ada statistik, karya, atau klaim performa fiktif.
+- Halaman publik kini menampilkan portfolio statis: hero, lima episode series, tiga tautan karya, About dengan logo mitra, serta Contact. Statistik tetap menampilkan "Belum tersedia" sampai sinkronisasi API dibuat; tidak ada angka fiktif.
 - Detail operasional ada pada `README.md`. Bootstrap ini mendahului Phase 1–5 dan tidak menyatakan portfolio lengkap sudah selesai.
 
 ## Sumber dan fakta yang diketahui

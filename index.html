@@ -1,27 +1,615 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Portfolio Ikymian Studios sedang disiapkan.">
-  <title>Ikymian Studios</title>
-  <style>
-    :root { color-scheme: light; font-family: system-ui, sans-serif; }
-    * { box-sizing: border-box; }
-    body { margin: 0; background: #faf7f2; color: #252541; }
-    main { min-height: 100svh; display: grid; align-content: center; padding: 40px max(24px, calc((100vw - 1000px) / 2)); }
-    h1 { margin: 0 0 24px; max-width: 12ch; font-size: clamp(48px, 9vw, 96px); line-height: 1; letter-spacing: -0.055em; font-weight: 600; }
-    p { max-width: 42ch; margin: 0 0 32px; color: #606074; font-size: 18px; line-height: 1.6; }
-    a { width: fit-content; color: #51439a; text-underline-offset: 5px; }
-    a:focus-visible { outline: 2px solid #51439a; outline-offset: 6px; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ikymian Studios — AI Filmmaker &amp; Content Creator</title>
+<meta name="description" content="Portfolio Ikymian Studios — series, music video, short film, dan tutorial dengan pendekatan kreatif berbasis AI.">
+<link rel="canonical" href="https://ikymianstudios.si/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf7f2;
+    --cream-deep: #f2ece2;
+    --milk-blue: #b8d4f2;
+    --pale-pink: #f0cbdc;
+    --indigo: #51439a;
+    --ink: #252541;
+    --muted: #606074;
+    --line: rgba(37, 37, 65, .12);
+    --page: 1160px;
+    --ease: cubic-bezier(.16, 1, .3, 1);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: auto; background: var(--cream); }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  ::selection { background: var(--pale-pink); color: var(--ink); }
+
+  .wrap { width: min(var(--page), calc(100% - 48px)); margin-inline: auto; }
+
+  .skip {
+    position: absolute; left: -9999px; top: 0; z-index: 60;
+    background: var(--ink); color: var(--cream); padding: 12px 18px; border-radius: 0 0 10px 0;
+  }
+  .skip:focus { left: 0; }
+
+  :focus-visible { outline: 2px solid var(--indigo); outline-offset: 4px; border-radius: 4px; }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 30;
+    background: color-mix(in srgb, var(--cream) 86%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; min-height: 68px;
+  }
+  .brand { display: flex; flex-direction: column; gap: 1px; text-decoration: none; }
+  .brand strong { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+  .brand span { font-size: 11px; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a {
+    text-decoration: none; font-size: 14px; color: var(--muted);
+    padding-block: 4px; border-bottom: 1px solid transparent;
+    transition: color .25s var(--ease), border-color .25s var(--ease);
+  }
+  .nav-links a:hover { color: var(--ink); border-color: var(--indigo); }
+
+  .lang {
+    display: inline-flex; align-items: center; gap: 2px;
+    border: 1px solid var(--line); border-radius: 999px; padding: 3px;
+    background: rgba(255, 255, 255, .5);
+  }
+  .lang button {
+    appearance: none; border: 0; background: transparent; cursor: pointer;
+    font: inherit; font-size: 12px; letter-spacing: .06em; font-weight: 500;
+    color: var(--muted); padding: 5px 11px; border-radius: 999px;
+    transition: background .25s var(--ease), color .25s var(--ease);
+  }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: var(--cream); }
+  .lang button:hover { color: var(--ink); }
+  .lang button[aria-pressed="true"]:hover { color: var(--cream); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(ellipse 60% 55% at 16% 26%, rgba(184, 212, 242, .78), transparent 62%),
+      radial-gradient(ellipse 52% 48% at 82% 34%, rgba(240, 203, 220, .70), transparent 60%),
+      radial-gradient(ellipse 55% 45% at 58% 92%, rgba(81, 67, 154, .16), transparent 66%),
+      var(--cream);
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.05fr .95fr; align-items: center;
+    gap: 40px; min-height: calc(86dvh - 68px); padding-block: 48px;
+  }
+  .hero-copy { max-width: 600px; min-width: 0; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+    margin: 0 0 28px;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--indigo); }
+
+  .hero h1 {
+    margin: 0 0 26px;
+    font-size: clamp(36px, 4.6vw, 62px);
+    line-height: 1.02;
+    letter-spacing: -.04em;
+    font-weight: 500;
+    max-width: 15ch;
+  }
+  .hero p.lead {
+    margin: 0 0 34px;
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 40ch;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none; font-size: 14px; font-weight: 500;
+    padding: 13px 22px; border-radius: 999px;
+    transition: transform .3s var(--ease), background .3s var(--ease), color .3s var(--ease);
+  }
+  .btn:active { transform: translateY(-1px) scale(.99); }
+  .btn--solid { background: var(--ink); color: var(--cream); }
+  .btn--solid:hover { background: var(--indigo); }
+  .btn--ghost { border: 1px solid var(--line); color: var(--ink); background: rgba(255, 255, 255, .4); }
+  .btn--ghost:hover { border-color: var(--indigo); }
+  .btn .arrow { transition: transform .3s var(--ease); }
+  .btn:hover .arrow { transform: translate(2px, -2px); }
+
+  .hero-portrait {
+    position: relative; display: flex; justify-content: flex-end; align-items: flex-end;
+  }
+  .hero-portrait img {
+    width: auto; height: auto; max-width: 100%;
+    max-height: min(78vh, 700px); object-fit: contain;
+    filter: drop-shadow(0 26px 50px rgba(37, 37, 65, .13));
+  }
+  .hero-note { display: none; }
+
+  /* ---------- section shell ---------- */
+  section { scroll-margin-top: 84px; }
+  .section { padding-block: 104px; }
+  .section + .section { border-top: 1px solid var(--line); }
+
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 24px; margin-bottom: 48px;
+  }
+  .section-head h2 {
+    margin: 0; font-size: clamp(26px, 3vw, 36px);
+    letter-spacing: -.03em; font-weight: 500;
+  }
+  .section-head .index {
+    font-size: 11px; letter-spacing: .18em; color: var(--muted); text-transform: uppercase;
+  }
+  .section-intro {
+    max-width: 52ch; margin: -28px 0 44px; color: var(--muted);
+    font-size: 16px;
+  }
+
+  /* ---------- series ---------- */
+  .series-meta {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px;
+    margin-bottom: 22px;
+  }
+  .series-meta h3 { margin: 0; font-size: 19px; font-weight: 500; letter-spacing: -.015em; }
+  .series-meta span { font-size: 12px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+
+  .series-grid {
+    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px;
+  }
+  .card { text-decoration: none; display: block; }
+  .poster {
+    position: relative; aspect-ratio: 9 / 16; overflow: hidden;
+    border-radius: 12px; background: var(--cream-deep);
+  }
+  .poster img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .8s var(--ease);
+  }
+  .card:hover .poster img { transform: scale(1.035); }
+  .poster::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(37, 37, 65, .62), transparent 42%);
+    opacity: .9; transition: opacity .4s var(--ease);
+  }
+  .poster-meta {
+    position: absolute; left: 12px; right: 12px; bottom: 10px; z-index: 2;
+    display: flex; align-items: center; justify-content: space-between;
+    color: #fdfbf7; font-size: 11px; letter-spacing: .06em;
+  }
+  .poster-meta .ep { font-weight: 500; letter-spacing: .12em; }
+  .card-body { padding-top: 12px; }
+  .card-body h4 {
+    margin: 0 0 3px; font-size: 14px; font-weight: 500; letter-spacing: -.01em;
+    line-height: 1.35;
+  }
+  .card-body p { margin: 0; font-size: 12px; color: var(--muted); }
+
+  /* ---------- single works ---------- */
+  .works-label {
+    margin: 64px 0 14px; font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .work-list { border-top: 1px solid var(--line); }
+  .work-row {
+    display: grid; grid-template-columns: 132px 1fr auto; align-items: center;
+    gap: 24px; padding: 22px 6px; border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    transition: background .3s var(--ease), padding-left .3s var(--ease);
+  }
+  .work-row:hover { background: rgba(255, 255, 255, .55); padding-left: 14px; }
+  .work-row .cat { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--indigo); }
+  .work-row .title { font-size: clamp(17px, 2vw, 22px); letter-spacing: -.02em; }
+  .work-row .pending { color: var(--muted); font-weight: 300; }
+  .work-row .arrow { font-size: 20px; color: var(--muted); transition: transform .3s var(--ease), color .3s var(--ease); }
+  .work-row:hover .arrow { transform: translate(3px, -3px); color: var(--indigo); }
+
+  /* ---------- impact ---------- */
+  .impact-grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 40px;
+  }
+  .metric { padding: 22px 0; border-top: 1px solid var(--line); }
+  .metric dt { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .metric dd {
+    margin: 10px 0 0; font-size: clamp(28px, 3.4vw, 40px);
+    letter-spacing: -.03em; font-weight: 400; color: var(--ink);
+  }
+  .metric dd.empty { font-size: 15px; letter-spacing: .01em; font-weight: 300; color: var(--muted); opacity: .8; padding-top: 6px; }
+  .impact-note { margin-top: 30px; font-size: 13px; color: var(--muted); max-width: 60ch; }
+
+  /* ---------- about ---------- */
+  .about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 64px; align-items: start; }
+  .about-copy p { margin: 0 0 18px; font-size: 17px; line-height: 1.65; max-width: 46ch; }
+  .about-copy p:last-child { margin-bottom: 0; }
+  .process {
+    border-left: 1px solid var(--line); padding-left: 28px;
+  }
+  .process .label { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .process ul { list-style: none; margin: 14px 0 0; padding: 0; }
+  .process li {
+    display: flex; justify-content: space-between; gap: 16px;
+    padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 14px;
+  }
+  .process li span:last-child { color: var(--muted); }
+
+  .partners { margin-top: 72px; padding-top: 30px; border-top: 1px solid var(--line); }
+  .partners .label { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .partner-row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 34px 46px; margin-top: 24px;
+  }
+  .partner-row img {
+    height: 22px; width: auto; object-fit: contain;
+    filter: grayscale(1) opacity(.62);
+    transition: filter .3s var(--ease), opacity .3s var(--ease);
+  }
+  .partner-row img:hover { filter: grayscale(1) opacity(1); }
+  .partner-row .capcut { color: var(--ink); }
+  .partner-row .invert { filter: invert(1) grayscale(1) opacity(.62); }
+  .partner-row .invert:hover { filter: invert(1) grayscale(1) opacity(1); }
+
+  /* ---------- contact ---------- */
+  .contact-grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
+  .contact h2 {
+    margin: 0 0 18px; font-size: clamp(32px, 4.6vw, 56px);
+    letter-spacing: -.04em; font-weight: 500; line-height: 1.02; max-width: 14ch;
+  }
+  .mail {
+    display: inline-block; font-size: clamp(18px, 2.4vw, 26px);
+    text-decoration: none; border-bottom: 1px solid var(--indigo);
+    padding-bottom: 3px; transition: color .3s var(--ease);
+  }
+  .mail:hover { color: var(--indigo); }
+  .socials { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 34px; }
+  .socials a {
+    font-size: 13px; color: var(--muted); text-decoration: none;
+    transition: color .25s var(--ease);
+  }
+  .socials a:hover { color: var(--ink); }
+
+  /* ---------- footer ---------- */
+  .footer {
+    border-top: 1px solid var(--line);
+    padding-block: 30px 40px;
+  }
+  .footer-inner {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px;
+    font-size: 12px; color: var(--muted);
+  }
+
+  /* ---------- reveal ---------- */
+  .reveal {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity .75s var(--ease), transform .75s var(--ease);
+    transition-delay: calc(var(--i, 0) * 65ms);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .card:hover .poster img { transform: none; }
+    .btn, .link-arrow, .arrow { transition: none; }
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 1000px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 28px; min-height: 0; padding-block: 48px 40px; }
+    .hero-portrait { justify-content: flex-start; }
+    .hero-portrait img { max-height: 52vh; }
+    .hero-note { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .process { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
+    .series-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .impact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .contact-grid { grid-template-columns: 1fr; align-items: start; }
+  }
+
+  @media (max-width: 720px) {
+    .wrap { width: calc(100% - 32px); }
+    .nav-links { gap: 16px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .nav-inner { min-height: 62px; }
+    .hero h1 { font-size: clamp(30px, 9vw, 42px); }
+    .section { padding-block: 72px; }
+    .section-head { flex-direction: column; gap: 8px; margin-bottom: 32px; }
+    .section-intro { margin-top: -18px; }
+    .series-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .work-row { grid-template-columns: 1fr auto; gap: 6px 16px; padding: 18px 4px; }
+    .work-row .cat { grid-column: 1 / -1; }
+    .impact-grid { grid-template-columns: 1fr; }
+    .partners { margin-top: 52px; }
+    .partner-row { gap: 24px 30px; }
+    .partner-row img { height: 19px; }
+    .footer-inner { flex-direction: column; }
+  }
+</style>
 </head>
 <body>
-  <main>
-    <h1>Ikymian Studios</h1>
-    <p>Portfolio sedang disiapkan.<br>Sampai ketemu sebentar lagi.</p>
-    <a href="https://ikymianstudios.si/">ikymianstudios.si</a>
-  </main>
+<a class="skip" href="#work">Lewati ke karya</a>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Ikymian Studios">
+      <strong>Ikymian Studios</strong>
+      <span>Caisart Felix</span>
+    </a>
+    <nav class="nav-links" aria-label="Navigasi utama">
+      <a href="#work" data-id="Karya" data-en="Work">Karya</a>
+      <a href="#about" data-id="Tentang" data-en="About">Tentang</a>
+      <a href="#contact" data-id="Kontak" data-en="Contact">Kontak</a>
+      <div class="lang" role="group" aria-label="Bahasa / Language">
+        <button type="button" data-lang="id" aria-pressed="true">ID</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow reveal" data-id="AI Filmmaker &amp; Content Creator" data-en="AI Filmmaker &amp; Content Creator">AI Filmmaker &amp; Content Creator</p>
+        <h1 class="reveal" style="--i:1"
+            data-id="Cerita, musik, dan ide yang menjadi visual."
+            data-en="Stories, music, and ideas turned into visuals.">Cerita, musik, dan ide yang menjadi visual.</h1>
+        <p class="lead reveal" style="--i:2"
+           data-id="Series, music video, short film, dan tutorial dengan pendekatan kreatif berbasis AI."
+           data-en="Series, music videos, short films, and tutorials with an AI-driven creative approach.">Series, music video, short film, dan tutorial dengan pendekatan kreatif berbasis AI.</p>
+        <div class="cta-row reveal" style="--i:3">
+          <a class="btn btn--solid" href="#work">
+            <span data-id="Lihat Karya" data-en="View Work">Lihat Karya</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="btn btn--ghost" href="#contact">
+            <span data-id="Diskusi Kolaborasi" data-en="Start a Project">Diskusi Kolaborasi</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-portrait reveal" style="--i:2">
+        <img src="images/hero-1.png" alt="Potret karakter visual Ikymian Studios" width="1200" height="896">
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 data-id="Karya Pilihan" data-en="Selected Works">Karya Pilihan</h2>
+        <span class="index">01 / Work</span>
+      </div>
+      <p class="section-intro reveal"
+         data-id="Lima episode series, satu music video, satu short film, dan satu tutorial."
+         data-en="Five series episodes, one music video, one short film, and one tutorial.">Lima episode series, satu music video, satu short film, dan satu tutorial.</p>
+
+      <div class="series-meta reveal">
+        <h3>Berondong Sebelah Rumah</h3>
+        <span>Series · 5 episode</span>
+      </div>
+
+      <div class="series-grid">
+        <a class="card reveal" style="--i:1" href="https://www.tiktok.com/@damiann101/video/7692173774682131733" target="_blank" rel="noopener">
+          <div class="poster">
+            <img src="images/works/berondong/ep01.jpg" alt="Poster Berondong Sebelah Rumah episode 01" loading="lazy">
+            <div class="poster-meta"><span class="ep">EP 01</span><span>1:59</span></div>
+          </div>
+          <div class="card-body">
+            <h4 data-id="Episode 01" data-en="Episode 01">Episode 01</h4>
+            <p>TikTok · Series</p>
+          </div>
+        </a>
+        <a class="card reveal" style="--i:2" href="https://www.tiktok.com/@damiann101/video/7692619848244890900" target="_blank" rel="noopener">
+          <div class="poster">
+            <img src="images/works/berondong/ep02.jpg" alt="Poster Berondong Sebelah Rumah episode 02" loading="lazy">
+            <div class="poster-meta"><span class="ep">EP 02</span><span>2:01</span></div>
+          </div>
+          <div class="card-body">
+            <h4 data-id="Terlalu Dekat" data-en="Too Close">Terlalu Dekat</h4>
+            <p>TikTok · Series</p>
+          </div>
+        </a>
+        <a class="card reveal" style="--i:3" href="https://www.tiktok.com/@damiann101/video/7692863785836678421" target="_blank" rel="noopener">
+          <div class="poster">
+            <img src="images/works/berondong/ep03.jpg" alt="Poster Berondong Sebelah Rumah episode 03" loading="lazy">
+            <div class="poster-meta"><span class="ep">EP 03</span><span>2:03</span></div>
+          </div>
+          <div class="card-body">
+            <h4 data-id="Mantan Suami" data-en="The Ex-Husband">Mantan Suami</h4>
+            <p>TikTok · Series</p>
+          </div>
+        </a>
+        <a class="card reveal" style="--i:4" href="https://www.tiktok.com/@damiann101/video/7693810204948974869" target="_blank" rel="noopener">
+          <div class="poster">
+            <img src="images/works/berondong/ep04.jpg" alt="Poster Berondong Sebelah Rumah episode 04" loading="lazy">
+            <div class="poster-meta"><span class="ep">EP 04</span><span>2:03</span></div>
+          </div>
+          <div class="card-body">
+            <h4 data-id="Jangan Bikin Gue Nyaman" data-en="Don't Make Me Comfortable">Jangan Bikin Gue Nyaman</h4>
+            <p>TikTok · Series</p>
+          </div>
+        </a>
+        <a class="card reveal" style="--i:5" href="https://www.tiktok.com/@damiann101/video/7695612157299379476" target="_blank" rel="noopener">
+          <div class="poster">
+            <img src="images/works/berondong/ep05.jpg" alt="Poster Berondong Sebelah Rumah episode 05" loading="lazy">
+            <div class="poster-meta"><span class="ep">EP 05</span><span>1:56</span></div>
+          </div>
+          <div class="card-body">
+            <h4 data-id="Bukan Tempat Gue" data-en="Not My Place">Bukan Tempat Gue</h4>
+            <p>TikTok · Series</p>
+          </div>
+        </a>
+      </div>
+
+      <p class="works-label reveal" data-id="Format lain" data-en="Other formats">Format lain</p>
+      <div class="work-list">
+        <a class="work-row reveal" href="https://www.instagram.com/reel/Dd89pg1SnHS/" target="_blank" rel="noopener">
+          <span class="cat">Instagram</span>
+          <span class="title" data-id="Tutorial" data-en="Tutorial">Tutorial</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="work-row reveal" href="https://www.instagram.com/reel/DcfJ7wEyVAA/" target="_blank" rel="noopener">
+          <span class="cat">Instagram</span>
+          <span class="title" data-id="Short Film" data-en="Short Film">Short Film</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="work-row reveal" href="https://www.instagram.com/reel/DejefTNSRs7/" target="_blank" rel="noopener">
+          <span class="cat">Instagram</span>
+          <span class="title" data-id="Music Video" data-en="Music Video">Music Video</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="impact" class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 data-id="Jangkauan" data-en="Reach">Jangkauan</h2>
+        <span class="index">02 / Impact</span>
+      </div>
+      <dl class="impact-grid">
+        <div class="metric reveal"><dt data-id="Total views" data-en="Total views">Total views</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:1"><dt data-id="Followers" data-en="Followers">Followers</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:2"><dt data-id="Engagement" data-en="Engagement">Engagement</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:3"><dt data-id="Videos created" data-en="Videos created">Videos created</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:4"><dt data-id="Completed campaigns" data-en="Completed campaigns">Completed campaigns</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:5"><dt data-id="Nominations" data-en="Nominations">Nominations</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+      </dl>
+      <p class="impact-note reveal"
+         data-id="Angka belum terhubung. Views akan diisi otomatis dari API resmi; metrik lain diisi dari data terverifikasi."
+         data-en="Numbers are not connected yet. Views will sync automatically from official APIs; other metrics come from verified records.">Angka belum terhubung. Views akan diisi otomatis dari API resmi; metrik lain diisi dari data terverifikasi.</p>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 data-id="Tentang" data-en="About">Tentang</h2>
+        <span class="index">03 / About</span>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy reveal">
+          <p data-id="Saya membuat series, music video, short film, dan tutorial, mengeksplorasi cara ide berkembang menjadi cerita dan visual melalui AI."
+             data-en="I make series, music videos, short films, and tutorials, exploring how ideas become stories and visuals through AI.">Saya membuat series, music video, short film, dan tutorial, mengeksplorasi cara ide berkembang menjadi cerita dan visual melalui AI.</p>
+          <p data-id="Berondong Sebelah Rumah adalah AI micro-drama lima episode, dibuat dengan CapCut dan Seedance 2.5."
+             data-en="Berondong Sebelah Rumah is a five-episode AI micro-drama, made with CapCut and Seedance 2.5.">Berondong Sebelah Rumah adalah AI micro-drama lima episode, dibuat dengan CapCut dan Seedance 2.5.</p>
+        </div>
+        <aside class="process reveal" style="--i:2">
+          <span class="label" data-id="Proses" data-en="Process">Proses</span>
+          <ul>
+            <li><span data-id="Arah cerita" data-en="Story direction">Arah cerita</span><span>01</span></li>
+            <li><span data-id="Visual &amp; karakter" data-en="Visuals &amp; characters">Visual &amp; karakter</span><span>02</span></li>
+            <li><span data-id="Editing &amp; suara" data-en="Editing &amp; sound">Editing &amp; suara</span><span>03</span></li>
+            <li><span data-id="Publikasi" data-en="Publishing">Publikasi</span><span>04</span></li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="partners reveal">
+        <span class="label" data-id="Mitra Kreatif" data-en="Creative Partner">Mitra Kreatif</span>
+        <div class="partner-row">
+          <img class="capcut" src="images/partners/capcut.svg" alt="CapCut" loading="lazy">
+          <img src="images/partners/oiioii.png" alt="OiiOii" loading="lazy">
+          <img class="invert" src="images/partners/pixmax.svg" alt="Pixmax" loading="lazy">
+          <img src="images/partners/topmediai.png" alt="TopMediai" loading="lazy">
+          <img src="images/partners/openart.png" alt="OpenArt" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 class="reveal" data-id="Mari buat sesuatu." data-en="Let's make something.">Mari buat sesuatu.</h2>
+        <a class="mail reveal" href="mailto:ariesiky8@gmail.com">ariesiky8@gmail.com</a>
+        <div class="socials reveal">
+          <a href="https://instagram.com/ikymianvt" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@caisarttfelix" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://www.youtube.com/@ikymian_dramas" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://x.com/ikymianstudios" target="_blank" rel="noopener">X</a>
+          <a href="https://www.threads.com/@ikymian_series" target="_blank" rel="noopener">Threads</a>
+        </div>
+      </div>
+      <span class="index reveal" style="--i:2">04 / Contact</span>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span>© 2026 Ikymian Studios</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var nodes = document.querySelectorAll("[data-id]");
+    var buttons = document.querySelectorAll(".lang button");
+
+    function setLang(lang) {
+      var next = lang === "en" ? "en" : "id";
+      document.documentElement.lang = next;
+      nodes.forEach(function (el) {
+        var value = el.getAttribute("data-" + next);
+        if (value !== null) el.textContent = value;
+      });
+      buttons.forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.lang === next));
+      });
+      try { localStorage.setItem("lang", next); } catch (e) {}
+      document.title = next === "en"
+        ? "Ikymian Studios — AI Filmmaker & Content Creator"
+        : "Ikymian Studios — AI Filmmaker & Content Creator";
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () { setLang(b.dataset.lang); });
+    });
+
+    var saved = "id";
+    try { saved = localStorage.getItem("lang") || "id"; } catch (e) {}
+    setLang(saved);
+
+    var revealed = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      revealed.forEach(function (el) { el.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
+    revealed.forEach(function (el) { io.observe(el); });
+  })();
+</script>
 </body>
 </html>
