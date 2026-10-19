@@ -156,6 +156,8 @@ Ini baseline CSS, bukan klaim bahwa tekstur cair sudah selesai secara visual. Pe
 
 **Revisi keempat, 19 Oktober 2026 — biru dan pink dominan.** Pengguna meminta warna dominan situs adalah biru dan pink. Hero memakai gradien biru susu ke pink pucat, Selected Works berlatar biru lembut, Impact berlatar pink lembut, dan Contact bergradien pink ke biru. Krem dipakai sebagai aksen permukaan (nav, kartu, footer) dan indigo tetap warna teks. Tidak ada blok gelap.
 
+**Revisi kelima, 19 Oktober 2026 — frontend akan dirombak.** Pengguna menyatakan ingin merombak frontend. Brief di bagian ini (krim, biru susu, pink, indigo, kalem, tipografi lapang, gerak ringan) tetap menjadi acuan; implementasi saat ini adalah iterasi, bukan hasil final. Skill yang terpasang dan boleh dipakai: `frontend-design`, `tailwind-design-system`, `responsive-design`, dan `threejs-*`.
+
 Tipografi besar dan lapang, navigasi pendek, garis pembatas tipis, sudut media lembut, dan maksimal satu pola hover sederhana. Tidak ada marquee, scroll hijacking, cursor khusus, atau efek gerak terus-menerus. Hormati `prefers-reduced-motion` bila transisi ditambahkan.
 
 ## Struktur satu halaman
@@ -284,11 +286,23 @@ Tetap **total 5 phase**, diperbarui mengikuti kebutuhan CMS yang disetujui. Tuju
 
 | Phase | Pekerjaan | Hasil dan syarat selesai |
 | --- | --- | --- |
-| 1 — Fondasi konten dan arah visual | Kunci identitas, section, copy, palet, kandidat karya, thumbnail, akun sosial, dan field editor | Brief serta inventaris konten/field jelas; kebutuhan yang belum tersedia ditandai |
-| 2 — Fondasi aplikasi dan admin | Siapkan Next.js, Payload, SQLite, login `/adminku`, Collections, Globals, media upload/URL, dan draft/publish | Admin dapat mengelola konten; akses tulis terlindungi; video tanpa thumbnail tidak lolos publish |
-| 3 — Landing page dan player media | Bangun UI dua bahasa dengan Taste Skill v2 dan referensi Aura; hubungkan konten CMS, portfolio, thumbnail, serta player sesuai sumber | Landing responsif dan dapat dialihkan ID/EN; edit/publish tampil tanpa deploy; video baru aktif setelah Play dan mengikuti rasio sumber |
-| 4 — Statistik dan views otomatis | Periksa API serta scheduler VPS, bangun sinkronisasi views, tampilkan followers, engagement, jumlah video, completed campaigns, dan nominations sesuai sumbernya | Views benar-benar diperbarui otomatis pada platform yang disepakati; cakupan dan waktu pembaruan terlihat; snapshot terakhir tetap tersedia saat refresh gagal |
-| 5 — Pemeriksaan akhir dan peluncuran | Verifikasi edit/publish, akses admin, media, metadata, backup/pemulihan, serta deployment aplikasi di balik Nginx/SSL | Preview final dan alur utama lolos; data bertahan saat deploy; peluncuran aplikasi setelah diminta pengguna |
+| 1 — Fondasi konten dan arah visual ✅ | Kunci identitas, section, copy, palet, kandidat karya, thumbnail, akun sosial, dan field editor | Brief serta inventaris konten/field jelas; kebutuhan yang belum tersedia ditandai |
+| 2 — Fondasi aplikasi dan admin ✅ | Siapkan Next.js, Payload, SQLite, login `/adminku`, Collections, Globals, media upload/URL, dan draft/publish | Admin dapat mengelola konten; akses tulis terlindungi; video tanpa thumbnail tidak lolos publish |
+| 3 — Landing page dan player media ✅ | Bangun UI dua bahasa dengan Taste Skill v2 dan referensi Aura; hubungkan konten CMS, portfolio, thumbnail, serta player sesuai sumber | Landing responsif dan dapat dialihkan ID/EN; edit/publish tampil tanpa deploy; video baru aktif setelah Play dan mengikuti rasio sumber |
+| 4 — Statistik dan views otomatis 🟡 | Periksa API serta scheduler VPS, bangun sinkronisasi views, tampilkan followers, engagement, jumlah video, completed campaigns, dan nominations sesuai sumbernya | Views benar-benar diperbarui otomatis pada platform yang disepakati; cakupan dan waktu pembaruan terlihat; snapshot terakhir tetap tersedia saat refresh gagal |
+| 5 — Pemeriksaan akhir dan peluncuran ✅ | Verifikasi edit/publish, akses admin, media, metadata, backup/pemulihan, serta deployment aplikasi di balik Nginx/SSL | Preview final dan alur utama lolos; data bertahan saat deploy; peluncuran aplikasi setelah diminta pengguna |
+
+### Status implementasi per 19 Oktober 2026
+
+| Phase | Status | Catatan |
+| --- | --- | --- |
+| 1 | ✅ ditutup | Gap tercatat: poster episode berbeda + judul/poster 3 reel ditunda |
+| 2 | ✅ | Next.js, Payload, SQLite, `/adminku`, 3 collection + 4 global, draft/publish |
+| 3 | ✅ | Landing CMS-driven, bilingual cookie, Tailwind v4, Three.js, responsif |
+| 4 | 🟡 | Sumber tidak resmi (YouTube/TikTok), manual, production belum disinkronkan, IG diblokir |
+| 5 | ✅ | Live di VPS: systemd port 3001, Nginx proxy, migrasi, backup + uji restore |
+
+Detail operasional (service, path, deploy, rollback) ada di `README.md`.
 
 ### Rincian Phase 1
 
@@ -351,6 +365,8 @@ Path berikut adalah rencana berkas untuk implementasi berikutnya, bukan berkas y
 1. Periksa akses API untuk akun/platform yang disepakati; dokumentasikan field, cakupan total views, serta interval yang layak.
 2. Hubungkan API resmi ke proses sinkronisasi server dan simpan snapshot pada database. Token tetap di environment server.
 3. Tampilkan nilai, cakupan, dan waktu pembaruan pada landing. Bedakan views otomatis dari metrik editorial yang bisa diedit melalui admin. Cakupan yang disetujui pengguna pada 19 Oktober 2026: **semua kanal** (Instagram, TikTok, YouTube, X, Threads; Facebook menyusul).
+
+**Revisi 19 Oktober 2026 — sumber tidak resmi.** Pengguna memilih API tidak resmi yang gratis. Implementasi: Innertube (YouTube), socialcounts (subscriber), markup profil TikTok. Hasil uji: YouTube 8.200 subscriber + 254 views (2 video long-form), TikTok 31.100 follower / 733.700 likes / 83 video; Instagram diblokir. Konsekuensi yang diterima: rawan berubah, cakupan parsial, tanpa SLA, dan acceptance Phase 4 belum terpenuhi penuh (belum otomatis terjadwal).
 4. Verifikasi respons API nyata memperbarui snapshot. Saat refresh gagal, snapshot terakhir dan waktunya tetap tersedia; data yang belum ada tidak berubah menjadi nol atau angka fiktif.
 
 **Acceptance:** views benar-benar diperbarui otomatis untuk cakupan yang disepakati; data manual bukan pengganti penyelesaian fitur.
@@ -423,4 +439,15 @@ Tidak ada perintah npm/build/lint karena belum ada toolchain aplikasi. Halaman s
 
 ## Handoff
 
-**Jangan mulai implementasi sampai pengguna meminta lanjut.** Seluruh keputusan kini tersimpan pada dokumen ini: stack CMS, `/adminku`, editor per bagian, media upload/URL, thumbnail wajib sebelum Play, tanpa autoplay, dua bahasa ID/EN tanpa mengubah URL, Taste Skill v2, referensi Aura, dan views otomatis. Total tetap lima phase. Saat diminta, kerjakan berurutan tanpa subagent secara default; kelengkapan aset serta akses API/provider yang belum diputuskan ditetapkan pada phase terkait. Halaman status, SSL, dan PR bootstrap yang sudah ada tetap terpisah dari pekerjaan CMS berikutnya.
+Aplikasi sudah live di `https://ikymianstudios.si/` (Phase 2, 3, 5 selesai; Phase 4
+sebagian). Dokumen ini tetap menjadi sumber keputusan: stack CMS, `/adminku`, editor
+per bagian, media upload/URL, thumbnail wajib sebelum Play, tanpa autoplay, dua
+bahasa ID/EN, brief visual krim/biru susu/pink/indigo, dan cakupan statistik semua
+kanal.
+
+**Pekerjaan berikutnya:** frontend dirombak ulang mengikuti brief dan skill yang
+terpasang (`frontend-design`, `tailwind-design-system`, `responsive-design`,
+`threejs-*`). Setelah itu: poster episode berbeda, judul/poster tiga reel,
+penjadwal statistik, dan penghapusan `noindex` saat konten final.
+
+**Jangan** mengubah konfigurasi situs lain di VPS, PM2 `deploy`, atau port 3000.

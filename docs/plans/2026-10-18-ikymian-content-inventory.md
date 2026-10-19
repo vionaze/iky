@@ -27,15 +27,20 @@ instruksi, implementasi menunggu permintaan pengguna.
 
 | # | Item Phase 1 | Status | Catatan |
 | --- | --- | --- | --- |
-| 1 | Identitas: ejaan brand, titel, bio, email | 🟡 | Ejaan brand + kanal sosial ✅; titel/bio draft; email, bahasa, nama kreator belum |
+| 1 | Identitas: ejaan brand, titel, bio, email | 🟡 | Brand, nama, email, bilingual ✅; titel/bio masih draft |
 | 2 | Struktur section | ✅ | Hero → Selected Works → Impact → About & Process → Contact |
-| 3 | Arah visual: palet, tipografi, jarak | ✅ | Token di bagian 5; tekstur cair masih perlu ditinjau di browser |
-| 4 | Inventaris karya & media | 🟡 | 8 karya: 5 series lengkap dengan poster; 3 reel butuh judul + poster |
-| 5 | Inventaris statistik & akses API | ❌ | Metrik terkunci; akun/platform dan akses belum |
-| 6 | Peta field CMS header–body–footer | ✅ | Bagian 9 |
+| 3 | Arah visual: palet, tipografi, jarak | 🟡 | Token §5 tetap acuan brief; **frontend akan dirombak** (19 Okt) |
+| 4 | Inventaris karya & media | 🟡 | 8 karya; 5 poster series memakai key art sama; 3 reel tanpa judul/poster (ditunda) |
+| 5 | Inventaris statistik & akses API | 🟡 | Semua kanal; sync tidak resmi YT/TT jalan; IG diblokir; production belum disinkronkan |
+| 6 | Peta field CMS header–body–footer | ✅ | Bagian 9, sudah diimplementasikan |
+| 7 | Logo resmi Creative Partner | ✅ | 5.2, termasuk AKOOL |
 
 Phase 1 dinyatakan selesai ketika item 1 dan 4 punya isi nyata. Item 5 boleh
 menunggu (kelayakan API dibuktikan di Phase 4).
+
+**Status implementasi per 19 Oktober 2026:** Phase 2 ✅, Phase 3 ✅, Phase 4 🟡
+(hanya sumber tidak resmi, manual, production belum disinkronkan), Phase 5 ✅
+(live di VPS). Detail operasional ada di `README.md`.
 
 ---
 
@@ -147,6 +152,10 @@ Referensi visual: Aura (pilih 3–5 contoh saat Phase 3). Panduan FE: Taste Skil
 
 Komposisi hero memakai potret cutout transparan di sisi kanan dan teks di kiri —
 lihat bagian 6.1.
+
+**Catatan 19 Oktober 2026:** frontend akan dirombak. Token warna, tipografi, dan
+aturan gerak di bagian ini tetap menjadi acuan brief, bukan deskripsi implementasi
+yang sekarang.
 
 ### Baris Creative Partner
 
@@ -282,9 +291,9 @@ berdasarkan sumber nyata yang diberikan — bukan sekarang.
 
 | Metrik | Definisi | Sumber data | Status |
 | --- | --- | --- | --- |
-| Total views | Akumulasi views konten pada akun/platform yang disebut; bukan page views | API resmi, otomatis | ✅ cakupan: semua kanal; akses API ❌ |
-| Followers/subscribers | Per platform + total akun terverifikasi; bukan unique audience | API resmi | ❌ |
-| Engagement | Engagement rate per platform, periode 30 hari, rumus disebut | API resmi | ❌ |
+| Total views | Akumulasi views konten pada akun/platform yang disebut; bukan page views | Tidak resmi: Innertube (YouTube) | 🟡 YouTube long-form saja |
+| Followers/subscribers | Per platform + total akun terverifikasi; bukan unique audience | Tidak resmi: socialcounts + profil TikTok | 🟡 YT + TikTok; IG ❌ |
+| Engagement | Engagement rate per platform, periode 30 hari, rumus disebut | — | ❌ |
 | Videos created | Jumlah karya video unik yang dibuat | Editorial (admin) | ❌ angka belum ada |
 | Completed campaigns | Jumlah campaign selesai, bukan jumlah konten | Editorial (admin) | ❌ |
 | Nominations | Jumlah nominasi terverifikasi + acara/tahun/kategori/bukti | Editorial (admin) | ❌ |
@@ -295,7 +304,15 @@ YouTube `@ikymian_dramas`, X `@ikymianstudios`, Threads `@ikymian_series`.
 **Keputusan 19 Oktober 2026:** cakupan total views adalah **semua kanal** di atas
 (plus Facebook bila URL profil bersih tersedia). Total hanya menjumlahkan platform
 yang API-nya benar-benar menyediakan views; platform tanpa akses ditampilkan
-terpisah, bukan dianggap nol. Akses API belum ada dan diperiksa di Phase 4.
+terpisah, bukan dianggap nol.
+
+**Revisi 19 Oktober 2026 — API tidak resmi.** Atas instruksi pengguna, Phase 4
+memakai sumber gratis tidak resmi: Innertube untuk daftar video YouTube,
+socialcounts untuk subscriber, dan markup profil publik TikTok. Hasil uji:
+YouTube 8.200 subscriber dan 254 views (2 video long-form), TikTok 31.100 follower,
+733.700 likes, 83 video. Instagram diblokir (butuh login) sehingga dilewati.
+Batasan: rawan berubah sewaktu-waktu, cakupan views parsial, penjadwal belum ada,
+dan production belum disinkronkan.
 
 Kelayakan API yang sudah diperiksa (dari rencana):
 
@@ -525,9 +542,9 @@ login /adminku → tambah/edit → simpan draft → preview → publish
 | 2 | Email bisnis — ✅ `ariesiky8@gmail.com` | Contact, Footer |
 | 3 | URL sosial asli — ✅ terisi, lihat bagian 2.1 | Contact, Footer |
 | 4 | Link karya MV, Short Film, Tutorial — ✅ terisi (3 reel Instagram) | Selected Works |
-| 5 | Poster/thumbnail — ✅ 5 episode series, ❌ 3 reel | Aturan publish video |
+| 5 | Poster/thumbnail — 🟡 5 episode memakai key art sama; 3 reel belum ada | Aturan publish video |
 | 6 | Foto hero (still) — ✅ `images/hero-1.png` dipilih, 2 cadangan | Hero |
-| 7 | Logo partner resmi — 5 dari 6 terkumpul, AKOOL belum; lihat 6.2 | Baris Creative Partner |
+| 7 | Logo partner resmi — ✅ 6 dari 6 (termasuk AKOOL); lihat 6.2 | Baris Creative Partner |
 | 8 | Judul dan durasi 3 reel Instagram — **ditunda, ditanyakan setelah Phase 5** | Kartu karya |
 
 Sudah diputuskan: bilingual ID/EN dengan toggle (bagian 9.9), nama kreator
@@ -537,8 +554,8 @@ Caisart Felix ditampilkan bersama brand, dan `@damiann101` adalah akun pengguna.
 
 | # | Kebutuhan | Untuk |
 | --- | --- | --- |
-| 7 | Akun/platform yang dihitung untuk total views | Sinkronisasi Phase 4 |
-| 8 | Akses/izin API per platform | Sinkronisasi Phase 4 |
+| 7 | Akun/platform untuk total views — ✅ semua kanal | Sinkronisasi Phase 4 |
+| 8 | Kredensial API — ✅ tidak dipakai; sumber tidak resmi dipilih | Sinkronisasi Phase 4 |
 | 9 | Jumlah video unik yang dibuat | Stats editorial |
 | 10 | Jumlah completed campaigns | Stats editorial |
 | 11 | Nominasi + acara/tahun/kategori/bukti | Stats editorial |
@@ -551,8 +568,8 @@ Caisart Felix ditampilkan bersama brand, dan `@damiann101` adalah akun pengguna.
 | 13 | Logo (jika ada) | Header |
 | 14 | Klip preview 6–8 detik per karya | Preview kartu |
 
-Selama P0 belum lengkap, Phase 2 (scaffold aplikasi) masih bisa dikerjakan dengan
-konten placeholder yang ditandai jelas, tetapi landing belum boleh dianggap selesai.
+P0 inti sudah terpenuhi. Sisa yang ditunda: poster berbeda per episode dan
+judul/poster tiga reel — diminta setelah Phase 5.
 
 ---
 
@@ -575,3 +592,7 @@ dilanjutkan ke Phase 2.
 
 **Belum termasuk:** membuat halaman, mengolah video, menghubungkan API, deployment,
 atau menambah dependencies.
+
+**Implementasi setelah Phase 1 (19 Oktober 2026):** aplikasi Next.js + Payload sudah
+dibangun, landing live di `https://ikymianstudios.si/`, dan statistik memakai sumber
+tidak resmi. Frontend akan dirombak lagi; token visual §5 tetap menjadi acuan brief.
