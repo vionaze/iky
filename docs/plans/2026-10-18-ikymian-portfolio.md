@@ -4,7 +4,7 @@
 
 **Goal:** Membuat webapp portfolio di `https://ikymianstudios.si` dengan landing page publik dan admin `/adminku` untuk mengelola karya serta mengedit konten dari header sampai footer tanpa mengubah kode.
 
-**Architecture:** Satu aplikasi Next.js dengan Payload CMS terintegrasi, satu repo, dan SQLite pada VPS EZTOPUP. Landing page membaca konten terpublikasi dari CMS; `/adminku` menyediakan login, pengelolaan portfolio/media, serta editor konten per bagian. Upload dan database disimpan secara persisten di luar checkout Git. Total views diperbarui otomatis melalui API resmi ke snapshot pada database; akses tiap platform diperiksa sebelum implementasi konektornya. Landing tersedia dalam dua bahasa (ID/EN) dengan toggle tanpa mengubah URL, memakai localization Payload dan cookie bahasa.
+**Architecture:** Satu aplikasi Next.js dengan Payload CMS terintegrasi, satu repo, dan SQLite pada VPS EZTOPUP. Landing page membaca konten terpublikasi dari CMS; `/adminku` menyediakan login, pengelolaan portfolio/media, serta editor konten per bagian. Upload dan database disimpan secara persisten di luar checkout Git. Total views diperbarui otomatis ke snapshot pada database; sumber metrik mengikuti keputusan Phase 4 (API resmi atau sumber gratis tidak resmi). Landing tersedia dalam dua bahasa (ID/EN) dengan toggle tanpa mengubah URL, memakai localization Payload dan cookie bahasa.
 
 **Tech Stack:** Next.js, React, TypeScript, Tailwind CSS, Payload CMS, SQLite melalui adapter resmi Payload, serta Nginx dan SSL yang sudah tersedia di VPS. Native HTML video untuk upload/file video langsung dan embed player untuk platform yang mendukung. Versi paket yang kompatibel ditetapkan saat implementasi. Stack ini sudah disetujui pengguna; aplikasi CMS belum dibuat.
 
@@ -242,7 +242,7 @@ Simpan snapshot metrik pada database melalui CMS dan tampilkan tanggal pembaruan
 
 Lakukan pemeriksaan akses akun lebih dulu. Tentukan platform, akun pemilik, field tersedia, izin aplikasi, serta mekanisme scheduler pada VPS yang sudah dipilih. Setelah lolos pemeriksaan itu, tambahkan rencana proses sinkronisasi dan jadwalnya dengan path yang sesuai aplikasi. Jangan membangun endpoint spekulatif sekarang.
 
-Alur minimum: API resmi → pembaruan di server → satu snapshot publik → halaman. Token tetap di server. Usulan interval awal 30–60 menit, disesuaikan kuota serta kebutuhan; jangan menjanjikan realtime per detik. Tampilkan tanggal pembaruan per sumber. Saat refresh gagal, pertahankan snapshot terakhir beserta waktunya; jika belum pernah ada data, tampilkan belum tersedia. Tidak menggunakan angka yang naik sendiri untuk menyimulasikan views.
+Alur minimum: sumber metrik (API resmi atau tidak resmi) → pembaruan di server → satu snapshot publik → halaman. Token tetap di server. Usulan interval awal 30–60 menit, disesuaikan kuota serta kebutuhan; jangan menjanjikan realtime per detik. Tampilkan tanggal pembaruan per sumber. Saat refresh gagal, pertahankan snapshot terakhir beserta waktunya; jika belum pernah ada data, tampilkan belum tersedia. Tidak menggunakan angka yang naik sendiri untuk menyimulasikan views.
 
 Dasar kelayakan yang telah diperiksa:
 
@@ -363,7 +363,7 @@ Path berikut adalah rencana berkas untuk implementasi berikutnya, bukan berkas y
 **Files yang direncanakan:** Modify `src/globals/Stats.ts` dan `src/app/(frontend)/page.tsx`; create `src/lib/sync-stats.ts`. Path konektor dan konfigurasi scheduler ditetapkan setelah platform serta mekanisme proses server benar-benar dipilih.
 
 1. Periksa akses API untuk akun/platform yang disepakati; dokumentasikan field, cakupan total views, serta interval yang layak.
-2. Hubungkan API resmi ke proses sinkronisasi server dan simpan snapshot pada database. Token tetap di environment server.
+2. Hubungkan sumber metrik yang disetujui ke proses sinkronisasi server dan simpan snapshot pada database. Kredensial (jika ada) tetap di environment server.
 3. Tampilkan nilai, cakupan, dan waktu pembaruan pada landing. Bedakan views otomatis dari metrik editorial yang bisa diedit melalui admin. Cakupan yang disetujui pengguna pada 19 Oktober 2026: **semua kanal** (Instagram, TikTok, YouTube, X, Threads; Facebook menyusul).
 
 **Revisi 19 Oktober 2026 — sumber tidak resmi.** Pengguna memilih API tidak resmi yang gratis. Implementasi: Innertube (YouTube), socialcounts (subscriber), markup profil TikTok. Hasil uji: YouTube 8.200 subscriber + 254 views (2 video long-form), TikTok 31.100 follower / 733.700 likes / 83 video; Instagram diblokir. Konsekuensi yang diterima: rawan berubah, cakupan parsial, tanpa SLA, dan acceptance Phase 4 belum terpenuhi penuh (belum otomatis terjadwal).
