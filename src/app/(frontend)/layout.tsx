@@ -1,10 +1,17 @@
 import type { Metadata } from 'next'
-import { Bricolage_Grotesque, Instrument_Sans } from 'next/font/google'
+import { Bricolage_Grotesque, DM_Sans, Instrument_Sans } from 'next/font/google'
 import './globals.css'
 
 const display = Bricolage_Grotesque({
   subsets: ['latin'],
   variable: '--font-bricolage',
+  display: 'swap',
+})
+
+const dm = DM_Sans({
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  variable: '--font-dm',
   display: 'swap',
 })
 
@@ -22,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function FrontendLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`}>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${dm.variable}`}>
       <body>{children}</body>
     </html>
   )

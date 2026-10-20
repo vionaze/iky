@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { LangToggle } from '@/components/LangToggle'
 import { getDict, type Locale } from '@/lib/i18n'
 import { getCmsContent } from '@/lib/cms'
-import LiquidScene from '@/components/LiquidScene'
+import HeroStage from '@/components/HeroStage'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 
 type AnyRecord = Record<string, any>
@@ -169,53 +169,13 @@ export default async function HomePage() {
         </div>
       </header>
 
-      <main id="top">
-        <section className="relative overflow-hidden">
-          <div aria-hidden="true" className="pointer-events-none absolute -left-48 -top-64 size-[38rem] rounded-full bg-milk/70 blur-3xl" />
-          <div aria-hidden="true" className="pointer-events-none absolute -right-40 top-6 size-[34rem] rounded-full bg-pink/70 blur-3xl" />
-          <div aria-hidden="true" className="pointer-events-none absolute bottom-[-12rem] left-1/3 size-[30rem] rounded-full bg-indigo/10 blur-3xl" />
-
-          <div className="relative mx-auto grid w-[min(1160px,calc(100%-32px))] items-center gap-10 py-14 sm:py-16 lg:grid-cols-12 lg:gap-4 lg:py-20">
-            <div className="lg:col-span-7">
-              <p className="animate-rise flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-muted">
-                <span aria-hidden="true" className="h-px w-8 bg-indigo" />
-                {t.hero.eyebrow}
-              </p>
-              <h1 className="animate-rise mt-7 max-w-[13ch] font-display text-[clamp(2.6rem,6.2vw,5.25rem)] font-medium leading-[0.94] tracking-[-0.045em] [animation-delay:90ms]">
-                {heroTitle}
-              </h1>
-              <p className="animate-rise mt-7 max-w-[42ch] text-[clamp(1rem,1.4vw,1.125rem)] leading-relaxed text-muted [animation-delay:180ms]">
-                {heroLead}
-              </p>
-              <div className="animate-rise mt-9 flex flex-wrap items-center gap-3 [animation-delay:270ms]">
-                <a
-                  href="#work"
-                  className="inline-flex items-center gap-2 rounded-full bg-indigo px-6 py-3.5 text-sm font-medium text-cream transition-colors hover:bg-ink active:translate-y-px"
-                >
-                  {ctaPrimaryLabel}
-                  <span aria-hidden="true" className="text-xs">↗</span>
-                </a>
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3.5 text-sm font-medium transition-colors hover:border-indigo hover:text-indigo active:translate-y-px"
-                >
-                  {ctaSecondaryLabel}
-                </a>
-              </div>
-            </div>
-
-            <div className="relative flex min-h-[380px] items-end justify-center sm:min-h-[460px] lg:col-span-5 lg:min-h-[560px]">
-              <LiquidScene />
-              <img
-                src="/images/hero-1.png"
-                alt="Portrait of an Ikymian Studios visual character"
-                width={1200}
-                height={896}
-                className="relative z-10 mx-auto h-auto w-auto max-h-[48vh] object-contain drop-shadow-[0_36px_60px_rgba(37,37,65,0.18)] lg:max-h-[66vh]"
-              />
-            </div>
-          </div>
-        </section>
+      <main>
+        <HeroStage
+          small={t.heroStage.small}
+          ghost={t.heroStage.ghost}
+          subline={t.heroStage.subline}
+          cta={t.heroStage.cta}
+        />
 
         <section id="work" className="border-t border-line bg-[#e9f1fb] py-20 md:py-28">
           <div className="mx-auto w-[min(1160px,calc(100%-32px))]">

@@ -310,18 +310,43 @@ async function seed() {
     })
   }
 
+  async function postGlobal(slug, locale, data) {
+    const current = await api(`/api/globals/${slug}?locale=${locale}&depth=0`)
+    const doc = { ...current, ...data }
+    delete doc.id
+    delete doc.updatedAt
+    delete doc.createdAt
+    delete doc.globalType
+    await api(`/api/globals/${slug}?locale=${locale}`, {
+      method: 'POST',
+      body: JSON.stringify(doc),
+    })
+  }
+
+  // Header nav labels are localized fields inside an array. Reuse the row ids
+  // so writing the Indonesian labels does not wipe the English ones.
+  const existingHeader = await api('/api/globals/header?locale=en&depth=0').catch(() => ({}))
+  const headerRowIds = (existingHeader.navItems ?? []).map((row) => row.id)
+
+  const withHeaderIds = (items, ids) =>
+    items.map((item, index) => (ids[index] ? { id: ids[index], ...item } : item))
+
+  await postGlobal('header', 'en', {
+    ...globals.en.header,
+    navItems: withHeaderIds(globals.en.header.navItems, headerRowIds),
+  })
+
+  const afterHeaderEn = await api('/api/globals/header?locale=en&depth=0')
+  const stableHeaderIds = (afterHeaderEn.navItems ?? []).map((row) => row.id)
+
+  await postGlobal('header', 'id', {
+    ...globals.id.header,
+    navItems: withHeaderIds(globals.id.header.navItems, stableHeaderIds),
+  })
+
   for (const locale of ['en', 'id']) {
-    for (const slug of ['header', 'home', 'footer']) {
-      const current = await api(`/api/globals/${slug}?locale=${locale}&depth=0`)
-      const doc = { ...current, ...globals[locale][slug] }
-      delete doc.id
-      delete doc.updatedAt
-      delete doc.createdAt
-      delete doc.globalType
-      await api(`/api/globals/${slug}?locale=${locale}`, {
-        method: 'POST',
-        body: JSON.stringify(doc),
-      })
+    for (const slug of ['home', 'footer']) {
+      await postGlobal(slug, locale, globals[locale][slug])
     }
   }
 

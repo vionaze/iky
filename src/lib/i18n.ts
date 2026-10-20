@@ -5,6 +5,12 @@ const seriesHref = 'https://www.tiktok.com/@damiann101/playlist/BerondongSebelah
 const en = {
   langLabel: 'Language',
   nav: { work: 'Work', about: 'About', contact: 'Contact' },
+  heroStage: {
+    small: 'Small studio,',
+    ghost: 'big stories',
+    subline: '5 episodes. 3 formats. One studio.',
+    cta: 'Meet the work',
+  },
   hero: {
     eyebrow: 'AI Filmmaker & Content Creator',
     title: 'Stories, music, and ideas turned into visuals.',
@@ -83,6 +89,12 @@ export type Dict = typeof en
 const id: Dict = {
   langLabel: 'Bahasa',
   nav: { work: 'Karya', about: 'Tentang', contact: 'Kontak' },
+  heroStage: {
+    small: 'Studio kecil,',
+    ghost: 'cerita besar',
+    subline: '5 episode. 3 format. Satu studio.',
+    cta: 'Lihat karya',
+  },
   hero: {
     eyebrow: 'AI Filmmaker & Content Creator',
     title: 'Cerita, musik, dan ide yang menjadi visual.',
