@@ -1,16 +1,26 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
+import { useTransition } from 'react'
 import type { Locale } from '@/lib/i18n'
 
 export function LangToggle({ locale }: { locale: Locale }) {
+  const router = useRouter()
+  const [pending, startTransition] = useTransition()
+
   function setLang(next: Locale) {
     if (next === locale) return
     document.cookie = `lang=${next}; path=/; max-age=31536000; samesite=lax`
-    window.location.reload()
+    document.documentElement.lang = next
+
+    startTransition(() => {
+      router.refresh()
+    })
   }
 
   return (
     <div
+      data-pending={pending ? 'true' : undefined}
       className="inline-flex items-center gap-0.5 rounded-full border border-line bg-white/50 p-0.5"
       role="group"
       aria-label="Language"

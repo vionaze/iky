@@ -46,6 +46,14 @@
   transform: translateY(105%);
 }
 
+.ready .word > span {
+  transform: none;
+}
+
+.ready .letter {
+  opacity: 1;
+}
+
 .ghostWrap {
   position: relative;
   z-index: 1;

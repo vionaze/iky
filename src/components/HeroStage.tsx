@@ -77,6 +77,7 @@ export default function HeroStage({
         })
       })
       if (sublineEl) gsap.set(sublineEl, { opacity: 1, y: 0 })
+      root.classList.add(styles.ready)
       return
     }
 
@@ -113,6 +114,7 @@ export default function HeroStage({
           0.7,
         )
         .to(sublineEl, { opacity: 1, y: 0, duration: 0.8 }, 1.5)
+        .add(() => root.classList.add(styles.ready), 2.2)
 
       cardEls.forEach((card, index) => {
         const rest = rotations[index] ?? 0
