@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 26px;
+  gap: 20px;
   animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -31,7 +31,7 @@
 
 .line {
   font-family: var(--font-montserrat);
-  font-size: clamp(48px, 12vw, 144px);
+  font-size: 48px;
   font-weight: 600;
   line-height: 0.95;
   letter-spacing: 0.01em;
@@ -105,7 +105,7 @@
   }
 
   .line {
-    font-size: clamp(44px, 15vw, 96px);
+    font-size: 48px;
   }
 
   .heart {
