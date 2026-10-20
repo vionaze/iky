@@ -24,7 +24,7 @@ export default function Preloader() {
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const hold = reduceMotion ? 300 : 1700
-    const fade = reduceMotion ? 250 : 850
+    const fade = reduceMotion ? 250 : 1050
 
     document.documentElement.style.overflow = 'hidden'
 

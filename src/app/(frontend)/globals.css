@@ -53,19 +53,17 @@ html.intro-seen [data-preloader] {
 }
 
 html.intro-reveal main {
-  animation: site-in 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: site-in 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes site-in {
   from {
-    opacity: 0.4;
-    transform: scale(1.05);
-    filter: blur(4px);
+    opacity: 0.55;
+    transform: scale(1.03);
   }
   to {
     opacity: 1;
     transform: scale(1);
-    filter: blur(0);
   }
 }
 
