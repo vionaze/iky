@@ -60,17 +60,6 @@
   animation: swap 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.caret {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  margin-left: 0.5em;
-  vertical-align: middle;
-  border-radius: 50%;
-  background: #3b82f6;
-  animation: blink 0.9s steps(1) infinite;
-}
-
 @keyframes rise {
   from {
     opacity: 0;
@@ -118,8 +107,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .inner,
-  .status,
-  .caret {
+  .status {
     animation: none;
   }
 }

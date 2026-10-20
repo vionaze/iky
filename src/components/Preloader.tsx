@@ -12,8 +12,8 @@ export default function Preloader() {
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const hold = reduceMotion ? 350 : 2500
-    const fade = reduceMotion ? 200 : 500
+    const hold = reduceMotion ? 350 : 2100
+    const fade = reduceMotion ? 200 : 400
 
     document.documentElement.style.overflow = 'hidden'
 
@@ -34,7 +34,7 @@ export default function Preloader() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const interval = window.setInterval(() => {
       setPhraseIndex((index) => (index + 1) % phrases.length)
-    }, 420)
+    }, 525)
     return () => window.clearInterval(interval)
   }, [])
 
@@ -60,10 +60,7 @@ export default function Preloader() {
           </svg>
         </div>
         <div className={styles.status} key={phraseIndex} aria-live="polite">
-          <span>
-            {phrases[phraseIndex]}
-            <span className={styles.caret} aria-hidden="true" />
-          </span>
+          <span>{phrases[phraseIndex]}</span>
         </div>
       </div>
     </div>
