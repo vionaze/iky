@@ -11,22 +11,44 @@ export default function Preloader() {
   const [phraseIndex, setPhraseIndex] = useState(0)
 
   useEffect(() => {
+    let seen = false
+    try {
+      seen = window.sessionStorage.getItem('iky-intro-seen') === '1'
+    } catch {
+      seen = false
+    }
+    if (seen) {
+      setDone(true)
+      return
+    }
+
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const hold = reduceMotion ? 350 : 2100
-    const fade = reduceMotion ? 200 : 400
+    const hold = reduceMotion ? 300 : 1700
+    const fade = reduceMotion ? 250 : 850
 
     document.documentElement.style.overflow = 'hidden'
 
-    const leaveTimer = window.setTimeout(() => setLeaving(true), hold)
+    const leaveTimer = window.setTimeout(() => {
+      setLeaving(true)
+      document.documentElement.classList.add('intro-reveal')
+    }, hold)
+
     const doneTimer = window.setTimeout(() => {
       setDone(true)
       document.documentElement.style.overflow = ''
+      document.documentElement.classList.remove('intro-reveal')
+      try {
+        window.sessionStorage.setItem('iky-intro-seen', '1')
+      } catch {
+        /* storage may be unavailable */
+      }
     }, hold + fade)
 
     return () => {
       window.clearTimeout(leaveTimer)
       window.clearTimeout(doneTimer)
       document.documentElement.style.overflow = ''
+      document.documentElement.classList.remove('intro-reveal')
     }
   }, [])
 
@@ -34,7 +56,7 @@ export default function Preloader() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const interval = window.setInterval(() => {
       setPhraseIndex((index) => (index + 1) % phrases.length)
-    }, 525)
+    }, 420)
     return () => window.clearInterval(interval)
   }, [])
 

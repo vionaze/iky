@@ -48,12 +48,37 @@
   }
 }
 
+html.intro-seen [data-preloader] {
+  display: none;
+}
+
+html.intro-reveal main {
+  animation: site-in 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes site-in {
+  from {
+    opacity: 0.4;
+    transform: scale(1.05);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
   .animate-rise {
+    animation: none;
+  }
+
+  html.intro-reveal main {
     animation: none;
   }
 }

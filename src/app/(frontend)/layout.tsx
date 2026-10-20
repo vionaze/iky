@@ -38,6 +38,11 @@ export default function FrontendLayout({ children }: { children: React.ReactNode
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} ${dm.variable} ${montserrat.variable}`}>
       <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem('iky-intro-seen')==='1'){document.documentElement.classList.add('intro-seen')}}catch(e){}`,
+          }}
+        />
         <noscript>
           <style>{`[data-preloader]{display:none}`}</style>
         </noscript>
