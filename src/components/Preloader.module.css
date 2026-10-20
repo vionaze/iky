@@ -59,7 +59,7 @@
   inset: 0;
   background: var(--color-indigo);
   transform-origin: left center;
-  animation: fill 1.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: fill 4.6s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 @keyframes rise {

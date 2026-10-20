@@ -9,7 +9,7 @@ export default function Preloader() {
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const hold = reduceMotion ? 350 : 1450
+    const hold = reduceMotion ? 350 : 5000
     const fade = reduceMotion ? 200 : 500
 
     document.documentElement.style.overflow = 'hidden'
