@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { cookies } from 'next/headers'
 import { Bricolage_Grotesque, DM_Sans, Instrument_Sans, Montserrat } from 'next/font/google'
 import './globals.css'
 import Preloader from '@/components/Preloader'
@@ -34,10 +35,13 @@ export const metadata: Metadata = {
     'Portfolio of Ikymian Studios — series, music video, short film, and tutorial with an AI-driven creative approach.',
 }
 
-export default function FrontendLayout({ children }: { children: React.ReactNode }) {
+export default async function FrontendLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies()
+  const locale = cookieStore.get('lang')?.value === 'id' ? 'id' : 'en'
+
   return (
     <html
-      lang="en"
+      lang={locale}
       suppressHydrationWarning
       className={`${display.variable} ${sans.variable} ${dm.variable} ${montserrat.variable}`}
     >

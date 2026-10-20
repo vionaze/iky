@@ -258,7 +258,7 @@ export default function HeroStage({
 
       <h1 className={styles.small}>
         {smallWords.map((word, index) => (
-          <span key={`${word}-${index}`}>
+          <span key={index}>
             <span className={styles.word}>
               <span>{word}</span>
             </span>
@@ -270,7 +270,7 @@ export default function HeroStage({
       <div className={styles.ghostWrap} aria-hidden="true">
         <div className={styles.ghost}>
           {ghostChars.map((char, index) => (
-            <span key={`${char}-${index}`} className={styles.letter}>
+            <span key={index} className={styles.letter}>
               {char === ' ' ? '\u00A0' : char}
             </span>
           ))}
