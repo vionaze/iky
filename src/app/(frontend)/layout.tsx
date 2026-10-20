@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Bricolage_Grotesque, DM_Sans, Instrument_Sans } from 'next/font/google'
 import './globals.css'
+import Preloader from '@/components/Preloader'
 
 const display = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -30,7 +31,13 @@ export const metadata: Metadata = {
 export default function FrontendLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} ${dm.variable}`}>
-      <body>{children}</body>
+      <body>
+        <noscript>
+          <style>{`[data-preloader]{display:none}`}</style>
+        </noscript>
+        <Preloader />
+        {children}
+      </body>
     </html>
   )
 }

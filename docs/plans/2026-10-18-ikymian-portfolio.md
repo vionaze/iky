@@ -156,6 +156,8 @@ Ini baseline CSS, bukan klaim bahwa tekstur cair sudah selesai secara visual. Pe
 
 **Revisi keempat, 19 Oktober 2026 — biru dan pink dominan.** Pengguna meminta warna dominan situs adalah biru dan pink. Hero memakai gradien biru susu ke pink pucat, Selected Works berlatar biru lembut, Impact berlatar pink lembut, dan Contact bergradien pink ke biru. Krem dipakai sebagai aksen permukaan (nav, kartu, footer) dan indigo tetap warna teks. Tidak ada blok gelap.
 
+**Revisi ketujuh, 20 Oktober 2026 — preloader logotype.** Ditambahkan layar loading sebelum halaman utama: logotype "IKYMIAN / STUDIOS" digambar per huruf dengan animasi stroke SVG, heart biru sebagai penutup, lalu overlay terangkat. Huruf dikonversi dari font Bricolage Grotesque ke path agar bisa dianimasikan. Tanpa audio, menghormati `prefers-reduced-motion`, dan responsif di mobile.
+
 **Revisi keenam, 20 Oktober 2026 — hero gaya kartu + GSAP.** Hero diganti mengikuti referensi pengguna: judul kecil di tengah, teks ghost italic raksasa, 8 kartu karya tersebar, CTA pil, grain halus. Animasi memakai GSAP (intro stagger, float, parallax pointer, tilt 3D, fan-out saat scroll) dan dimatikan saat `prefers-reduced-motion`. Kartu memakai 3 potret hero, 1 poster series, dan 4 kartu format. Copy hero sementara berasal dari kamus `src/lib/i18n.ts` (`heroStage`), bukan CMS.
 
 **Revisi kelima, 19 Oktober 2026 — frontend akan dirombak.** Pengguna menyatakan ingin merombak frontend. Brief di bagian ini (krim, biru susu, pink, indigo, kalem, tipografi lapang, gerak ringan) tetap menjadi acuan; implementasi saat ini adalah iterasi, bukan hasil final. Skill yang terpasang dan boleh dipakai: `frontend-design`, `tailwind-design-system`, `responsive-design`, dan `threejs-*`.

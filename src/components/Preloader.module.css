@@ -1,0 +1,77 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #121116;
+  will-change: transform;
+}
+
+.glow {
+  position: absolute;
+  width: 78vw;
+  height: 78vw;
+  max-width: 860px;
+  max-height: 860px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(184, 212, 242, 0.18) 0%, rgba(240, 203, 220, 0.1) 45%, transparent 70%);
+  filter: blur(42px);
+  pointer-events: none;
+}
+
+.svg {
+  position: relative;
+  width: clamp(260px, 74vw, 720px);
+  height: auto;
+  overflow: visible;
+}
+
+.stroke,
+.heart {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.stroke {
+  stroke: #faf7f2;
+  stroke-width: 26;
+}
+
+.heart {
+  stroke: #4f8ef7;
+  stroke-width: 32;
+}
+
+.hint {
+  position: absolute;
+  bottom: 38px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 242, 0.42);
+}
+
+@media (max-width: 750px) {
+  .svg {
+    width: 82vw;
+  }
+
+  .hint {
+    bottom: 28px;
+    font-size: 9px;
+  }
+
+  .stroke {
+    stroke-width: 34;
+  }
+
+  .heart {
+    stroke-width: 42;
+  }
+}
