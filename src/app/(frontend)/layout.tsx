@@ -36,7 +36,11 @@ export const metadata: Metadata = {
 
 export default function FrontendLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${dm.variable} ${montserrat.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${display.variable} ${sans.variable} ${dm.variable} ${montserrat.variable}`}
+    >
       <body>
         <script
           dangerouslySetInnerHTML={{
