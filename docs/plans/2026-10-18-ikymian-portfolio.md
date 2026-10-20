@@ -156,7 +156,7 @@ Ini baseline CSS, bukan klaim bahwa tekstur cair sudah selesai secara visual. Pe
 
 **Revisi keempat, 19 Oktober 2026 — biru dan pink dominan.** Pengguna meminta warna dominan situs adalah biru dan pink. Hero memakai gradien biru susu ke pink pucat, Selected Works berlatar biru lembut, Impact berlatar pink lembut, dan Contact bergradien pink ke biru. Krem dipakai sebagai aksen permukaan (nav, kartu, footer) dan indigo tetap warna teks. Tidak ada blok gelap.
 
-**Revisi ketujuh, 20 Oktober 2026 — preloader minimal.** Pengguna menilai animasi logotype besar berlebihan. Preloader diganti menjadi teks kecil **Montserrat** di tengah: "IKYMIAN STUDIOS" + heart biru + garis loading tipis selama ±5 detik, lalu overlay memudar. Tanpa audio, menghormati `prefers-reduced-motion`, dan responsif di mobile.
+**Revisi ketujuh, 20 Oktober 2026 — preloader minimal.** Pengguna menilai animasi logotype besar berlebihan. Preloader diganti menjadi teks kecil **Montserrat** di tengah: "IKYMIAN STUDIOS" + heart biru + garis loading tipis selama ±3 detik, lalu overlay memudar. Ukuran logotype 144px di desktop (mengecil di mobile). Tanpa audio, menghormati `prefers-reduced-motion`, dan responsif di mobile.
 
 **Revisi keenam, 20 Oktober 2026 — hero gaya kartu + GSAP.** Hero diganti mengikuti referensi pengguna: judul kecil di tengah, teks ghost italic raksasa, 8 kartu karya tersebar, CTA pil, grain halus. Animasi memakai GSAP (intro stagger, float, parallax pointer, tilt 3D, fan-out saat scroll) dan dimatikan saat `prefers-reduced-motion`. Kartu memakai 3 potret hero, 1 poster series, dan 4 kartu format. Copy hero sementara berasal dari kamus `src/lib/i18n.ts` (`heroStage`), bukan CMS.
 

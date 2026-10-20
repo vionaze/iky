@@ -18,36 +18,36 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
-  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  gap: 26px;
+  animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .lockup {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 2px;
 }
 
-.word {
+.line {
   font-family: var(--font-montserrat);
-  font-size: 11px;
+  font-size: clamp(48px, 12vw, 144px);
   font-weight: 600;
-  letter-spacing: 0.32em;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
   color: var(--color-ink);
-  text-indent: 0.32em;
 }
 
 .heart {
-  width: 11px;
-  height: 11px;
+  width: 22px;
+  height: 22px;
   color: #3b82f6;
-  flex: none;
 }
 
 .bar {
   position: relative;
-  width: 64px;
+  width: 120px;
   height: 1px;
   overflow: hidden;
   background: rgba(37, 37, 65, 0.14);
@@ -59,13 +59,13 @@
   inset: 0;
   background: var(--color-indigo);
   transform-origin: left center;
-  animation: fill 4.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: fill 2.4s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -83,15 +83,21 @@
 }
 
 @media (max-width: 750px) {
-  .word {
-    font-size: 10px;
-    letter-spacing: 0.26em;
-    text-indent: 0.26em;
+  .inner {
+    gap: 18px;
+  }
+
+  .line {
+    font-size: clamp(44px, 15vw, 96px);
   }
 
   .heart {
-    width: 10px;
-    height: 10px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .bar {
+    width: 96px;
   }
 }
 
