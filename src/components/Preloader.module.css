@@ -4,74 +4,104 @@
   z-index: 100;
   display: grid;
   place-items: center;
-  overflow: hidden;
-  background: #121116;
-  will-change: transform;
+  background: var(--color-cream);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
 }
 
-.glow {
-  position: absolute;
-  width: 78vw;
-  height: 78vw;
-  max-width: 860px;
-  max-height: 860px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle, rgba(184, 212, 242, 0.18) 0%, rgba(240, 203, 220, 0.1) 45%, transparent 70%);
-  filter: blur(42px);
+.leaving {
+  opacity: 0;
   pointer-events: none;
 }
 
-.svg {
-  position: relative;
-  width: clamp(260px, 74vw, 720px);
-  height: auto;
-  overflow: visible;
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.stroke,
-.heart {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0;
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.stroke {
-  stroke: #faf7f2;
-  stroke-width: 26;
-}
-
-.heart {
-  stroke: #4f8ef7;
-  stroke-width: 32;
-}
-
-.hint {
-  position: absolute;
-  bottom: 38px;
-  font-family: var(--font-sans);
-  font-size: 10px;
+.word {
+  font-family: var(--font-montserrat);
+  font-size: 11px;
+  font-weight: 600;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: rgba(250, 247, 242, 0.42);
+  color: var(--color-ink);
+  text-indent: 0.32em;
+}
+
+.heart {
+  width: 11px;
+  height: 11px;
+  color: #3b82f6;
+  flex: none;
+}
+
+.bar {
+  position: relative;
+  width: 64px;
+  height: 1px;
+  overflow: hidden;
+  background: rgba(37, 37, 65, 0.14);
+}
+
+.bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-indigo);
+  transform-origin: left center;
+  animation: fill 1.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 @media (max-width: 750px) {
-  .svg {
-    width: 82vw;
-  }
-
-  .hint {
-    bottom: 28px;
-    font-size: 9px;
-  }
-
-  .stroke {
-    stroke-width: 34;
+  .word {
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-indent: 0.26em;
   }
 
   .heart {
-    stroke-width: 42;
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inner,
+  .bar::after {
+    animation: none;
+  }
+
+  .bar::after {
+    transform: scaleX(1);
   }
 }

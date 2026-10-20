@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Bricolage_Grotesque, DM_Sans, Instrument_Sans } from 'next/font/google'
+import { Bricolage_Grotesque, DM_Sans, Instrument_Sans, Montserrat } from 'next/font/google'
 import './globals.css'
 import Preloader from '@/components/Preloader'
 
@@ -13,6 +13,12 @@ const dm = DM_Sans({
   subsets: ['latin'],
   style: ['normal', 'italic'],
   variable: '--font-dm',
+  display: 'swap',
+})
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-montserrat',
   display: 'swap',
 })
 
@@ -30,7 +36,7 @@ export const metadata: Metadata = {
 
 export default function FrontendLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${dm.variable}`}>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${dm.variable} ${montserrat.variable}`}>
       <body>
         <noscript>
           <style>{`[data-preloader]{display:none}`}</style>

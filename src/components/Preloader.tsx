@@ -1,72 +1,28 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import gsap from 'gsap'
-import { logo } from './logoPaths'
+import { useEffect, useState } from 'react'
 import styles from './Preloader.module.css'
 
 export default function Preloader() {
-  const rootRef = useRef<HTMLDivElement>(null)
+  const [leaving, setLeaving] = useState(false)
   const [done, setDone] = useState(false)
 
   useEffect(() => {
-    const root = rootRef.current
-    if (!root) return
-
-    const paths = Array.from(root.querySelectorAll<SVGPathElement>('path'))
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const hold = reduceMotion ? 350 : 1450
+    const fade = reduceMotion ? 200 : 500
+
     document.documentElement.style.overflow = 'hidden'
 
-    const finish = () => {
-      document.documentElement.style.overflow = ''
+    const leaveTimer = window.setTimeout(() => setLeaving(true), hold)
+    const doneTimer = window.setTimeout(() => {
       setDone(true)
-    }
-
-    if (reduceMotion) {
-      paths.forEach((path) => gsap.set(path, { opacity: 1, strokeDasharray: 'none', strokeDashoffset: 0 }))
-      const tween = gsap.to(root, { opacity: 0, duration: 0.4, delay: 0.4, onComplete: finish })
-      return () => {
-        tween.kill()
-        document.documentElement.style.overflow = ''
-      }
-    }
-
-    paths.forEach((path) => {
-      const length = path.getTotalLength() + 1
-      gsap.set(path, {
-        opacity: 1,
-        strokeDasharray: length,
-        strokeDashoffset: length,
-      })
-    })
-
-    const heart = paths[paths.length - 1]
-    const letters = paths.slice(0, -1)
-
-    const timeline = gsap.timeline({
-      onComplete: finish,
-    })
-
-    timeline
-      .to(letters, {
-        strokeDashoffset: 0,
-        duration: 0.36,
-        stagger: 0.055,
-        ease: 'power2.inOut',
-      }, 0.15)
-      .to(heart, {
-        strokeDashoffset: 0,
-        duration: 0.45,
-        ease: 'power2.inOut',
-      }, '>-0.05')
-      .to(root, {
-        yPercent: -100,
-        duration: 0.75,
-        ease: 'power4.inOut',
-      }, '+=0.3')
+      document.documentElement.style.overflow = ''
+    }, hold + fade)
 
     return () => {
-      timeline.kill()
+      window.clearTimeout(leaveTimer)
+      window.clearTimeout(doneTimer)
       document.documentElement.style.overflow = ''
     }
   }, [])
@@ -74,26 +30,30 @@ export default function Preloader() {
   if (done) return null
 
   return (
-    <div ref={rootRef} data-preloader className={styles.overlay} role="status" aria-label="Loading Ikymian Studios">
-      <div className={styles.glow} aria-hidden="true" />
-      <svg
-        className={styles.svg}
-        viewBox={`0 0 ${logo.width} ${logo.height}`}
-        fill="none"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <g transform={`translate(${-logo.minX} ${-logo.minY})`}>
-          {logo.paths.map((path, index) => (
-            <path
-              key={`${path.ch}-${index}`}
-              d={path.d}
-              className={path.ch === 'heart' ? styles.heart : styles.stroke}
-            />
-          ))}
-        </g>
-      </svg>
-      <div className={styles.hint}>Loading</div>
+    <div
+      data-preloader
+      className={`${styles.overlay} ${leaving ? styles.leaving : ''}`}
+      role="status"
+      aria-label="Loading Ikymian Studios"
+    >
+      <div className={styles.inner}>
+        <div className={styles.lockup}>
+          <span className={styles.word}>Ikymian Studios</span>
+          <svg
+            className={styles.heart}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+        </div>
+        <div className={styles.bar} aria-hidden="true" />
+      </div>
     </div>
   )
 }
