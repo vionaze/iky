@@ -78,6 +78,19 @@
   will-change: transform;
 }
 
+@keyframes footer-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.footer-marquee {
+  animation: footer-marquee 32s linear infinite;
+}
+
 html.intro-seen [data-preloader] {
   display: none;
 }
@@ -110,7 +123,8 @@ html.intro-reveal main {
     animation: none;
   }
 
-  .partner-float {
+  .partner-float,
+  .footer-marquee {
     animation: none;
   }
 }

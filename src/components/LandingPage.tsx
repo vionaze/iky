@@ -46,6 +46,37 @@ type LandingProps = {
   cmsId: AnyRecord
 }
 
+function SocialIcon({ name }: { name: string }) {
+  if (name === 'Instagram') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+      </svg>
+    )
+  }
+
+  if (name === 'X') {
+    return (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M4 3h4.2l4.4 5.9L17.8 3H20l-6.1 7.2L21 21h-4.2l-4.8-6.4L6.2 21H4l6.5-7.7L4 3z" />
+      </svg>
+    )
+  }
+
+  if (name === 'YouTube') {
+    return (
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
+        <rect x="2.5" y="6" width="19" height="12" rx="3.5" />
+        <path d="M10.5 9.5v5l4.5-2.5z" fill="currentColor" stroke="none" />
+      </svg>
+    )
+  }
+
+  return null
+}
+
 export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProps) {
   const [locale, setLocale] = useState<Locale>(initialLocale)
   const t = getDict(locale)
@@ -513,14 +544,58 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
             </div>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-6 text-xs text-muted">
-            <span>{footerCopyright}</span>
-            <div className="flex items-center gap-5">
-              <span>Caisart Felix</span>
-              <a href="#top" className="text-pink transition-colors hover:text-ink">
-                {t.footerTop} ↑
-              </a>
+          <div className="mt-14 overflow-hidden border-y border-line py-5">
+            <div className="footer-marquee flex w-max items-center whitespace-nowrap" aria-hidden="true">
+              {[0, 1].map((copy) => (
+                <span
+                  key={copy}
+                  className="px-6 font-display text-[11vw] font-bold uppercase leading-none tracking-[-0.04em] text-white/[0.055] select-none"
+                >
+                  Ikymian Studios •
+                </span>
+              ))}
             </div>
+          </div>
+
+          <div className="flex flex-col gap-6 py-8 md:flex-row md:items-center md:justify-between">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+              <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-muted">
+                <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+                {t.footerStatus}
+              </span>
+              <nav className="flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.2em] text-muted" aria-label="Footer">
+                {navItems.map((item: AnyRecord) => (
+                  <a key={item.href} href={item.href} className="transition-colors hover:text-ink">
+                    {item.label}
+                  </a>
+                ))}
+                <a href="#top" className="transition-colors hover:text-ink">
+                  {t.footerTop}
+                </a>
+              </nav>
+            </div>
+
+            <div className="flex items-center gap-3">
+              {['Instagram', 'X', 'YouTube']
+                .map((name) => socials.find((social: AnyRecord) => social.name === name))
+                .filter(Boolean)
+                .map((social: AnyRecord) => (
+                  <a
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                    className="grid size-10 place-items-center rounded-full border border-line text-muted transition-colors hover:border-pink/60 hover:text-ink"
+                  >
+                    <SocialIcon name={social.name} />
+                  </a>
+                ))}
+            </div>
+          </div>
+
+          <div className="border-t border-line py-6 text-center text-[10px] uppercase tracking-[0.32em] text-muted/60">
+            {t.hero.eyebrow} • {footerCopyright}
           </div>
         </div>
       </footer>

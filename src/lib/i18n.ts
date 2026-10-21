@@ -8,6 +8,7 @@ const en = {
   footerNav: 'Explore',
   footerSocial: 'Social',
   footerTop: 'Back to top',
+  footerStatus: 'Available for work',
   heroStage: {
     small: 'Small studio,',
     ghost: 'big stories',
@@ -94,6 +95,7 @@ const id: Dict = {
   footerNav: 'Jelajahi',
   footerSocial: 'Sosial',
   footerTop: 'Kembali ke atas',
+  footerStatus: 'Terbuka untuk kolaborasi',
   heroStage: {
     small: 'Studio kecil,',
     ghost: 'cerita besar',
