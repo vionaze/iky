@@ -95,31 +95,6 @@
   filter: brightness(1.06) saturate(1.06);
 }
 
-.card a::before,
-.card a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 4;
-  height: 0;
-  background: #05060f;
-  transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card a::before {
-  top: 0;
-}
-
-.card a::after {
-  bottom: 0;
-}
-
-.card:hover a::before,
-.card:hover a::after {
-  height: 10px;
-}
-
 .glow {
   position: absolute;
   inset: 0;
