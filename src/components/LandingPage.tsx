@@ -138,7 +138,6 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
   const ctaPrimaryLabel = cms.home?.hero?.ctaPrimary?.label || t.hero.primary
   const ctaSecondaryLabel = cms.home?.hero?.ctaSecondary?.label || t.hero.secondary
   const worksLabel = cms.home?.works?.title || t.works.label
-  const worksIntro = cms.home?.works?.intro || t.works.intro
   const impactLabel = cms.home?.impact?.title || t.impact.label
   const impactNote = cms.home?.impact?.intro || t.impact.note
   const aboutHeadline = cms.home?.about?.title || t.about.title
@@ -263,7 +262,6 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
         <WorksCarousel
           label={worksLabel}
           index={t.works.index}
-          intro={worksIntro}
           cards={[
             { img: seriesPoster, kicker: 'Series', title: seriesTitle },
             ...episodeList.slice(1).map((episode: AnyRecord) => ({

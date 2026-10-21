@@ -25,7 +25,6 @@ const en = {
     label: 'Selected Works',
     index: '01',
     title: 'Work',
-    intro: 'One series, one music video, one short film, and one tutorial.',
     series: {
       title: 'Berondong Sebelah Rumah',
       meta: 'Series · 5 episodes',
@@ -112,7 +111,6 @@ const id: Dict = {
     label: 'Karya Pilihan',
     index: '01',
     title: 'Karya',
-    intro: 'Satu series, satu music video, satu short film, dan satu tutorial.',
     series: {
       title: 'Berondong Sebelah Rumah',
       meta: 'Series · 5 episode',

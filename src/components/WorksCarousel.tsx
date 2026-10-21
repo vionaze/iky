@@ -13,11 +13,10 @@ export type WorkCard = {
 type WorksCarouselProps = {
   label: string
   index: string
-  intro: string
   cards: WorkCard[]
 }
 
-export default function WorksCarousel({ label, index, intro, cards }: WorksCarouselProps) {
+export default function WorksCarousel({ label, index, cards }: WorksCarouselProps) {
   const rootRef = useRef<HTMLElement>(null)
   const prevRef = useRef<HTMLButtonElement>(null)
   const nextRef = useRef<HTMLButtonElement>(null)
@@ -68,7 +67,6 @@ export default function WorksCarousel({ label, index, intro, cards }: WorksCarou
           {index} / Work
         </p>
         <h2 className={styles.title}>{label}</h2>
-        <p className={styles.intro}>{intro}</p>
       </div>
 
       <div className={styles.gallery}>

@@ -35,12 +35,6 @@
   line-height: 1;
 }
 
-.intro {
-  margin-top: 12px;
-  font-size: 13px;
-  color: var(--color-muted);
-}
-
 .gallery {
   position: absolute;
   inset: 0;
