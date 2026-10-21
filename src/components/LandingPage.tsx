@@ -430,7 +430,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
                 key={copy}
                 className="font-display text-[11vw] font-bold uppercase leading-none tracking-[-0.04em] text-white/[0.055] select-none"
               >
-                Ikymian Studios&nbsp;•&nbsp;
+                Ikymian Studios&nbsp;•&nbsp;Elian&nbsp;•&nbsp;Aurelia&nbsp;•&nbsp;
               </span>
             ))}
           </div>
