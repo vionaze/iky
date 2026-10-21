@@ -510,21 +510,22 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           className="pointer-events-none absolute -right-40 -top-40 h-[460px] w-[460px] rounded-full bg-pink/[0.18] blur-3xl"
           aria-hidden="true"
         />
-        <div className="relative w-full px-6 py-12 md:px-12 md:py-16">
-          <div className="overflow-hidden border-y border-line py-5">
-            <div className="footer-marquee flex w-max items-center whitespace-nowrap" aria-hidden="true">
-              {[0, 1].map((copy) => (
-                <span
-                  key={copy}
-                  className="px-6 font-display text-[11vw] font-bold uppercase leading-none tracking-[-0.04em] text-white/[0.055] select-none"
-                >
-                  Ikymian Studios •
-                </span>
-              ))}
-            </div>
-          </div>
 
-          <div className="flex flex-col gap-6 py-8 md:flex-row md:items-center md:justify-between">
+        <div className="relative w-full overflow-hidden">
+          <div className="footer-marquee flex w-max items-center whitespace-nowrap" aria-hidden="true">
+            {[0, 1].map((copy) => (
+              <span
+                key={copy}
+                className="font-display text-[11vw] font-bold uppercase leading-none tracking-[-0.04em] text-white/[0.055] select-none"
+              >
+                Ikymian Studios&nbsp;•&nbsp;
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative w-full px-6 pb-12 pt-8 md:px-12 md:pb-16">
+          <div className="flex flex-col gap-6 pb-8 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-muted">
                 <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
