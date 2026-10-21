@@ -511,7 +511,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           aria-hidden="true"
         />
 
-        <div className="relative w-full overflow-hidden">
+        <div className="relative w-full overflow-hidden pt-10 md:pt-14">
           <div className="footer-marquee flex w-max items-center whitespace-nowrap" aria-hidden="true">
             {[0, 1].map((copy) => (
               <span
