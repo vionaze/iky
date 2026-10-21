@@ -294,15 +294,15 @@
   .stage { padding: 68px 16px 40px; min-height: calc(100dvh - 64px); }
   .small { font-size: 10vw; }
   .ghost { font-size: 17.5vw; }
-  .cards { height: 330px; top: auto; bottom: 260px; }
-  .c1 { width: 70px; height: 94px; left: 3%; top: 20px; }
-  .c2 { width: 84px; height: 112px; left: 26%; top: 4px; }
-  .c3 { width: 92px; height: 122px; left: 50%; top: 12px; }
-  .c4 { width: 74px; height: 98px; left: 73%; top: 2px; }
-  .c5 { width: 104px; height: 138px; left: 27%; top: 160px; }
-  .c6 { width: 78px; height: 104px; left: 3%; top: 172px; }
-  .c7 { width: 92px; height: 122px; left: 52%; top: 168px; }
-  .c8 { width: 72px; height: 96px; left: 76%; top: 178px; }
+  .cards { height: 340px; top: auto; bottom: 260px; }
+  .c1 { width: 70px; height: 94px; left: 26%; top: 14px; }
+  .c4 { width: 74px; height: 98px; left: 58%; top: 6px; }
+  .c2 { width: 84px; height: 112px; left: 1%; top: 112px; }
+  .c3 { width: 88px; height: 118px; left: 24%; top: 104px; }
+  .c5 { width: 96px; height: 128px; left: 47%; top: 96px; }
+  .c7 { width: 86px; height: 116px; left: 71%; top: 108px; }
+  .c6 { width: 70px; height: 94px; left: 26%; top: 224px; }
+  .c8 { width: 74px; height: 98px; left: 58%; top: 232px; }
   .label { padding: 10px; }
   .label .k { font-size: 7px; }
   .label .v { font-size: 15px; }
