@@ -12,9 +12,12 @@ const partners = [
   { name: 'CapCut', src: '/images/partners/capcut.svg', invert: true },
   { name: 'OiiOii', src: '/images/partners/oiioii.png' },
   { name: 'Pixmax', src: '/images/partners/pixmax.svg' },
-  { name: 'TopMediai', src: '/images/partners/topmediai.png' },
-  { name: 'OpenArt', src: '/images/partners/openart.png', invert: true },
+  { name: 'TopMediai', src: '/images/partners/topmediai.png', square: true },
+  { name: 'OpenArt', src: '/images/partners/openart.png', invert: true, square: true },
   { name: 'AKOOL', src: '/images/partners/akool.png' },
+  { name: 'Nemo Video', src: '/images/partners/nemo.png' },
+  { name: 'Wizstar', src: '/images/partners/wizstar.png' },
+  { name: 'Pollo AI', src: '/images/partners/pollo.png', square: true },
 ]
 
 function LexicalParagraphs({ data }: { data: AnyRecord }) {
@@ -395,7 +398,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               <p className="text-center text-[10px] uppercase tracking-[0.24em] text-pink">
                 {t.about.partnersLabel}
               </p>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-8">
                 {partners.map((partner, index) => (
                   <span
                     key={partner.name}
@@ -409,7 +412,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
                       src={partner.src}
                       alt={partner.name}
                       loading="lazy"
-                      className={`h-10 w-auto max-w-[190px] object-contain sm:h-14 ${partner.invert ? 'invert' : ''}`}
+                      className={`h-10 w-auto max-w-[210px] object-contain ${partner.square ? 'sm:h-16' : 'sm:h-14'} ${partner.invert ? 'invert' : ''}`}
                     />
                   </span>
                 ))}
