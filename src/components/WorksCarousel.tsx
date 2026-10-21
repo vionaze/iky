@@ -2,10 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import styles from './WorksCarousel.module.css'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export type WorkCard = {
   img: string
@@ -39,67 +36,23 @@ export default function WorksCarousel({ label, index, intro, cards }: WorksCarou
       const items = gsap.utils.toArray<HTMLElement>(`.${styles.card}`, root)
       const spacing = 0.1
       const snap = gsap.utils.snap(spacing)
-      let iteration = 0
-      let trigger: ScrollTrigger
-
       const loop = buildSeamlessLoop(items, spacing)
+      loop.pause()
 
       const scrub = gsap.to(loop, {
         totalTime: 0,
-        duration: 0.5,
+        duration: 0.7,
         ease: 'power3',
         paused: true,
       })
 
-      function wrapForward(self: ScrollTrigger) {
-        iteration++
-        ;(self as ScrollTrigger & { wrapping?: boolean }).wrapping = true
-        self.scroll(self.start + 1)
+      const go = (direction: number) => {
+        scrub.vars.totalTime = snap((scrub.vars.totalTime ?? 0) + direction * spacing)
+        scrub.invalidate().restart()
       }
 
-      function wrapBackward(self: ScrollTrigger) {
-        iteration--
-        if (iteration < 0) {
-          iteration = 9
-          loop.totalTime(loop.totalTime() + loop.duration() * 10)
-          scrub.pause()
-        }
-        ;(self as ScrollTrigger & { wrapping?: boolean }).wrapping = true
-        self.scroll(self.end - 1)
-      }
-
-      function scrubTo(totalTime: number) {
-        const progress = (totalTime - loop.duration() * iteration) / loop.duration()
-        if (progress > 1) {
-          wrapForward(trigger)
-        } else if (progress < 0) {
-          wrapBackward(trigger)
-        } else {
-          trigger.scroll(trigger.start + progress * (trigger.end - trigger.start))
-        }
-      }
-
-      trigger = ScrollTrigger.create({
-        trigger: root,
-        start: 'top top',
-        end: '+=3000',
-        pin: true,
-        onUpdate(self) {
-          const state = self as ScrollTrigger & { wrapping?: boolean }
-          if (self.progress === 1 && self.direction > 0 && !state.wrapping) {
-            wrapForward(self)
-          } else if (self.progress < 1e-5 && self.direction < 0 && !state.wrapping) {
-            wrapBackward(self)
-          } else {
-            scrub.vars.totalTime = snap((iteration + self.progress) * loop.duration())
-            scrub.invalidate().restart()
-            state.wrapping = false
-          }
-        },
-      })
-
-      const onPrev = () => scrubTo(scrub.vars.totalTime - spacing)
-      const onNext = () => scrubTo(scrub.vars.totalTime + spacing)
+      const onPrev = () => go(-1)
+      const onNext = () => go(1)
 
       prevRef.current?.addEventListener('click', onPrev)
       nextRef.current?.addEventListener('click', onNext)
@@ -134,14 +87,27 @@ export default function WorksCarousel({ label, index, intro, cards }: WorksCarou
         </ul>
       </div>
 
-      <div className={styles.actions}>
-        <button ref={prevRef} type="button" className={styles.button}>
-          Prev
-        </button>
-        <button ref={nextRef} type="button" className={styles.button}>
-          Next
-        </button>
-      </div>
+      <button
+        ref={prevRef}
+        type="button"
+        className={`${styles.navButton} ${styles.prev}`}
+        aria-label="Previous work"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <polyline points="15 6 9 12 15 18" />
+        </svg>
+      </button>
+
+      <button
+        ref={nextRef}
+        type="button"
+        className={`${styles.navButton} ${styles.next}`}
+        aria-label="Next work"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <polyline points="9 6 15 12 9 18" />
+        </svg>
+      </button>
     </section>
   )
 }

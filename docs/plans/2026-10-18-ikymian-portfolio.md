@@ -156,7 +156,7 @@ Ini baseline CSS, bukan klaim bahwa tekstur cair sudah selesai secara visual. Pe
 
 **Revisi keempat, 19 Oktober 2026 — biru dan pink dominan.** Pengguna meminta warna dominan situs adalah biru dan pink. Hero memakai gradien biru susu ke pink pucat, Selected Works berlatar biru lembut, Impact berlatar pink lembut, dan Contact bergradien pink ke biru. Krem dipakai sebagai aksen permukaan (nav, kartu, footer) dan indigo tetap warna teks. Tidak ada blok gelap.
 
-**Revisi ketiga belas, 21 Oktober 2026 — Selected Works jadi carousel.** Section Works diganti infinite card swipe berbasis GSAP seamless loop: kartu bergerak saat scroll (section di-pin 3000px), plus tombol Prev/Next. Urutan mulai Berondong Sebelah Rumah, lalu episode 02–05 dengan thumbnail sama dan judul berbeda, lalu Tutorial AI, Short Film, Music Video. Kartu tampil 3D-ish dengan skala/opacity dan label di bawah. Mode reduced-motion menampilkan grid statis.
+**Revisi ketiga belas, 21 Oktober 2026 — Selected Works jadi carousel.** Section Works diganti infinite card swipe berbasis GSAP seamless loop. Scroll-pin dihapus karena mengganggu scroll halaman; navigasi memakai tombol panah kiri/kanan di sisi layar, dan halaman tetap bisa di-scroll normal. Urutan mulai Berondong Sebelah Rumah, lalu episode 02–05 dengan thumbnail sama dan judul berbeda, lalu Tutorial AI, Short Film, Music Video. Kartu tampil 3D-ish dengan skala/opacity dan label di bawah. Mode reduced-motion menampilkan grid statis.
 
 **Revisi kedua belas, 21 Oktober 2026 — bubble field (dibatalkan).** Section bubble sempat dibuat, lalu pengguna meminta di-revert karena tidak diperlukan. Komponen, style, dan string terkait dihapus; alur kembali langsung dari hero ke Works.
 
