@@ -701,36 +701,38 @@ export interface Footer {
 export interface Stat {
   id: number;
   /**
-   * Waktu snapshot metrik diambil dari sumber.
+   * Kapan angka terakhir diperbarui (bisa manual).
    */
   metricsUpdatedAt?: string | null;
   /**
-   * Diisi proses sinkronisasi, bukan editor manual.
+   * Bisa diisi manual (mis. total views TikTok + YouTube). Sync otomatis tidak menimpanya kecuali SYNC_TOTAL_VIEWS=1.
    */
   totalViews?: number | null;
   platforms?:
     | {
         name: string;
         url?: string | null;
+        /**
+         * Bisa diedit manual.
+         */
         followers?: number | null;
         metricsUpdatedAt?: string | null;
         source?: string | null;
         id?: string | null;
       }[]
     | null;
-  engagement?:
-    | {
-        platform: string;
-        value?: number | null;
-        formula?: string | null;
-        period?: string | null;
-        source?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * Bisa diedit manual.
+   */
   videosCreated?: number | null;
+  /**
+   * Bisa diedit manual.
+   */
   completedCampaigns?: number | null;
-  nominations?: number | null;
+  /**
+   * Satu nominasi per baris — berupa teks, bukan angka.
+   */
+  nominationsText?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -927,19 +929,9 @@ export interface StatsSelect<T extends boolean = true> {
         source?: T;
         id?: T;
       };
-  engagement?:
-    | T
-    | {
-        platform?: T;
-        value?: T;
-        formula?: T;
-        period?: T;
-        source?: T;
-        id?: T;
-      };
   videosCreated?: T;
   completedCampaigns?: T;
-  nominations?: T;
+  nominationsText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -178,19 +178,20 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           0,
         )
       : null
-  const engagementValue =
-    Array.isArray(stats?.engagement) && typeof stats.engagement[0]?.value === 'number'
-      ? stats.engagement[0].value
-      : null
-
   const statValues: Array<number | null> = [
     typeof stats?.totalViews === 'number' ? stats.totalViews : null,
     followersTotal,
-    engagementValue,
     typeof stats?.videosCreated === 'number' ? stats.videosCreated : null,
     typeof stats?.completedCampaigns === 'number' ? stats.completedCampaigns : null,
-    typeof stats?.nominations === 'number' ? stats.nominations : null,
   ]
+
+  const nominationItems =
+    typeof stats?.nominationsText === 'string'
+      ? stats.nominationsText
+          .split('\n')
+          .map((item: string) => item.trim())
+          .filter(Boolean)
+      : []
 
   const formatStat = (value: number | null) =>
     typeof value === 'number'
@@ -341,19 +342,38 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
 
             <dl className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-x-10 lg:grid-cols-3">
               {t.impact.metrics.map((metric, index) => {
+                const isNominations = index === t.impact.metrics.length - 1
                 const value = statValues[index]
+
                 return (
                   <div key={metric}>
                     <dt className="text-[10px] uppercase tracking-[0.2em] text-muted">{metric}</dt>
-                    <dd className="mt-3 font-display text-[clamp(2rem,4.8vw,4.25rem)] font-medium leading-none tracking-[-0.04em]">
-                      {typeof value === 'number' ? (
-                        <CountUp value={value} locale={locale === 'id' ? 'id-ID' : 'en-US'} />
+                    {isNominations ? (
+                      nominationItems.length > 0 ? (
+                        <dd className="mt-3 space-y-1.5">
+                          {nominationItems.map((nomination: string) => (
+                            <span
+                              key={nomination}
+                              className="block font-display text-[clamp(0.95rem,1.3vw,1.15rem)] leading-snug"
+                            >
+                              {nomination}
+                            </span>
+                          ))}
+                        </dd>
                       ) : (
-                        <span className="text-[clamp(1rem,1.4vw,1.15rem)] font-normal tracking-normal text-muted">
-                          {t.impact.empty}
-                        </span>
-                      )}
-                    </dd>
+                        <dd className="mt-3 text-[clamp(1rem,1.4vw,1.15rem)] text-muted">{t.impact.empty}</dd>
+                      )
+                    ) : (
+                      <dd className="mt-3 font-display text-[clamp(2rem,4.8vw,4.25rem)] font-medium leading-none tracking-[-0.04em]">
+                        {typeof value === 'number' ? (
+                          <CountUp value={value} locale={locale === 'id' ? 'id-ID' : 'en-US'} />
+                        ) : (
+                          <span className="text-[clamp(1rem,1.4vw,1.15rem)] font-normal tracking-normal text-muted">
+                            {t.impact.empty}
+                          </span>
+                        )}
+                      </dd>
+                    )}
                   </div>
                 )
               })}

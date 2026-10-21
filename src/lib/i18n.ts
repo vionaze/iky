@@ -54,7 +54,6 @@ const en = {
     metrics: [
       'Total views',
       'Followers',
-      'Engagement',
       'Videos created',
       'Completed campaigns',
       'Nominations',
@@ -149,7 +148,6 @@ const id: Dict = {
     metrics: [
       'Total views',
       'Followers',
-      'Engagement',
       'Videos created',
       'Completed campaigns',
       'Nominations',

@@ -29,19 +29,13 @@ export const Stats: GlobalConfig = {
         { name: 'source', type: 'text' },
       ],
     },
-    {
-      name: 'engagement',
-      type: 'array',
-      fields: [
-        { name: 'platform', type: 'text', required: true },
-        { name: 'value', type: 'number' },
-        { name: 'formula', type: 'text' },
-        { name: 'period', type: 'text' },
-        { name: 'source', type: 'text' },
-      ],
-    },
     { name: 'videosCreated', type: 'number', admin: { description: 'Bisa diedit manual.' } },
     { name: 'completedCampaigns', type: 'number', admin: { description: 'Bisa diedit manual.' } },
-    { name: 'nominations', type: 'number', admin: { description: 'Bisa diedit manual.' } },
+    {
+      name: 'nominationsText',
+      type: 'textarea',
+      label: 'Nominations',
+      admin: { description: 'Satu nominasi per baris — berupa teks, bukan angka.' },
+    },
   ],
 }
