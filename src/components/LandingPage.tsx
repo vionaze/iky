@@ -109,9 +109,15 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
     apply()
   }
 
+  const cmsNavItems = Array.isArray(cms.header?.navItems)
+    ? cms.header.navItems.filter(
+        (item: AnyRecord) => typeof item?.label === 'string' && item.label.trim().length > 0,
+      )
+    : []
+
   const navItems =
-    Array.isArray(cms.header?.navItems) && cms.header.navItems.length > 0
-      ? cms.header.navItems
+    cmsNavItems.length > 0
+      ? cmsNavItems
       : [
           { label: t.nav.work, href: '#work' },
           { label: t.nav.about, href: '#about' },
