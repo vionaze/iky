@@ -4,7 +4,11 @@
   z-index: 100;
   display: grid;
   place-items: center;
-  background: var(--color-cream);
+  background:
+    radial-gradient(60% 50% at 18% 12%, rgba(111, 141, 255, 0.22), transparent 60%),
+    radial-gradient(50% 45% at 85% 20%, rgba(255, 138, 193, 0.2), transparent 60%),
+    radial-gradient(45% 40% at 55% 100%, rgba(202, 76, 255, 0.12), transparent 65%),
+    var(--color-cream);
   opacity: 1;
   transition: opacity 0.8s ease 0.1s;
   will-change: opacity;
