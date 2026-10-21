@@ -190,7 +190,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
     typeof value === 'number'
       ? value.toLocaleString(locale === 'id' ? 'id-ID' : 'en-US')
       : t.impact.empty
-  const email = cms.footer?.email || t.contact.email
+  const email = cms.home?.contact?.email || cms.footer?.email || t.contact.email
   const footerCopyright = cms.footer?.copyright || t.footer
   const socials =
     Array.isArray(cms.footer?.socials) && cms.footer.socials.length > 0
@@ -198,6 +198,80 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           .filter((item: AnyRecord) => item.visible !== false)
           .map((item: AnyRecord) => ({ name: item.label || item.platform, href: item.url }))
       : t.socials
+
+  const heroStage = {
+    small: cms.home?.heroStage?.small || t.heroStage.small,
+    ghost: cms.home?.heroStage?.ghost || t.heroStage.ghost,
+    cta: cms.home?.heroStage?.cta || t.heroStage.cta,
+  }
+
+  const aboutMe = {
+    title: cms.home?.aboutMe?.title || t.aboutMe.title,
+    lead: cms.home?.aboutMe?.lead || t.aboutMe.lead,
+    p1: cms.home?.aboutMe?.p1 || t.aboutMe.p1,
+    p2: cms.home?.aboutMe?.p2 || t.aboutMe.p2,
+    p3: cms.home?.aboutMe?.p3 || t.aboutMe.p3,
+    closing: cms.home?.aboutMe?.closing || t.aboutMe.closing,
+  }
+
+  const processWords =
+    Array.isArray(cms.home?.about?.processWords) && cms.home.about.processWords.length > 0
+      ? cms.home.about.processWords.map((item: AnyRecord) => item.word).filter(Boolean)
+      : t.about.process
+
+  const cmsPartners = Array.isArray(cms.home?.about?.partners)
+    ? cms.home.about.partners.filter((item: AnyRecord) => item?.name && item?.logo?.url)
+    : []
+
+  const partnerItems =
+    cmsPartners.length > 0
+      ? cmsPartners.map((item: AnyRecord) => ({
+          name: item.name,
+          src: item.logo.url,
+          invert: Boolean(item.invert),
+          square: Boolean(item.square),
+        }))
+      : partners
+
+  const carouselFallbackImages = [
+    seriesPoster,
+    seriesPoster,
+    seriesPoster,
+    seriesPoster,
+    seriesPoster,
+    '/images/hero-1.png',
+    '/images/hero-2.png',
+    '/images/hero-3.webp',
+  ]
+
+  const cmsCarousel = Array.isArray(cms.home?.works?.carousel) ? cms.home.works.carousel : []
+
+  const carouselCards =
+    cmsCarousel.length > 0
+      ? cmsCarousel.map((item: AnyRecord, index: number) => ({
+          img: item.image?.url || carouselFallbackImages[index % carouselFallbackImages.length],
+          kicker: item.kicker || '',
+          meta: item.meta || '',
+          title: item.title || '',
+          href: item.href || '#work',
+        }))
+      : [
+          { img: seriesPoster, kicker: 'Series', meta: '05 Episodes', title: seriesTitle, href: seriesHref },
+          ...episodeList.slice(1).map((episode: AnyRecord) => ({
+            img: seriesPoster,
+            kicker: 'Series',
+            meta: episode.ep,
+            title: episode.title,
+            href: seriesHref,
+          })),
+          { img: '/images/hero-1.png', kicker: 'Tutorial AI', title: 'AI Tutorial', href: '#work' },
+          { img: '/images/hero-2.png', kicker: 'Short Film', title: 'Short Film', href: '#work' },
+          { img: '/images/hero-3.webp', kicker: 'Music Video', title: 'Music Video', href: '#work' },
+        ]
+
+  const marqueeText = cms.home?.footerMarquee || 'Ikymian Studios • Caisart Felix •'
+
+  const contactCtaLabel = cms.home?.contact?.ctaLabel || t.contact.cta
 
   return (
     <>
@@ -236,27 +310,16 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
 
       <main>
         <HeroStage
-          small={t.heroStage.small}
-          ghost={t.heroStage.ghost}
-          cta={t.heroStage.cta}
+          small={heroStage.small}
+          ghost={heroStage.ghost}
+          cta={heroStage.cta}
         />
 
 
         <WorksCarousel
           label={worksLabel}
           index={t.works.index}
-          cards={[
-            { img: seriesPoster, kicker: 'Series', meta: '05 Episodes', title: seriesTitle },
-            ...episodeList.slice(1).map((episode: AnyRecord) => ({
-              img: seriesPoster,
-              kicker: 'Series',
-              meta: episode.ep,
-              title: episode.title,
-            })),
-            { img: '/images/hero-1.png', kicker: 'Tutorial AI', title: 'AI Tutorial' },
-            { img: '/images/hero-2.png', kicker: 'Short Film', title: 'Short Film' },
-            { img: '/images/hero-3.webp', kicker: 'Music Video', title: 'Music Video' },
-          ]}
+          cards={carouselCards}
         />
 
         <section id="impact" className="border-t border-line bg-pink/[0.16] py-20 md:py-28">
@@ -297,7 +360,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           <div className="mx-auto w-[min(1160px,calc(100%-32px))]">
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-medium tracking-[-0.035em]">
-                {t.aboutMe.title}
+                {aboutMe.title}
               </h2>
               <span className="text-[10px] uppercase tracking-[0.22em] text-pink">
                 {t.about.index} / About
@@ -307,22 +370,22 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
             <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:gap-14">
               <div className="lg:col-span-7">
                 <p className="font-display text-[clamp(1.15rem,1.7vw,1.4rem)] leading-snug text-pink">
-                  {t.aboutMe.lead}
+                  {aboutMe.lead}
                 </p>
                 <div className="mt-5 max-w-[58ch] space-y-3 text-[14px] leading-relaxed text-muted">
-                  <p>{t.aboutMe.p1}</p>
-                  <p>{t.aboutMe.p2}</p>
-                  <p>{t.aboutMe.p3}</p>
+                  <p>{aboutMe.p1}</p>
+                  <p>{aboutMe.p2}</p>
+                  <p>{aboutMe.p3}</p>
                 </div>
                 <p className="mt-6 text-[12px] uppercase tracking-[0.18em] text-pink">
-                  {t.aboutMe.closing}
+                  {aboutMe.closing}
                 </p>
               </div>
 
               <aside className="lg:col-span-5">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-pink">{t.about.processLabel}</p>
                 <div className="mt-6">
-                  <LoopingWords words={t.about.process} />
+                  <LoopingWords words={processWords} />
                 </div>
               </aside>
             </div>
@@ -332,7 +395,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
                 {t.about.partnersLabel}
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-6">
-                {partners.map((partner, index) => (
+                {partnerItems.map((partner: AnyRecord, index: number) => (
                   <span
                     key={partner.name}
                     className="partner-float inline-flex items-center justify-center px-2"
@@ -373,7 +436,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               <h2 className="max-w-[13ch] font-display text-[clamp(2.4rem,5.4vw,4.25rem)] font-medium leading-[0.96] tracking-[-0.045em]">
                 {contactTitle}
               </h2>
-              <ContactCta href={`mailto:${email}`} label={t.contact.cta} />
+              <ContactCta href={`mailto:${email}`} label={contactCtaLabel} />
             </div>
 
             <div className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2">
@@ -408,7 +471,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
                 key={copy}
                 className="font-display text-[11vw] font-bold uppercase leading-none tracking-[-0.04em] text-white/[0.055] select-none"
               >
-                Ikymian Studios&nbsp;•&nbsp;Caisart Felix&nbsp;•&nbsp;
+                {marqueeText}{' '}
               </span>
             ))}
           </div>

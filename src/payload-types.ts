@@ -530,6 +530,14 @@ export interface Home {
       href?: string | null;
     };
   };
+  /**
+   * Teks besar di hero (small heading, ghost word, CTA).
+   */
+  heroStage?: {
+    small?: string | null;
+    ghost?: string | null;
+    cta?: string | null;
+  };
   showreel?: {
     enabled?: boolean | null;
     title?: string | null;
@@ -538,11 +546,35 @@ export interface Home {
   works?: {
     title?: string | null;
     intro?: string | null;
+    /**
+     * Kartu di section Selected Works (urutan sesuai tampil).
+     */
+    carousel?:
+      | {
+          title: string;
+          kicker?: string | null;
+          meta?: string | null;
+          image?: (number | null) | Media;
+          href?: string | null;
+          id?: string | null;
+        }[]
+      | null;
   };
   impact?: {
     title?: string | null;
     intro?: string | null;
     showUpdatedAt?: boolean | null;
+  };
+  /**
+   * Isi section About Me.
+   */
+  aboutMe?: {
+    title?: string | null;
+    lead?: string | null;
+    p1?: string | null;
+    p2?: string | null;
+    p3?: string | null;
+    closing?: string | null;
   };
   about?: {
     title?: string | null;
@@ -561,6 +593,27 @@ export interface Home {
       };
       [k: string]: unknown;
     } | null;
+    /**
+     * Kata-kata yang berputar di Process.
+     */
+    processWords?:
+      | {
+          word: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Logo Creative Partner.
+     */
+    partners?:
+      | {
+          name: string;
+          logo?: (number | null) | Media;
+          invert?: boolean | null;
+          square?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
     skills?:
       | {
           name?: string | null;
@@ -595,7 +648,13 @@ export interface Home {
   contact?: {
     title?: string | null;
     body?: string | null;
+    email?: string | null;
+    ctaLabel?: string | null;
   };
+  /**
+   * Teks marquee besar di footer.
+   */
+  footerMarquee?: string | null;
   seo?: {
     metaTitle?: string | null;
     metaDescription?: string | null;
@@ -724,6 +783,13 @@ export interface HomeSelect<T extends boolean = true> {
               href?: T;
             };
       };
+  heroStage?:
+    | T
+    | {
+        small?: T;
+        ghost?: T;
+        cta?: T;
+      };
   showreel?:
     | T
     | {
@@ -736,6 +802,16 @@ export interface HomeSelect<T extends boolean = true> {
     | {
         title?: T;
         intro?: T;
+        carousel?:
+          | T
+          | {
+              title?: T;
+              kicker?: T;
+              meta?: T;
+              image?: T;
+              href?: T;
+              id?: T;
+            };
       };
   impact?:
     | T
@@ -744,11 +820,36 @@ export interface HomeSelect<T extends boolean = true> {
         intro?: T;
         showUpdatedAt?: T;
       };
+  aboutMe?:
+    | T
+    | {
+        title?: T;
+        lead?: T;
+        p1?: T;
+        p2?: T;
+        p3?: T;
+        closing?: T;
+      };
   about?:
     | T
     | {
         title?: T;
         body?: T;
+        processWords?:
+          | T
+          | {
+              word?: T;
+              id?: T;
+            };
+        partners?:
+          | T
+          | {
+              name?: T;
+              logo?: T;
+              invert?: T;
+              square?: T;
+              id?: T;
+            };
         skills?:
           | T
           | {
@@ -773,7 +874,10 @@ export interface HomeSelect<T extends boolean = true> {
     | {
         title?: T;
         body?: T;
+        email?: T;
+        ctaLabel?: T;
       };
+  footerMarquee?: T;
   seo?:
     | T
     | {

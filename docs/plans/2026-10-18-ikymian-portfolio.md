@@ -156,6 +156,8 @@ Ini baseline CSS, bukan klaim bahwa tekstur cair sudah selesai secara visual. Pe
 
 **Revisi keempat, 19 Oktober 2026 — biru dan pink dominan.** Pengguna meminta warna dominan situs adalah biru dan pink. Hero memakai gradien biru susu ke pink pucat, Selected Works berlatar biru lembut, Impact berlatar pink lembut, dan Contact bergradien pink ke biru. Krem dipakai sebagai aksen permukaan (nav, kartu, footer) dan indigo tetap warna teks. Tidak ada blok gelap.
 
+**Revisi ketujuh belas, 21 Oktober 2026 — konten bisa diedit dari admin.** Home global ditambah field: `heroStage`, `works.carousel` (judul, kicker, meta, gambar, href), `aboutMe`, `about.processWords`, `about.partners` (logo upload, invert, square), `contact.email`/`ctaLabel`, dan `footerMarquee`. LandingPage memakai nilai CMS dengan fallback ke kamus. Migration `20261021_133144_editable_content` dibuat, dan `scripts/seed-editable.mjs` mengisi konten awal (8 kartu carousel, about, hero, process, footer) untuk EN/ID.
+
 **Revisi keenam belas, 21 Oktober 2026 — About Me.** Isi About diganti narasi personal M. Rizki Firmansyah (EN/ID): heading "About Me", lead "Where imagination meets cinematic innovation.", tiga paragraf keahlian, dan closing. Layout dibuat kompak, process looping words tetap di samping, partner di bawah.
 
 **Revisi kelima belas, 21 Oktober 2026 — process looping words.** Daftar proses di About diganti komponen looping words bergaya Osmo: kata (STORY DIRECTION, VISUALS & CHARACTERS, EDITING & SOUND, PUBLISHING) bergerak vertikal dengan easing elastic, frame sudut pink mengikuti lebar kata, dan fade mask atas/bawah. Berhenti otomatis saat `prefers-reduced-motion`.

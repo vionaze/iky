@@ -9,6 +9,7 @@ export type WorkCard = {
   kicker: string
   meta?: string
   title: string
+  href?: string
 }
 
 type WorksCarouselProps = {
@@ -74,7 +75,7 @@ export default function WorksCarousel({ label, index, cards }: WorksCarouselProp
         <ul className={styles.cards}>
           {cards.map((card, cardIndex) => (
             <li key={`${card.title}-${cardIndex}`} className={styles.card}>
-              <a href="#work" aria-label={`${card.kicker}: ${card.title}`}>
+              <a href={card.href || '#work'} aria-label={`${card.kicker}: ${card.title}`}>
                 <img src={card.img} alt="" loading="lazy" />
                 <span className={styles.glow} aria-hidden="true" />
                 <span className={styles.overlay}>

@@ -132,3 +132,18 @@ ditampilkan per platform. Penjadwalan otomatis belum dipasang.
   `generateMetadata` (`src/app/(frontend)/page.tsx`) saat siap diindeks.
 - Upload REST Payload 3.91 mengirim field tambahan sebagai satu field `_payload`
   berisi JSON, bukan field terpisah.
+
+## Mengedit konten di admin
+
+Masuk ke `/adminku` → **Globals → Home** untuk mengubah:
+
+- **Hero stage** — teks kecil, ghost word, label CTA
+- **Selected Works → Carousel** — kartu (judul, kicker, meta, gambar, link); urutan mengikuti daftar
+- **About Me** — judul, lead, 3 paragraf, closing
+- **About → Process Words** — kata yang berputar
+- **About → Partners** — nama, logo (upload Media), invert, square
+- **Contact** — email tujuan dan label CTA
+- **Footer Marquee** — teks marquee besar
+
+Header (nav), Footer (social & copyright), Stats, Projects, dan Media juga tetap bisa diedit dari admin.
+Setelah mengubah skema, buat migration (`pnpm payload migrate:create <nama>`) dan jalankan `pnpm payload migrate` di production.
