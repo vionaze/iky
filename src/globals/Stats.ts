@@ -7,12 +7,16 @@ export const Stats: GlobalConfig = {
     {
       name: 'metricsUpdatedAt',
       type: 'date',
-      admin: { description: 'Waktu snapshot metrik diambil dari sumber.' },
+      admin: { description: 'Kapan angka terakhir diperbarui (bisa manual).' },
     },
     {
       name: 'totalViews',
       type: 'number',
-      admin: { readOnly: true, description: 'Diisi proses sinkronisasi, bukan editor manual.' },
+      label: 'Total views',
+      admin: {
+        description:
+          'Bisa diisi manual (mis. total views TikTok + YouTube). Sync otomatis tidak menimpanya kecuali SYNC_TOTAL_VIEWS=1.',
+      },
     },
     {
       name: 'platforms',
@@ -20,7 +24,7 @@ export const Stats: GlobalConfig = {
       fields: [
         { name: 'name', type: 'text', required: true },
         { name: 'url', type: 'text' },
-        { name: 'followers', type: 'number' },
+        { name: 'followers', type: 'number', admin: { description: 'Bisa diedit manual.' } },
         { name: 'metricsUpdatedAt', type: 'date' },
         { name: 'source', type: 'text' },
       ],
@@ -36,8 +40,8 @@ export const Stats: GlobalConfig = {
         { name: 'source', type: 'text' },
       ],
     },
-    { name: 'videosCreated', type: 'number' },
-    { name: 'completedCampaigns', type: 'number' },
-    { name: 'nominations', type: 'number' },
+    { name: 'videosCreated', type: 'number', admin: { description: 'Bisa diedit manual.' } },
+    { name: 'completedCampaigns', type: 'number', admin: { description: 'Bisa diedit manual.' } },
+    { name: 'nominations', type: 'number', admin: { description: 'Bisa diedit manual.' } },
   ],
 }

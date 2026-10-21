@@ -245,7 +245,12 @@ async function main() {
   const doc = {
     ...current,
     metricsUpdatedAt: now,
-    totalViews: totalViews > 0 ? totalViews : null,
+    totalViews:
+      process.env.SYNC_TOTAL_VIEWS === '1'
+        ? totalViews > 0
+          ? totalViews
+          : current.totalViews
+        : current.totalViews,
     platforms,
     note: viewCoverage.length ? `Coverage: ${viewCoverage.join(', ')}` : undefined,
   }
