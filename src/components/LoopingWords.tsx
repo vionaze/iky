@@ -28,13 +28,20 @@ export default function LoopingWords({ words }: { words: string[] }) {
         const item = items[targetIndex % count]
         if (!item) return
         const wordEl = item.firstElementChild as HTMLElement | null
-        const width = wordEl?.getBoundingClientRect().width ?? item.getBoundingClientRect().width
+        const wordWidth = wordEl?.getBoundingClientRect().width ?? item.getBoundingClientRect().width
+        const maxWidth = list.parentElement?.getBoundingClientRect().width ?? wordWidth
+        const width = Math.min(Math.max(wordWidth + 28, 80), maxWidth)
+
         gsap.to(selector, {
-          width: Math.max(width + 28, 80),
+          width,
           duration: 0.5,
           ease: 'expo.out',
         })
       }
+
+      const onResize = () => frameWord(index)
+      window.addEventListener('resize', onResize)
+      document.fonts?.ready.then(() => frameWord(index))
 
       const move = () => {
         index += 1
@@ -56,7 +63,10 @@ export default function LoopingWords({ words }: { words: string[] }) {
       frameWord(0)
       const interval = window.setInterval(move, 2400)
 
-      return () => window.clearInterval(interval)
+      return () => {
+        window.clearInterval(interval)
+        window.removeEventListener('resize', onResize)
+      }
     }, list)
 
     return () => context.revert()
