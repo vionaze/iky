@@ -17,7 +17,7 @@ const partners = [
   { name: 'AKOOL', src: '/images/partners/akool.png' },
   { name: 'Nemo Video', src: '/images/partners/nemo.png' },
   { name: 'Wizstar', src: '/images/partners/wizstar.png' },
-  { name: 'Pollo AI', src: '/images/partners/pollo.png', square: true },
+  { name: 'Pollo AI', src: '/images/partners/pollo.png' },
 ]
 
 function LexicalParagraphs({ data }: { data: AnyRecord }) {
