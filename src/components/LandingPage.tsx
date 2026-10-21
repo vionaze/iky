@@ -204,7 +204,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           cta={t.heroStage.cta}
         />
 
-        <section id="work" className="border-t border-line bg-[#e9f1fb] py-20 md:py-28">
+        <section id="work" className="border-t border-line bg-[#eaf0ff] py-20 md:py-28">
           <div className="mx-auto w-[min(1160px,calc(100%-32px))]">
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-medium tracking-[-0.035em]">
@@ -405,7 +405,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           className="border-t border-line py-20 md:py-28"
           style={{
             background:
-              'radial-gradient(ellipse 55% 75% at 85% 18%, rgba(240,203,220,0.9), transparent 62%), radial-gradient(ellipse 50% 70% at 6% 92%, rgba(184,212,242,0.9), transparent 64%), #faf7f2',
+              'radial-gradient(ellipse 55% 75% at 85% 18%, rgba(255,209,230,0.9), transparent 62%), radial-gradient(ellipse 50% 70% at 6% 92%, rgba(205,223,255,0.9), transparent 64%), #f6f4ff',
           }}
         >
           <div className="mx-auto flex w-[min(1160px,calc(100%-32px))] flex-wrap items-end justify-between gap-10">

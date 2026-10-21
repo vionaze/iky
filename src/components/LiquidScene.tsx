@@ -126,9 +126,9 @@ export default function LiquidScene() {
     const geometry = new THREE.IcosahedronGeometry(1.18, 48)
     const uniforms = {
       uTime: { value: reduceMotion ? 1.6 : 0 },
-      uBlue: { value: new THREE.Color('#b8d4f2') },
-      uPink: { value: new THREE.Color('#f0cbdc') },
-      uIndigo: { value: new THREE.Color('#51439a') },
+      uBlue: { value: new THREE.Color('#cddfff') },
+      uPink: { value: new THREE.Color('#ffd1e6') },
+      uIndigo: { value: new THREE.Color('#5b4bff') },
     }
     const material = new THREE.ShaderMaterial({
       uniforms,
