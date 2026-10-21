@@ -12,6 +12,8 @@
   left: 0;
   width: 56px;
   height: 64px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
   will-change: transform;
   filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.35));
 }
@@ -149,6 +151,10 @@
 
 .head::before { left: 23px; }
 .head::after { right: 23px; }
+
+.visible {
+  opacity: 1;
+}
 
 .happy .head {
   transform: scale(1.06) rotate(-4deg);

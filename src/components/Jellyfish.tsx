@@ -36,6 +36,7 @@ export default function Jellyfish() {
       Math.max(min, Math.min(max, value))
 
     const onPointerMove = (event: PointerEvent) => {
+      jelly.classList.add(styles.visible)
       targetX = clamp(event.clientX - width / 2, pad, window.innerWidth - width - pad)
       targetY = clamp(event.clientY - height * 0.85, pad, window.innerHeight - height - pad)
     }
