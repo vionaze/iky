@@ -10,7 +10,7 @@
   background:
     radial-gradient(90% 65% at 8% 0%, rgba(0, 200, 255, 0.35) 0%, transparent 58%),
     radial-gradient(80% 60% at 94% 14%, rgba(255, 45, 149, 0.38) 0%, transparent 54%),
-    linear-gradient(180deg, #1b06ff 0%, #0c00cc 100%);
+    linear-gradient(180deg, #0c1bc4 0%, #050848 100%);
 }
 
 .grain {
@@ -174,15 +174,15 @@
 }
 
 .labelBlue {
-  background: linear-gradient(165deg, #1d3bff 0%, #2f6bff 100%);
+  background: linear-gradient(165deg, #1226c9 0%, #2a4be0 100%);
 }
 
 .labelPink {
-  background: linear-gradient(165deg, #d1006f 0%, #ff2d95 100%);
+  background: linear-gradient(165deg, #c40067 0%, #ff2d95 100%);
 }
 
 .labelCream {
-  background: linear-gradient(165deg, #2a12e6 0%, #4b2bff 100%);
+  background: linear-gradient(165deg, #2212b0 0%, #3f2bd8 100%);
 }
 
 .labelIndigo {
@@ -242,7 +242,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1400ff;
+  color: #0a1bb8;
   background: #fff;
   transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
 }
