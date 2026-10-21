@@ -294,23 +294,31 @@
   .stage { padding: 68px 16px 40px; min-height: calc(100dvh - 64px); }
   .small { font-size: 10vw; }
   .ghost { font-size: 17.5vw; }
-  .cards { height: 230px; top: 39%; }
-  .c1 { width: 80px; height: 110px; left: 0; top: 20px; }
-  .c2 { width: 90px; height: 130px; left: 10%; top: 35px; }
-  .c3 { width: 110px; height: 150px; left: 22%; top: 15px; }
-  .c4 { width: 90px; height: 120px; left: 36%; top: 50px; }
-  .c5 { width: 130px; height: 180px; left: 46%; top: 0; }
-  .c6 { width: 95px; height: 130px; left: 62%; top: 40px; }
-  .c7 { width: 100px; height: 140px; left: 74%; top: 20px; }
-  .c8 { width: 80px; height: 110px; left: 87%; top: 35px; }
+  .cards { height: 330px; top: auto; bottom: 200px; }
+  .c1 { width: 70px; height: 94px; left: 3%; top: 20px; }
+  .c2 { width: 84px; height: 112px; left: 26%; top: 4px; }
+  .c3 { width: 92px; height: 122px; left: 50%; top: 12px; }
+  .c4 { width: 74px; height: 98px; left: 73%; top: 2px; }
+  .c5 { width: 104px; height: 138px; left: 27%; top: 160px; }
+  .c6 { width: 78px; height: 104px; left: 3%; top: 172px; }
+  .c7 { width: 92px; height: 122px; left: 52%; top: 168px; }
+  .c8 { width: 72px; height: 96px; left: 76%; top: 178px; }
   .label { padding: 10px; }
   .label .k { font-size: 7px; }
   .label .v { font-size: 15px; }
   .subline {
-    position: static;
-    width: auto;
-    transform: none;
-    margin-top: 350px;
+    position: absolute;
+    top: auto;
+    bottom: 32px;
+    left: 50%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 10px;
+    width: calc(100% - 32px);
+    transform: translateX(-50%);
+    margin-top: 0;
   }
+  .note { margin-top: 0; }
   .note { font-size: 12px; }
 }
