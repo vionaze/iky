@@ -126,6 +126,20 @@
   background: linear-gradient(180deg, rgba(6, 8, 24, 0.08) 0%, rgba(6, 8, 24, 0.94) 100%);
 }
 
+.cardMetaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cardMeta {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+
 .cardKicker {
   font-size: 9px;
   letter-spacing: 0.22em;
@@ -136,7 +150,21 @@
     letter-spacing 0.45s ease;
 }
 
-.card:hover .cardKicker {
+.card:hover .cardMetaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cardMeta {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.cardKicker {
   transform: translateY(-2px);
   letter-spacing: 0.3em;
 }

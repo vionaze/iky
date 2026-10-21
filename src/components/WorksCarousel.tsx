@@ -7,6 +7,7 @@ import styles from './WorksCarousel.module.css'
 export type WorkCard = {
   img: string
   kicker: string
+  meta?: string
   title: string
 }
 
@@ -77,7 +78,10 @@ export default function WorksCarousel({ label, index, cards }: WorksCarouselProp
                 <img src={card.img} alt="" loading="lazy" />
                 <span className={styles.glow} aria-hidden="true" />
                 <span className={styles.overlay}>
-                  <span className={styles.cardKicker}>{card.kicker}</span>
+                  <span className={styles.cardMetaRow}>
+                    <span className={styles.cardKicker}>{card.kicker}</span>
+                    {card.meta ? <span className={styles.cardMeta}>{card.meta}</span> : null}
+                  </span>
                   <span className={styles.cardTitle}>{card.title}</span>
                 </span>
               </a>

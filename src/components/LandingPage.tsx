@@ -244,10 +244,11 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           label={worksLabel}
           index={t.works.index}
           cards={[
-            { img: seriesPoster, kicker: 'Series', title: seriesTitle },
+            { img: seriesPoster, kicker: 'Series', meta: '05 Episodes', title: seriesTitle },
             ...episodeList.slice(1).map((episode: AnyRecord) => ({
               img: seriesPoster,
-              kicker: episode.ep,
+              kicker: 'Series',
+              meta: episode.ep,
               title: episode.title,
             })),
             { img: '/images/hero-1.png', kicker: 'Tutorial AI', title: 'AI Tutorial' },
