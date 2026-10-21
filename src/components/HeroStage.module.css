@@ -88,7 +88,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 43%;
+  top: 39%;
   height: 320px;
   z-index: 3;
   pointer-events: none;
@@ -209,7 +209,7 @@
 
 .subline {
   position: absolute;
-  top: calc(43% + 330px);
+  top: calc(39% + 340px);
   left: 50%;
   z-index: 4;
   width: min(520px, calc(100% - 32px));
