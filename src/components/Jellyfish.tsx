@@ -19,8 +19,8 @@ export default function Jellyfish() {
       return
     }
 
-    const width = 130
-    const height = 150
+    const width = 56
+    const height = 64
     const pad = 16
 
     let targetX = window.innerWidth - width - 32
@@ -68,7 +68,8 @@ export default function Jellyfish() {
   return (
     <div ref={rootRef} className={styles.root} aria-hidden="true">
       <div ref={jellyRef} className={styles.jelly}>
-        <div className={styles.float}>
+        <div className={styles.scaler}>
+          <div className={styles.float}>
           <span className={`${styles.bubble} ${styles.b1}`} />
           <span className={`${styles.bubble} ${styles.b2}`} />
           <span className={`${styles.bubble} ${styles.b3}`} />
@@ -81,8 +82,9 @@ export default function Jellyfish() {
             <span className={styles.eye} />
             <span className={styles.mouth} />
           </div>
-          <div className={styles.tentacles}>
-            <i /><i /><i /><i />
+            <div className={styles.tentacles}>
+              <i /><i /><i /><i />
+            </div>
           </div>
         </div>
       </div>

@@ -10,10 +10,20 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 130px;
-  height: 150px;
+  width: 56px;
+  height: 64px;
   will-change: transform;
   filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.35));
+}
+
+.scaler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 130px;
+  height: 150px;
+  transform: scale(0.43);
+  transform-origin: top left;
 }
 
 .float {
