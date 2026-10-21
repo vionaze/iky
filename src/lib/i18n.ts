@@ -11,7 +11,6 @@ const en = {
   heroStage: {
     small: 'Small studio,',
     ghost: 'big stories',
-    subline: '5 episodes. 3 formats. One studio.',
     cta: 'Meet the work',
   },
   hero: {
@@ -98,7 +97,6 @@ const id: Dict = {
   heroStage: {
     small: 'Studio kecil,',
     ghost: 'cerita besar',
-    subline: '5 episode. 3 format. Satu studio.',
     cta: 'Lihat karya',
   },
   hero: {

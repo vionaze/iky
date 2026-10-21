@@ -256,26 +256,6 @@
   transform: rotate(45deg);
 }
 
-.note {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-  margin-top: 20px;
-  font-size: 13px;
-  letter-spacing: 0.05em;
-  color: rgba(244, 243, 255, 0.7);
-}
-
-.note::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-pink);
-  flex: none;
-}
-
 @media (max-width: 1100px) {
   .cards { height: 270px; }
   .c1 { width: 104px; height: 144px; left: 3%; top: 26px; }
@@ -287,7 +267,6 @@
   .c7 { width: 140px; height: 192px; left: 70%; top: 26px; }
   .c8 { width: 104px; height: 140px; left: 85%; top: 42px; }
   .label .v { font-size: 19px; }
-  .subline { margin-top: 190px; }
 }
 
 @media (max-width: 750px) {
@@ -319,6 +298,4 @@
     transform: translateX(-50%);
     margin-top: 0;
   }
-  .note { margin-top: 0; }
-  .note { font-size: 12px; }
 }

@@ -207,7 +207,6 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
         <HeroStage
           small={t.heroStage.small}
           ghost={t.heroStage.ghost}
-          subline={t.heroStage.subline}
           cta={t.heroStage.cta}
         />
 

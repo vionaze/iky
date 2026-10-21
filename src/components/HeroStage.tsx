@@ -37,12 +37,10 @@ const scrollMoves = [
 export default function HeroStage({
   small,
   ghost,
-  subline,
   cta,
 }: {
   small: string
   ghost: string
-  subline: string
   cta: string
 }) {
   const rootRef = useRef<HTMLElement>(null)
@@ -324,7 +322,6 @@ export default function HeroStage({
             </svg>
           </span>
         </a>
-        <div className={styles.note}>{subline}</div>
       </div>
     </section>
   )
