@@ -2,6 +2,20 @@
 
 import { useEffect, useRef, useState } from 'react'
 
+function formatCompact(value: number, locale: string) {
+  if (value >= 1_000_000) {
+    const millions = value / 1_000_000
+    const rounded = millions >= 10 ? Math.round(millions) : Math.round(millions * 10) / 10
+    return `${rounded}M`
+  }
+
+  if (value >= 100_000) {
+    return `${Math.round(value / 1_000)}K`
+  }
+
+  return value.toLocaleString(locale)
+}
+
 export default function CountUp({ value, locale }: { value: number; locale: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const [display, setDisplay] = useState(value)
@@ -49,5 +63,5 @@ export default function CountUp({ value, locale }: { value: number; locale: stri
     }
   }, [value])
 
-  return <span ref={ref}>{display.toLocaleString(locale)}</span>
+  return <span ref={ref}>{formatCompact(display, locale)}</span>
 }
