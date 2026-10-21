@@ -1,12 +1,12 @@
 .stage {
   position: relative;
   overflow: hidden;
-  min-height: calc(100dvh - 72px);
-  padding: 92px 24px 56px;
+  min-height: calc(100dvh - 84px);
+  padding: clamp(56px, 8vh, 92px) 24px 56px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background:
     radial-gradient(70% 50% at 50% 100%, rgba(255, 138, 193, 0.14) 0%, transparent 70%),
     radial-gradient(90% 65% at 8% 0%, rgba(111, 141, 255, 0.24) 0%, transparent 58%),
@@ -208,9 +208,13 @@
 .c8 { width: 130px; height: 175px; left: 84%; top: 50px; z-index: 2; }
 
 .subline {
-  position: relative;
+  position: absolute;
+  top: calc(43% + 330px);
+  left: 50%;
   z-index: 4;
-  margin-top: 270px;
+  width: min(520px, calc(100% - 32px));
+  transform: translateX(-50%);
+  margin-top: 0;
   text-align: center;
 }
 
@@ -242,7 +246,7 @@
   border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   color: #161c4c;
   background: #fff;
   transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
@@ -255,7 +259,7 @@
 .note {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 8px;
   margin-top: 20px;
   font-size: 13px;
@@ -287,7 +291,7 @@
 }
 
 @media (max-width: 750px) {
-  .stage { padding: 96px 16px 40px; min-height: calc(100dvh - 64px); }
+  .stage { padding: 68px 16px 40px; min-height: calc(100dvh - 64px); }
   .small { font-size: 10vw; }
   .ghost { font-size: 17.5vw; }
   .cards { height: 230px; top: 39%; }
@@ -302,6 +306,11 @@
   .label { padding: 10px; }
   .label .k { font-size: 7px; }
   .label .v { font-size: 15px; }
-  .subline { margin-top: 250px; }
+  .subline {
+    position: static;
+    width: auto;
+    transform: none;
+    margin-top: 350px;
+  }
   .note { font-size: 12px; }
 }
