@@ -16,7 +16,6 @@ export async function generateMetadata(): Promise<Metadata> {
         ? 'Portfolio Ikymian Studios — series, music video, short film, dan tutorial dengan pendekatan kreatif berbasis AI.'
         : 'Portfolio of Ikymian Studios — series, music video, short film, and tutorial with an AI-driven creative approach.',
     alternates: { canonical: 'https://ikymianstudios.si/' },
-    robots: { index: false, follow: false },
     openGraph: {
       title: 'Ikymian Studios — AI Filmmaker & Content Creator',
       description: t.hero.lead,
