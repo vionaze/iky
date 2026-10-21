@@ -47,7 +47,7 @@ const en = {
     ],
   },
   impact: {
-    label: 'Reach',
+    label: 'SOCIALS REACH',
     index: '02',
     empty: 'Not available yet',
     note: 'Numbers are not connected yet. Views will sync automatically from official APIs; other metrics come from verified records.',
@@ -142,7 +142,7 @@ const id: Dict = {
     ],
   },
   impact: {
-    label: 'Jangkauan',
+    label: 'SOCIALS REACH',
     index: '02',
     empty: 'Belum tersedia',
     note: 'Angka belum terhubung. Views akan diisi otomatis dari API resmi; metrik lain diisi dari data terverifikasi.',

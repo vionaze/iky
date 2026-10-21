@@ -123,7 +123,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
   const ctaPrimaryLabel = cms.home?.hero?.ctaPrimary?.label || t.hero.primary
   const ctaSecondaryLabel = cms.home?.hero?.ctaSecondary?.label || t.hero.secondary
   const worksLabel = cms.home?.works?.title || t.works.label
-  const impactLabel = cms.home?.impact?.title || t.impact.label
+  const impactLabel = t.impact.label
   const contactTitle = cms.home?.contact?.title || t.contact.title
 
   const formatDocs = Array.isArray(cms.formats) ? cms.formats : []
