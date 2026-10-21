@@ -1,0 +1,186 @@
+.section {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 50% at 18% 12%, rgba(77, 110, 255, 0.22), transparent 65%),
+    radial-gradient(55% 45% at 88% 18%, rgba(255, 138, 193, 0.16), transparent 60%),
+    radial-gradient(70% 60% at 50% 110%, rgba(75, 90, 220, 0.18), transparent 65%),
+    #080b1f;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 28% 68%, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1px 1px at 44% 34%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 62% 76%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 76% 42%, rgba(255, 255, 255, 0.75), transparent),
+    radial-gradient(1px 1px at 88% 64%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 52% 12%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 8% 82%, rgba(255, 255, 255, 0.6), transparent);
+  background-size: 100% 100%;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.copy {
+  position: absolute;
+  left: 50%;
+  top: clamp(88px, 12vh, 120px);
+  z-index: 5;
+  width: max-content;
+  max-width: calc(100% - 40px);
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.kicker {
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-pink);
+}
+
+.hint {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.field {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.bubble {
+  position: absolute;
+  display: block;
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 0 30px rgba(255, 255, 255, 0.16),
+    inset 0 -20px 40px rgba(0, 0, 0, 0.28),
+    0 30px 80px -30px rgba(0, 0, 0, 0.85);
+  will-change: transform;
+}
+
+.bubble img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.06);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bubble:hover img,
+.bubble:focus-visible img {
+  transform: scale(1.12);
+}
+
+.glass {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(120% 90% at 28% 16%, rgba(255, 255, 255, 0.32), transparent 48%),
+    radial-gradient(80% 60% at 70% 90%, rgba(120, 150, 255, 0.18), transparent 60%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.info {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14%;
+  text-align: center;
+  background: rgba(6, 8, 24, 0.42);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.center .info,
+.bubble:hover .info,
+.bubble:focus-visible .info {
+  opacity: 1;
+}
+
+.type {
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 1.3vw, 1.35rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.explore {
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  font-size: 11px;
+  color: #fff;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.bubble:hover .explore {
+  background: #fff;
+  color: #10142f;
+}
+
+@media (max-width: 767px) {
+  .section {
+    min-height: 92vh;
+  }
+
+  .copy {
+    top: 82px;
+  }
+
+  .info {
+    padding: 10%;
+    gap: 6px;
+  }
+
+  .title {
+    font-size: 0.85rem;
+  }
+
+  .explore {
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble img {
+    transition: none;
+  }
+}

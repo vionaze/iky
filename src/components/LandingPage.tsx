@@ -5,6 +5,7 @@ import { flushSync } from 'react-dom'
 import { LangToggle } from '@/components/LangToggle'
 import { getDict, type Locale } from '@/lib/i18n'
 import HeroStage from '@/components/HeroStage'
+import BubbleField from '@/components/BubbleField'
 
 type AnyRecord = Record<string, any>
 
@@ -212,6 +213,55 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           ghost={t.heroStage.ghost}
           subline={t.heroStage.subline}
           cta={t.heroStage.cta}
+        />
+
+        <BubbleField
+          kicker={t.bubble.kicker}
+          hint={t.bubble.hint}
+          explore={t.bubble.explore}
+          bubbles={[
+            {
+              type: t.bubble.series,
+              title: seriesTitle,
+              img: seriesPoster,
+              size: 420,
+              left: 50,
+              top: 54,
+              center: true,
+            },
+            {
+              type: t.bubble.episode,
+              title: episodeList[2]?.title,
+              img: '/images/works/berondong/ep03.jpg',
+              size: 200,
+              left: 15,
+              top: 24,
+            },
+            {
+              type: t.bubble.still,
+              title: t.bubble.onSet,
+              img: '/images/hero-2.png',
+              size: 200,
+              left: 84,
+              top: 72,
+            },
+            {
+              type: t.bubble.still,
+              title: 'Caisart Felix',
+              img: '/images/hero-1.png',
+              size: 180,
+              left: 84,
+              top: 22,
+            },
+            {
+              type: t.bubble.still,
+              title: t.bubble.onSet,
+              img: '/images/hero-3.webp',
+              size: 170,
+              left: 16,
+              top: 78,
+            },
+          ]}
         />
 
         <section id="work" className="border-t border-line bg-cream-deep py-20 md:py-28">
