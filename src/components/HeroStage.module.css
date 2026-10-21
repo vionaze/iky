@@ -8,9 +8,9 @@
   align-items: center;
   justify-content: center;
   background:
-    radial-gradient(90% 65% at 10% 0%, rgba(77, 124, 254, 0.28) 0%, transparent 58%),
-    radial-gradient(80% 60% at 92% 16%, rgba(244, 114, 182, 0.2) 0%, transparent 54%),
-    linear-gradient(180deg, #0d0b1c 0%, #090814 100%);
+    radial-gradient(90% 65% at 8% 0%, rgba(0, 200, 255, 0.35) 0%, transparent 58%),
+    radial-gradient(80% 60% at 94% 14%, rgba(255, 45, 149, 0.38) 0%, transparent 54%),
+    linear-gradient(180deg, #1b06ff 0%, #0c00cc 100%);
 }
 
 .grain {
@@ -72,7 +72,7 @@
   font-size: clamp(96px, 19vw, 280px);
   line-height: 0.85;
   letter-spacing: -0.045em;
-  color: #2c2749;
+  color: rgba(255, 255, 255, 0.12);
   text-align: center;
   white-space: nowrap;
   user-select: none;
@@ -101,7 +101,7 @@
   cursor: pointer;
   text-decoration: none;
   will-change: transform;
-  background: linear-gradient(180deg, #a9c9ff 0%, #cbb6ff 52%, #ffc5df 100%);
+  background: linear-gradient(180deg, #2f6bff 0%, #7a3cff 50%, #ff2d95 100%);
   box-shadow:
     0 30px 50px -18px rgba(0, 0, 0, 0.5),
     0 12px 24px -10px rgba(91, 75, 255, 0.22),
@@ -174,19 +174,19 @@
 }
 
 .labelBlue {
-  background: linear-gradient(165deg, #17244a 0%, #1d2e5c 100%);
+  background: linear-gradient(165deg, #1d3bff 0%, #2f6bff 100%);
 }
 
 .labelPink {
-  background: linear-gradient(165deg, #36192b 0%, #45203a 100%);
+  background: linear-gradient(165deg, #d1006f 0%, #ff2d95 100%);
 }
 
 .labelCream {
-  background: linear-gradient(165deg, #211c38 0%, #2a2447 100%);
+  background: linear-gradient(165deg, #2a12e6 0%, #4b2bff 100%);
 }
 
 .labelIndigo {
-  background: linear-gradient(165deg, #5b4bff 0%, #8b7bff 100%);
+  background: linear-gradient(165deg, #ff2d95 0%, #ff7ac0 100%);
 }
 
 .labelIndigo .k {
@@ -219,15 +219,15 @@
   gap: 10px;
   padding: 12px 20px 12px 24px;
   border-radius: 999px;
-  background: var(--color-ink);
-  color: var(--color-cream);
+  background: linear-gradient(180deg, #ff2d95 0%, #ff5cb8 100%);
+  color: #fff;
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
   box-shadow:
-    0 14px 24px -8px rgba(37, 37, 65, 0.45),
-    0 5px 10px -2px rgba(37, 37, 65, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    0 16px 30px -10px rgba(255, 45, 149, 0.55),
+    0 6px 12px -4px rgba(10, 0, 80, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
   transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
 }
 
@@ -242,8 +242,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  background: linear-gradient(180deg, #5b4bff 0%, #5f8bff 55%, #ff9ecb 100%);
+  color: #1400ff;
+  background: #fff;
   transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
 }
 
@@ -255,7 +255,7 @@
   margin-top: 20px;
   font-size: 13px;
   letter-spacing: 0.05em;
-  color: var(--color-muted);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 @media (max-width: 1100px) {

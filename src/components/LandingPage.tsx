@@ -405,7 +405,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           className="border-t border-line py-20 md:py-28"
           style={{
             background:
-              'radial-gradient(ellipse 55% 75% at 85% 18%, rgba(255,143,196,0.16), transparent 62%), radial-gradient(ellipse 50% 70% at 6% 92%, rgba(91,140,255,0.18), transparent 64%), #0b0a18',
+              'radial-gradient(ellipse 55% 75% at 85% 18%, rgba(255,45,149,0.35), transparent 62%), radial-gradient(ellipse 50% 70% at 6% 92%, rgba(0,200,255,0.3), transparent 64%), #0e00d6',
           }}
         >
           <div className="mx-auto flex w-[min(1160px,calc(100%-32px))] flex-wrap items-end justify-between gap-10">

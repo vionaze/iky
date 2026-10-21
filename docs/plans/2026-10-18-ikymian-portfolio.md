@@ -156,6 +156,8 @@ Ini baseline CSS, bukan klaim bahwa tekstur cair sudah selesai secara visual. Pe
 
 **Revisi keempat, 19 Oktober 2026 — biru dan pink dominan.** Pengguna meminta warna dominan situs adalah biru dan pink. Hero memakai gradien biru susu ke pink pucat, Selected Works berlatar biru lembut, Impact berlatar pink lembut, dan Contact bergradien pink ke biru. Krem dipakai sebagai aksen permukaan (nav, kartu, footer) dan indigo tetap warna teks. Tidak ada blok gelap.
 
+**Revisi kesepuluh, 21 Oktober 2026 — biru elektrik + pink.** Pengguna menegaskan temanya bukan "dark" atau "light", melainkan identitas biru elektrik dan pink. Kanvas jadi biru elektrik `#1400ff`, permukaan `#0e00d6`, teks putih, muted putih 78%, pink `#ff2d95`, indigo `#ff5cb8`, biru terang `#4d9dff`. Hero memakai glow cyan/pink di atas biru, ghost `rgba(255,255,255,0.12)`, CTA pil pink dengan orb putih, dan kartu label biru/pink. `color-scheme: dark` tetap agar kontrol native menyatu.
+
 **Revisi kesembilan, 21 Oktober 2026 — tema gelap.** Pengguna meminta tema tidak lagi light. Dasar jadi indigo-hitam (`#0b0a18`), permukaan `#121022`, teks `#f5f3ff`, muted `#a9a4c9`, aksen biru `#5b8cff`, pink `#ff8fc4`, indigo `#9b8bff`. Hero memakai glow biru/pink di atas gelap, ghost text `#2c2749`, kartu label bertint gelap, dan `color-scheme: dark` diaktifkan.
 
 **Revisi kedelapan, 21 Oktober 2026 — palet biru-pink baru.** Dasar krem diganti periwinkle muda (`#f6f4ff`) dengan wash radial biru di kiri atas dan pink di kanan atas. Aksen jadi biru elektrik (`#4d7cfe`) dan pink (`#ffd1e6`), indigo `#5b4bff`, ink `#15132b`. Kartu hero memakai gradasi biru → ungu → pink, label format biru/pink/lavender/indigo, ghost text lavender.
