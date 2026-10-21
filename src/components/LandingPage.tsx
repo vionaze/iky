@@ -10,6 +10,7 @@ import WorksCarousel from '@/components/WorksCarousel'
 import LoopingWords from '@/components/LoopingWords'
 import ContactCta from '@/components/ContactCta'
 import MagicDust from '@/components/MagicDust'
+import CountUp from '@/components/CountUp'
 
 type AnyRecord = Record<string, any>
 
@@ -123,7 +124,6 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
   const ctaSecondaryLabel = cms.home?.hero?.ctaSecondary?.label || t.hero.secondary
   const worksLabel = cms.home?.works?.title || t.works.label
   const impactLabel = cms.home?.impact?.title || t.impact.label
-  const impactNote = cms.home?.impact?.intro || t.impact.note
   const contactTitle = cms.home?.contact?.title || t.contact.title
 
   const formatDocs = Array.isArray(cms.formats) ? cms.formats : []
@@ -270,32 +270,26 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               </span>
             </div>
 
-            <dl className="mt-10 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
-              {t.impact.metrics.map((metric, index) => (
-                <div key={metric} className="border-t border-ink/15 py-5">
-                  <dt className="text-[10px] uppercase tracking-[0.18em] text-ink/60">{metric}</dt>
-                  <dd className="mt-2 text-sm text-muted">{formatStat(statValues[index] ?? null)}</dd>
-                </div>
-              ))}
+            <dl className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-x-10 lg:grid-cols-3">
+              {t.impact.metrics.map((metric, index) => {
+                const value = statValues[index]
+                return (
+                  <div key={metric}>
+                    <dt className="text-[10px] uppercase tracking-[0.2em] text-muted">{metric}</dt>
+                    <dd className="mt-3 font-display text-[clamp(2rem,4.8vw,4.25rem)] font-medium leading-none tracking-[-0.04em]">
+                      {typeof value === 'number' ? (
+                        <CountUp value={value} locale={locale === 'id' ? 'id-ID' : 'en-US'} />
+                      ) : (
+                        <span className="text-[clamp(1rem,1.4vw,1.15rem)] font-normal tracking-normal text-muted">
+                          {t.impact.empty}
+                        </span>
+                      )}
+                    </dd>
+                  </div>
+                )
+              })}
             </dl>
-            <p className="mt-8 max-w-[62ch] text-[13px] leading-relaxed text-muted">{impactNote}</p>
-            {Array.isArray(stats?.platforms) && stats.platforms.length > 0 ? (
-              <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.14em] text-muted">
-                {stats.platforms.map((platform: AnyRecord) => (
-                  <li key={platform.name}>
-                    {platform.name}
-                    {typeof platform.followers === 'number'
-                      ? ` · ${platform.followers.toLocaleString(locale === 'id' ? 'id-ID' : 'en-US')}`
-                      : ''}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-            {updatedLabel ? (
-              <p className="mt-3 text-[11px] uppercase tracking-[0.16em] text-muted">
-                {locale === 'id' ? 'Diperbarui' : 'Updated'} {updatedLabel}
-              </p>
-            ) : null}
+
           </div>
         </section>
 
