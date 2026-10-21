@@ -156,6 +156,8 @@ Ini baseline CSS, bukan klaim bahwa tekstur cair sudah selesai secara visual. Pe
 
 **Revisi keempat, 19 Oktober 2026 — biru dan pink dominan.** Pengguna meminta warna dominan situs adalah biru dan pink. Hero memakai gradien biru susu ke pink pucat, Selected Works berlatar biru lembut, Impact berlatar pink lembut, dan Contact bergradien pink ke biru. Krem dipakai sebagai aksen permukaan (nav, kartu, footer) dan indigo tetap warna teks. Tidak ada blok gelap.
 
+**Revisi keenam belas, 21 Oktober 2026 — About Me.** Isi About diganti narasi personal M. Rizki Firmansyah (EN/ID): heading "About Me", lead "Where imagination meets cinematic innovation.", tiga paragraf keahlian, dan closing. Layout dibuat kompak, process looping words tetap di samping, partner di bawah.
+
 **Revisi kelima belas, 21 Oktober 2026 — process looping words.** Daftar proses di About diganti komponen looping words bergaya Osmo: kata (STORY DIRECTION, VISUALS & CHARACTERS, EDITING & SOUND, PUBLISHING) bergerak vertikal dengan easing elastic, frame sudut pink mengikuti lebar kata, dan fade mask atas/bawah. Berhenti otomatis saat `prefers-reduced-motion`.
 
 **Revisi keempat belas, 21 Oktober 2026 — halaman 404.** URL tak dikenal sekarang menampilkan 404 kustom: teks "404, page not found." diketik karakter demi karakter dengan kursor blok pink, angka 404 raksasa sebagai ghost di belakang, tombol replay animasi, dan "Back home". Karena route group punya root layout masing-masing, boundary not-found bawaan tidak dipakai; middleware me-rewrite path tak dikenal ke `/not-found` dengan status 404 asli.

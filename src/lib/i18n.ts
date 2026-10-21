@@ -60,6 +60,14 @@ const en = {
       'Nominations',
     ],
   },
+  aboutMe: {
+    title: 'About Me',
+    lead: 'Where imagination meets cinematic innovation.',
+    p1: "I'm M. Rizki Firmansyah, the creative mind behind Ikymian Studios — an independent AI Filmmaker, Creative Director, and Visual Storyteller dedicated to redefining how stories are imagined and brought to life.",
+    p2: 'My expertise spans AI filmmaking, cinematic storytelling, short films, original series, music videos, creative advertising, character development, and generative visual production. I combine artistic direction, emotional storytelling, and advanced AI technology to create immersive, photorealistic cinematic experiences.',
+    p3: 'Beyond filmmaking, I develop creative AI workflows, educational content, and visual concepts that empower creators to push the boundaries of digital storytelling.',
+    closing: 'Crafting stories that connect, visuals that inspire, and experiences that stay with you.',
+  },
   about: {
     label: 'About',
     index: '03',
@@ -145,6 +153,14 @@ const id: Dict = {
       'Completed campaigns',
       'Nominations',
     ],
+  },
+  aboutMe: {
+    title: 'Tentang Saya',
+    lead: 'Tempat imajinasi bertemu inovasi sinematik.',
+    p1: 'Saya M. Rizki Firmansyah, sosok kreatif di balik Ikymian Studios — AI Filmmaker, Creative Director, dan Visual Storyteller independen yang berdedikasi mendefinisikan ulang cara cerita dibayangkan dan diwujudkan.',
+    p2: 'Keahlian saya mencakup AI filmmaking, cinematic storytelling, short film, series orisinal, music video, iklan kreatif, pengembangan karakter, dan produksi visual generatif. Saya memadukan arahan artistik, cerita yang emosional, dan teknologi AI untuk menghadirkan pengalaman sinematik yang imersif dan fotorealistis.',
+    p3: 'Di luar filmmaking, saya mengembangkan alur kerja AI kreatif, konten edukasi, dan konsep visual yang membantu kreator mendorong batas storytelling digital.',
+    closing: 'Merangkai cerita yang menyentuh, visual yang menginspirasi, dan pengalaman yang membekas.',
   },
   about: {
     label: 'Tentang',

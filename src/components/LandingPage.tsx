@@ -23,25 +23,6 @@ const partners = [
   { name: 'Pollo AI', src: '/images/partners/pollo.png' },
 ]
 
-function LexicalParagraphs({ data }: { data: AnyRecord }) {
-  const paragraphs = (data?.root?.children ?? [])
-    .filter((node: AnyRecord) => node?.type === 'paragraph')
-    .map((node: AnyRecord) =>
-      (node?.children ?? [])
-        .map((child: AnyRecord) => (typeof child?.text === 'string' ? child.text : ''))
-        .join(''),
-    )
-    .filter(Boolean)
-
-  return (
-    <>
-      {paragraphs.map((text: string, index: number) => (
-        <p key={index}>{text}</p>
-      ))}
-    </>
-  )
-}
-
 type LandingProps = {
   initialLocale: Locale
   cmsEn: AnyRecord
@@ -141,7 +122,6 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
   const worksLabel = cms.home?.works?.title || t.works.label
   const impactLabel = cms.home?.impact?.title || t.impact.label
   const impactNote = cms.home?.impact?.intro || t.impact.note
-  const aboutHeadline = cms.home?.about?.title || t.about.title
   const contactTitle = cms.home?.contact?.title || t.contact.title
 
   const formatDocs = Array.isArray(cms.formats) ? cms.formats : []
@@ -316,30 +296,30 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           </div>
         </section>
 
-        <section id="about" className="border-t border-line py-20 md:py-28">
+        <section id="about" className="border-t border-line py-16 md:py-20">
           <div className="mx-auto w-[min(1160px,calc(100%-32px))]">
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-medium tracking-[-0.035em]">
-                {t.about.label}
+                {t.aboutMe.title}
               </h2>
               <span className="text-[10px] uppercase tracking-[0.22em] text-pink">
                 {t.about.index} / About
               </span>
             </div>
 
-            <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:gap-14">
               <div className="lg:col-span-7">
-                <p className="font-display text-[clamp(1.6rem,2.8vw,2.2rem)] font-medium leading-[1.2] tracking-[-0.03em]">
-                  {aboutHeadline}
+                <p className="font-display text-[clamp(1.15rem,1.7vw,1.4rem)] leading-snug text-pink">
+                  {t.aboutMe.lead}
                 </p>
-                <p className="mt-6 max-w-[52ch] text-[17px] leading-relaxed">{t.about.lead}</p>
-                {cms.home?.about?.body ? (
-                  <div className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted [&_p]:mt-3">
-                    <LexicalParagraphs data={cms.home.about.body} />
-                  </div>
-                ) : (
-                  <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">{t.about.body}</p>
-                )}
+                <div className="mt-5 max-w-[58ch] space-y-3 text-[14px] leading-relaxed text-muted">
+                  <p>{t.aboutMe.p1}</p>
+                  <p>{t.aboutMe.p2}</p>
+                  <p>{t.aboutMe.p3}</p>
+                </div>
+                <p className="mt-6 text-[12px] uppercase tracking-[0.18em] text-pink">
+                  {t.aboutMe.closing}
+                </p>
               </div>
 
               <aside className="lg:col-span-5">
@@ -350,7 +330,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               </aside>
             </div>
 
-            <div className="mt-16 border-t border-line p-6">
+            <div className="mt-12 border-t border-line p-6">
               <p className="text-center text-[13px] uppercase tracking-[0.24em] text-pink">
                 {t.about.partnersLabel}
               </p>
