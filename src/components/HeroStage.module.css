@@ -294,7 +294,7 @@
   .stage { padding: 68px 16px 40px; min-height: calc(100dvh - 64px); }
   .small { font-size: 10vw; }
   .ghost { font-size: 17.5vw; }
-  .cards { height: 330px; top: auto; bottom: 200px; }
+  .cards { height: 330px; top: auto; bottom: 260px; }
   .c1 { width: 70px; height: 94px; left: 3%; top: 20px; }
   .c2 { width: 84px; height: 112px; left: 26%; top: 4px; }
   .c3 { width: 92px; height: 122px; left: 50%; top: 12px; }
@@ -309,7 +309,7 @@
   .subline {
     position: absolute;
     top: auto;
-    bottom: 32px;
+    bottom: 88px;
     left: 50%;
     display: flex;
     flex-direction: column-reverse;
