@@ -9,12 +9,12 @@ import HeroStage from '@/components/HeroStage'
 type AnyRecord = Record<string, any>
 
 const partners = [
-  { name: 'CapCut', src: '/images/partners/capcut.svg', className: 'brightness-0' },
-  { name: 'OiiOii', src: '/images/partners/oiioii.png', className: 'grayscale' },
-  { name: 'Pixmax', src: '/images/partners/pixmax.svg', className: 'brightness-0' },
-  { name: 'TopMediai', src: '/images/partners/topmediai.png', className: 'grayscale' },
-  { name: 'OpenArt', src: '/images/partners/openart.png', className: 'brightness-0' },
-  { name: 'AKOOL', src: '/images/partners/akool.png', className: 'brightness-0' },
+  { name: 'CapCut', src: '/images/partners/capcut.svg', invert: true },
+  { name: 'OiiOii', src: '/images/partners/oiioii.png' },
+  { name: 'Pixmax', src: '/images/partners/pixmax.svg' },
+  { name: 'TopMediai', src: '/images/partners/topmediai.png' },
+  { name: 'OpenArt', src: '/images/partners/openart.png', invert: true },
+  { name: 'AKOOL', src: '/images/partners/akool.png' },
 ]
 
 function LexicalParagraphs({ data }: { data: AnyRecord }) {
@@ -391,17 +391,27 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               </aside>
             </div>
 
-            <div className="mt-16 border-t border-line pt-8">
-              <p className="text-[10px] uppercase tracking-[0.18em] text-muted">{t.about.partnersLabel}</p>
-              <div className="mt-6 flex flex-wrap items-center gap-x-10 gap-y-6">
-                {partners.map((partner) => (
-                  <img
+            <div className="mt-16 border-t border-line pt-12">
+              <p className="text-center text-[10px] uppercase tracking-[0.24em] text-pink">
+                {t.about.partnersLabel}
+              </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+                {partners.map((partner, index) => (
+                  <span
                     key={partner.name}
-                    src={partner.src}
-                    alt={partner.name}
-                    loading="lazy"
-                    className={`h-5 w-auto object-contain opacity-60 transition-opacity hover:opacity-100 ${partner.className}`}
-                  />
+                    className="partner-float inline-flex items-center justify-center px-2"
+                    style={{
+                      animationDelay: `${index * 0.45}s`,
+                      animationDuration: `${6.5 + (index % 3)}s`,
+                    }}
+                  >
+                    <img
+                      src={partner.src}
+                      alt={partner.name}
+                      loading="lazy"
+                      className={`h-10 w-auto max-w-[190px] object-contain sm:h-14 ${partner.invert ? 'invert' : ''}`}
+                    />
+                  </span>
                 ))}
               </div>
             </div>
