@@ -193,7 +193,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
             {navItems.map((item: AnyRecord) => (
               <a
                 key={item.href}
-                className="hidden rounded-full px-3 py-2 text-[13px] text-muted transition-colors hover:bg-white/[0.06] hover:text-ink sm:block"
+                className="hidden rounded-full px-3 py-2 text-[13px] text-muted transition-colors hover:bg-white/[0.06] hover:text-pink sm:block"
                 href={item.href}
               >
                 {item.label}
@@ -218,7 +218,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               <h2 className="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-medium tracking-[-0.035em]">
                 {worksLabel}
               </h2>
-              <span className="text-[10px] uppercase tracking-[0.22em] text-muted">
+              <span className="text-[10px] uppercase tracking-[0.22em] text-pink">
                 {t.works.index} / Work
               </span>
             </div>
@@ -277,11 +277,11 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               </div>
             </div>
 
-            <p className="mt-16 text-[10px] uppercase tracking-[0.2em] text-muted">{t.works.other}</p>
+            <p className="mt-16 text-[10px] uppercase tracking-[0.2em] text-pink">{t.works.other}</p>
             <div className="mt-4 grid gap-4 md:grid-cols-12">
               {formats.map((format: AnyRecord, index: number) => {
                 const span = ['md:col-span-5', 'md:col-span-4', 'md:col-span-3'][index]
-                const tint = ['bg-milk/15', 'bg-pink/15', 'bg-indigo/10'][index]
+                const tint = ['bg-milk/15', 'bg-pink/20', 'bg-indigo/10'][index]
                 return (
                   <a
                     key={format.name}
@@ -312,13 +312,13 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           </div>
         </section>
 
-        <section id="impact" className="border-t border-line bg-pink/10 py-20 md:py-28">
+        <section id="impact" className="border-t border-line bg-pink/[0.16] py-20 md:py-28">
           <div className="mx-auto w-[min(1160px,calc(100%-32px))]">
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-medium tracking-[-0.035em]">
                 {impactLabel}
               </h2>
-              <span className="text-[10px] uppercase tracking-[0.22em] text-muted">
+              <span className="text-[10px] uppercase tracking-[0.22em] text-pink">
                 {t.impact.index} / Impact
               </span>
             </div>
@@ -358,7 +358,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               <h2 className="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-medium tracking-[-0.035em]">
                 {t.about.label}
               </h2>
-              <span className="text-[10px] uppercase tracking-[0.22em] text-muted">
+              <span className="text-[10px] uppercase tracking-[0.22em] text-pink">
                 {t.about.index} / About
               </span>
             </div>
@@ -379,7 +379,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               </div>
 
               <aside className="lg:col-span-5">
-                <p className="text-[10px] uppercase tracking-[0.18em] text-muted">{t.about.processLabel}</p>
+                <p className="text-[10px] uppercase tracking-[0.18em] text-pink">{t.about.processLabel}</p>
                 <ol className="mt-4 divide-y divide-line border-y border-line">
                   {t.about.process.map((step, index) => (
                     <li key={step} className="flex items-center justify-between gap-6 py-3 text-sm">
@@ -413,7 +413,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           className="border-t border-line py-20 md:py-28"
           style={{
             background:
-              'radial-gradient(ellipse 55% 75% at 85% 18%, rgba(255,138,193,0.2), transparent 62%), radial-gradient(ellipse 50% 70% at 6% 92%, rgba(111,141,255,0.22), transparent 64%), #0f1438',
+              'radial-gradient(ellipse 55% 75% at 85% 18%, rgba(255,138,193,0.3), transparent 62%), radial-gradient(ellipse 50% 70% at 6% 92%, rgba(111,141,255,0.22), transparent 64%), #0f1438',
           }}
         >
           <div className="mx-auto flex w-[min(1160px,calc(100%-32px))] flex-wrap items-end justify-between gap-10">
@@ -434,21 +434,21 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[13px] text-muted transition-colors hover:text-ink"
+                    className="text-[13px] text-muted transition-colors hover:text-pink"
                   >
                     {social.name}
                   </a>
                 ))}
               </div>
             </div>
-            <span className="text-[10px] uppercase tracking-[0.22em] text-muted">{t.contact.index} / Contact</span>
+            <span className="text-[10px] uppercase tracking-[0.22em] text-pink">{t.contact.index} / Contact</span>
           </div>
         </section>
       </main>
 
       <footer className="relative overflow-hidden border-t border-line bg-cream-deep">
         <div
-          className="pointer-events-none absolute -right-40 -top-40 h-[460px] w-[460px] rounded-full bg-pink/[0.12] blur-3xl"
+          className="pointer-events-none absolute -right-40 -top-40 h-[460px] w-[460px] rounded-full bg-pink/[0.18] blur-3xl"
           aria-hidden="true"
         />
         <div className="relative mx-auto w-[min(1160px,calc(100%-32px))] py-14">
@@ -471,11 +471,11 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
 
             <div className="flex flex-wrap gap-12 sm:gap-20">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.22em] text-muted">{t.footerNav}</p>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-pink">{t.footerNav}</p>
                 <ul className="mt-4 space-y-2.5 text-sm">
                   {navItems.map((item: AnyRecord) => (
                     <li key={item.href}>
-                      <a href={item.href} className="text-muted transition-colors hover:text-ink">
+                      <a href={item.href} className="text-muted transition-colors hover:text-pink">
                         {item.label}
                       </a>
                     </li>
@@ -483,7 +483,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
                 </ul>
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-[0.22em] text-muted">{t.footerSocial}</p>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-pink">{t.footerSocial}</p>
                 <ul className="mt-4 space-y-2.5 text-sm">
                   {socials.map((social: AnyRecord) => (
                     <li key={social.name}>
@@ -491,7 +491,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-muted transition-colors hover:text-ink"
+                        className="text-muted transition-colors hover:text-pink"
                       >
                         {social.name}
                       </a>
@@ -506,7 +506,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
             <span>{footerCopyright}</span>
             <div className="flex items-center gap-5">
               <span>Caisart Felix</span>
-              <a href="#top" className="transition-colors hover:text-ink">
+              <a href="#top" className="text-pink transition-colors hover:text-ink">
                 {t.footerTop} ↑
               </a>
             </div>
