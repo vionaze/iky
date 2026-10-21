@@ -31,6 +31,13 @@ const sans = Instrument_Sans({
 
 export const metadata: Metadata = {
   title: 'Ikymian Studios — AI Filmmaker & Content Creator',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
   description:
     'Portfolio of Ikymian Studios — series, music video, short film, and tutorial with an AI-driven creative approach.',
 }
