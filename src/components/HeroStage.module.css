@@ -258,16 +258,18 @@
 }
 
 .orb svg {
+  display: block;
+  margin: auto;
   animation: orb-bob 1.4s ease-in-out infinite;
 }
 
 @keyframes orb-bob {
   0%,
   100% {
-    transform: translateY(-2px);
+    transform: translateY(-1.5px);
   }
   50% {
-    transform: translateY(2px);
+    transform: translateY(1.5px);
   }
 }
 
