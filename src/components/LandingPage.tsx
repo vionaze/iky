@@ -393,7 +393,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               </span>
             </div>
 
-            <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:gap-14">
+            <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:gap-12">
               <div className="lg:col-span-7">
                 <p className="font-display text-[clamp(1.15rem,1.7vw,1.4rem)] leading-snug text-pink">
                   {aboutMe.lead}
@@ -406,14 +406,27 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
                 <p className="mt-6 text-[12px] uppercase tracking-[0.18em] text-pink">
                   {aboutMe.closing}
                 </p>
+
+                <div className="mt-10 border-t border-line pt-8">
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-pink">
+                    {t.about.processLabel}
+                  </p>
+                  <div className="mt-5">
+                    <LoopingWords words={processWords} />
+                  </div>
+                </div>
               </div>
 
-              <aside className="lg:col-span-5">
-                <p className="text-[10px] uppercase tracking-[0.18em] text-pink">{t.about.processLabel}</p>
-                <div className="mt-6">
-                  <LoopingWords words={processWords} />
+              <div className="lg:col-span-5">
+                <div className="overflow-hidden rounded-[22px] border border-line lg:sticky lg:top-28">
+                  <img
+                    src="/images/about/caisart.jpg"
+                    alt="M. Rizki Firmansyah — Ikymian Studios"
+                    className="aspect-[4/5] w-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
-              </aside>
+              </div>
             </div>
 
             <div className="mt-12 mb-6 border-t border-line p-6">
