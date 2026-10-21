@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #161c4c;
+  --color-cream-deep: #0f1438;
+  --color-milk: #7f9dff;
+  --color-pink: #ff8ac1;
+  --color-indigo: #ffa3d0;
+  --color-blue: #6f8dff;
+  --color-ink: #f4f3ff;
+  --color-muted: rgba(244, 243, 255, 0.66);
+  --color-line: rgba(255, 255, 255, 0.12);
+
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-instrument);
+
+  --animate-rise: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply text-ink font-sans antialiased;
+
+    background-color: var(--color-cream);
+    background-image:
+      radial-gradient(48rem 34rem at 0% 0%, rgba(111, 141, 255, 0.22), transparent 62%),
+      radial-gradient(46rem 32rem at 100% 4%, rgba(255, 138, 193, 0.24), transparent 58%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: var(--color-pink);
+    color: #14002a;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-indigo);
+    outline-offset: 4px;
+    border-radius: 6px;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes partner-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.partner-float {
+  animation: partner-float 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes footer-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.footer-marquee {
+  animation: footer-marquee 32s linear infinite;
+}
+
+html.intro-seen [data-preloader] {
+  display: none;
+}
+
+html.intro-reveal main {
+  animation: site-in 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes site-in {
+  from {
+    opacity: 0.55;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-rise {
+    animation: none;
+  }
+
+  html.intro-reveal main {
+    animation: none;
+  }
+
+  .partner-float,
+  .footer-marquee {
+    animation: none;
+  }
+}

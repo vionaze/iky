@@ -1,0 +1,50 @@
+{
+  "name": "ikymian-studios",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "sync:stats": "node scripts/sync-stats.mjs"
+  },
+  "dependencies": {
+    "@payloadcms/db-sqlite": "3.91.0",
+    "@payloadcms/next": "3.91.0",
+    "@payloadcms/richtext-lexical": "3.91.0",
+    "@payloadcms/ui": "3.91.0",
+    "cross-env": "^10.1.0",
+    "dotenv": "^16.4.7",
+    "graphql": "^16.8.1",
+    "gsap": "^3.15.0",
+    "next": "15.4.11",
+    "payload": "3.91.0",
+    "react": "19.1.10",
+    "react-dom": "19.1.10",
+    "sharp": "^0.34.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.186.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20.18.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp",
+      "esbuild",
+      "unrs-resolver"
+    ]
+  }
+}

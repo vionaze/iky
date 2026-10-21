@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ikymian Studios — AI Filmmaker &amp; Content Creator</title>
+<meta name="description" content="Portfolio of Ikymian Studios — series, music video, short film, and tutorial with an AI-driven creative approach.">
+<link rel="canonical" href="https://ikymianstudios.si/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf7f2;
+    --cream-deep: #f3eee6;
+    --blue-soft: #e8f1fb;
+    --blue-deep: #d3e6f9;
+    --pink-soft: #fbe8f0;
+    --pink-deep: #f6d2e1;
+    --milk-blue: #b8d4f2;
+    --pale-pink: #f0cbdc;
+    --indigo: #51439a;
+    --ink: #252541;
+    --muted: #606074;
+    --line: rgba(37, 37, 65, .12);
+    --page: 1160px;
+    --ease: cubic-bezier(.16, 1, .3, 1);
+    --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; background: var(--cream); }
+  body {
+    margin: 0; background: var(--cream); color: var(--ink);
+    font-family: var(--sans); font-weight: 400; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  ::selection { background: var(--pale-pink); color: var(--ink); }
+
+  .wrap { width: min(var(--page), calc(100% - 48px)); margin-inline: auto; }
+
+  .skip { position: absolute; left: -9999px; top: 0; z-index: 60; background: var(--ink); color: var(--cream); padding: 12px 18px; }
+  .skip:focus { left: 0; }
+  :focus-visible { outline: 2px solid var(--indigo); outline-offset: 4px; border-radius: 6px; }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 30;
+    background: rgba(250, 247, 242, .58);
+    backdrop-filter: blur(18px) saturate(150%);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; }
+  .brand { display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
+  .brand strong { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+  .brand span { font-size: 10px; color: var(--muted); letter-spacing: .2em; text-transform: uppercase; }
+
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a {
+    text-decoration: none; font-size: 13px; color: var(--muted);
+    padding-block: 4px; border-bottom: 1px solid transparent;
+    transition: color .25s var(--ease), border-color .25s var(--ease);
+  }
+  .nav-links a:hover { color: var(--ink); border-color: var(--indigo); }
+
+  .lang { display: inline-flex; align-items: center; gap: 2px; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: rgba(255, 255, 255, .5); }
+  .lang button {
+    appearance: none; border: 0; background: transparent; cursor: pointer;
+    font: inherit; font-size: 11px; letter-spacing: .08em; font-weight: 500;
+    color: var(--muted); padding: 5px 10px; border-radius: 999px;
+    transition: background .25s var(--ease), color .25s var(--ease);
+  }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: var(--cream); }
+  .lang button:hover { color: var(--ink); }
+  .lang button[aria-pressed="true"]:hover { color: var(--cream); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    background: linear-gradient(104deg, var(--blue-deep) 0%, #f2e6ee 52%, var(--pink-deep) 100%);
+  }
+  .hero::before,
+  .hero::after {
+    content: ""; position: absolute; border-radius: 50%; pointer-events: none;
+    filter: blur(80px); opacity: .72; z-index: 0;
+  }
+  .hero::before { width: 620px; height: 620px; top: -180px; left: -140px; background: var(--milk-blue); opacity: .8; }
+  .hero::after { width: 560px; height: 560px; top: 20px; right: -140px; background: var(--pale-pink); opacity: .8; }
+  .hero-glow { position: absolute; width: 620px; height: 420px; bottom: -180px; left: 38%; background: var(--indigo); opacity: .16; filter: blur(110px); border-radius: 50%; pointer-events: none; }
+
+  .hero-grid {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1.04fr .96fr; align-items: center;
+    gap: 36px; min-height: calc(90dvh - 72px); padding-block: 48px 40px;
+  }
+  .hero-copy { max-width: 620px; min-width: 0; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 12px; margin: 0 0 28px;
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+  }
+  .eyebrow::before { content: ""; width: 30px; height: 1px; background: var(--indigo); }
+
+  .hero h1 {
+    margin: 0 0 26px; font-weight: 500;
+    font-size: clamp(46px, 6vw, 82px); line-height: .98; letter-spacing: -.045em;
+    max-width: 13ch;
+  }
+  .hero p.lead { margin: 0 0 34px; font-size: clamp(15px, 1.45vw, 18px); line-height: 1.65; color: var(--muted); max-width: 40ch; }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px; text-decoration: none;
+    font-size: 14px; font-weight: 500; padding: 13px 22px; border-radius: 999px;
+    transition: transform .3s var(--ease), background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+  }
+  .btn:active { transform: translateY(-1px) scale(.99); }
+  .btn--solid { background: var(--indigo); color: var(--cream); }
+  .btn--solid:hover { background: var(--ink); }
+  .btn--ghost { border: 1px solid rgba(37, 37, 65, .18); color: var(--ink); }
+  .btn--ghost:hover { border-color: var(--indigo); color: var(--indigo); }
+  .btn .arrow { transition: transform .3s var(--ease); font-size: 13px; }
+  .btn:hover .arrow { transform: translate(2px, -2px); }
+
+  .hero-portrait { position: relative; display: flex; justify-content: center; align-items: flex-end; }
+  .hero-portrait img {
+    width: auto; height: auto; max-width: 100%; max-height: min(74vh, 640px);
+    object-fit: contain; filter: drop-shadow(0 34px 60px rgba(37, 37, 65, .16));
+  }
+
+  /* ---------- sections ---------- */
+  section { scroll-margin-top: 88px; }
+  .section { padding-block: 104px; }
+  #work { background: var(--blue-soft); }
+  #impact { background: var(--pink-soft); }
+  .section + .section { border-top: 1px solid var(--line); }
+
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 42px; }
+  .section-head h2 { margin: 0; font-size: clamp(30px, 3.6vw, 44px); font-weight: 500; letter-spacing: -.035em; line-height: 1.05; }
+  .section-head .index { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .section-intro { max-width: 54ch; margin: -22px 0 48px; color: var(--muted); font-size: 16px; }
+
+  /* ---------- featured series ---------- */
+  .series-feature { display: grid; grid-template-columns: .82fr 1.18fr; gap: 56px; align-items: start; }
+  .series-poster {
+    position: relative; display: block; border-radius: 18px; overflow: hidden;
+    background: var(--cream); border: 1px solid rgba(37, 37, 65, .08);
+    aspect-ratio: 9 / 16; max-width: 380px; width: 100%;
+  }
+  .series-poster img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease); }
+  .series-poster:hover img { transform: scale(1.03); }
+  .series-poster::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(37, 37, 65, .55), transparent 46%); }
+  .series-flag {
+    position: absolute; left: 14px; top: 14px; z-index: 2;
+    font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--cream); background: rgba(37, 37, 65, .35);
+    border: 1px solid rgba(250, 247, 242, .3); border-radius: 999px; padding: 6px 12px;
+    backdrop-filter: blur(6px);
+  }
+
+  .series-side h3 { margin: 4px 0 14px; font-size: clamp(26px, 2.8vw, 34px); font-weight: 500; letter-spacing: -.03em; line-height: 1.08; }
+  .series-side .desc { margin: 0 0 30px; color: var(--muted); max-width: 46ch; font-size: 15.5px; }
+
+  .episode-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .episode-list li { border-bottom: 1px solid var(--line); }
+  .episode-list a {
+    display: grid; grid-template-columns: 54px 1fr auto auto; align-items: center; gap: 16px;
+    padding: 15px 4px; text-decoration: none;
+    transition: padding-left .3s var(--ease), background .3s var(--ease);
+  }
+  .episode-list a:hover { padding-left: 10px; background: rgba(81, 67, 154, .04); }
+  .episode-list .ep { font-size: 10px; letter-spacing: .16em; color: var(--indigo); text-transform: uppercase; }
+  .episode-list .name { font-size: 16px; letter-spacing: -.01em; }
+  .episode-list .dur { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .episode-list .arrow { font-size: 15px; color: var(--muted); transition: transform .3s var(--ease), color .3s var(--ease); }
+  .episode-list a:hover .arrow { transform: translate(3px, -3px); color: var(--indigo); }
+
+  /* ---------- other formats ---------- */
+  .formats-label { margin: 76px 0 18px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .format-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .format-card {
+    display: flex; flex-direction: column; justify-content: space-between; gap: 44px;
+    min-height: 210px; padding: 24px; border-radius: 18px; text-decoration: none;
+    border: 1px solid rgba(37, 37, 65, .08);
+    transition: transform .35s var(--ease), border-color .35s var(--ease);
+  }
+  .format-card:hover { transform: translateY(-3px); border-color: rgba(81, 67, 154, .35); }
+  .format-card .cat { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  .format-card .name { font-size: clamp(22px, 2.2vw, 28px); letter-spacing: -.03em; line-height: 1.1; display: block; }
+  .format-card .foot { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--muted); margin-top: 10px; }
+  .format-card .foot .arrow { font-size: 15px; transition: transform .3s var(--ease); }
+  .format-card:hover .foot .arrow { transform: translate(3px, -3px); }
+  .format-card--blue { background: rgba(184, 212, 242, .55); }
+  .format-card--pink { background: rgba(240, 203, 220, .62); }
+  .format-card--indigo { background: rgba(81, 67, 154, .10); }
+
+  /* ---------- impact ---------- */
+  .impact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 48px; }
+  .metric { padding: 22px 0; border-top: 1px solid var(--line); }
+  .metric dt { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  .metric dd { margin: 10px 0 0; font-size: clamp(28px, 3.2vw, 40px); font-weight: 500; letter-spacing: -.03em; }
+  .metric dd.empty { font-size: 14px; font-weight: 400; color: var(--muted); padding-top: 6px; letter-spacing: 0; }
+  .impact-note { margin-top: 32px; font-size: 13px; color: var(--muted); max-width: 62ch; }
+
+  /* ---------- about ---------- */
+  .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: start; }
+  .about-copy p { margin: 0 0 20px; font-size: 17px; line-height: 1.68; max-width: 48ch; }
+  .about-copy p:first-child { font-size: clamp(21px, 2.1vw, 26px); line-height: 1.4; letter-spacing: -.02em; max-width: 30ch; margin-bottom: 24px; }
+  .about-copy p:last-child { margin-bottom: 0; color: var(--muted); }
+  .process { border-left: 1px solid var(--line); padding-left: 30px; }
+  .process .label { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  .process ul { list-style: none; margin: 16px 0 0; padding: 0; }
+  .process li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .process li span:last-child { font-size: 11px; color: var(--indigo); font-variant-numeric: tabular-nums; }
+
+  .partners { margin-top: 68px; padding-top: 30px; border-top: 1px solid var(--line); }
+  .partners .label { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  .partner-row { display: flex; flex-wrap: wrap; align-items: center; gap: 28px 42px; margin-top: 24px; }
+  .partner-row img { height: 20px; width: auto; object-fit: contain; filter: brightness(0) opacity(.58); transition: filter .3s var(--ease), opacity .3s var(--ease); }
+  .partner-row img:hover { filter: brightness(0) opacity(.92); }
+  .partner-row .capcut { color: var(--ink); }
+
+  /* ---------- contact ---------- */
+  .contact {
+    background:
+      radial-gradient(ellipse 55% 75% at 88% 18%, rgba(246, 210, 225, .95), transparent 62%),
+      radial-gradient(ellipse 50% 70% at 6% 92%, rgba(211, 230, 249, .95), transparent 64%),
+      linear-gradient(118deg, var(--pink-soft) 0%, #f4eaf3 48%, var(--blue-soft) 100%);
+  }
+  .contact-grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
+  .contact h2 { margin: 0 0 22px; font-size: clamp(38px, 5.4vw, 68px); font-weight: 500; letter-spacing: -.045em; line-height: .98; max-width: 13ch; }
+  .mail { display: inline-block; font-size: clamp(18px, 2.2vw, 26px); text-decoration: none; border-bottom: 1px solid var(--indigo); padding-bottom: 3px; transition: color .3s var(--ease); }
+  .mail:hover { color: var(--indigo); }
+  .socials { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 34px; }
+  .socials a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color .25s var(--ease); }
+  .socials a:hover { color: var(--ink); }
+
+  /* ---------- footer ---------- */
+  .footer { background: var(--cream); border-top: 1px solid var(--line); padding-block: 28px 38px; }
+  .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--muted); }
+
+  /* ---------- reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .series-poster:hover img, .format-card:hover { transform: none; }
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 1000px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 26px; min-height: 0; padding-block: 44px 40px; }
+    .hero-portrait { justify-content: flex-start; }
+    .hero-portrait img { max-height: 48vh; }
+    .hero h1 { max-width: 14ch; }
+    .series-feature { grid-template-columns: 1fr; gap: 32px; }
+    .series-poster { max-width: 460px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .process { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
+    .impact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .contact-grid { grid-template-columns: 1fr; align-items: start; }
+  }
+
+  @media (max-width: 720px) {
+    .wrap { width: calc(100% - 32px); }
+    .nav-inner { min-height: 64px; }
+    .nav-links { gap: 16px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero h1 { font-size: clamp(38px, 10.4vw, 56px); max-width: 12ch; }
+    .hero::before, .hero::after { filter: blur(60px); opacity: .6; }
+    .section { padding-block: 72px; }
+    .section-head { flex-direction: column; gap: 8px; margin-bottom: 30px; }
+    .section-intro { margin-top: -16px; }
+    .episode-list a { grid-template-columns: 46px 1fr auto; gap: 12px; padding: 14px 2px; }
+    .episode-list .dur { display: none; }
+    .format-grid { grid-template-columns: 1fr; gap: 14px; }
+    .format-card { min-height: 150px; gap: 30px; }
+    .impact-grid { grid-template-columns: 1fr; }
+    .partners { margin-top: 50px; }
+    .partner-row { gap: 22px 28px; }
+    .partner-row img { height: 17px; }
+    .footer-inner { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#work">Skip to work</a>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Ikymian Studios">
+      <strong>Ikymian Studios</strong>
+      <span>Caisart Felix</span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#work" data-id="Karya" data-en="Work">Karya</a>
+      <a href="#about" data-id="Tentang" data-en="About">Tentang</a>
+      <a href="#contact" data-id="Kontak" data-en="Contact">Kontak</a>
+      <div class="lang" role="group" aria-label="Language / Bahasa">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="id" aria-pressed="false">ID</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <span class="hero-glow" aria-hidden="true"></span>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow reveal" data-id="AI Filmmaker &amp; Content Creator" data-en="AI Filmmaker &amp; Content Creator">AI Filmmaker &amp; Content Creator</p>
+        <h1 class="reveal" style="--i:1"
+            data-id="Cerita, musik, dan ide yang menjadi visual."
+            data-en="Stories, music, and ideas turned into visuals.">Cerita, musik, dan ide yang menjadi visual.</h1>
+        <p class="lead reveal" style="--i:2"
+           data-id="Series, music video, short film, dan tutorial dengan pendekatan kreatif berbasis AI."
+           data-en="Series, music videos, short films, and tutorials with an AI-driven creative approach.">Series, music video, short film, dan tutorial dengan pendekatan kreatif berbasis AI.</p>
+        <div class="cta-row reveal" style="--i:3">
+          <a class="btn btn--solid" href="#work">
+            <span data-id="Lihat Karya" data-en="View Work">Lihat Karya</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="btn btn--ghost" href="#contact">
+            <span data-id="Diskusi Kolaborasi" data-en="Start a Project">Diskusi Kolaborasi</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-portrait reveal" style="--i:2">
+        <img src="images/hero-1.png" alt="Portrait of an Ikymian Studios visual character" data-alt-id="Potret karakter visual Ikymian Studios" data-alt-en="Portrait of an Ikymian Studios visual character" width="1200" height="896">
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 data-id="Karya Pilihan" data-en="Selected Works">Karya Pilihan</h2>
+        <span class="index">01 / Work</span>
+      </div>
+      <p class="section-intro reveal"
+         data-id="Satu series, satu music video, satu short film, dan satu tutorial."
+         data-en="One series, one music video, one short film, and one tutorial.">Satu series, satu music video, satu short film, dan satu tutorial.</p>
+
+      <div class="series-feature">
+        <a class="series-poster reveal" href="https://www.tiktok.com/@damiann101/video/7692173774682131733" target="_blank" rel="noopener">
+          <img src="images/works/berondong/ep01.jpg" alt="Poster Berondong Sebelah Rumah" loading="lazy">
+          <span class="series-flag" data-id="Series · 5 episode" data-en="Series · 5 episodes">Series · 5 episode</span>
+        </a>
+        <div class="series-side">
+          <h3 class="reveal">Berondong Sebelah Rumah</h3>
+          <p class="desc reveal"
+             data-id="AI micro-drama lima episode. Elian dan Aurelia, dua dunia yang bertemu di satu rumah. Dibuat dengan CapCut dan Seedance 2.5."
+             data-en="A five-episode AI micro-drama. Elian and Aurelia, two worlds meeting in one house. Made with CapCut and Seedance 2.5.">AI micro-drama lima episode. Elian dan Aurelia, dua dunia yang bertemu di satu rumah. Dibuat dengan CapCut dan Seedance 2.5.</p>
+          <ol class="episode-list reveal" style="--i:2">
+            <li><a href="https://www.tiktok.com/@damiann101/video/7692173774682131733" target="_blank" rel="noopener">
+              <span class="ep">EP 01</span>
+              <span class="name" data-id="Episode 01" data-en="Episode 01">Episode 01</span>
+              <span class="dur">1:59</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a></li>
+            <li><a href="https://www.tiktok.com/@damiann101/video/7692619848244890900" target="_blank" rel="noopener">
+              <span class="ep">EP 02</span>
+              <span class="name" data-id="Terlalu Dekat" data-en="Too Close">Terlalu Dekat</span>
+              <span class="dur">2:01</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a></li>
+            <li><a href="https://www.tiktok.com/@damiann101/video/7692863785836678421" target="_blank" rel="noopener">
+              <span class="ep">EP 03</span>
+              <span class="name" data-id="Mantan Suami" data-en="The Ex-Husband">Mantan Suami</span>
+              <span class="dur">2:03</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a></li>
+            <li><a href="https://www.tiktok.com/@damiann101/video/7693810204948974869" target="_blank" rel="noopener">
+              <span class="ep">EP 04</span>
+              <span class="name" data-id="Jangan Bikin Gue Nyaman" data-en="Don't Make Me Comfortable">Jangan Bikin Gue Nyaman</span>
+              <span class="dur">2:03</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a></li>
+            <li><a href="https://www.tiktok.com/@damiann101/video/7695612157299379476" target="_blank" rel="noopener">
+              <span class="ep">EP 05</span>
+              <span class="name" data-id="Bukan Tempat Gue" data-en="Not My Place">Bukan Tempat Gue</span>
+              <span class="dur">1:56</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a></li>
+          </ol>
+        </div>
+      </div>
+
+      <p class="formats-label reveal" data-id="Format lain" data-en="Other formats">Format lain</p>
+      <div class="format-grid">
+        <a class="format-card format-card--blue reveal" href="https://www.instagram.com/reel/Dd89pg1SnHS/" target="_blank" rel="noopener">
+          <span class="cat">01</span>
+          <span>
+            <span class="name" data-id="Tutorial" data-en="Tutorial">Tutorial</span>
+            <span class="foot"><span>Instagram</span><span class="arrow" aria-hidden="true">↗</span></span>
+          </span>
+        </a>
+        <a class="format-card format-card--pink reveal" style="--i:1" href="https://www.instagram.com/reel/DcfJ7wEyVAA/" target="_blank" rel="noopener">
+          <span class="cat">02</span>
+          <span>
+            <span class="name" data-id="Short Film" data-en="Short Film">Short Film</span>
+            <span class="foot"><span>Instagram</span><span class="arrow" aria-hidden="true">↗</span></span>
+          </span>
+        </a>
+        <a class="format-card format-card--indigo reveal" style="--i:2" href="https://www.instagram.com/reel/DejefTNSRs7/" target="_blank" rel="noopener">
+          <span class="cat">03</span>
+          <span>
+            <span class="name" data-id="Music Video" data-en="Music Video">Music Video</span>
+            <span class="foot"><span>Instagram</span><span class="arrow" aria-hidden="true">↗</span></span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="impact" class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 data-id="Jangkauan" data-en="Reach">Jangkauan</h2>
+        <span class="index">02 / Impact</span>
+      </div>
+      <dl class="impact-grid">
+        <div class="metric reveal"><dt data-id="Total views" data-en="Total views">Total views</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:1"><dt data-id="Followers" data-en="Followers">Followers</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:2"><dt data-id="Engagement" data-en="Engagement">Engagement</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:3"><dt data-id="Videos created" data-en="Videos created">Videos created</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:4"><dt data-id="Completed campaigns" data-en="Completed campaigns">Completed campaigns</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+        <div class="metric reveal" style="--i:5"><dt data-id="Nominations" data-en="Nominations">Nominations</dt><dd class="empty" data-id="Belum tersedia" data-en="Not available yet">Belum tersedia</dd></div>
+      </dl>
+      <p class="impact-note reveal"
+         data-id="Angka belum terhubung. Views akan diisi otomatis dari API resmi; metrik lain diisi dari data terverifikasi."
+         data-en="Numbers are not connected yet. Views will sync automatically from official APIs; other metrics come from verified records.">Angka belum terhubung. Views akan diisi otomatis dari API resmi; metrik lain diisi dari data terverifikasi.</p>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 data-id="Tentang" data-en="About">Tentang</h2>
+        <span class="index">03 / About</span>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy reveal">
+          <p data-id="Series, music video, short film, dan tutorial — mengeksplorasi cara ide berkembang menjadi cerita dan visual melalui AI."
+             data-en="Series, music videos, short films, and tutorials — exploring how ideas become stories and visuals through AI.">Series, music video, short film, dan tutorial — mengeksplorasi cara ide berkembang menjadi cerita dan visual melalui AI.</p>
+          <p data-id="Berondong Sebelah Rumah adalah AI micro-drama lima episode, dibuat dengan CapCut dan Seedance 2.5."
+             data-en="Berondong Sebelah Rumah is a five-episode AI micro-drama, made with CapCut and Seedance 2.5.">Berondong Sebelah Rumah adalah AI micro-drama lima episode, dibuat dengan CapCut dan Seedance 2.5.</p>
+        </div>
+        <aside class="process reveal" style="--i:2">
+          <span class="label" data-id="Proses" data-en="Process">Proses</span>
+          <ul>
+            <li><span data-id="Arah cerita" data-en="Story direction">Arah cerita</span><span>01</span></li>
+            <li><span data-id="Visual &amp; karakter" data-en="Visuals &amp; characters">Visual &amp; karakter</span><span>02</span></li>
+            <li><span data-id="Editing &amp; suara" data-en="Editing &amp; sound">Editing &amp; suara</span><span>03</span></li>
+            <li><span data-id="Publikasi" data-en="Publishing">Publikasi</span><span>04</span></li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="partners reveal">
+        <span class="label" data-id="Mitra Kreatif" data-en="Creative Partner">Mitra Kreatif</span>
+        <div class="partner-row">
+          <img class="capcut" src="images/partners/capcut.svg" alt="CapCut" loading="lazy">
+          <img src="images/partners/oiioii.png" alt="OiiOii" loading="lazy">
+          <img src="images/partners/pixmax.svg" alt="Pixmax" loading="lazy">
+          <img src="images/partners/topmediai.png" alt="TopMediai" loading="lazy">
+          <img src="images/partners/openart.png" alt="OpenArt" loading="lazy">
+          <img src="images/partners/akool.png" alt="AKOOL" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 class="reveal" data-id="Mari buat sesuatu." data-en="Let's make something.">Mari buat sesuatu.</h2>
+        <a class="mail reveal" href="mailto:ariesiky8@gmail.com">ariesiky8@gmail.com</a>
+        <div class="socials reveal">
+          <a href="https://instagram.com/ikymianvt" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@caisarttfelix" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://www.youtube.com/@ikymian_dramas" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://x.com/ikymianstudios" target="_blank" rel="noopener">X</a>
+          <a href="https://www.threads.com/@ikymian_series" target="_blank" rel="noopener">Threads</a>
+        </div>
+      </div>
+      <span class="index reveal" style="--i:2">04 / Contact</span>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span>© 2026 Ikymian Studios</span>
+    <span>Caisart Felix</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var nodes = document.querySelectorAll("[data-id]");
+    var buttons = document.querySelectorAll(".lang button");
+
+    function setLang(lang) {
+      var next = lang === "en" ? "en" : "id";
+      document.documentElement.lang = next;
+      nodes.forEach(function (el) {
+        var value = el.getAttribute("data-" + next);
+        if (value !== null) el.textContent = value;
+        var alt = el.getAttribute("data-alt-" + next);
+        if (alt !== null) el.setAttribute("alt", alt);
+      });
+      buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === next)); });
+      try { localStorage.setItem("lang", next); } catch (e) {}
+    }
+
+    buttons.forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
+
+    var saved = "en";
+    try { saved = localStorage.getItem("lang") || "en"; } catch (e) {}
+    setLang(saved);
+
+    var revealed = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      revealed.forEach(function (el) { el.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add("in"); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
+    revealed.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+</body>
+</html>
