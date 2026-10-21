@@ -14,7 +14,7 @@ const cards: CardData[] = [
   { kind: 'photo', src: '/images/hero-3.webp', fit: 'cover', alt: 'Ikymian Studios portrait' },
   { kind: 'photo', src: '/images/hero-1.png', fit: 'cover', alt: 'Ikymian Studios portrait' },
   { kind: 'label', tone: 'pink', label: 'Format', value: 'Music Video' },
-  { kind: 'photo', src: '/images/works/berondong/ep01.jpg', fit: 'contain', alt: 'Berondong Sebelah Rumah' },
+  { kind: 'photo', src: '/images/works/berondong/ep01.jpg', fit: 'cover', alt: 'Berondong Sebelah Rumah' },
   { kind: 'label', tone: 'cream', label: 'Format', value: 'Short Film' },
   { kind: 'photo', src: '/images/hero-2.png', fit: 'cover', alt: 'Ikymian Studios portrait' },
   { kind: 'label', tone: 'indigo', label: 'Format', value: 'Tutorial' },
