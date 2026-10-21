@@ -77,6 +77,7 @@ export default function WorksCarousel({ label, index, intro, cards }: WorksCarou
             <li key={`${card.title}-${cardIndex}`} className={styles.card}>
               <a href="#work" aria-label={`${card.kicker}: ${card.title}`}>
                 <img src={card.img} alt="" loading="lazy" />
+                <span className={styles.glow} aria-hidden="true" />
                 <span className={styles.overlay}>
                   <span className={styles.cardKicker}>{card.kicker}</span>
                   <span className={styles.cardTitle}>{card.title}</span>
