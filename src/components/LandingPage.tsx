@@ -204,7 +204,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           cta={t.heroStage.cta}
         />
 
-        <section id="work" className="border-t border-line bg-[#eaf0ff] py-20 md:py-28">
+        <section id="work" className="border-t border-line bg-cream-deep py-20 md:py-28">
           <div className="mx-auto w-[min(1160px,calc(100%-32px))]">
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-medium tracking-[-0.035em]">
@@ -231,7 +231,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
                       className="aspect-[9/16] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                       loading="lazy"
                     />
-                    <span className="absolute left-4 top-4 rounded-full border border-cream/30 bg-ink/35 px-3 py-1.5 text-[10px] uppercase tracking-[0.16em] text-cream backdrop-blur">
+                    <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/40 px-3 py-1.5 text-[10px] uppercase tracking-[0.16em] text-white backdrop-blur">
                       {seriesMeta}
                     </span>
                   </a>
@@ -273,7 +273,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
             <div className="mt-4 grid gap-4 md:grid-cols-12">
               {formats.map((format: AnyRecord, index: number) => {
                 const span = ['md:col-span-5', 'md:col-span-4', 'md:col-span-3'][index]
-                const tint = ['bg-milk/50', 'bg-pink/55', 'bg-indigo/[0.09]'][index]
+                const tint = ['bg-milk/15', 'bg-pink/15', 'bg-indigo/10'][index]
                 return (
                   <a
                     key={format.name}
@@ -304,7 +304,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           </div>
         </section>
 
-        <section id="impact" className="border-t border-line bg-pink/40 py-20 md:py-28">
+        <section id="impact" className="border-t border-line bg-pink/10 py-20 md:py-28">
           <div className="mx-auto w-[min(1160px,calc(100%-32px))]">
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-medium tracking-[-0.035em]">
@@ -405,7 +405,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           className="border-t border-line py-20 md:py-28"
           style={{
             background:
-              'radial-gradient(ellipse 55% 75% at 85% 18%, rgba(255,209,230,0.9), transparent 62%), radial-gradient(ellipse 50% 70% at 6% 92%, rgba(205,223,255,0.9), transparent 64%), #f6f4ff',
+              'radial-gradient(ellipse 55% 75% at 85% 18%, rgba(255,143,196,0.16), transparent 62%), radial-gradient(ellipse 50% 70% at 6% 92%, rgba(91,140,255,0.18), transparent 64%), #0b0a18',
           }}
         >
           <div className="mx-auto flex w-[min(1160px,calc(100%-32px))] flex-wrap items-end justify-between gap-10">

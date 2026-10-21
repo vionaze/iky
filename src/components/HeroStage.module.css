@@ -8,9 +8,9 @@
   align-items: center;
   justify-content: center;
   background:
-    radial-gradient(90% 65% at 10% 0%, #e0eaff 0%, transparent 58%),
-    radial-gradient(80% 60% at 92% 16%, #ffe0ee 0%, transparent 54%),
-    linear-gradient(180deg, #faf9ff 0%, #f2efff 100%);
+    radial-gradient(90% 65% at 10% 0%, rgba(77, 124, 254, 0.28) 0%, transparent 58%),
+    radial-gradient(80% 60% at 92% 16%, rgba(244, 114, 182, 0.2) 0%, transparent 54%),
+    linear-gradient(180deg, #0d0b1c 0%, #090814 100%);
 }
 
 .grain {
@@ -72,7 +72,7 @@
   font-size: clamp(96px, 19vw, 280px);
   line-height: 0.85;
   letter-spacing: -0.045em;
-  color: #c3bce8;
+  color: #2c2749;
   text-align: center;
   white-space: nowrap;
   user-select: none;
@@ -103,9 +103,9 @@
   will-change: transform;
   background: linear-gradient(180deg, #a9c9ff 0%, #cbb6ff 52%, #ffc5df 100%);
   box-shadow:
-    0 30px 50px -18px rgba(21, 19, 43, 0.35),
+    0 30px 50px -18px rgba(0, 0, 0, 0.5),
     0 12px 24px -10px rgba(91, 75, 255, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
   transition: box-shadow 0.5s cubic-bezier(0.6, 0, 0.2, 1);
 }
 
@@ -117,18 +117,18 @@
   border-radius: inherit;
   background: linear-gradient(
     155deg,
-    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.14) 0%,
     transparent 32%,
     transparent 70%,
-    rgba(21, 19, 43, 0.12) 100%
+    rgba(255, 255, 255, 0.08) 100%
   );
 }
 
 .card:hover {
   box-shadow:
-    0 44px 70px -22px rgba(21, 19, 43, 0.42),
+    0 44px 70px -22px rgba(0, 0, 0, 0.55),
     0 20px 36px -12px rgba(91, 75, 255, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .card img {
@@ -160,7 +160,7 @@
   font-size: 9px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(21, 19, 43, 0.55);
+  color: rgba(245, 243, 255, 0.55);
 }
 
 .label .v {
@@ -174,15 +174,15 @@
 }
 
 .labelBlue {
-  background: linear-gradient(165deg, #d8e7ff 0%, #eef5ff 100%);
+  background: linear-gradient(165deg, #17244a 0%, #1d2e5c 100%);
 }
 
 .labelPink {
-  background: linear-gradient(165deg, #ffd6e7 0%, #fff0f7 100%);
+  background: linear-gradient(165deg, #36192b 0%, #45203a 100%);
 }
 
 .labelCream {
-  background: linear-gradient(165deg, #e9e3ff 0%, #f7f4ff 100%);
+  background: linear-gradient(165deg, #211c38 0%, #2a2447 100%);
 }
 
 .labelIndigo {
