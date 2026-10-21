@@ -1,0 +1,205 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.jelly {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 130px;
+  height: 150px;
+  will-change: transform;
+  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.35));
+}
+
+.float {
+  position: absolute;
+  inset: 0;
+  animation: float 4s ease-in-out infinite;
+}
+
+.head {
+  position: relative;
+  width: 130px;
+  height: 92px;
+  border-radius: 70px 70px 35px 35px;
+  background: linear-gradient(135deg, #b7f9fa, #5bd2e2);
+  box-shadow:
+    inset -9px -8px 0 rgba(69, 191, 211, 0.33),
+    0 7px 25px rgba(128, 225, 236, 0.33);
+  z-index: 2;
+  transition: transform 0.4s ease;
+}
+
+.shine {
+  position: absolute;
+  width: 42px;
+  height: 13px;
+  top: 16px;
+  left: 22px;
+  border-top: 6px solid #efffff;
+  border-radius: 50%;
+  transform: rotate(-24deg);
+}
+
+.eye {
+  position: absolute;
+  top: 57px;
+  left: 43px;
+  width: 7px;
+  height: 10px;
+  background: #238ba5;
+  border-radius: 50%;
+}
+
+.eye + .eye {
+  left: 81px;
+}
+
+.mouth {
+  position: absolute;
+  left: 61px;
+  top: 67px;
+  width: 10px;
+  height: 6px;
+  border-bottom: 2px solid #238ba5;
+  border-radius: 50%;
+}
+
+.tentacles {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 18px;
+  margin-top: -4px;
+}
+
+.tentacles i {
+  display: block;
+  width: 9px;
+  height: 55px;
+  background: #72dbe7;
+  border-radius: 0 0 20px 20px;
+  transform-origin: top;
+  animation: sway 3s ease-in-out infinite alternate;
+}
+
+.tentacles i:nth-child(2) {
+  height: 70px;
+  animation-delay: -1s;
+}
+.tentacles i:nth-child(3) {
+  height: 65px;
+  animation-delay: -2s;
+}
+.tentacles i:nth-child(4) {
+  height: 48px;
+  animation-delay: -0.5s;
+}
+
+.bubble {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #83dfe9;
+  border-radius: 50%;
+  opacity: 0;
+  animation: bubbles 5s linear infinite;
+}
+
+.b1 { left: 23%; top: 120px; }
+.b2 { left: 72%; top: 140px; animation-delay: 1.6s; width: 8px; height: 8px; }
+.b3 { left: 80%; top: 90px; animation-delay: 3s; }
+
+.heart {
+  position: absolute;
+  top: 10px;
+  right: -22px;
+  font-size: 25px;
+  color: #43c9df;
+  opacity: 0;
+  transform: translateY(12px) scale(0.4);
+}
+
+.head::before,
+.head::after {
+  content: '';
+  position: absolute;
+  top: 68px;
+  width: 16px;
+  height: 8px;
+  background: #28b6d0;
+  opacity: 0;
+  border-radius: 50%;
+  transition: opacity 0.3s ease;
+}
+
+.head::before { left: 23px; }
+.head::after { right: 23px; }
+
+.happy .head {
+  transform: scale(1.06) rotate(-4deg);
+}
+
+.happy .head::before,
+.happy .head::after {
+  opacity: 0.45;
+}
+
+.happy .tentacles i:first-child {
+  animation: wave 0.35s ease-in-out infinite alternate;
+}
+
+.happy .tentacles i:last-child {
+  animation: wave 0.4s ease-in-out infinite alternate-reverse;
+}
+
+.happy .mouth {
+  width: 12px;
+  height: 9px;
+  left: 60px;
+  border: 0;
+  border-radius: 50%;
+  background: #238ba5;
+}
+
+.happy .heart {
+  animation: love 1.4s ease-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-13px); }
+}
+
+@keyframes sway {
+  from { transform: rotate(-12deg); }
+  to { transform: rotate(12deg); }
+}
+
+@keyframes bubbles {
+  0% { transform: translateY(30px); opacity: 0; }
+  25% { opacity: 0.8; }
+  85% { opacity: 0.6; }
+  100% { transform: translateY(-95px); opacity: 0; }
+}
+
+@keyframes wave {
+  from { transform: rotate(-28deg); }
+  to { transform: rotate(28deg); }
+}
+
+@keyframes love {
+  0% { opacity: 0; transform: translateY(12px) scale(0.4) rotate(-15deg); }
+  25% { opacity: 1; transform: translateY(0) scale(1) rotate(10deg); }
+  100% { opacity: 0; transform: translateY(-48px) scale(1.2) rotate(20deg); }
+}
+
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .root {
+    display: none;
+  }
+}

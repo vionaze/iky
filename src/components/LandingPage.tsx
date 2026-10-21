@@ -5,6 +5,7 @@ import { flushSync } from 'react-dom'
 import { LangToggle } from '@/components/LangToggle'
 import { getDict, type Locale } from '@/lib/i18n'
 import HeroStage from '@/components/HeroStage'
+import Jellyfish from '@/components/Jellyfish'
 
 type AnyRecord = Record<string, any>
 
@@ -454,6 +455,8 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           </div>
         </section>
       </main>
+
+      <Jellyfish />
 
       <footer className="relative overflow-hidden border-t border-line bg-cream-deep">
         <div
