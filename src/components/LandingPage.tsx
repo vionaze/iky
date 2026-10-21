@@ -330,7 +330,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               </aside>
             </div>
 
-            <div className="mt-12 border-t border-line p-6">
+            <div className="mt-12 mb-6 border-t border-line p-6">
               <p className="text-center text-[13px] uppercase tracking-[0.24em] text-pink">
                 {t.about.partnersLabel}
               </p>
