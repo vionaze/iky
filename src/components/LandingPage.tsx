@@ -7,6 +7,7 @@ import { getDict, type Locale } from '@/lib/i18n'
 import HeroStage from '@/components/HeroStage'
 import Jellyfish from '@/components/Jellyfish'
 import WorksCarousel from '@/components/WorksCarousel'
+import LoopingWords from '@/components/LoopingWords'
 
 type AnyRecord = Record<string, any>
 
@@ -343,14 +344,9 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
 
               <aside className="lg:col-span-5">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-pink">{t.about.processLabel}</p>
-                <ol className="mt-4 divide-y divide-line border-y border-line">
-                  {t.about.process.map((step, index) => (
-                    <li key={step} className="flex items-center justify-between gap-6 py-3 text-sm">
-                      <span>{step}</span>
-                      <span className="text-[11px] text-indigo">0{index + 1}</span>
-                    </li>
-                  ))}
-                </ol>
+                <div className="mt-6">
+                  <LoopingWords words={t.about.process} />
+                </div>
               </aside>
             </div>
 
