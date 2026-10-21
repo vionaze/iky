@@ -178,12 +178,9 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
       </a>
 
       <header className="sticky top-0 z-40 border-b border-line bg-cream/70 backdrop-blur-xl">
-        <div className="mx-auto flex min-h-[76px] w-[min(1160px,calc(100%-32px))] items-center justify-between gap-4">
-          <a href="#top" className="flex items-center gap-3" aria-label="Ikymian Studios">
-            <span className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-pink to-blue font-display text-[15px] font-semibold text-cream">
-              I
-            </span>
-            <span className="font-display text-[15px] font-semibold uppercase leading-none tracking-[0.14em]">
+        <div className="mx-auto flex min-h-[84px] w-[min(1160px,calc(100%-32px))] items-center justify-between gap-4">
+          <a href="#top" className="flex items-center" aria-label="Ikymian Studios">
+            <span className="font-display text-[clamp(18px,2.1vw,30px)] font-semibold uppercase leading-none tracking-[0.12em]">
               Ikymian Studios
             </span>
           </a>
@@ -467,11 +464,8 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
         <div className="relative mx-auto w-[min(1160px,calc(100%-32px))] py-14">
           <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
             <div>
-              <a href="#top" className="inline-flex items-center gap-3">
-                <span className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-pink to-blue font-display text-[15px] font-semibold text-cream">
-                  I
-                </span>
-                <span className="font-display text-lg font-semibold uppercase tracking-[0.14em]">
+              <a href="#top" className="inline-flex items-center">
+                <span className="font-display text-[clamp(20px,2vw,28px)] font-semibold uppercase leading-none tracking-[0.12em]">
                   Ikymian Studios
                 </span>
               </a>
