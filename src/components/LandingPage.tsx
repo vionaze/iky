@@ -9,6 +9,7 @@ import Jellyfish from '@/components/Jellyfish'
 import WorksCarousel from '@/components/WorksCarousel'
 import LoopingWords from '@/components/LoopingWords'
 import ContactCta from '@/components/ContactCta'
+import MagicDust from '@/components/MagicDust'
 
 type AnyRecord = Record<string, any>
 
@@ -361,13 +362,15 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
 
         <section
           id="contact"
-          className="border-t border-line py-20 md:py-28"
+          className="relative overflow-hidden border-t border-line py-20 md:py-28"
           style={{
             background:
               'radial-gradient(ellipse 55% 75% at 85% 18%, rgba(255,138,193,0.3), transparent 62%), radial-gradient(ellipse 50% 70% at 6% 92%, rgba(111,141,255,0.22), transparent 64%), #0f1438',
           }}
         >
-          <div className="mx-auto flex w-[min(1160px,calc(100%-32px))] flex-col items-center text-center">
+          <MagicDust />
+
+          <div className="relative z-10 mx-auto flex w-[min(1160px,calc(100%-32px))] flex-col items-center text-center">
             <span className="text-[10px] uppercase tracking-[0.22em] text-pink">
               {t.contact.index} / Contact
             </span>
