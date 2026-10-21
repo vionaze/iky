@@ -494,57 +494,8 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           className="pointer-events-none absolute -right-40 -top-40 h-[460px] w-[460px] rounded-full bg-pink/[0.18] blur-3xl"
           aria-hidden="true"
         />
-        <div className="relative mx-auto w-[min(1160px,calc(100%-32px))] py-14">
-          <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
-            <div>
-              <a href="#top" className="inline-flex items-center">
-                <span className="font-display text-[clamp(20px,2vw,28px)] font-semibold uppercase leading-none tracking-[0.12em]">
-                  Ikymian Studios
-                </span>
-              </a>
-              <p className="mt-4 max-w-[36ch] text-sm text-muted">{t.hero.eyebrow}.</p>
-              <a
-                href={`mailto:${email}`}
-                className="mt-5 inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm transition-colors hover:border-pink/60 hover:text-pink"
-              >
-                {email} <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-
-            <div className="flex flex-wrap gap-12 sm:gap-20">
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.22em] text-pink">{t.footerNav}</p>
-                <ul className="mt-4 space-y-2.5 text-sm">
-                  {navItems.map((item: AnyRecord) => (
-                    <li key={item.href}>
-                      <a href={item.href} className="text-muted transition-colors hover:text-pink">
-                        {item.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.22em] text-pink">{t.footerSocial}</p>
-                <ul className="mt-4 space-y-2.5 text-sm">
-                  {socials.map((social: AnyRecord) => (
-                    <li key={social.name}>
-                      <a
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted transition-colors hover:text-pink"
-                      >
-                        {social.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-14 overflow-hidden border-y border-line py-5">
+        <div className="relative w-full px-6 py-12 md:px-12 md:py-16">
+          <div className="overflow-hidden border-y border-line py-5">
             <div className="footer-marquee flex w-max items-center whitespace-nowrap" aria-hidden="true">
               {[0, 1].map((copy) => (
                 <span
@@ -594,7 +545,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
             </div>
           </div>
 
-          <div className="border-t border-line py-6 text-center text-[10px] uppercase tracking-[0.32em] text-muted/60">
+          <div className="border-t border-line pt-6 text-center text-[10px] uppercase tracking-[0.32em] text-muted/60">
             {t.hero.eyebrow} • {footerCopyright}
           </div>
         </div>
