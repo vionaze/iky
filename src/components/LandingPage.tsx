@@ -253,8 +253,43 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
 
   const cmsCarousel = Array.isArray(cms.home?.works?.carousel) ? cms.home.works.carousel : []
 
+  const categoryLabels: Record<string, string> = {
+    series: 'Series',
+    tutorial: 'Tutorial AI',
+    'short-film': 'Short Film',
+    'music-video': 'Music Video',
+  }
+
+  const categoryFallback: Record<string, string> = {
+    series: seriesPoster,
+    tutorial: '/images/hero-1.png',
+    'short-film': '/images/hero-2.png',
+    'music-video': '/images/hero-3.webp',
+  }
+
+  const cmsProjects = Array.isArray(cms.portfolios) ? cms.portfolios : []
+
+  const portfolioCards = cmsProjects
+    .filter((item: AnyRecord) => item?.title)
+    .map((item: AnyRecord) => {
+      const firstMedia = Array.isArray(item.media) ? item.media[0] : item.media
+      const episodeCount = Array.isArray(item.episodes) ? item.episodes.length : 0
+
+      return {
+        img: firstMedia?.url || categoryFallback[item.category] || seriesPoster,
+        kicker: categoryLabels[item.category] || '',
+        meta: item.category === 'series' ? (episodeCount > 0 ? `${episodeCount} Episodes` : 'Series') : '',
+        title: item.title,
+        href: item.link || '#work',
+      }
+    })
+
   const carouselCards =
-    cmsCarousel.length > 0
+    portfolioCards.length > 0
+      ? portfolioCards.length >= 8
+        ? portfolioCards
+        : Array.from({ length: Math.ceil(8 / portfolioCards.length) }).flatMap(() => portfolioCards)
+      : cmsCarousel.length > 0
       ? cmsCarousel.map((item: AnyRecord, index: number) => ({
           img: item.image?.url || carouselFallbackImages[index % carouselFallbackImages.length],
           kicker: item.kicker || '',

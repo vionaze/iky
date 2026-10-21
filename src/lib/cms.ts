@@ -11,6 +11,7 @@ export type CmsContent = {
   stats?: AnyRecord
   series?: AnyRecord | null
   formats?: AnyRecord[]
+  portfolios?: AnyRecord[]
 }
 
 /**
@@ -21,7 +22,7 @@ export type CmsContent = {
 export async function getCmsContent(locale: Locale): Promise<CmsContent> {
   try {
     const payload = await getPayload({ config })
-    const [header, home, footer, stats, seriesResult, formatResult] = await Promise.all([
+    const [header, home, footer, stats, seriesResult, formatResult, portfolioResult] = await Promise.all([
       payload.findGlobal({ slug: 'header', locale, depth: 0 }),
       payload.findGlobal({ slug: 'home', locale, depth: 0 }),
       payload.findGlobal({ slug: 'footer', locale, depth: 0 }),
@@ -49,6 +50,14 @@ export async function getCmsContent(locale: Locale): Promise<CmsContent> {
         locale,
         sort: 'order',
       }),
+      payload.find({
+        collection: 'projects',
+        where: { _status: { equals: 'published' } },
+        limit: 50,
+        depth: 1,
+        locale,
+        sort: 'order',
+      }),
     ])
 
     return {
@@ -58,6 +67,7 @@ export async function getCmsContent(locale: Locale): Promise<CmsContent> {
       stats,
       series: seriesResult.docs[0] ?? null,
       formats: formatResult.docs,
+      portfolios: portfolioResult.docs,
     }
   } catch (error) {
     console.error('[cms] unable to read content', error)

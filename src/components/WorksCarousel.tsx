@@ -75,7 +75,12 @@ export default function WorksCarousel({ label, index, cards }: WorksCarouselProp
         <ul className={styles.cards}>
           {cards.map((card, cardIndex) => (
             <li key={`${card.title}-${cardIndex}`} className={styles.card}>
-              <a href={card.href || '#work'} aria-label={`${card.kicker}: ${card.title}`}>
+              <a
+                href={card.href || '#work'}
+                aria-label={`${card.kicker}: ${card.title}`}
+                target={(card.href || '').startsWith('http') ? '_blank' : undefined}
+                rel={(card.href || '').startsWith('http') ? 'noreferrer noopener' : undefined}
+              >
                 <img src={card.img} alt="" loading="lazy" />
                 <span className={styles.glow} aria-hidden="true" />
                 <span className={styles.overlay}>

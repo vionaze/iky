@@ -208,6 +208,8 @@ export interface Media {
   };
 }
 /**
+ * Portfolio karya. Tambah item per kategori: Series (dengan episode di dalamnya), Tutorial, Short Film, Music Video. Isi link tujuan dan thumbnail/preview.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "projects".
  */
@@ -217,6 +219,9 @@ export interface Project {
   slug: string;
   category: 'series' | 'music-video' | 'short-film' | 'tutorial';
   context?: string | null;
+  /**
+   * Khusus Series: daftar episode (judul, durasi, link).
+   */
   episodes?:
     | {
         label?: string | null;
@@ -233,8 +238,14 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
+  /**
+   * URL tujuan saat kartu di Selected Works diklik.
+   */
   link?: string | null;
   linkLabel?: string | null;
+  /**
+   * Thumbnail/poster yang tampil di kartu Selected Works. Media pertama dipakai.
+   */
   media?: (number | Media)[] | null;
   preview?: {
     enabled?: boolean | null;

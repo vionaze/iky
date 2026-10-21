@@ -147,3 +147,15 @@ Masuk ke `/adminku` → **Globals → Home** untuk mengubah:
 
 Header (nav), Footer (social & copyright), Stats, Projects, dan Media juga tetap bisa diedit dari admin.
 Setelah mengubah skema, buat migration (`pnpm payload migrate:create <nama>`) dan jalankan `pnpm payload migrate` di production.
+
+## Portfolio Selected Works
+
+Kartu **Selected Works** diambil otomatis dari koleksi **Projects** (bukan field carousel Home).
+
+Di `/adminku` → **Projects → Create New**:
+- **Category**: Series / Tutorial / Short Film / Music Video
+- **Title**, **Link** (URL tujuan saat kartu diklik), **Media** (thumbnail/poster, media pertama dipakai)
+- **Order** untuk urutan tampil
+- Khusus **Series**: isi **Episodes** (judul, durasi, link) di dalam series tersebut
+
+Publish item agar muncul di situs. Jika item < 8, kartu diulang otomatis agar carousel tetap penuh; begitu item ≥ 8 semua tampil unik.

@@ -4,7 +4,9 @@ export const Projects: CollectionConfig = {
   slug: 'projects',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', '_status', 'order', 'updatedAt'],
+    defaultColumns: ['title', 'category', 'link', '_status', 'order', 'updatedAt'],
+    description:
+      'Portfolio karya. Tambah item per kategori: Series (dengan episode di dalamnya), Tutorial, Short Film, Music Video. Isi link tujuan dan thumbnail/preview.',
   },
   versions: { drafts: true },
   access: {
@@ -29,6 +31,7 @@ export const Projects: CollectionConfig = {
     {
       name: 'episodes',
       type: 'array',
+      admin: { description: 'Khusus Series: daftar episode (judul, durasi, link).' },
       fields: [
         { name: 'label', type: 'text' },
         { name: 'title', type: 'text', localized: true },
@@ -42,13 +45,14 @@ export const Projects: CollectionConfig = {
       type: 'array',
       fields: [{ name: 'name', type: 'text', required: true }],
     },
-    { name: 'link', type: 'text' },
+    { name: 'link', type: 'text', admin: { description: 'URL tujuan saat kartu di Selected Works diklik.' } },
     { name: 'linkLabel', type: 'text', localized: true },
     {
       name: 'media',
       type: 'relationship',
       relationTo: 'media',
       hasMany: true,
+      admin: { description: 'Thumbnail/poster yang tampil di kartu Selected Works. Media pertama dipakai.' },
     },
     {
       name: 'preview',
