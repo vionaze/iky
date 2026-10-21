@@ -350,11 +350,11 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               </aside>
             </div>
 
-            <div className="mt-16 border-t border-line pt-12">
-              <p className="text-center text-[10px] uppercase tracking-[0.24em] text-pink">
+            <div className="mt-16 border-t border-line p-6">
+              <p className="text-center text-[13px] uppercase tracking-[0.24em] text-pink">
                 {t.about.partnersLabel}
               </p>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-8">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-6">
                 {partners.map((partner, index) => (
                   <span
                     key={partner.name}
@@ -368,7 +368,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
                       src={partner.src}
                       alt={partner.name}
                       loading="lazy"
-                      className={`h-10 w-auto max-w-[210px] object-contain ${partner.square ? 'sm:h-16' : 'sm:h-14'} ${partner.invert ? 'invert' : ''}`}
+                      className={`h-12 w-auto max-w-[240px] object-contain ${partner.square ? 'sm:h-20' : 'sm:h-16'} ${partner.invert ? 'invert' : ''}`}
                     />
                   </span>
                 ))}
