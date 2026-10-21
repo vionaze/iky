@@ -1,0 +1,147 @@
+.cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 36px;
+  background: rgba(9, 11, 28, 0.55);
+  color: var(--color-ink);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  isolation: isolate;
+  transition: background-color 0.3s ease;
+}
+
+.cta::before,
+.cta::after {
+  content: '';
+  position: absolute;
+  left: -40px;
+  right: -40px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.25) 40px,
+    #fff 40px,
+    #fff calc(100% - 40px),
+    rgba(255, 255, 255, 0.25) calc(100% - 40px),
+    rgba(255, 255, 255, 0)
+  );
+  filter: drop-shadow(0 0 6px rgba(255, 138, 193, 0.4));
+  transition: filter 0.4s ease;
+}
+
+.cta::before {
+  top: -2px;
+}
+
+.cta::after {
+  bottom: -2px;
+}
+
+.edge {
+  position: absolute;
+  top: -40px;
+  bottom: -40px;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.25) 40px,
+    #fff 40px,
+    #fff calc(100% - 40px),
+    rgba(255, 255, 255, 0.25) calc(100% - 40px),
+    rgba(255, 255, 255, 0)
+  );
+  filter: drop-shadow(0 0 6px rgba(111, 141, 255, 0.45));
+  transition: filter 0.4s ease;
+}
+
+.edgeLeft {
+  left: -2px;
+}
+
+.edgeRight {
+  right: -2px;
+}
+
+.glow {
+  position: absolute;
+  inset: -24px;
+  z-index: -1;
+  background: radial-gradient(circle, rgba(255, 138, 193, 0.3), transparent 60%);
+  filter: blur(18px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.cta:hover {
+  background: rgba(9, 11, 28, 0.78);
+}
+
+.cta:hover::before,
+.cta:hover::after,
+.cta:hover .edge {
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
+}
+
+.cta:hover .glow {
+  opacity: 1;
+}
+
+.label {
+  position: relative;
+  z-index: 2;
+}
+
+.arrow {
+  position: relative;
+  z-index: 2;
+  font-size: 13px;
+  transition: transform 0.3s ease;
+}
+
+.cta:hover .arrow {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 640px) {
+  .cta {
+    padding: 14px 26px;
+    letter-spacing: 0.16em;
+  }
+
+  .cta::before,
+  .cta::after {
+    left: -20px;
+    right: -20px;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.25) 20px,
+      #fff 20px,
+      #fff calc(100% - 20px),
+      rgba(255, 255, 255, 0.25) calc(100% - 20px),
+      rgba(255, 255, 255, 0)
+    );
+  }
+
+  .edge {
+    top: -20px;
+    bottom: -20px;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.25) 20px,
+      #fff 20px,
+      #fff calc(100% - 20px),
+      rgba(255, 255, 255, 0.25) calc(100% - 20px),
+      rgba(255, 255, 255, 0)
+    );
+  }
+}

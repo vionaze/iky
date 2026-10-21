@@ -83,6 +83,7 @@ const en = {
     index: '04',
     title: "Let's make something.",
     email: 'ariesiky8@gmail.com',
+    cta: 'Start a collaboration',
   },
   socials: [
     { name: 'Instagram', href: 'https://instagram.com/ikymianvt' },
@@ -177,6 +178,7 @@ const id: Dict = {
     index: '04',
     title: 'Mari buat sesuatu.',
     email: 'ariesiky8@gmail.com',
+    cta: 'Mulai kolaborasi',
   },
   socials: en.socials,
   footer: '© 2026 Ikymian Studios',

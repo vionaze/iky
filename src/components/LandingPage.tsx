@@ -8,6 +8,7 @@ import HeroStage from '@/components/HeroStage'
 import Jellyfish from '@/components/Jellyfish'
 import WorksCarousel from '@/components/WorksCarousel'
 import LoopingWords from '@/components/LoopingWords'
+import ContactCta from '@/components/ContactCta'
 
 type AnyRecord = Record<string, any>
 
@@ -366,32 +367,31 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
               'radial-gradient(ellipse 55% 75% at 85% 18%, rgba(255,138,193,0.3), transparent 62%), radial-gradient(ellipse 50% 70% at 6% 92%, rgba(111,141,255,0.22), transparent 64%), #0f1438',
           }}
         >
-          <div className="mx-auto flex w-[min(1160px,calc(100%-32px))] flex-wrap items-end justify-between gap-10">
-            <div>
+          <div className="mx-auto flex w-[min(1160px,calc(100%-32px))] flex-col items-center text-center">
+            <span className="text-[10px] uppercase tracking-[0.22em] text-pink">
+              {t.contact.index} / Contact
+            </span>
+
+            <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:justify-center md:gap-12">
               <h2 className="max-w-[13ch] font-display text-[clamp(2.4rem,5.4vw,4.25rem)] font-medium leading-[0.96] tracking-[-0.045em]">
                 {contactTitle}
               </h2>
-              <a
-                href={`mailto:${email}`}
-                className="mt-7 inline-block border-b border-indigo pb-1 text-[clamp(1.125rem,2.2vw,1.625rem)] transition-colors hover:text-indigo"
-              >
-                {email}
-              </a>
-              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-                {socials.map((social: AnyRecord) => (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[13px] text-muted transition-colors hover:text-pink"
-                  >
-                    {social.name}
-                  </a>
-                ))}
-              </div>
+              <ContactCta href={`mailto:${email}`} label={t.contact.cta} />
             </div>
-            <span className="text-[10px] uppercase tracking-[0.22em] text-pink">{t.contact.index} / Contact</span>
+
+            <div className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2">
+              {socials.map((social: AnyRecord) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[13px] text-muted transition-colors hover:text-pink"
+                >
+                  {social.name}
+                </a>
+              ))}
+            </div>
           </div>
         </section>
       </main>
