@@ -175,17 +175,25 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
       </a>
 
       <header className="sticky top-0 z-40 border-b border-line bg-cream/70 backdrop-blur-xl">
-        <div className="mx-auto flex min-h-[72px] w-[min(1160px,calc(100%-32px))] items-center justify-between gap-6">
-          <a href="#top" className="flex flex-col leading-none" aria-label="Ikymian Studios">
-            <span className="font-display text-[17px] font-semibold tracking-tight">Ikymian Studios</span>
-            <span className="mt-1 text-[10px] uppercase tracking-[0.22em] text-muted">Caisart Felix</span>
+        <div className="mx-auto flex min-h-[76px] w-[min(1160px,calc(100%-32px))] items-center justify-between gap-4">
+          <a href="#top" className="flex items-center gap-3" aria-label="Ikymian Studios">
+            <span className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-pink to-blue font-display text-[15px] font-semibold text-cream">
+              I
+            </span>
+            <span className="flex flex-col leading-none">
+              <span className="font-display text-[17px] font-semibold tracking-tight">Ikymian Studios</span>
+              <span className="mt-1 text-[10px] uppercase tracking-[0.22em] text-muted">Caisart Felix</span>
+            </span>
           </a>
 
-          <nav className="flex items-center gap-6 sm:gap-7" aria-label="Main">
+          <nav
+            className="flex items-center gap-1 rounded-full border border-line bg-white/[0.04] p-1 sm:pl-3"
+            aria-label="Main"
+          >
             {navItems.map((item: AnyRecord) => (
               <a
                 key={item.href}
-                className="hidden text-[13px] text-muted transition-colors hover:text-ink sm:block"
+                className="hidden rounded-full px-3 py-2 text-[13px] text-muted transition-colors hover:bg-white/[0.06] hover:text-ink sm:block"
                 href={item.href}
               >
                 {item.label}
@@ -405,7 +413,7 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
           className="border-t border-line py-20 md:py-28"
           style={{
             background:
-              'radial-gradient(ellipse 55% 75% at 85% 18%, rgba(255,45,149,0.35), transparent 62%), radial-gradient(ellipse 50% 70% at 6% 92%, rgba(0,200,255,0.3), transparent 64%), #070f7a',
+              'radial-gradient(ellipse 55% 75% at 85% 18%, rgba(255,138,193,0.2), transparent 62%), radial-gradient(ellipse 50% 70% at 6% 92%, rgba(111,141,255,0.22), transparent 64%), #0f1438',
           }}
         >
           <div className="mx-auto flex w-[min(1160px,calc(100%-32px))] flex-wrap items-end justify-between gap-10">
@@ -438,10 +446,71 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
         </section>
       </main>
 
-      <footer className="border-t border-line py-7">
-        <div className="mx-auto flex w-[min(1160px,calc(100%-32px))] flex-wrap items-center justify-between gap-3 text-xs text-muted">
-          <span>{footerCopyright}</span>
-          <span>Caisart Felix</span>
+      <footer className="relative overflow-hidden border-t border-line bg-cream-deep">
+        <div
+          className="pointer-events-none absolute -right-40 -top-40 h-[460px] w-[460px] rounded-full bg-pink/[0.12] blur-3xl"
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto w-[min(1160px,calc(100%-32px))] py-14">
+          <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+            <div>
+              <a href="#top" className="inline-flex items-center gap-3">
+                <span className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-pink to-blue font-display text-[15px] font-semibold text-cream">
+                  I
+                </span>
+                <span className="font-display text-xl font-medium">Ikymian Studios</span>
+              </a>
+              <p className="mt-4 max-w-[36ch] text-sm text-muted">{t.hero.eyebrow}.</p>
+              <a
+                href={`mailto:${email}`}
+                className="mt-5 inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm transition-colors hover:border-pink/60 hover:text-pink"
+              >
+                {email} <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+
+            <div className="flex flex-wrap gap-12 sm:gap-20">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-muted">{t.footerNav}</p>
+                <ul className="mt-4 space-y-2.5 text-sm">
+                  {navItems.map((item: AnyRecord) => (
+                    <li key={item.href}>
+                      <a href={item.href} className="text-muted transition-colors hover:text-ink">
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-muted">{t.footerSocial}</p>
+                <ul className="mt-4 space-y-2.5 text-sm">
+                  {socials.map((social: AnyRecord) => (
+                    <li key={social.name}>
+                      <a
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted transition-colors hover:text-ink"
+                      >
+                        {social.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-6 text-xs text-muted">
+            <span>{footerCopyright}</span>
+            <div className="flex items-center gap-5">
+              <span>Caisart Felix</span>
+              <a href="#top" className="transition-colors hover:text-ink">
+                {t.footerTop} ↑
+              </a>
+            </div>
+          </div>
         </div>
       </footer>
     </>

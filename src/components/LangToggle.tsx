@@ -11,7 +11,7 @@ export function LangToggle({
 }) {
   return (
     <div
-      className="inline-flex items-center gap-0.5 rounded-full border border-line bg-white/10 p-0.5"
+      className="inline-flex items-center gap-0.5 rounded-full bg-white/[0.06] p-0.5"
       role="group"
       aria-label="Language"
     >

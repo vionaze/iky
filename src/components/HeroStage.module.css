@@ -8,9 +8,9 @@
   align-items: center;
   justify-content: center;
   background:
-    radial-gradient(90% 65% at 8% 0%, rgba(0, 200, 255, 0.35) 0%, transparent 58%),
-    radial-gradient(80% 60% at 94% 14%, rgba(255, 45, 149, 0.38) 0%, transparent 54%),
-    linear-gradient(180deg, #0c1bc4 0%, #050848 100%);
+    radial-gradient(90% 65% at 8% 0%, rgba(111, 141, 255, 0.24) 0%, transparent 58%),
+    radial-gradient(80% 60% at 94% 14%, rgba(255, 138, 193, 0.2) 0%, transparent 54%),
+    linear-gradient(180deg, #1b2360 0%, #0e1238 100%);
 }
 
 .grain {
@@ -72,7 +72,7 @@
   font-size: clamp(96px, 19vw, 280px);
   line-height: 0.85;
   letter-spacing: -0.045em;
-  color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.1);
   text-align: center;
   white-space: nowrap;
   user-select: none;
@@ -101,7 +101,7 @@
   cursor: pointer;
   text-decoration: none;
   will-change: transform;
-  background: linear-gradient(180deg, #2f6bff 0%, #7a3cff 50%, #ff2d95 100%);
+  background: linear-gradient(180deg, #3a5ad8 0%, #7654d8 50%, #ff8ac1 100%);
   box-shadow:
     0 30px 50px -18px rgba(0, 0, 0, 0.5),
     0 12px 24px -10px rgba(91, 75, 255, 0.22),
@@ -174,19 +174,19 @@
 }
 
 .labelBlue {
-  background: linear-gradient(165deg, #1226c9 0%, #2a4be0 100%);
+  background: linear-gradient(165deg, #1d2a66 0%, #2b3b8f 100%);
 }
 
 .labelPink {
-  background: linear-gradient(165deg, #c40067 0%, #ff2d95 100%);
+  background: linear-gradient(165deg, #5c2144 0%, #7a2c5a 100%);
 }
 
 .labelCream {
-  background: linear-gradient(165deg, #2212b0 0%, #3f2bd8 100%);
+  background: linear-gradient(165deg, #272262 0%, #38308a 100%);
 }
 
 .labelIndigo {
-  background: linear-gradient(165deg, #ff2d95 0%, #ff7ac0 100%);
+  background: linear-gradient(165deg, #b93d7f 0%, #ff8ac1 100%);
 }
 
 .labelIndigo .k {
@@ -219,13 +219,13 @@
   gap: 10px;
   padding: 12px 20px 12px 24px;
   border-radius: 999px;
-  background: linear-gradient(180deg, #ff2d95 0%, #ff5cb8 100%);
+  background: linear-gradient(180deg, #ff5aa8 0%, #ff8ac1 100%);
   color: #fff;
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
   box-shadow:
-    0 16px 30px -10px rgba(255, 45, 149, 0.55),
+    0 16px 30px -10px rgba(255, 90, 168, 0.35),
     0 6px 12px -4px rgba(10, 0, 80, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.35);
   transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
@@ -242,7 +242,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0a1bb8;
+  color: #161c4c;
   background: #fff;
   transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
 }
@@ -255,7 +255,7 @@
   margin-top: 20px;
   font-size: 13px;
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(244, 243, 255, 0.7);
 }
 
 @media (max-width: 1100px) {
