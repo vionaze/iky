@@ -183,9 +183,8 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
             <span className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-pink to-blue font-display text-[15px] font-semibold text-cream">
               I
             </span>
-            <span className="flex flex-col leading-none">
-              <span className="font-display text-[17px] font-semibold tracking-tight">Ikymian Studios</span>
-              <span className="mt-1 text-[10px] uppercase tracking-[0.22em] text-muted">Caisart Felix</span>
+            <span className="font-display text-[15px] font-semibold uppercase leading-none tracking-[0.14em]">
+              Ikymian Studios
             </span>
           </a>
 
@@ -471,7 +470,9 @@ export default function LandingPage({ initialLocale, cmsEn, cmsId }: LandingProp
                 <span className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-pink to-blue font-display text-[15px] font-semibold text-cream">
                   I
                 </span>
-                <span className="font-display text-xl font-medium">Ikymian Studios</span>
+                <span className="font-display text-lg font-semibold uppercase tracking-[0.14em]">
+                  Ikymian Studios
+                </span>
               </a>
               <p className="mt-4 max-w-[36ch] text-sm text-muted">{t.hero.eyebrow}.</p>
               <a
