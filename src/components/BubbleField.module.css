@@ -1,6 +1,9 @@
 .section {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100svh;
+  min-height: 640px;
+  max-height: 1000px;
   overflow: hidden;
   background:
     radial-gradient(60% 50% at 18% 12%, rgba(77, 110, 255, 0.22), transparent 65%),
@@ -56,7 +59,8 @@
 .field {
   position: absolute;
   inset: 0;
-  transform-origin: 50% 50%;
+  width: min(100%, 1440px);
+  margin-inline: auto;
   will-change: transform;
 }
 
@@ -157,7 +161,10 @@
 
 @media (max-width: 767px) {
   .section {
-    min-height: 92vh;
+    height: 92vh;
+    height: 92svh;
+    min-height: 600px;
+    max-height: 820px;
   }
 
   .copy {

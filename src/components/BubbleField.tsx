@@ -2,10 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import styles from './BubbleField.module.css'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export type Bubble = {
   type: string
@@ -51,25 +48,6 @@ export default function BubbleField({ bubbles, kicker, hint, explore }: BubbleFi
           ease: 'sine.inOut',
           delay: index * 0.3,
         })
-      })
-
-      const mm = gsap.matchMedia()
-
-      mm.add('(min-width: 768px)', () => {
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: root,
-            start: 'top top',
-            end: '+=170%',
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-          },
-        })
-
-        timeline
-          .to(field, { scale: 3, ease: 'none' }, 0)
-          .to(`.${styles.copy}`, { opacity: 0, y: -40, ease: 'none' }, 0)
       })
     }, root)
 
