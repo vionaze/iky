@@ -50,6 +50,8 @@ export default function HeroStage({
     if (!root) return
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const compact = window.matchMedia('(max-width: 750px)').matches
+    const restRotation = (index: number) => (compact ? 0 : rotations[index] ?? 0)
     const cardEls = Array.from(root.querySelectorAll<HTMLElement>(`.${styles.card}`))
     const words = Array.from(root.querySelectorAll<HTMLElement>(`.${styles.word} > span`))
     const letters = Array.from(root.querySelectorAll<HTMLElement>(`.${styles.letter}`))
@@ -59,7 +61,7 @@ export default function HeroStage({
     const cleanups: Array<() => void> = []
 
     cardEls.forEach((card, index) => {
-      card.dataset.restRot = String(rotations[index] ?? 0)
+      card.dataset.restRot = String(restRotation(index))
       card.dataset.depth = String(depths[index] ?? 8)
     })
 
@@ -104,7 +106,7 @@ export default function HeroStage({
             y: 0,
             opacity: 1,
             scale: 1,
-            rotation: (index) => rotations[index] ?? 0,
+            rotation: (index) => restRotation(index),
             duration: 1.1,
             stagger: { each: 0.08, from: 'center' },
             ease: 'back.out(1.4)',
@@ -115,7 +117,7 @@ export default function HeroStage({
         .add(() => root.classList.add(styles.ready), 2.2)
 
       cardEls.forEach((card, index) => {
-        const rest = rotations[index] ?? 0
+        const rest = restRotation(index)
         gsap.to(card, {
           y: `+=${8 + (index % 3) * 5}`,
           rotation: rest + (index % 2 === 0 ? 1.5 : -1.5),
